@@ -9,13 +9,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/events"
-	"github.com/grafana/grafana/pkg/log"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/registry"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/util"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/events"
+	"github.com/xformation/cms-ui/pkg/log"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/registry"
+	"github.com/xformation/cms-ui/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/util"
 )
 
 var mailTemplates *template.Template

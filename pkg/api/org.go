@@ -1,12 +1,12 @@
 package api
 
 import (
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/metrics"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/util"
+	"github.com/xformation/cms-ui/pkg/api/dtos"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/metrics"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/util"
 )
 
 // GET /api/org

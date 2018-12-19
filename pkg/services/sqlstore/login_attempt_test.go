@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	m "github.com/grafana/grafana/pkg/models"
 	. "github.com/smartystreets/goconvey/convey"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 func mockTime(mock time.Time) time.Time {

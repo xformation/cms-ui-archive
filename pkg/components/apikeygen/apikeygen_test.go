@@ -3,8 +3,8 @@ package apikeygen
 import (
 	"testing"
 
-	"github.com/grafana/grafana/pkg/util"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/util"
 )
 
 func TestApiKeyGen(t *testing.T) {

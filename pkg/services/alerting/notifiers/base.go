@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/services/alerting"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/services/alerting"
 )
 
 const (

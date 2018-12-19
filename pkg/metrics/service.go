@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/metrics/graphitebridge"
-	"github.com/grafana/grafana/pkg/registry"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/metrics/graphitebridge"
+	"github.com/xformation/cms-ui/pkg/registry"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 var metricsLogger log.Logger = log.New("metrics")

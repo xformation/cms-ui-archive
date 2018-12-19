@@ -2,8 +2,8 @@ package commands
 
 import (
 	"github.com/fatih/color"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
-	s "github.com/grafana/grafana/pkg/cmd/grafana-cli/services"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/logger"
+	s "github.com/xformation/cms-ui/pkg/cmd/cms-cli/services"
 )
 
 func upgradeCommand(c CommandLine) error {

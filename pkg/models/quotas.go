@@ -2,7 +2,7 @@ package models
 
 import (
 	"errors"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/setting"
 	"time"
 )
 

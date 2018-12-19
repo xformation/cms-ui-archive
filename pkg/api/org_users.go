@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
+	"github.com/xformation/cms-ui/pkg/api/dtos"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 // POST /api/org/users
@@ -103,8 +103,8 @@ func updateOrgUserHelper(cmd m.UpdateOrgUserCommand) Response {
 // DELETE /api/org/users/:userId
 func RemoveOrgUserForCurrentOrg(c *m.ReqContext) Response {
 	return removeOrgUserHelper(&m.RemoveOrgUserCommand{
-		UserId:                   c.ParamsInt64(":userId"),
-		OrgId:                    c.OrgId,
+		UserId: c.ParamsInt64(":userId"),
+		OrgId:  c.OrgId,
 		ShouldDeleteOrphanedUser: true,
 	})
 }

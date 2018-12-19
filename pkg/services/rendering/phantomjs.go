@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/middleware"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/middleware"
 )
 
 func (rs *RenderingService) renderViaPhantomJS(ctx context.Context, opts Opts) (*RenderResult, error) {

@@ -5,10 +5,10 @@ import (
 
 	"fmt"
 
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/services/session"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/services/session"
 )
 
 func TestOrgRedirectMiddleware(t *testing.T) {

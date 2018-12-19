@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/api/dtos"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 const (

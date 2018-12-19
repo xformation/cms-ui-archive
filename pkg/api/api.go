@@ -2,11 +2,11 @@ package api
 
 import (
 	"github.com/go-macaron/binding"
-	"github.com/grafana/grafana/pkg/api/avatar"
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/api/routing"
-	"github.com/grafana/grafana/pkg/middleware"
-	m "github.com/grafana/grafana/pkg/models"
+	"github.com/xformation/cms-ui/pkg/api/avatar"
+	"github.com/xformation/cms-ui/pkg/api/dtos"
+	"github.com/xformation/cms-ui/pkg/api/routing"
+	"github.com/xformation/cms-ui/pkg/middleware"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 func (hs *HTTPServer) registerRoutes() {

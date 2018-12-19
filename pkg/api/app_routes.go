@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/grafana/grafana/pkg/api/pluginproxy"
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/middleware"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/util"
+	"github.com/xformation/cms-ui/pkg/api/pluginproxy"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/middleware"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins"
+	"github.com/xformation/cms-ui/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/util"
 	macaron "gopkg.in/macaron.v1"
 )
 

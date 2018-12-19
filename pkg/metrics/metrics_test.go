@@ -11,12 +11,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/components/simplejson"
-	"github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins"
-	"github.com/grafana/grafana/pkg/setting"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	"github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func TestMetrics(t *testing.T) {

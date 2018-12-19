@@ -5,7 +5,7 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	m "github.com/grafana/grafana/pkg/models"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 func MeasureRequestTime() macaron.Handler {

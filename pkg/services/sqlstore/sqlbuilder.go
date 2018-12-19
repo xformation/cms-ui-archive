@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"strings"
 
-	m "github.com/grafana/grafana/pkg/models"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 type SqlBuilder struct {

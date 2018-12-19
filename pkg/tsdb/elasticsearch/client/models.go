@@ -3,7 +3,7 @@ package es
 import (
 	"encoding/json"
 
-	"github.com/grafana/grafana/pkg/tsdb"
+	"github.com/xformation/cms-ui/pkg/tsdb"
 )
 
 // SearchRequest represents a search request

@@ -3,11 +3,11 @@ package api
 import (
 	"time"
 
-	"github.com/grafana/grafana/pkg/api/dtos"
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/services/dashboards"
-	"github.com/grafana/grafana/pkg/services/guardian"
+	"github.com/xformation/cms-ui/pkg/api/dtos"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/services/dashboards"
+	"github.com/xformation/cms-ui/pkg/services/guardian"
 )
 
 func GetFolderPermissionList(c *m.ReqContext) Response {

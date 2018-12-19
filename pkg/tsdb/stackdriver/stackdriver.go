@@ -18,15 +18,15 @@ import (
 	"golang.org/x/net/context/ctxhttp"
 	"golang.org/x/oauth2/google"
 
-	"github.com/grafana/grafana/pkg/api/pluginproxy"
-	"github.com/grafana/grafana/pkg/components/null"
-	"github.com/grafana/grafana/pkg/components/simplejson"
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/tsdb"
 	"github.com/opentracing/opentracing-go"
+	"github.com/xformation/cms-ui/pkg/api/pluginproxy"
+	"github.com/xformation/cms-ui/pkg/components/null"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins"
+	"github.com/xformation/cms-ui/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/tsdb"
 )
 
 var (

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/grafana/grafana/pkg/log"
+	"github.com/xformation/cms-ui/pkg/log"
 )
 
 type DashboardProvisioner struct {

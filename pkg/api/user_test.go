@@ -3,11 +3,11 @@ package api
 import (
 	"testing"
 
-	"github.com/grafana/grafana/pkg/models"
+	"github.com/xformation/cms-ui/pkg/models"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/components/simplejson"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
 )
 
 func TestUserApiEndpoint(t *testing.T) {

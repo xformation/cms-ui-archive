@@ -1,8 +1,8 @@
 package notifications
 
 import (
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/setting"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 type Message struct {

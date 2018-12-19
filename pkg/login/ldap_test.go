@@ -5,9 +5,9 @@ import (
 	"crypto/tls"
 	"testing"
 
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
 	"gopkg.in/ldap.v3"
 )
 

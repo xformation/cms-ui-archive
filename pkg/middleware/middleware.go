@@ -5,13 +5,13 @@ import (
 
 	"gopkg.in/macaron.v1"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/components/apikeygen"
-	"github.com/grafana/grafana/pkg/log"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/services/session"
-	"github.com/grafana/grafana/pkg/setting"
-	"github.com/grafana/grafana/pkg/util"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/components/apikeygen"
+	"github.com/xformation/cms-ui/pkg/log"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/services/session"
+	"github.com/xformation/cms-ui/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/util"
 )
 
 var (

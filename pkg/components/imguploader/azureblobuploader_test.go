@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/grafana/grafana/pkg/setting"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func TestUploadToAzureBlob(t *testing.T) {

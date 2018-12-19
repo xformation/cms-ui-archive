@@ -6,10 +6,10 @@ import (
 	"runtime"
 
 	"github.com/codegangsta/cli"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/commands"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/services"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/utils"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/commands"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/logger"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/services"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/utils"
 )
 
 var version = "master"
@@ -18,27 +18,27 @@ func main() {
 	setupLogging()
 
 	app := cli.NewApp()
-	app.Name = "Grafana cli"
+	app.Name = "cms cli"
 	app.Usage = ""
-	app.Author = "Grafana Project"
-	app.Email = "https://github.com/grafana/grafana"
+	app.Author = "cms Project"
+	app.Email = "https://github.com/xformation/cms-ui"
 	app.Version = version
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "pluginsDir",
-			Usage:  "path to the grafana plugin directory",
+			Usage:  "path to the cms plugin directory",
 			Value:  utils.GetGrafanaPluginDir(runtime.GOOS),
 			EnvVar: "GF_PLUGIN_DIR",
 		},
 		cli.StringFlag{
 			Name:   "repo",
 			Usage:  "url to the plugin repository",
-			Value:  "https://grafana.com/api/plugins",
+			Value:  "https://cms.com/api/plugins",
 			EnvVar: "GF_PLUGIN_REPO",
 		},
 		cli.StringFlag{
 			Name:   "pluginUrl",
-			Usage:  "Full url to the plugin zip file instead of downloading the plugin from grafana.com/api",
+			Usage:  "Full url to the plugin zip file instead of downloading the plugin from cms.com/api",
 			Value:  "",
 			EnvVar: "GF_PLUGIN_URL",
 		},

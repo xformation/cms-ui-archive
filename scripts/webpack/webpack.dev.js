@@ -21,7 +21,7 @@ module.exports = merge(common, {
 
   output: {
     path: path.resolve(__dirname, '../../public/build'),
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     // Keep publicPath relative for host.com/grafana/ deployments
     publicPath: "public/build/",
   },
@@ -80,7 +80,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin('../../public/build', { allowExternal: true }),
     new MiniCssExtractPlugin({
-      filename: "grafana.[name].[hash].css"
+      filename: "grafana.[name].css"
     }),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../../public/views/error.html'),

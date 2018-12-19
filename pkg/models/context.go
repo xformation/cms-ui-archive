@@ -6,9 +6,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/macaron.v1"
 
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/services/session"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/services/session"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 type ReqContext struct {

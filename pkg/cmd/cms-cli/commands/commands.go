@@ -6,10 +6,10 @@ import (
 
 	"github.com/codegangsta/cli"
 	"github.com/fatih/color"
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/logger"
-	"github.com/grafana/grafana/pkg/services/sqlstore"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/logger"
+	"github.com/xformation/cms-ui/pkg/services/sqlstore"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func runDbCommand(command func(commandLine CommandLine) error) func(context *cli.Context) {

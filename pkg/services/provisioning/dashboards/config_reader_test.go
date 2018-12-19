@@ -3,8 +3,8 @@ package dashboards
 import (
 	"testing"
 
-	"github.com/grafana/grafana/pkg/log"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/log"
 )
 
 var (

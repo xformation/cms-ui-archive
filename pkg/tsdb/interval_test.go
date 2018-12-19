@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/grafana/grafana/pkg/setting"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func TestInterval(t *testing.T) {

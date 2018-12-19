@@ -11,23 +11,23 @@ import (
 	"testing"
 	"time"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/log"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/registry"
-	"github.com/grafana/grafana/pkg/services/annotations"
-	"github.com/grafana/grafana/pkg/services/cache"
-	"github.com/grafana/grafana/pkg/services/sqlstore/migrations"
-	"github.com/grafana/grafana/pkg/services/sqlstore/migrator"
-	"github.com/grafana/grafana/pkg/services/sqlstore/sqlutil"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/log"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/registry"
+	"github.com/xformation/cms-ui/pkg/services/annotations"
+	"github.com/xformation/cms-ui/pkg/services/cache"
+	"github.com/xformation/cms-ui/pkg/services/sqlstore/migrations"
+	"github.com/xformation/cms-ui/pkg/services/sqlstore/migrator"
+	"github.com/xformation/cms-ui/pkg/services/sqlstore/sqlutil"
+	"github.com/xformation/cms-ui/pkg/setting"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 
-	_ "github.com/grafana/grafana/pkg/tsdb/mssql"
 	_ "github.com/lib/pq"
 	sqlite3 "github.com/mattn/go-sqlite3"
+	_ "github.com/xformation/cms-ui/pkg/tsdb/mssql"
 )
 
 var (

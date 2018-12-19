@@ -5,11 +5,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/grafana/grafana/pkg/social"
+	"github.com/xformation/cms-ui/pkg/social"
 
-	"github.com/grafana/grafana/pkg/metrics/graphitebridge"
-	"github.com/grafana/grafana/pkg/setting"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/xformation/cms-ui/pkg/metrics/graphitebridge"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func (im *InternalMetricsService) readSettings() error {

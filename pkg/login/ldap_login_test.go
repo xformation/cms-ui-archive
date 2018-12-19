@@ -3,9 +3,9 @@ package login
 import (
 	"testing"
 
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/setting"
 	. "github.com/smartystreets/goconvey/convey"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func TestLdapLogin(t *testing.T) {

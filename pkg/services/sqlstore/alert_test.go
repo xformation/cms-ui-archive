@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/grafana/grafana/pkg/components/simplejson"
-	m "github.com/grafana/grafana/pkg/models"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 func mockTimeNow() {

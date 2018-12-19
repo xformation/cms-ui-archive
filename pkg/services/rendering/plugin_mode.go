@@ -7,9 +7,9 @@ import (
 	"path"
 	"time"
 
-	pluginModel "github.com/grafana/grafana-plugin-model/go/renderer"
-	"github.com/grafana/grafana/pkg/plugins"
 	plugin "github.com/hashicorp/go-plugin"
+	pluginModel "github.com/xformation/cms-ui-plugin-model/go/renderer"
+	"github.com/xformation/cms-ui/pkg/plugins"
 )
 
 func (rs *RenderingService) startPlugin(ctx context.Context) error {

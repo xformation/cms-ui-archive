@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/grafana/grafana-plugin-model/go/datasource"
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins/datasource/wrapper"
-	"github.com/grafana/grafana/pkg/tsdb"
 	plugin "github.com/hashicorp/go-plugin"
+	"github.com/xformation/cms-ui-plugin-model/go/datasource"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins/datasource/wrapper"
+	"github.com/xformation/cms-ui/pkg/tsdb"
 )
 
 // DataSourcePlugin contains all metadata about a datasource plugin

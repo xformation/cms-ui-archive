@@ -3,8 +3,8 @@ package api
 import (
 	"testing"
 
-	"github.com/grafana/grafana/pkg/setting"
 	. "github.com/smartystreets/goconvey/convey"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func TestHTTPServer(t *testing.T) {

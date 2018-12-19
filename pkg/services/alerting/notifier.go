@@ -4,14 +4,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/components/imguploader"
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/metrics"
-	"github.com/grafana/grafana/pkg/services/rendering"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/components/imguploader"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/metrics"
+	"github.com/xformation/cms-ui/pkg/services/rendering"
+	"github.com/xformation/cms-ui/pkg/setting"
 
-	m "github.com/grafana/grafana/pkg/models"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 type NotifierPlugin struct {
@@ -84,8 +84,8 @@ func (n *notificationService) sendAndMarkAsComplete(evalContext *EvalContext, no
 func (n *notificationService) sendNotification(evalContext *EvalContext, notifierState *notifierState) error {
 	if !evalContext.IsTestRun {
 		setPendingCmd := &m.SetAlertNotificationStateToPendingCommand{
-			Id:                           notifierState.state.Id,
-			Version:                      notifierState.state.Version,
+			Id:      notifierState.state.Id,
+			Version: notifierState.state.Version,
 			AlertRuleStateUpdatedVersion: evalContext.Rule.StateChanges,
 		}
 

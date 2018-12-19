@@ -11,27 +11,27 @@ import (
 	"path"
 	"time"
 
-	"github.com/grafana/grafana/pkg/api/routing"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/xformation/cms-ui/pkg/api/routing"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	macaron "gopkg.in/macaron.v1"
 
-	"github.com/grafana/grafana/pkg/api/live"
-	httpstatic "github.com/grafana/grafana/pkg/api/static"
-	"github.com/grafana/grafana/pkg/bus"
-	"github.com/grafana/grafana/pkg/components/simplejson"
-	"github.com/grafana/grafana/pkg/log"
-	"github.com/grafana/grafana/pkg/middleware"
-	"github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/plugins"
-	"github.com/grafana/grafana/pkg/registry"
-	"github.com/grafana/grafana/pkg/services/cache"
-	"github.com/grafana/grafana/pkg/services/datasources"
-	"github.com/grafana/grafana/pkg/services/hooks"
-	"github.com/grafana/grafana/pkg/services/rendering"
-	"github.com/grafana/grafana/pkg/setting"
+	"github.com/xformation/cms-ui/pkg/api/live"
+	httpstatic "github.com/xformation/cms-ui/pkg/api/static"
+	"github.com/xformation/cms-ui/pkg/bus"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	"github.com/xformation/cms-ui/pkg/log"
+	"github.com/xformation/cms-ui/pkg/middleware"
+	"github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/plugins"
+	"github.com/xformation/cms-ui/pkg/registry"
+	"github.com/xformation/cms-ui/pkg/services/cache"
+	"github.com/xformation/cms-ui/pkg/services/datasources"
+	"github.com/xformation/cms-ui/pkg/services/hooks"
+	"github.com/xformation/cms-ui/pkg/services/rendering"
+	"github.com/xformation/cms-ui/pkg/setting"
 )
 
 func init() {

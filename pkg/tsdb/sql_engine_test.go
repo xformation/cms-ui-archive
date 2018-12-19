@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/grafana/grafana/pkg/components/null"
-	"github.com/grafana/grafana/pkg/components/simplejson"
-	"github.com/grafana/grafana/pkg/models"
+	"github.com/xformation/cms-ui/pkg/components/null"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	"github.com/xformation/cms-ui/pkg/models"
 
 	. "github.com/smartystreets/goconvey/convey"
 )

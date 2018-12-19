@@ -5,8 +5,8 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 
-	"github.com/grafana/grafana/pkg/components/null"
-	"github.com/grafana/grafana/pkg/tsdb"
+	"github.com/xformation/cms-ui/pkg/components/null"
+	"github.com/xformation/cms-ui/pkg/tsdb"
 )
 
 func TestSimpleReducer(t *testing.T) {

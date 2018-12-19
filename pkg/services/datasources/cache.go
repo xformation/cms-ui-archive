@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/grafana/grafana/pkg/bus"
-	m "github.com/grafana/grafana/pkg/models"
-	"github.com/grafana/grafana/pkg/registry"
-	"github.com/grafana/grafana/pkg/services/cache"
+	"github.com/xformation/cms-ui/pkg/bus"
+	m "github.com/xformation/cms-ui/pkg/models"
+	"github.com/xformation/cms-ui/pkg/registry"
+	"github.com/xformation/cms-ui/pkg/services/cache"
 )
 
 type CacheService interface {

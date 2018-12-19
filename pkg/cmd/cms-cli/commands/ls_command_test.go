@@ -2,8 +2,8 @@ package commands
 
 import (
 	"errors"
-	"github.com/grafana/grafana/pkg/cmd/grafana-cli/commands/commandstest"
-	s "github.com/grafana/grafana/pkg/cmd/grafana-cli/services"
+	"github.com/xformation/cms-ui/pkg/cmd/cms-cli/commands/commandstest"
+	s "github.com/xformation/cms-ui/pkg/cmd/cms-cli/services"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )

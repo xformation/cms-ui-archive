@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	m "github.com/grafana/grafana/pkg/models"
 	. "github.com/smartystreets/goconvey/convey"
+	m "github.com/xformation/cms-ui/pkg/models"
 )
 
 func TestStatsDataAccess(t *testing.T) {
