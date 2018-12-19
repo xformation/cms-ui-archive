@@ -34,8 +34,8 @@ const (
 	DEV                 = "development"
 	PROD                = "production"
 	TEST                = "test"
-	APP_NAME            = "Grafana"
-	APP_NAME_ENTERPRISE = "Grafana Enterprise"
+	APP_NAME            = "Synectiks-cms"
+	APP_NAME_ENTERPRISE = "Synectiks CMS Enterprise"
 )
 
 var (

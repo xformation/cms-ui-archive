@@ -31,7 +31,7 @@ import (
 	_ "github.com/xformation/cms-ui/pkg/tsdb/testdata"
 )
 
-var version = "5.0.0"
+var version = "1.0.0"
 var commit = "NA"
 var buildBranch = "master"
 var buildstamp string

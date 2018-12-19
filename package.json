@@ -1,13 +1,13 @@
 {
   "author": {
-    "name": "Torkel Ödegaard",
-    "company": "Grafana Labs"
+    "name": "Synectiks-code",
+    "company": "synectiks inc"
   },
-  "name": "grafana",
-  "version": "5.5.0-pre1",
+  "name": "cms-ui",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "http://github.com/grafana/grafana.git"
+    "url": "http://github.com/xformation/cms-ui.git"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
