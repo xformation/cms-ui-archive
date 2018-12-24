@@ -317,6 +317,13 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 					Id:          "localapp",
 					Url:         setting.AppSubUrl + "/localapp",
 				},
+				{
+					Text:        "Global App",
+					Icon:        "gicon gicon-datasources",
+					Description: "Add and configure data sources",
+					Id:          "datasources",
+					Url:         setting.AppSubUrl + "/datasources",
+				},
 			},
 		}
 
