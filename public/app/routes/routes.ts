@@ -310,6 +310,11 @@ export function setupAngularRoutes($routeProvider, $locationProvider) {
       controller: 'AlertNotificationEditCtrl',
       controllerAs: 'ctrl',
     })
+    .when('/localapp', {
+      templateUrl: 'public/app/features/localapp/partials/local_app.html',
+      controller: 'LocalAppCtrl',
+      controllerAs: 'ctrl',
+    })
     .otherwise({
       templateUrl: 'public/app/partials/error.html',
       controller: 'ErrorCtrl',

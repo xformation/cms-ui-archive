@@ -9,5 +9,8 @@ import './admin';
 import './alerting/NotificationsEditCtrl';
 import './alerting/NotificationsListCtrl';
 import './manage-dashboards';
+import './localapp';
+import './localapp/college-settings';
+import './localapp/college-settings/legalentities';
 import './teams/CreateTeamCtrl';
 import './profile/all';
