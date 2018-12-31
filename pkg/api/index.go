@@ -311,7 +311,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 			Url:      setting.AppSubUrl + "/localapp",
 			Children: []*dtos.NavLink{
 				{
-					Text:         "Local App",
+					Text:         "Local Config",
 					Icon:         "gicon gicon-datasources",
 					Description:  "Local Application",
 					Id:           "localapp",
@@ -319,7 +319,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 					HideFromTabs: true,
 				},
 				{
-					Text:         "Global App",
+					Text:         "Global Config",
 					Icon:         "gicon gicon-datasources",
 					Description:  "Add and configure data sources",
 					Id:           "datasources",

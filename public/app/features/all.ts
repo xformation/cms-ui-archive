@@ -11,6 +11,8 @@ import './alerting/NotificationsListCtrl';
 import './manage-dashboards';
 import './localapp';
 import './localapp/college-settings';
+import './localapp/academic-settings';
+import './localapp/academic-settings/yearsetting';
 import './localapp/college-settings/generalinfo';
 import './localapp/college-settings/legalentities';
 import './localapp/college-settings/locations';
