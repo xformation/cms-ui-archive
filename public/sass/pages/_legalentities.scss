@@ -1,6 +1,7 @@
 .legal-entities-main-container {
   .tab-content {
-    padding: 50px 0px;
+    border: 1px solid $gray-3;
+    padding: 2rem !important;
   }
   .empty-form-label {
     padding: 0 !important;
@@ -8,6 +9,10 @@
   }
   .logo {
     width: 100px;
+    height: 18px;
+  }
+  .background {
+    width: 500px;
   }
   .tile {
     width: 240px;
@@ -43,4 +48,97 @@
 
 .blue {
   background-color: #8198be;
+}
+.ht-150 {
+  height: 150px !important;
+}
+
+// select,
+// input[type='file'] {
+//   display: none !important;
+// }
+
+.upload-cursor {
+  cursor: pointer;
+  color: #5ccefc;
+  margin-left: 2rem;
+  width: 15rem;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+
+table,
+tr,
+td,
+th {
+  border: #dadada 1px solid;
+}
+
+.custom-table-header {
+  background: rgb(238, 238, 238);
+}
+
+th,
+td {
+  padding: 10px !important;
+  height: 30px;
+}
+
+.bp {
+  width: 100px;
+  border-bottom: 2px solid #4d4d4d;
+  background-color: #3697ef !important;
+  color: #fff;
+}
+.bs {
+  width: 100px;
+  border-bottom: 2px solid #4d4d4d;
+  background-color: #84bf48;
+  color: #fff;
+}
+
+.l-grey {
+  color: #cecece;
+}
+
+.legal-tab {
+  background: white;
+  color: #3697ef;
+  overflow: hidden;
+  font-weight: 500;
+  border: 1px solid #cecece;
+  border-bottom: 0px;
+  border-top: 2px solid #3697ef;
+}
+
+.dflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.form-left,
+.form-right {
+  width: 27vw;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.b-0 {
+  border: 0px !important;
+}
+
+.bg-white {
+  background-color: $white !important;
+}
+
+.mx {
+  margin-left: 12px !important;
+  margin-right: 12px !important;
 }

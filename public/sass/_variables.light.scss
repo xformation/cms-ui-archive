@@ -20,11 +20,11 @@ $dark-4: #35373f;
 $dark-5: #41444b;
 $gray-1: #52545c;
 $gray-2: #767980;
-$gray-3: #acb6bf;
+$gray-3: #b9bec6;
 $gray-4: #c7d0d9;
 $gray-5: #dde4ed;
 $gray-6: #e9edf2;
-$gray-7: #f7f8fa;
+$gray-7: #efefef;
 
 $white: #fff;
 
@@ -33,23 +33,23 @@ $white: #fff;
 $blue: #0083b3;
 $blue-dark: #005f81;
 $blue-light: #00a8e6;
-$green: #3aa655;
+$green: #84bf48;
 $red: #d44939;
 $yellow: #ff851b;
-$orange: #ff7941;
+$sprimary: #3697ef;
 $pink: #e671b8;
 $purple: #9954bb;
 $variable: $blue;
 
-$brand-primary: $orange;
+$brand-primary: $sprimary;
 $brand-success: $green;
-$brand-warning: $orange;
+$brand-warning: $sprimary;
 $brand-danger: $red;
 
 $query-red: $red;
 $query-green: $green;
 $query-purple: $purple;
-$query-orange: $orange;
+$query-orange: $sprimary;
 $query-keyword: $blue;
 
 // Status colors
@@ -159,11 +159,12 @@ $btn-secondary-bg-hl: lighten($blue, 4%);
 $btn-success-bg: lighten($green, 3%);
 $btn-success-bg-hl: darken($green, 3%);
 
-$btn-warning-bg: lighten($orange, 3%);
-$btn-warning-bg-hl: darken($orange, 3%);
+$btn-warning-bg: lighten($sprimary, 3%);
+$btn-warning-bg-hl: darken($sprimary, 3%);
 
-$btn-danger-bg: lighten($red, 3%);
-$btn-danger-bg-hl: darken($red, 3%);
+$btn-danger-bg: lighten($gray-3, 3%);
+$btn-danger-bg-hl: darken($gray-3, 3%);
+$btn-gray-bg: $gray-3;
 
 $btn-inverse-bg: $gray-6;
 $btn-inverse-bg-hl: darken($gray-6, 5%);
@@ -284,7 +285,7 @@ $navbar-button-border: $gray-4;
 
 // Form states and alerts
 // -------------------------
-$warning-text-color: lighten($orange, 10%);
+$warning-text-color: lighten($sprimary, 10%);
 $error-text-color: lighten($red, 10%);
 $success-text-color: lighten($green, 10%);
 $info-text-color: $blue;
@@ -394,7 +395,7 @@ $panel-editor-viz-item-border-hover: 1px solid $blue-light;
 $panel-editor-viz-item-bg: $white;
 $panel-editor-tabs-line-color: $dark-5;
 $panel-editor-viz-item-bg-hover: lighten($blue, 62%);
-$panel-editor-viz-item-bg-hover-active: lighten($orange, 34%);
+$panel-editor-viz-item-bg-hover-active: lighten($sprimary, 34%);
 
 $panel-option-section-border: 1px solid $gray-6;
 $panel-option-section-header-bg: linear-gradient(0deg, $gray-6, $gray-7);

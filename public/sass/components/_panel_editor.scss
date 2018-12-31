@@ -112,7 +112,7 @@
   &:hover {
     transition: background 0.2s ease-in 0.4s;
     transition-delay: 0.2s;
-    background: linear-gradient(90deg, $orange, $red);
+    background: linear-gradient(90deg, $sprimary, $red);
     .panel-editor-resizer__handle-dots {
       transition: opacity 0.2s ease-in;
       opacity: 0;
@@ -156,8 +156,8 @@
   transition: transform 1 ease;
 
   &--current {
-    box-shadow: 0 0 6px $orange;
-    border: 1px solid $orange;
+    box-shadow: 0 0 6px $sprimary;
+    border: 1px solid $sprimary;
   }
 
   &:hover {

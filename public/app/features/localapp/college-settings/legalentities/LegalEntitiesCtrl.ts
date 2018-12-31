@@ -1,7 +1,7 @@
 export class LegalEntitiesCtrl {
   navModel: any;
   activeTabIndex = 0;
-  logoSrc = '';
+  logoSrc = '/public/img/logo-placeholder.png';
   $scope;
   /** @ngInject */
   constructor($scope) {

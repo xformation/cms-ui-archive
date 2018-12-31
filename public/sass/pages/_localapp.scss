@@ -7,9 +7,10 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding: 2rem;
 
   .aside-container {
-    max-width: 30%;
+    max-width: 20%;
     .tab-title {
       font-size: 15px;
     }
