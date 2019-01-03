@@ -2,7 +2,7 @@ export class CollegeSettingsCtrl {
   sections: any[];
   activeTabId: string;
   constructor() {
-    this.activeTabId = 'legal_entities';
+    this.activeTabId = 'general_info';
     this.buildSectionList();
   }
 

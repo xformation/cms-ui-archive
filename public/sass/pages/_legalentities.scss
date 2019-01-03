@@ -8,6 +8,10 @@
   }
   .logo {
     width: 100px;
+    height: 18px;
+  }
+  .background {
+    width: 500px;
   }
   .tile {
     width: 240px;
@@ -43,4 +47,59 @@
 
 .blue {
   background-color: #8198be;
+}
+.ht-150 {
+  height: 150px !important;
+}
+
+select,
+input[type='file'] {
+  display: none !important;
+}
+
+.upload-cursor {
+  cursor: pointer;
+  color: #5ccefc;
+  margin-left: 2rem;
+  width: 15rem;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+
+table,
+tr,
+td,
+th {
+  border: #dadada 1px solid;
+}
+
+.custom-table-header {
+  background: rgb(238, 238, 238);
+}
+
+th,
+td {
+  padding: 10px !important;
+  height: 30px;
+}
+
+.bp {
+  width: 100px;
+  border-bottom: 2px solid #4d4d4d;
+  background-color: #3697ef !important;
+  color: #fff;
+}
+.bs {
+  width: 100px;
+  border-bottom: 2px solid #4d4d4d;
+  background-color: #84bf48;
+  color: #fff;
+}
+
+.l-grey {
+  color: #cecece;
 }

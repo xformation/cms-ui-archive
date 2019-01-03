@@ -14,7 +14,11 @@ const SideMenuDropDown: SFC<Props> = props => {
       </li>
       {link.children &&
         link.children.map((child, index) => {
-          return <DropDownChild child={child} key={`${child.url}-${index}`} />;
+          if (!child.hideFromMenu) {
+            return <DropDownChild child={child} key={`${child.url}-${index}`} />;
+          } else {
+            return null;
+          }
         })}
     </ul>
   );
