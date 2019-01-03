@@ -8,7 +8,7 @@
   color: white;
 }
 .dashboard-settings__content {
-  padding: 0 30px;
+  padding: 0 0 0 20px;
   margin: 0;
 }
 .tab-header {
@@ -109,6 +109,9 @@ tile-info {
 }
 
 table#academic {
+  th {
+    text-align: left;
+  }
   td,
   th {
     width: auto;
@@ -130,12 +133,21 @@ table#academic {
   button {
     margin-right: 24px;
   }
+  td:first-child {
+    padding-right: 4rem !important;
+  }
+  td:nth-child(4) {
+    padding-right: 3rem !important;
+  }
+  td:last-child {
+    padding-right: 3rem !important;
+  }
 }
 .wauto {
   width: auto;
   font-size: 10px;
 }
-i.fa.fa-calendar {
+i.fa.fa-calendar-o {
   border-left: 1px solid #cccccc;
   padding: 7px 0px 0px 13px;
   height: 34px;
@@ -143,13 +155,13 @@ i.fa.fa-calendar {
 }
 
 .bg-heading {
-  background-color: #ebedf0;
+  background-color: #f6f6f6;
 }
 
 .yspace {
-  margin: -2rem;
+  margin: -21px -32px;
   padding: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 .p {
   padding: 8px;
@@ -158,6 +170,10 @@ i.fa.fa-calendar {
   margin-right: 1rem;
 }
 table.academicyear {
+  th {
+    text-align: center;
+  }
+  width: 100%;
   thead,
   tr:last-child {
     background-color: white !important;
@@ -181,4 +197,87 @@ table.academicyear {
     padding-left: 4rem !important;
     padding-right: 4rem !important;
   }
+}
+.fa-university {
+  color: white;
+  font-size: 1.5em;
+}
+
+.stroke-transparent {
+  -webkit-text-stroke: 1px #000;
+  -webkit-text-fill-color: transparent;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d62727;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(12, 133, 22);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.ht {
+  height: 5vh;
+}
+// padding
+.p-1 {
+  padding: 10px;
+}
+.p-2 {
+  padding: 20px;
+}
+.ptl-06 {
+  padding-top: 6px;
+  padding-left: 6px;
 }
