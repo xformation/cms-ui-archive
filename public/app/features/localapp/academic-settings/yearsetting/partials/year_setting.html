@@ -1,13 +1,13 @@
 <page-header model="ctrl.navModel"></page-header>
 <!-- optional-->
 <div class="page-container page-body legal-entities-main-container">
+  <h3 class="bg-heading yspace">
+    <i class="fa fa-university mr-1" aria-hidden="true"></i> Admin - Academic Year Setting
+  </h3>
   <div class="info-container">
-    <div class="authorized-signatory-container m-b-1">
-      <h3>Admin - Academic Year Setting</h3>
-      <h4>Academic Year</h4>
-    </div>
+    <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading p">Academic Year</h4></div>
   </div>
-  <table>
+  <table id="academic">
     <thead>
       <th>Year</th>
       <th>Start Date</th>
@@ -18,18 +18,185 @@
     <tbody>
       <tr>
         <td>2018-2019</td>
-        <td><input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2018-08-09" /></td>
-        <td><input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" /></td>
-        <td><button class="btn btn-primary">Manage Holidays</button></td>
-        <td><button class="btn btn-primary">Manage Terms</button></td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td><button class="btn btn-primary wauto">Manage Holidays</button></td>
+        <td><button class="btn btn-primary wauto">Manage Terms</button></td>
       </tr>
       <tr>
         <td>2018-2019</td>
-        <td><input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2018-08-09" /></td>
-        <td><input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" /></td>
-        <td><button class="btn btn-primary">Manage Holidays</button></td>
-        <td><button class="btn btn-primary">Manage Terms</button></td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td><button class="btn btn-primary wauto">Manage Holidays</button></td>
+        <td><button class="btn btn-primary wauto">Manage Terms</button></td>
+      </tr>
+      <tr>
+        <td>2018-2019</td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td><button class="btn btn-primary wauto">Manage Holidays</button></td>
+        <td><button class="btn btn-primary wauto">Manage Terms</button></td>
+      </tr>
+      <tr>
+        <td>2018-2019</td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td>
+          <label for="">
+            <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </label>
+        </td>
+        <td><button class="btn btn-primary wauto">Manage Holidays</button></td>
+        <td><button class="btn btn-primary wauto">Manage Terms</button></td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<style>
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d62727;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: '';
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  input:checked + .slider {
+    background-color: rgb(12, 133, 22);
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
+
+<table class="academicyear">
+  <thead>
+    <th>Sr.No.</th>
+    <th>Holiday</th>
+    <th>Date</th>
+    <th>Active</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Bhogi, Sankranti</td>
+      <td>14/01/2019</td>
+      <td>
+        <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bhogi, Sankranti</td>
+      <td>14/01/2019</td>
+      <td>
+        <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bhogi, Sankranti</td>
+      <td>14/01/2019</td>
+      <td>
+        <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bhogi, Sankranti</td>
+      <td>14/01/2019</td>
+      <td>
+        <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+      </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Bhogi, Sankranti</td>
+      <td>14/01/2019</td>
+      <td>
+        <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+      </td>
+    </tr>
+  </tbody>
+</table>
