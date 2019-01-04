@@ -315,6 +315,11 @@ export function setupAngularRoutes($routeProvider, $locationProvider) {
       controller: 'LocalAppCtrl',
       controllerAs: 'ctrl',
     })
+    .when('/localapp/manageholiday', {
+      templateUrl: 'public/app/features/localapp/academic-settings/manageholidays/partials/manage_holidays.html',
+      controller: 'ManageHolidaysSettingCtrl',
+      controllerAs: 'ctrl',
+    })
     .otherwise({
       templateUrl: 'public/app/partials/error.html',
       controller: 'ErrorCtrl',

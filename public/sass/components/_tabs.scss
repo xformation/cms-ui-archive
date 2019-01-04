@@ -15,7 +15,6 @@
   margin-right: $spacer/2;
   position: relative;
   display: block;
-  border: solid transparent;
   border-width: 0 1px 1px;
   border-radius: 3px 3px 0 0;
   color: $text-color;
@@ -37,7 +36,7 @@
   &.active,
   &.active:hover,
   &.active:focus {
-    border-color: $orange $tab-border-color transparent;
+    border-color: $sprimary $tab-border-color transparent;
     background: $page-bg;
     color: $link-color;
     overflow: hidden;
@@ -57,4 +56,75 @@
   &.active--panel {
     background: $panel-bg !important;
   }
+}
+.m-0 {
+  margin: 0px 0px !important;
+}
+
+.legal-gf-tabs {
+  @include clearfix();
+  float: left;
+  position: relative;
+  top: 1px;
+}
+
+.legal-gf-tabs-item {
+  float: left;
+  list-style: none;
+}
+
+.legal-gf-tabs-link {
+  padding: $tabs-padding;
+  margin-right: $spacer/2;
+  position: relative;
+  display: block;
+  border-width: 0 1px 1px;
+  border-radius: 3px 3px 0 0;
+  color: $text-color;
+
+  i {
+    margin-right: 5px;
+  }
+
+  .gicon {
+    position: relative;
+    top: -2px;
+  }
+
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+  }
+
+  &.active,
+  &.active:hover,
+  &.active:focus {
+    border-color: $sprimary $tab-border-color transparent;
+    background: $white;
+    color: $link-color;
+    border: 1px solid $gray-3;
+    border-bottom: 0px;
+    border-top: 2px solid $sprimary;
+    border-left: 1px solid $gray-3;
+    border-right: 1px solid $gray-3;
+    overflow: hidden;
+
+    &::before {
+      display: block;
+      content: ' ';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      top: 0;
+      background-image: linear-gradient(to right, $sprimary $sprimary 0%, $sprimary 99%, $sprimary 100%);
+    }
+  }
+
+  &.active--panel {
+    background: $panel-bg !important;
+  }
+}
+.m-0 {
+  margin: 0px 0px !important;
 }

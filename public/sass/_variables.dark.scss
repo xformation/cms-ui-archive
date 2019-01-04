@@ -31,15 +31,15 @@ $white: #fff;
 // -------------------------
 $blue: #33b5e5;
 $blue-dark: #005f81;
-$green: #299c46;
+$green: #84bf48;
 $red: #d44a3a;
 $yellow: #ecbb13;
 $pink: #ff4444;
 $purple: #9933cc;
 $variable: #32d1df;
-$orange: #eb7b18;
+$sprimary: #3697ef;
 
-$brand-primary: $orange;
+$brand-primary: $sprimary;
 $brand-success: $green;
 $brand-warning: $brand-primary;
 $brand-danger: $red;
@@ -48,7 +48,7 @@ $query-red: #e24d42;
 $query-green: #74e680;
 $query-purple: #fe85fc;
 $query-keyword: #66d9ef;
-$query-orange: $orange;
+$query-orange: $sprimary;
 
 // Status colors
 // -------------------------
@@ -362,14 +362,14 @@ $variable-option-bg: $blue-dark;
 $switch-bg: $input-bg;
 $switch-slider-color: $dark-2;
 $switch-slider-off-bg: $gray-1;
-$switch-slider-on-bg: linear-gradient(90deg, $orange, $red);
+$switch-slider-on-bg: linear-gradient(90deg, $sprimary, $red);
 $switch-slider-shadow: 0 0 3px black;
 
 //Checkbox
 // -------------------------
 $checkbox-bg: $dark-1;
 $checkbox-border: 1px solid $gray-1;
-$checkbox-checked-bg: linear-gradient(0deg, $orange, $red);
+$checkbox-checked-bg: linear-gradient(0deg, $sprimary, $red);
 $checkbox-color: $dark-1;
 
 //Panel Edit
@@ -385,7 +385,7 @@ $panel-editor-viz-item-border-hover: 1px solid $blue;
 $panel-editor-viz-item-bg: $input-black;
 $panel-editor-tabs-line-color: #e3e3e3;
 $panel-editor-viz-item-bg-hover: darken($blue, 47%);
-$panel-editor-viz-item-bg-hover-active: darken($orange, 45%);
+$panel-editor-viz-item-bg-hover-active: darken($sprimary, 45%);
 
 $panel-option-section-border: 1px solid $dark-3;
 $panel-option-section-header-bg: linear-gradient(0deg, $gray-blue, $dark-1);
@@ -397,6 +397,6 @@ $panel-grid-placeholder-shadow: 0 0 4px $blue;
 $logs-color-unkown: $gray-2;
 
 // toggle-group
-$button-toggle-group-btn-active-bg: linear-gradient(90deg, $orange, $red);
+$button-toggle-group-btn-active-bg: linear-gradient(90deg, $sprimary, $red);
 $button-toggle-group-btn-active-shadow: inset 0 0 4px $black;
 $button-toggle-group-btn-seperator-border: 1px solid $page-bg;

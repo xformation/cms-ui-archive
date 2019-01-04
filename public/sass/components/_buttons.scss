@@ -15,6 +15,7 @@
   vertical-align: middle;
   cursor: pointer;
   border: none;
+  width: 100px;
 
   @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-border-radius);
 
@@ -98,6 +99,9 @@
 .btn-danger {
   @include buttonBackground($btn-danger-bg, $btn-danger-bg-hl);
 }
+// .btn-gray {
+//   @include buttonBackground($btn-gray-bg);
+// }
 // Success appears as green
 .btn-success {
   @include buttonBackground($btn-success-bg, $btn-success-bg-hl);
@@ -283,4 +287,8 @@ $btn-service-icon-width: 35px;
     opacity: 0.2;
     font-size: 14;
   }
+}
+
+.border-bottom {
+  border-bottom: 2px solid #41444b;
 }

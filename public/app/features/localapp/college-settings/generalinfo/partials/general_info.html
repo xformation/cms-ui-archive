@@ -16,8 +16,8 @@
       <img ng-src="{{ ctrl.logoSrc }}" class="logo m-b-1" />
       <div class="gf-form m-b-1">
         <label class="upload-cursor">
-          <input type="file" file-select="ctrl.getFile(file)" class="gf-form-file-input" accept="image/*" /> Upload
-          <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+          <input id="d-none" type="file" file-select="ctrl.getFile(file)" class="gf-form-file-input" accept="image/*" />
+          Upload <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
         </label>
       </div>
     </div>
@@ -27,8 +27,14 @@
       <img ng-src="{{ ctrl.bgSrc }}" class="background mt-1 m-b-1" />
       <div class="gf-form m-b-1">
         <label class="upload-cursor">
-          <input type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input" accept="image/*" /> PICK
-          DIFFERENT BACKGROUND <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+          <input
+            id="d-none"
+            type="file"
+            bgfile-select="ctrl.getbgFile(file)"
+            class="gf-form-file-input"
+            accept="image/*"
+          />
+          PICK DIFFERENT BACKGROUND <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
         </label>
       </div>
     </div>

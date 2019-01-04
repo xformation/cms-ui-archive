@@ -1,93 +1,87 @@
 <style>
-    .table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 70% !important;
-    }
-  thead, tr:last-child{
+  .table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70% !important;
+  }
+  thead,
+  tr:last-child {
     background-color: #f6f6f6;
   }
-  .mbt{
+  .mbt {
     float: right;
     margin-top: 2px;
     color: #cecece;
   }
-    td,
-    th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-      width: 25%;
-      color: #686868;
-    }
-    .table-p {
-      padding: 0 10px;
-    }
-    /* 
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    /* width: 25%; */
+    color: #686868;
+  }
+  .table-p {
+    padding: 0 10px;
+  }
+  /* 
     tr:nth-child(even) {
       background-color: #3d3d33;
     } */
-    button {
-      background: white;
-      color: #3697ef;
-      padding: 0.5rem;
-      border: 1px solid #dddddd;
-      margin-bottom: 1rem;
-      border-radius: 3px;
-    }
-    .fa-1-5x {
-      font-size: 1.5rem;
-      color: #cecece;
-    }
-    .tcenter {
-      text-align: center;
-    }
-  </style>
-  <div class="page-container page-body legal-entities-main-container">
-      <div class="authorized-signatory-container m-b-1">
-          <h3>Locations</h3>
-          <small>
-            Here you can manage the locations of the organization. You can assign Locations to employees later.
-          </small>
-        </div>
-    <button><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
-    <table class="table m-b-3">
-      <thead>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Applies</th>
-        <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Rishard</td>
-          <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-          <td class="tcenter">20 </br>
-            Employees
-        </td>
-          <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
-        </tr>
-        <tr>
-            <td>Rishard</td>
-            <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-            <td class="tcenter">20 </br>
-              Employees
-          </td>
-            <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
-        </tr>
-        <tr>
-              <td>Rishard</td>
-              <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-              <td class="tcenter">20 </br>
-                Employees
-            </td>
-              <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
-        </tr>   
-        <tr>
-          <td colspan="4">Total:3</td>
-        </tr>             
-      </tbody>
-    </table>
-    <i class="fa fa-phone orange"></i>
+  button {
+    background: white;
+    color: #3697ef;
+    padding: 0.5rem;
+    border: 1px solid #dddddd;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+  }
+  .fa-1-5x {
+    font-size: 1.5rem;
+    color: #cecece;
+  }
+  .tcenter {
+    text-align: center;
+  }
+</style>
+<div class="page-container page-body legal-entities-main-container">
+  <div class="authorized-signatory-container m-b-1">
+    <h3>Colleges Branches</h3>
+    <small> Create and manage college branches. </small>
   </div>
-  
+  <button><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
+  <table class="table m-b-3">
+    <thead>
+      <th>Branch Name</th>
+      <th>Description</th>
+      <th>College head</th>
+      <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bangalore</td>
+        <td>Not Available</td>
+        <td>Mr. Khan</td>
+        <td>
+          <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i
+          ><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
+        </td>
+      </tr>
+      <tr>
+        <td>Hyderabad</td>
+        <td>Not Available</td>
+        <td>Mr. Khan</td>
+        <td>
+          <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
+          <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Total:2</td>
+      </tr>
+    </tbody>
+  </table>
+  <i class="fa fa-phone orange"></i>
+</div>

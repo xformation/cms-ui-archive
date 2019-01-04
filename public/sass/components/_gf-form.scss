@@ -88,6 +88,8 @@ $input-border: 1px solid $input-border-color;
 
 .gf-form-button-row {
   padding-top: $spacer * 1.5;
+  padding-right: $spacer * 2;
+  float: right;
   a,
   button {
     margin-right: $spacer;

@@ -1,6 +1,7 @@
 .legal-entities-main-container {
   .tab-content {
-    padding: 50px 0px;
+    border: 1px solid $gray-3;
+    padding: 2rem !important;
   }
   .empty-form-label {
     padding: 0 !important;
@@ -52,10 +53,10 @@
   height: 150px !important;
 }
 
-select,
-input[type='file'] {
-  display: none !important;
-}
+// select,
+// input[type='file'] {
+//   display: none !important;
+// }
 
 .upload-cursor {
   cursor: pointer;
@@ -102,4 +103,42 @@ td {
 
 .l-grey {
   color: #cecece;
+}
+
+.legal-tab {
+  background: white;
+  color: #3697ef;
+  overflow: hidden;
+  font-weight: 500;
+  border: 1px solid #cecece;
+  border-bottom: 0px;
+  border-top: 2px solid #3697ef;
+}
+
+.dflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.form-left,
+.form-right {
+  width: 27vw;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.b-0 {
+  border: 0px !important;
+}
+
+.bg-white {
+  background-color: $white !important;
+}
+
+.mx {
+  margin-left: 12px !important;
+  margin-right: 12px !important;
 }

@@ -1,6 +1,6 @@
 <div class="local-app-container">
   <aside class="dashboard-settings__aside aside-container">
-    <a class="aside-a"><i class="fa fa-arrow-circle-o-left"></i> BACK</a>
+    <a href="/" class="aside-a"><i class="fa fa-arrow-circle-o-left"></i> BACK</a>
     <!-- <h2 class="dashboard-settings__aside-header"><i class="fa fa-cog"></i> Local Application</h2> -->
     <a
       href="{{::section.url}}"
@@ -18,6 +18,10 @@
     <college-settings></college-settings>
   </div>
 
+  <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'academic_settings'">
+    <academic-settings></academic-settings>
+  </div>
+  <!--   
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'payroll'">This is payroll</div>
 
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'leave_holidays'">This is leave holidays</div>
@@ -29,4 +33,5 @@
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'roles_permissions'">This is roles permissions</div>
 
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'integrations'">This is integration</div>
+</div> -->
 </div>
