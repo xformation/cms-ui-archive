@@ -1,4 +1,4 @@
-export class ManageHolidyasSettingCtrl {
+export class DepartmentSetupCtrl {
   navModel: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo-placeholder.png';
