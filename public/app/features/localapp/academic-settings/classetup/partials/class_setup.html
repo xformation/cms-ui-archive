@@ -1,0 +1,186 @@
+<page-header model="ctrl.navModel"></page-header>
+<!-- optional-->
+<div class="page-container page-body legal-entities-main-container">
+  <h3 class="bg-heading yspace">
+    <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Class Setup
+  </h3>
+  <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+    <h4 class="ptl-06">Class Setup</h4>
+    <div>
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
+        Add Class</a>
+      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+    </div>
+  </div>
+  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
+    <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div>
+    <table id="acs" class="fwidth">
+      <thead>
+        <th>Department</th>
+        <th>Primary Teacher</th>
+        <th>University</th>
+        <th>Max No of Students</th>
+        <th>Max No of Division</th>
+        <th>Add Division</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="">
+              <select name="" id="">
+                <option value="">Department 1</option>
+                <option value="">Department 2</option>
+                <option value="">Department 3</option>
+              </select>
+            </label>
+          </td>
+          <td>
+            <label for="">
+              <select name="" id="">
+                <option value="">Teacher 1</option>
+                <option value="">Teacher 2</option>
+                <option value="">Teacher 3</option>
+              </select>
+            </label>
+          </td>
+          <td>
+              <label for="">
+                  <select name="" id="">
+                    <option value="">University 1</option>
+                    <option value="">University 2</option>
+                    <option value="">University 3</option>
+                  </select>
+                </label>
+          </td>
+          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
+          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
+    <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
+      <h4 class="ptl-06">Academic Class</h4>
+      <div>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Holiday</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+      </div>
+    </div>
+    <table class="academicyear">
+      <thead>
+        <th>Sr.No.</th>
+        <th>Holiday</th>
+        <th>Date</th>
+        <th>Active</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Bhogi, Sankranti</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Bhogi, Sankranti</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Bhogi, Sankranti</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Bhogi, Sankranti</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Bhogi, Sankranti</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
+    <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+      <div>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Term</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+      </div>
+    </div>
+    <table class="academicyear">
+      <thead>
+        <th>Sr.No.</th>
+        <th>Terms/Semisters</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Active</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Term 1</td>
+          <td>14/01/2018</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Term 2</td>
+          <td>14/01/2018</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Term 3</td>
+          <td>14/01/2018</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Term 4</td>
+          <td>14/01/2018</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Term 5</td>
+          <td>14/01/2018</td>
+          <td>14/01/2019</td>
+          <td>
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

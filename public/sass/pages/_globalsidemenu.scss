@@ -304,3 +304,22 @@ input:checked + .slider:before {
 .m-0 {
   margin: 0;
 }
+
+table#acs {
+  select {
+    width: auto;
+  }
+}
+
+table#tds {
+  width: 100%;
+  th,
+  td {
+    // width: 100%;
+    text-align: left !important;
+    padding-left: 2rem !important;
+    input {
+      width: 100%;
+    }
+  }
+}
