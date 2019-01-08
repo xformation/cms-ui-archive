@@ -281,3 +281,26 @@ input:checked + .slider:before {
   padding-top: 6px;
   padding-left: 6px;
 }
+.width-full {
+  width: 100%;
+  th,
+  td:first-child {
+    width: 65%;
+  }
+  a,
+  h4 {
+    width: 100%;
+  }
+}
+
+.fwidth {
+  width: 100%;
+}
+
+.my {
+  margin-top: 5rem;
+}
+
+.m-0 {
+  margin: 0;
+}

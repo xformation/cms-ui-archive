@@ -30,6 +30,7 @@ export class AlertRuleList extends PureComponent<Props, any> {
     { text: 'No Data', value: 'no_data' },
     { text: 'Paused', value: 'paused' },
     { text: 'Pending', value: 'pending' },
+    { text: 'colspan', value: 'colspan' },
   ];
 
   componentDidMount() {
@@ -119,6 +120,420 @@ export class AlertRuleList extends PureComponent<Props, any> {
               <i className="fa fa-info-circle" /> How to add an alert
             </a>
           </div>
+          <div className="bg-heading dflex">
+            <h4>Academic Year 2018-2019</h4>
+            <div>
+              <a className="btn btn-primary wauto">Add New Role</a>
+              <a className="btn btn-primary wauto m-x-2">Set Preferences</a>
+              <a className="btn btn-primary wauto">Save</a>
+            </div>
+          </div>
+          <table className="width-full">
+            <thead>
+              <th>New Role Name</th>
+              <th>Set Preferences</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Manual entry of new role</td>
+                <td>
+                  <a href="" className="btn btn-primary">
+                    Set Preference for the Role
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="bg-heading dflex my">
+            <h4>Academic Year 2018-2019</h4>
+            <div>
+              <a className="btn btn-primary wauto m-x-2">Add New Role</a>
+              <a className="btn btn-primary wauto">Save</a>
+            </div>
+          </div>
+          <table className="fwidth">
+            <thead>
+              <tr>
+                <th>Preferences</th>
+                <th>Roles</th>
+                <th colSpan={2}>Admin</th>
+                <th colSpan={2}>Teacher</th>
+                <th colSpan={2}>House Keeping</th>
+                <th colSpan={2}>Driver</th>
+                <th colSpan={2}>HR Admin</th>
+                <th colSpan={2}>Accounts Head</th>
+              </tr>
+              <tr>
+                <th />
+                <th>Read</th>
+                <th>write</th>
+                <th>Read</th>
+                <th>write</th>
+                <th>Read</th>
+                <th>write</th>
+                <th>Read</th>
+                <th>write</th>
+                <th>Read</th>
+                <th>write</th>
+                <th>Read</th>
+                <th>write</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Attendance</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Exam</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Transport</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Fee</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Student Profile</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Inventory</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Transportation</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>HR - Payroll</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+              <tr>
+                <td>Accounts</td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+                <td>
+                  <input type="radio" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <section>
             <ol className="alert-rule-list">
               {alertRules.map(rule => (
