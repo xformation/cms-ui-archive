@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import PageHeader from 'app/core/components/PageHeader/PageHeader';
+// import PageHeader from 'app/core/components/PageHeader/PageHeader';
 import OrgActionBar from 'app/core/components/OrgActionBar/OrgActionBar';
 import PageLoader from 'app/core/components/PageLoader/PageLoader';
 import PluginList from './PluginList';
@@ -34,7 +34,7 @@ export class PluginListPage extends PureComponent<Props> {
   render() {
     const {
       hasFetched,
-      navModel,
+      // navModel,
       plugins,
       layoutMode,
       setPluginsLayoutMode,
@@ -49,8 +49,8 @@ export class PluginListPage extends PureComponent<Props> {
 
     return (
       <div>
-        <PageHeader model={navModel} />
-        <div className="page-container page-body">
+        {/* <PageHeader model={navModel} /> */}
+        <div className="plugin-container">
           <OrgActionBar
             searchQuery={searchQuery}
             layoutMode={layoutMode}
