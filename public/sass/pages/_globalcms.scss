@@ -325,5 +325,30 @@ table#tds {
 }
 .plugin-container {
   width: 100%;
-  padding: 3rem;
+  background: #efefef;
+  padding: 1rem;
+}
+
+footer.footer {
+  display: none;
+}
+
+.j-start {
+  display: flex;
+  justify-content: flex-start;
+}
+.react-datepicker-wrapper {
+  border: 1px solid grey;
+  width: 94%;
+  padding: 6px;
+}
+.pr-1 {
+  padding-right: 1.8rem;
+}
+
+.mt-3 {
+  margin-top: 3rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
 }
