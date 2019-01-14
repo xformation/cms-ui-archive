@@ -212,6 +212,7 @@ table.academicyear {
   display: inline-block;
   width: 60px;
   height: 34px;
+  background-color: #cccccc;
 }
 
 .switch input {
@@ -227,25 +228,27 @@ table.academicyear {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #d62727;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 .slider:before {
   position: absolute;
-  content: '';
+  content: url('/public/img/cross.png');
+  padding: 5px;
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #d62727;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked + .slider::before {
   background-color: rgb(12, 133, 22);
+  content: url('/public/img/tick.png');
+  padding: 5px;
 }
 
 input:focus + .slider {
