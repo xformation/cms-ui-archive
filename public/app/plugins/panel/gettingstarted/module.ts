@@ -39,10 +39,10 @@ class GettingStartedPanelCtrl extends PanelCtrl {
     });
 
     this.steps.push({
-      title: 'Create your first dashboard',
+      title: 'Setup Global Preferences',
       cta: 'New dashboard',
       icon: 'icon-gf icon-gf-dashboard',
-      href: 'dashboard/new?gettingstarted',
+      href: 'datasources',
       check: () => {
         return this.backendSrv.search({ limit: 1 }).then(result => {
           return result.length > 0;
