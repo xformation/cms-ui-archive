@@ -16,19 +16,19 @@ class GettingStartedPanelCtrl extends PanelCtrl {
     this.steps = [];
 
     this.steps.push({
-      title: 'Install Grafana',
+      title: 'Install EMS',
       icon: 'icon-gf icon-gf-check',
-      href: 'http://docs.grafana.org/',
+      href: 'http://docs.ems.org/',
       target: '_blank',
       note: 'Review the installation docs',
       check: () => $q.when(true),
     });
 
     this.steps.push({
-      title: 'Create your first data source',
+      title: 'Setup Application Preferences',
       cta: 'Add data source',
       icon: 'icon-gf icon-gf-datasources',
-      href: 'datasources/new?gettingstarted',
+      href: 'localapp',
       check: () => {
         return $q.when(
           datasourceSrv.getMetricSources().filter(item => {
