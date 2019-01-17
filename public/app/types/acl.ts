@@ -1,6 +1,6 @@
 export enum OrgRole {
-  Viewer = 'Viewer',
-  Editor = 'Editor',
+  Viewer = 'Teacher',
+  Editor = 'Student',
   Admin = 'Admin',
 }
 

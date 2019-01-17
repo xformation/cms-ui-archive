@@ -18,7 +18,7 @@ function processAclItem(dto: DashboardAclDTO): DashboardAcl {
     item.icon = 'fa fa-fw fa-street-view';
     item.name = item.role;
     item.sortRank = 30;
-    if (item.role === 'Editor') {
+    if (item.role === 'Student') {
       item.sortRank += 1;
     }
   }
