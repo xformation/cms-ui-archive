@@ -11,6 +11,9 @@ export class UtilSrv {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
     appEvents.on('hide-modal', this.hideModal.bind(this), this.$rootScope);
     appEvents.on('confirm-modal', this.showConfirmModal.bind(this), this.$rootScope);
+    appEvents.on('add-modal', this.addModal.bind(this), this.$rootScope);
+    appEvents.on('branch-modal', this.branchModal.bind(this), this.$rootScope);
+    appEvents.on('department-modal', this.departmentModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -78,6 +81,58 @@ export class UtilSrv {
       src: 'public/app/partials/confirm_modal.html',
       scope: scope,
       modalClass: 'confirm-modal',
+    });
+  }
+
+  addModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    // scope.onAdd = () => {
+    //   payload.onAdd();
+    //   scope.dismiss();
+    // };
+
+    // scope.updateAddText = value => {
+    //   scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
+    // };
+
+    // scope.title = payload.title;
+    // scope.text = payload.text;
+    // scope.text2 = payload.text2;
+    // scope.addText = payload.addText;
+
+    // scope.onAdd = payload.onAdd;
+    // scope.onAltAction = payload.onAltAction;
+    // scope.altActionText = payload.altActionText;
+    // scope.icon = payload.icon || 'fa-check';
+    // scope.yesText = payload.yesText || 'Yes';
+    // scope.noText = payload.noText || 'Cancel';
+    // scope.addTextValid = scope.addText ? false : true;
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/locations/partials/add_modal.html',
+      scope: scope,
+      modalClass: 'add-modal',
+    });
+  }
+
+  branchModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
+      scope: scope,
+      modalClass: 'branch-modal',
+    });
+  }
+
+  departmentModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/departmentsettings/partials/department_modal.html',
+      scope: scope,
+      modalClass: 'department-modal',
     });
   }
 }

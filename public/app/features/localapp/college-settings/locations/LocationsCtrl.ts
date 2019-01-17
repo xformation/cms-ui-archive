@@ -1,3 +1,5 @@
+import { appEvents } from 'app/core/core';
+
 export class LocationsCtrl {
   navModel: any;
   activeTabIndex = 0;
@@ -10,5 +12,13 @@ export class LocationsCtrl {
 
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
+  }
+  showModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('add-modal', {
+      text: text,
+      icon: 'fa-trash',
+    });
   }
 }

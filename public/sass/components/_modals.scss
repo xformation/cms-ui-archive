@@ -23,12 +23,29 @@
   position: fixed;
   z-index: $zindex-modal;
   width: 100%;
-  background: $page-bg;
+  background: #ffffff;
   @include box-shadow(0 3px 7px rgba(0,0,0,0.3));
   @include background-clip(padding-box);
   outline: none;
 
-  max-width: 750px;
+  max-width: 450px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+}
+
+.add-modal {
+  position: fixed;
+  z-index: $zindex-modal;
+  width: 100%;
+  background: #ffffff;
+  @include box-shadow(0 3px 7px rgba(0,0,0,0.3));
+  @include background-clip(padding-box);
+  outline: none;
+
+  max-width: 450px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -43,6 +60,12 @@
   @include clearfix();
 }
 
+.add-modal-header {
+  background: $page-header-bg-blue;
+  border-bottom: 1px solid $page-header-border-color;
+  @include clearfix();
+}
+
 .modal-header-title {
   font-size: $font-size-h3;
   float: left;
@@ -53,6 +76,21 @@
     position: relative;
     top: -2px;
   }
+}
+
+.add-modal-header-title {
+  font-size: $font-size-h3;
+  float: left;
+  padding: $spacer * 0.5;
+  margin: 5px 0px 5px 0px;
+  color: white;
+}
+
+.add-modal-header-close {
+  float: right;
+  padding: 5px $spacer;
+  font-size: $spacer * 2;
+  color: white;
 }
 
 .modal-header-close {
@@ -90,6 +128,20 @@
 
 .modal--narrow {
   max-width: 500px;
+}
+
+.add-confirm-modal {
+  max-width: 500px;
+  background-color: #f6f6f6;
+}
+
+.fwidth-modal-text {
+  width: 26.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.bg-transparent {
+  background: transparent;
 }
 
 .confirm-modal {
