@@ -17,11 +17,12 @@
     <table id="acs" class="fwidth">
       <thead>
         <th>Department</th>
+        <th>Year</th>
         <th>Primary Teacher</th>
         <th>University</th>
         <th>Max No of Students</th>
         <th>Max No of Division</th>
-        <th>Add Division</th>
+        <th>Add Section</th>
       </thead>
       <tbody>
         <tr>
@@ -31,6 +32,16 @@
                 <option value="">Department 1</option>
                 <option value="">Department 2</option>
                 <option value="">Department 3</option>
+              </select>
+            </label>
+          </td>
+          <td>
+            <label for="">
+              <select name="" id="">
+                <option value="">Year 1</option>
+                <option value="">Year 2</option>
+                <option value="">Year 3</option>
+                <option value="">Year 4</option>
               </select>
             </label>
           </td>
@@ -66,7 +77,7 @@
              <i class="fa fa-minus" aria-hidden="true"></i>
             </span>
           </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Add Division</a></td>
+          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Add Section</a></td>
         </tr>
        
       </tbody>
