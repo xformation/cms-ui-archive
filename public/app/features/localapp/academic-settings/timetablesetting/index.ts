@@ -1,10 +1,10 @@
 import coreModule from 'app/core/core_module';
 import { TimeTableCtrl } from './TimeTableCtrl';
 
-export function timetable() {
+export function timetableSetting() {
   return {
     restrict: 'E',
-    templateUrl: 'public/app/features/localapp/academic-settings/timetable/partials/time_table.html',
+    templateUrl: 'public/app/features/localapp/academic-settings/timetablesetting/partials/timetable_setting.html',
     controller: TimeTableCtrl,
     bindToController: true,
     controllerAs: 'ctrl',
@@ -13,4 +13,4 @@ export function timetable() {
   };
 }
 
-coreModule.directive('timetable', timetable);
+coreModule.directive('timetableSetting', timetableSetting);
