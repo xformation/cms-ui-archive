@@ -53,6 +53,40 @@
   top: 10%;
 }
 
+.signatory-modal {
+  position: fixed;
+  z-index: $zindex-modal;
+  width: 100%;
+  background: #ffffff;
+  @include box-shadow(0 3px 7px rgba(0,0,0,0.3));
+  @include background-clip(padding-box);
+  outline: none;
+
+  max-width: 800px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+}
+
+.import-department-modal {
+  position: fixed;
+  z-index: $zindex-modal;
+  width: 100%;
+  background: #ffffff;
+  @include box-shadow(0 3px 7px rgba(0,0,0,0.3));
+  @include background-clip(padding-box);
+  outline: none;
+
+  max-width: 800px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+}
+
 .modal-header {
   background: $page-header-bg;
   box-shadow: $page-header-shadow;
@@ -131,7 +165,6 @@
 }
 
 .add-confirm-modal {
-  max-width: 500px;
   background-color: #f6f6f6;
 }
 
@@ -230,4 +263,66 @@
     display: block;
     text-overflow: ellipsis;
   }
+}
+
+.mdflex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-fwidth {
+  width: 100%;
+}
+
+.mgrid {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  color: #8b8b8b !important;
+  h3 {
+    color: #8b8b8b !important;
+  }
+}
+
+.mbox {
+  border: 1px solid #e1e1e1;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 20px;
+}
+
+.circle-bg-blue {
+  border-radius: 50%;
+  background: #1c95ea;
+  height: 40px;
+  width: 40px;
+  color: white;
+  padding: 4px 13px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.m-grey-bg {
+  background: transparent !important;
+  border: 1px solid #e1e1e1;
+  color: grey;
+}
+
+#line {
+  width: 114px;
+  height: 3px;
+  background-color: #e1e1e1;
+  margin: 0 20px;
+}
+
+.m-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.mlabel {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
 }

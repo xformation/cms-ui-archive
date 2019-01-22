@@ -27,7 +27,8 @@
             <div class="tile-info">CEO</div>
           </div>
         </div>
-        <div class="tile"><a type="submit" class="upload-cursor">+ Add New Signatory</a></div>
+        <div class="tile"><a ng-click="ctrl.showSignatoryModal()" type="submit" class="upload-cursor">+ Add New
+            Signatory</a></div>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -48,7 +49,7 @@
             <div class="tile-info">Banglore</div>
           </div>
         </div>
-        <div class="tile"><a type="submit" class="upload-cursor">+ Add Bank Account</a></div>
+        <div class="tile"><a ng-click="ctrl.showBankModal()" type="submit" class="upload-cursor">+ Add Bank Account</a></div>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -75,10 +76,7 @@
       </ul>
       <div class="clearfix"></div>
     </div>
-    <div
-      class="tab-content"
-      style="margin: 0px 0px !important; padding: 2rem  !important; margin-bottom: 3rem !important;"
-    >
+    <div class="tab-content" style="margin: 0px 0px !important; padding: 2rem  !important; margin-bottom: 3rem !important;">
       <div ng-class="{'hide':ctrl.activeTabIndex !== 0}">
         <div class="contnet">
           <form class="gf-form-group section m-0 dflex">

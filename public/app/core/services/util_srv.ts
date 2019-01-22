@@ -14,6 +14,9 @@ export class UtilSrv {
     appEvents.on('add-modal', this.addModal.bind(this), this.$rootScope);
     appEvents.on('branch-modal', this.branchModal.bind(this), this.$rootScope);
     appEvents.on('department-modal', this.departmentModal.bind(this), this.$rootScope);
+    appEvents.on('import-department-modal', this.importDepartmentModal.bind(this), this.$rootScope);
+    appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
+    appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -133,6 +136,36 @@ export class UtilSrv {
       src: 'public/app/features/localapp/college-settings/departmentsettings/partials/department_modal.html',
       scope: scope,
       modalClass: 'department-modal',
+    });
+  }
+
+  importDepartmentModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/departmentsettings/partials/import_department_modal.html',
+      scope: scope,
+      modalClass: 'import-department-modal',
+    });
+  }
+
+  signatoryModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/legalentities/partials/signatory_modal.html',
+      scope: scope,
+      modalClass: 'signatory-modal',
+    });
+  }
+
+  bankModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/legalentities/partials/bank_modal.html',
+      scope: scope,
+      modalClass: 'bank-modal',
     });
   }
 }

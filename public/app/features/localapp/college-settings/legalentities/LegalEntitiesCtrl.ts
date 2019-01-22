@@ -1,3 +1,5 @@
+import { appEvents } from 'app/core/core';
+
 export class LegalEntitiesCtrl {
   navModel: any;
   activeTabIndex = 0;
@@ -25,5 +27,22 @@ export class LegalEntitiesCtrl {
       this.$scope.$apply();
     };
     fileReader.readAsDataURL(file);
+  }
+
+  showSignatoryModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('signatory-modal', {
+      text: text,
+      icon: 'fa-trash',
+    });
+  }
+  showBankModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('bank-modal', {
+      text: text,
+      icon: 'fa-trash',
+    });
   }
 }
