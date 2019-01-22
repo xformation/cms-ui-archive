@@ -174,10 +174,10 @@
     
        <p>View / Create Time Table</p>
      <div>
-        <span class="btn btn-primary mr-1 wauto">
+        <span class="btn btn-primary mr-1 btn-small" ng-click="divOne = divOne + 1" ng-init="divOne = 50">
           <i class="fa fa-plus" aria-hidden="true"></i>
-        </span> 50
-       <span class="btn btn-primary ml-1 wauto">
+        </span> {{divOne}}
+       <span class="btn btn-primary ml-1 btn-small" ng-click="divOne = divOne - 1">
          <i class="fa fa-minus" aria-hidden="true"></i>
         </span>
       </div>
@@ -202,12 +202,12 @@
     
        <p>View / Create Time Table</p>
      <div>
-        <span class="btn btn-primary mr-1 wauto">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-        </span> 50
-       <span class="btn btn-primary ml-1 wauto">
-         <i class="fa fa-minus" aria-hidden="true"></i>
-        </span>
+        <span class="btn btn-primary mr-1 btn-small" ng-click="divTwo = divTwo + 1" ng-init="divTwo = 50">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </span> {{divTwo}}
+         <span class="btn btn-primary ml-1 btn-small" ng-click="divTwo = divTwo - 1">
+           <i class="fa fa-minus" aria-hidden="true"></i>
+          </span>
       </div>
 
      
