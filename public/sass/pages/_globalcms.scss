@@ -313,6 +313,10 @@ table#acs {
   th {
     width: 140px;
   }
+  td {
+    padding: 1px !important;
+    height: 75% !important;
+  }
   select {
     border: 1px solid #cecece;
     width: 100% !important;
@@ -328,6 +332,12 @@ table#acs {
     padding: 13px 10px;
     border-radius: 10px;
   }
+}
+
+.btn-small {
+  width: 15px !important;
+  height: 15px !important;
+  padding: 2px 0px !important;
 }
 
 table#tds {

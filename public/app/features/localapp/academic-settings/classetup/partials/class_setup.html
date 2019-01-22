@@ -63,17 +63,17 @@
                   </select>
                 
           </td>
-          <td class="t-students"><span class="btn btn-primary mr-1 wauto">
+          <td class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
               <i class="fa fa-plus" aria-hidden="true"></i>
-            </span> 100
-           <span class="btn btn-primary ml-1 wauto">
+            </span> {{studentCount}}
+           <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
              <i class="fa fa-minus" aria-hidden="true"></i>
             </span>
           </td>
-          <td class="t-students"><span class="btn btn-primary mr-1 wauto">
+          <td class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
               <i class="fa fa-plus" aria-hidden="true"></i>
-            </span> 2
-           <span class="btn btn-primary ml-1 wauto">
+            </span> {{count}}
+           <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
              <i class="fa fa-minus" aria-hidden="true"></i>
             </span>
           </td>
