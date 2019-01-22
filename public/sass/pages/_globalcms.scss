@@ -309,16 +309,41 @@ input:checked + .slider:before {
 }
 
 table#acs {
-  select {
-    width: auto;
+  td,
+  th {
+    width: 140px;
   }
+  td {
+    padding: 1px !important;
+    height: 75% !important;
+  }
+  select {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important;
+    padding: 14px 10px !important;
+    border-radius: 10px;
+    font-size: 12px !important;
+  }
+  input {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important !important;
+    padding: 13px 10px;
+    border-radius: 10px;
+  }
+}
+
+.btn-small {
+  width: 15px !important;
+  height: 15px !important;
+  padding: 2px 0px !important;
 }
 
 table#tds {
   width: 100%;
   th,
   td {
-    // width: 100%;
     text-align: left !important;
     padding-left: 2rem !important;
     input {
@@ -393,8 +418,53 @@ footer.footer {
   align-items: flex-end;
 }
 
-.btnwidth {
-  width: 200px !important;
-  color: #363333 !important;
-  font-size: 18px;
+.class-setup {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+}
+.class-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  select {
+    width: 135px;
+  }
+  p:nth-child(5) {
+    margin-right: -3rem;
+  }
+}
+
+#subject-table {
+  th,
+  td {
+    padding: 2px !important;
+    text-align: center;
+    width: 168px;
+  }
+  td {
+    height: 75% !important;
+  }
+  select {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important;
+    padding: 14px 10px !important;
+    border-radius: 10px;
+    font-size: 12px !important;
+  }
+  input {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important !important;
+    padding: 13px 10px;
+    border-radius: 10px;
+  }
+  .btn-switch {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important;
+    border-radius: 10px;
+    padding-top: 6%;
+    padding-bottom: 6%;
+  }
 }
