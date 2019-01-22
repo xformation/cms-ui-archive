@@ -22,4 +22,13 @@ export class DepartmentSettingsCtrl {
       icon: 'fa-trash',
     });
   }
+
+  showImportModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('import-department-modal', {
+      text: text,
+      icon: 'fa-trash',
+    });
+  }
 }

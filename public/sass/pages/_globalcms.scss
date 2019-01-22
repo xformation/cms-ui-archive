@@ -309,8 +309,24 @@ input:checked + .slider:before {
 }
 
 table#acs {
+  td,
+  th {
+    width: 140px;
+  }
   select {
-    width: auto;
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important;
+    padding: 14px 10px !important;
+    border-radius: 10px;
+    font-size: 12px !important;
+  }
+  input {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important !important;
+    padding: 13px 10px;
+    border-radius: 10px;
   }
 }
 
@@ -318,7 +334,6 @@ table#tds {
   width: 100%;
   th,
   td {
-    // width: 100%;
     text-align: left !important;
     padding-left: 2rem !important;
     input {
