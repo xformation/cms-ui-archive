@@ -62,41 +62,34 @@
 
   <table class="table m-b-3">
     <thead>
+      <th>Id</th>
       <th>Name</th>
       <th>Address</th>
       <th>Applies</th>
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
-      <tr>
-        <td>Rishard</td>
-        <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-        <td class="tcenter">20 </br>
-          Employees
+      <tr ng-repeat="location in ctrl.locations">
+        <td class="width-4 text-center link-td">
+          {{location.id}}
         </td>
-        <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p"
-            aria-hidden="true"></i></td>
+        <td class="width-4 text-center link-td">
+          {{location.name}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{location.address}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{location.appliesTo}}
+        </td>
+        <td class="text-right">
+          <a ng-click="ctrl.deleteLocation(location)" class="btn btn-danger btn-small">
+            <i class="fa fa-remove"></i>
+          </a>
+        </td>
       </tr>
       <tr>
-        <td>Rishard</td>
-        <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-        <td class="tcenter">20 </br>
-          Employees
-        </td>
-        <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p"
-            aria-hidden="true"></i></td>
-      </tr>
-      <tr>
-        <td>Rishard</td>
-        <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-        <td class="tcenter">20 </br>
-          Employees
-        </td>
-        <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p"
-            aria-hidden="true"></i></td>
-      </tr>
-      <tr>
-        <td colspan="4">Total:3</td>
+        <td colspan="5">Total:3</td>
       </tr>
     </tbody>
   </table>
