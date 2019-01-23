@@ -4,180 +4,180 @@
   <h3 class="bg-heading yspace">
     <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Time Table Setting
   </h3>
+  <h4 class="bg-heading">
+    Academic Year 2018-2019
+  </h4>
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-    <h4 class="ptl-06">Academic Year 2018-2019</h4>
+    <h4 class="ptl-06">Create Timetable Template</h4>
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(1)">
-        Create Timetable</a>
-        <!-- <th><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Create Timetable</a></th> -->
-      <!-- <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a> -->
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
+        save</a>
     </div>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
     <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
-    <table class="fwidth">
+    <table id="acs" class="fwidth">
         <thead>
-          <th>Sr.No.</th>
-          <th>Timetable Name</th>
-          <th>Number of Periods</th>
-          <th>AcLink this Templatetive</th>
-          <th>Edit</th>
+          <th>Department</th>
+          <th>Year</th>
+          <th>Primary Teacher</th>
+          <th>University</th>
+          <th>Max No of Students</th>
+          <th>Max No of Division</th>
+          <th>Add Section</th>
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
-            <td>Computer Science Year 1</td>
-            <td>5</td>
-      <td><a href="" class="btn btn-primary">Link to Class</a></td>
-            <td>
-             <a href="" class="btn btn-primary">Edit</a>
+            <td>              
+                <select name="" id="">
+                  <option value="">Department 1</option>
+                  <option value="">Department 2</option>
+                  <option value="">Department 3</option>
+                </select>             
             </td>
-          </tr>
+            <td>              
+                <select name="" id="">
+                  <option value="">Year 1</option>
+                  <option value="">Year 2</option>
+                  <option value="">Year 3</option>
+                  <option value="">Year 4</option>
+                </select>              
+            </td>
+            <td>            
+                <select name="" id="">
+                  <option value="">Teacher 1</option>
+                  <option value="">Teacher 2</option>
+                  <option value="">Teacher 3</option>
+                </select>              
+            </td>
+            <td>                
+                    <select name="" id="">
+                      <option value="">University 1</option>
+                      <option value="">University 2</option>
+                      <option value="">University 3</option>
+                    </select>                  
+            </td>
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{studentCount}}
+             <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
+               <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+              </div>
+            </td>
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{count}}
+             <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
+               <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+              </div>
+            </td>
+            <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">save</a></td>
+          </tr>         
         </tbody>
       </table>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
-    <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
-      <h4 class="ptl-06">Academic Class</h4>
-      <div>
-        <!-- <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Holiday</a> -->
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
-      </div>
-    </div>
-
-    <div class="dfc mt-1">
-      <div class="select-input">
-        <label for="">Department</label>
-        <select name="" id="">
-            <option value="">Computer Science</option>
-            <option value="">Electric Engineering</option>
-            <option value="">EEE</option>
-          </select>
-      </div>
-      <div class="select-input">
-        <label for="">Year</label>
-        <select name="" id="">
-            <option value="">Year 1</option>
-            <option value="">Year 2</option>
-            <option value="">Year 3</option>
-          </select>
-      </div>
-      <div class="select-input">
-        <label for="">Semester</label>
-        <select name="" id="">
-            <option value="">Semester 1</option>
-            <option value="">Semester 2</option>
-            <option value="">Semester 3</option>
-          </select>
-      </div>
-      <div class="select-input">
-        <label for="">Section</label>
-        <select name="" id="">
-            <option value="">Section 1</option>
-            <option value="">Section 2</option>
-            <option value="">Section 3</option>
-          </select>
-      </div>
-      <div class=" df select-input">
-          <span class="btn btn-primary mr-1 wauto">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-            </span> <p>5</p>
-           <span class="btn btn-primary ml-1 wauto">
-             <i class="fa fa-minus" aria-hidden="true"></i>
-            </span>
-      </div>
-      <div class="select-input">
-          <span class="mr-1">Active</span><label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
-      </div>
-    </div>
- <!-- create template table -->
- <table id="acs" class="fwidth mt-1">
-    <thead class="n-border">
-        <th>Sr. No</th>
-        <th>Period Name</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Take Attendance</th>
-        <th>Use for Break</th>
-      <!-- <th>Max No of Division</th> -->
-      <!-- <th>Add Division</th> -->
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Period 1</td>
-        <td><input type="time" name="" id=""></td>
-        <td><input type="time" name="" id=""></td>
-        <td><label class="switch"> <input type="checkbox" /> <span class="slider"></span></td>
-        <td><label class="switch"> <input type="checkbox" /> <span class="slider"></span></td>
-      </tr>
-     
-    </tbody>
-  </table>
+    <table id="acs" class="fwidth">
+        <thead>
+          <th>Department</th>
+          <th>Year</th>
+          <th>Primary Teacher</th>
+          <th>University</th>
+          <th>Max No of Students</th>
+          <th>Max No of Division</th>
+          <th>Add Section</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>              
+                <select name="" id="">
+                  <option value="">Department 1</option>
+                  <option value="">Department 2</option>
+                  <option value="">Department 3</option>
+                </select>             
+            </td>
+            <td>              
+                <select name="" id="">
+                  <option value="">Year 1</option>
+                  <option value="">Year 2</option>
+                  <option value="">Year 3</option>
+                  <option value="">Year 4</option>
+                </select>              
+            </td>
+            <td>            
+                <select name="" id="">
+                  <option value="">Teacher 1</option>
+                  <option value="">Teacher 2</option>
+                  <option value="">Teacher 3</option>
+                </select>              
+            </td>
+            <td>                
+                    <select name="" id="">
+                      <option value="">University 1</option>
+                      <option value="">University 2</option>
+                      <option value="">University 3</option>
+                    </select>                  
+            </td>
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{studentCount}}
+             <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
+               <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+              </div>
+            </td>
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{count}}
+             <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
+               <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+              </div>
+            </td>
+            <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(0)">save</a></td>
+          </tr>
+        </tbody>
+      </table> 
+      <table class="fwidth">
+          <thead>
+            <th>Sr. No</th>
+            <th>Period Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Saturday Lecture</th>
+            <th>Break After</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Lecture 1</td>
+              <td><input type="time" name="" id=""></td>
+              <td><input type="time" name="" id=""></td>
+              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+            </tr>
+          </tbody>
+        </table>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
-    <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-      <div>
-        <!-- <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Term</a> -->
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
-      </div>
-    </div>
-    <table class="academicyear">
-      <thead>
-        <th>Sr.No.</th>
-        <th>Terms/Semisters</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Active</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Term 1</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Term 2</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Term 3</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Term 4</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Term 5</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+   <table class="fwidth">
+     <thead>
+       <th></th>
+       <th>Monday</th>
+       <th>Tuesday</th>
+       <th>Wednesday</th>
+       <th>Thursday</th>
+       <th>Friday</th>
+       <th>Saturday</th>
+     </thead>
+     <tbody>
+       <tr>
+         <td>Lectures</td>
+       </tr>
+     </tbody>
+   </table>
   </div>
   </div>
 </div>

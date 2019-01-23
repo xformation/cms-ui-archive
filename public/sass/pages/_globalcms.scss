@@ -159,7 +159,7 @@ i.fa.fa-calendar-o {
 }
 
 .yspace {
-  margin: -21px -32px;
+  margin: -21px -4.3%;
   padding: 0.5rem;
   margin-bottom: 2rem;
 }
@@ -309,6 +309,7 @@ input:checked + .slider:before {
 }
 
 table#acs {
+  text-align: center;
   td,
   th {
     width: 140px;
@@ -389,13 +390,9 @@ footer.footer {
 }
 
 .t-students {
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: baseline;
-  // border: none;
-  // margin-left: auto;
-  // margin-right: auto;
-  text-align: center;
+  border: 1px solid #cecece;
+  padding: 12px 5px;
+  border-radius: 10px;
 }
 .ml-1 {
   margin-left: 1rem;
@@ -410,6 +407,11 @@ footer.footer {
 }
 .select-input > select {
   width: 150px;
+  border: 1px solid #cecece;
+  height: 75% !important;
+  padding: 14px 10px !important;
+  border-radius: 10px;
+  font-size: 12px !important;
 }
 
 .dfc {
@@ -467,4 +469,11 @@ footer.footer {
     padding-top: 6%;
     padding-bottom: 6%;
   }
+}
+
+.w-160 {
+  width: 160px !important;
+}
+.mrn {
+  margin-right: -12px !important;
 }
