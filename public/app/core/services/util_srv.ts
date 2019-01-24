@@ -90,27 +90,28 @@ export class UtilSrv {
   addModal(payload) {
     const scope = this.$rootScope.$new();
 
-    // scope.onAdd = () => {
-    //   payload.onAdd();
-    //   scope.dismiss();
-    // };
+    scope.onAdd = () => {
+      payload.onAdd();
+      scope.dismiss();
+    };
 
-    // scope.updateAddText = value => {
-    //   scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
-    // };
+    scope.updateAddText = value => {
+      scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
+    };
 
-    // scope.title = payload.title;
-    // scope.text = payload.text;
-    // scope.text2 = payload.text2;
-    // scope.addText = payload.addText;
+    scope.title = payload.title;
+    scope.text = payload.text;
+    scope.text2 = payload.text2;
+    scope.input = payload.input;
+    scope.addText = payload.addText;
 
-    // scope.onAdd = payload.onAdd;
-    // scope.onAltAction = payload.onAltAction;
-    // scope.altActionText = payload.altActionText;
-    // scope.icon = payload.icon || 'fa-check';
-    // scope.yesText = payload.yesText || 'Yes';
-    // scope.noText = payload.noText || 'Cancel';
-    // scope.addTextValid = scope.addText ? false : true;
+    scope.onAdd = payload.onAdd;
+    scope.onAltAction = payload.onAltAction;
+    scope.altActionText = payload.altActionText;
+    scope.icon = payload.icon || 'fa-check';
+    scope.yesText = payload.yesText || 'Yes';
+    scope.noText = payload.noText || 'Cancel';
+    scope.addTextValid = scope.addText ? false : true;
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/locations/partials/add_modal.html',
