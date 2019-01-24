@@ -5,12 +5,14 @@ export class LocationsCtrl {
   navModel: any;
   query: any;
   activeTabIndex = 0;
+  $scope: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
     // this.$scope = $scope;
     this.query = '';
     this.getLocations();
+    this.$scope = $scope;
     $scope.create = () => {
       console.log('Create start');
       if (!$scope.locationForm.$valid) {
@@ -69,6 +71,7 @@ export class LocationsCtrl {
           this.getLocations();
         });
       },
+      scope: this.$scope,
     });
   }
 }

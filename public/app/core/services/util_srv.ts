@@ -88,7 +88,7 @@ export class UtilSrv {
   }
 
   addModal(payload) {
-    const scope = this.$rootScope.$new();
+    const scope = payload.scope ? payload.scope : this.$rootScope.$new();
 
     scope.onAdd = () => {
       payload.onAdd();
