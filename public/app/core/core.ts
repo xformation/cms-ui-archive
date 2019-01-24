@@ -8,6 +8,8 @@ import './directives/value_select_dropdown';
 import './directives/rebuild_on_change';
 import './directives/give_focus';
 import './directives/diff-view';
+import './directives/recursion_helper.js';
+import './directives/tree_view';
 import './jquery_extended';
 import './partials';
 import './components/jsontree/jsontree';
