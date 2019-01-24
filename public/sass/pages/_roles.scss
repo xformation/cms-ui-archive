@@ -1,0 +1,60 @@
+.roles-permission-container {
+  color: black !important;
+  .gf-tabs-link.active,
+  .gf-tabs-link.active:hover,
+  .gf-tabs-link.active:focus {
+    color: #3697ef !important;
+  }
+  .gf-tabs-link {
+    color: black !important;
+  }
+  .roles-main-container {
+    .border-container {
+      border: 1px solid #ababab;
+      padding: 20px;
+    }
+    .roles-container {
+      .radio-button-container {
+        margin-top: 10px;
+      }
+    }
+    .transition-preference {
+      margin-top: 30px;
+      .tab-header {
+        margin-bottom: 20px;
+      }
+      .transition-preference-label {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.tree-view-container {
+  .tree-sign {
+    position: relative;
+    top: -2px;
+    &.hide {
+      display: none !important;
+    }
+  }
+  p {
+    display: inline-block;
+    padding-left: 10px;
+  }
+  ul {
+    list-style-position: inside;
+    list-style: none;
+    > li {
+      padding-left: 35px;
+    }
+  }
+  input,
+  label {
+    display: inline-block;
+  }
+  label {
+    padding-left: 6px;
+  }
+}

@@ -18,6 +18,9 @@
     <academic-settings></academic-settings>
   </div>
 
+  <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'roles_permissions'">
+    <roles-permissions></roles-permissions>
+  </div>
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'payroll'">This is payroll</div>
 
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'leave_holidays'">This is leave holidays</div>

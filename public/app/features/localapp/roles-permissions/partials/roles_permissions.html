@@ -1,0 +1,21 @@
+<div class="roles-permission-container tab-container">
+  <div class="tab-header">
+    <ul class="gf-tabs">
+      <li class="gf-tabs-item" ng-repeat="section in ctrl.sections" ng-click="ctrl.setActiveTab(section.id)">
+        <a class="gf-tabs-link" ng-class="{active: ctrl.activeTabId === section.id}"> {{::section.title}} </a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="tab-content">
+    <div ng-class="{'hide':ctrl.activeTabId !== 'roles'}">
+      <roles></roles>
+    </div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'groups'}">
+      This is groups
+    </div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'users'}">
+      This is users
+    </div>
+  </div>
+</div>
