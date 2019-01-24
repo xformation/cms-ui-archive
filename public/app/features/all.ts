@@ -12,6 +12,7 @@ import './manage-dashboards';
 import './localapp';
 import './localapp/college-settings';
 import './localapp/academic-settings';
+import './localapp/academic-settings/timetabledetails';
 import './localapp/academic-settings/timetablesetting';
 import './localapp/academic-settings/classetup';
 import './localapp/academic-settings/departmentsetup';

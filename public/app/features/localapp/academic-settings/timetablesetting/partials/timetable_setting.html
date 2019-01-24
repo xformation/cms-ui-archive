@@ -1,9 +1,8 @@
 <page-header model="ctrl.navModel"></page-header>
-<!-- optional-->
-<div class="page-container page-body legal-entities-main-container">
-  <h3 class="bg-heading yspace">
+<!-- optional--><h3 class="bg-heading p-5">
     <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Time Table Setting
   </h3>
+<div class="page-container page-body legal-entities-main-container">
   <h4 class="bg-heading">
     Academic Year 2018-2019
   </h4>
@@ -16,7 +15,7 @@
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
     <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
-    <table id="acs" class="fwidth">
+    <table id="tts" class="fwidth b-0">
         <thead>
           <th>Department</th>
           <th>Year</th>
@@ -79,7 +78,7 @@
       </table>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
-    <table id="acs" class="fwidth">
+    <table id="tts" class="fwidth">
         <thead>
           <th>Department</th>
           <th>Year</th>
@@ -136,11 +135,11 @@
               </span>
               </div>
             </td>
-            <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(0)">save</a></td>
+            <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Continue</a></td>
           </tr>
         </tbody>
       </table> 
-      <table class="fwidth">
+      <table id="tttemplt" class="fwidth">
           <thead>
             <th>Sr. No</th>
             <th>Period Name</th>
@@ -155,29 +154,46 @@
               <td>Lecture 1</td>
               <td><input type="time" name="" id=""></td>
               <td><input type="time" name="" id=""></td>
+              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
+              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Lecture 2</td>
+              <td><input type="time" name="" id=""></td>
+              <td><input type="time" name="" id=""></td>
               <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
               <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Lecture 3</td>
+              <td><input type="time" name="" id=""></td>
+              <td><input type="time" name="" id=""></td>
+              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Lecture 4</td>
+              <td><input type="time" name="" id=""></td>
+              <td><input type="time" name="" id=""></td>
+              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Lecture 5</td>
+              <td><input type="time" name="" id=""></td>
+              <td><input type="time" name="" id=""></td>
+              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
+              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
             </tr>
           </tbody>
         </table>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
-   <table class="fwidth">
-     <thead>
-       <th></th>
-       <th>Monday</th>
-       <th>Tuesday</th>
-       <th>Wednesday</th>
-       <th>Thursday</th>
-       <th>Friday</th>
-       <th>Saturday</th>
-     </thead>
-     <tbody>
-       <tr>
-         <td>Lectures</td>
-       </tr>
-     </tbody>
-   </table>
+   <div ng-include src="'public/app/features/localapp/academic-settings/timetabledetails/partials/timetable_details.html'"></div>
   </div>
   </div>
 </div>

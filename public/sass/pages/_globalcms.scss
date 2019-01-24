@@ -117,7 +117,7 @@ table#academic {
     width: auto;
     background: white;
     color: #cccccc;
-    font-size: 11px;
+    font-size: 10px;
   }
   span {
     margin-right: 10px;
@@ -334,6 +334,38 @@ table#acs {
     border-radius: 10px;
   }
 }
+table#tts {
+  text-align: center;
+  border: 0px transparent !important;
+  th,
+  td,
+  tr {
+    border: 0px transparent !important;
+  }
+  td,
+  th {
+    width: 140px;
+  }
+  td {
+    padding: 1px !important;
+    height: 75% !important;
+  }
+  select {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important;
+    padding: 14px 10px !important;
+    border-radius: 10px;
+    font-size: 12px !important;
+  }
+  input {
+    border: 1px solid #cecece;
+    width: 100% !important;
+    height: 75% !important !important;
+    padding: 13px 10px;
+    border-radius: 10px;
+  }
+}
 
 .btn-small {
   width: 15px !important;
@@ -476,4 +508,87 @@ footer.footer {
 }
 .mrn {
   margin-right: -12px !important;
+}
+.b-0 {
+  border: 0px !important;
+}
+table#tttemplt {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  th,
+  td {
+    text-align: center;
+  }
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 250px;
+    text-align: left;
+  }
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 170px !important;
+  }
+  th:nth-child(6),
+  td:nth-child(6) {
+    width: 170px !important;
+  }
+}
+
+.p-5 {
+  padding: 5px 5px;
+}
+
+table#tmtd {
+  background-color: #f7f7f7;
+  text-align: center;
+  th {
+    text-align: center;
+  }
+  td {
+    padding: 0px !important;
+  }
+  tbody > tr:nth-child(3) {
+    background-color: #bebfc2;
+    color: #f5f5f5;
+    font-size: 20px;
+    letter-spacing: 15px;
+    text-transform: uppercase;
+  }
+  select {
+    width: 100%;
+  }
+}
+.ttdgrid {
+  margin: 3px 2px 2px 2px;
+  .ttd {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 4px 15px 1px;
+    padding: 0px;
+    span:nth-child(2) {
+      box-shadow: 1px 2px 4px;
+      padding: 0px 5px;
+      width: 18px;
+      height: 18px;
+      margin: 0px;
+      background: #f0f0f0;
+      color: #bdbdbd;
+      border-radius: 3px;
+      border: 1px solid #f0f0f0;
+    }
+  }
+  select {
+    border-top: 1px solid #e2e2e2e2;
+    border-bottom: 1px solid #9c9c9c;
+    border-radius: 5px;
+  }
+}
+
+.plr {
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+.ttlect {
+  margin-left: 0rem;
+  margin-right: 0rem;
 }
