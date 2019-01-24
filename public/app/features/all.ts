@@ -13,6 +13,7 @@ import './localapp';
 import './localapp/college-settings';
 import './localapp/academic-settings';
 import './localapp/roles-permissions';
+import './localapp/academic-settings/timetablesetting';
 import './localapp/academic-settings/classetup';
 import './localapp/academic-settings/departmentsetup';
 import './localapp/academic-settings/subjectsetup';

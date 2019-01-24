@@ -4,14 +4,18 @@
     border-collapse: collapse;
     width: 70% !important;
   }
-thead, tr:last-child{
-  background-color: #f6f6f6;
-}
-.mbt{
-  float: right;
-  margin-top: 2px;
-  color: #cecece;
-}
+
+  thead,
+  tr:last-child {
+    background-color: #f6f6f6;
+  }
+
+  .mbt {
+    float: right;
+    margin-top: 2px;
+    color: #cecece;
+  }
+
   td,
   th {
     border: 1px solid #dddddd;
@@ -20,10 +24,12 @@ thead, tr:last-child{
     /* width: 25%; */
     color: #686868;
   }
+
   .table-p {
     padding: 0 10px;
   }
-  /* 
+
+  /*
   tr:nth-child(even) {
     background-color: #3d3d33;
   } */
@@ -35,58 +41,79 @@ thead, tr:last-child{
     margin-bottom: 1rem;
     border-radius: 3px;
   }
+
   .fa-1-5x {
     font-size: 1.5rem;
     color: #cecece;
   }
+
   .tcenter {
     text-align: center;
   }
 </style>
 <div class="page-container page-body legal-entities-main-container">
-    <div class="authorized-signatory-container m-b-1">
-        <h3>Locations</h3>
-        <small>
-          Here you can manage the locations of the organization. You can assign Locations to employees later.
-        </small>
-      </div>
-  <button><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
+  <div class="authorized-signatory-container m-b-1">
+    <h3>Locations</h3>
+    <small>
+      Here you can manage the locations of the organization. You can assign Locations to employees later.
+    </small>
+  </div>
+  <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
+
   <table class="table m-b-3">
     <thead>
+      <th>Id</th>
       <th>Name</th>
       <th>Address</th>
       <th>Applies</th>
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
-      <tr>
-        <td>Rishard</td>
-        <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-        <td class="tcenter">20 </br>
-          Employees
-      </td>
-        <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
-      </tr>
-      <tr>
-          <td>Rishard</td>
-          <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-          <td class="tcenter">20 </br>
-            Employees
+      <tr ng-repeat="location in ctrl.locations">
+        <td class="width-4 text-center link-td">
+          <a ng-click="ctrl.showModal(location)">
+            {{location.id}}
+          </a>
         </td>
-          <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
+        <td class="width-4 text-center link-td">
+          {{location.name}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{location.address}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{location.appliesTo}}
+        </td>
+        <td class="text-right">
+          <a ng-click="ctrl.deleteLocation(location)" class="btn btn-danger btn-small">
+            <i class="fa fa-remove"></i>
+          </a>
+        </td>
       </tr>
       <tr>
-            <td>Rishard</td>
-            <td>Sita Corp Building, </br> 3rd Floor, </br>Madhapur, </br>Hyderabad, TS, India.</td>
-            <td class="tcenter">20 </br>
-              Employees
-          </td>
-            <td><i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i></td>
-      </tr>   
-      <tr>
-        <td colspan="4">Total:3</td>
-      </tr>             
+        <td colspan="5">Total: {{ctrl.locations.length}}</td>
+      </tr>
     </tbody>
   </table>
+  <form name="locationForm" class="gf-form-group section m-0 dflex">
+    <div class="bg-modal">
+      <div class="fwidth-modal-text">
+        <label class="gf-form-label b-0 bg-transparent">NAME</label>
+        <input type="text" required ng-model="location.name" class="gf-form-input" />
+      </div>
+      <div class="fwidth-modal-text">
+        <label class="gf-form-label b-0 bg-transparent">ADDRESS</label>
+        <input type="text" required ng-model="location.address" class="gf-form-input" />
+      </div>
+      <div class="fwidth-modal-text">
+        <label class="gf-form-label b-0 bg-transparent">APPLIES TO</label>
+        <input type="text" required ng-model="location.appliesTo" class="gf-form-input" />
+      </div>
+      <div class="gf-form-button-row p-r-4">
+        <button type="submit" ng-click="create()" class="btn btn-success border-bottom">Save</button>
+        <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+      </div>
+    </div>
+  </form>
   <i class="fa fa-phone orange"></i>
 </div>

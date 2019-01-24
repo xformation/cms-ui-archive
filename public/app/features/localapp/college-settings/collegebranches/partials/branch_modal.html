@@ -1,0 +1,47 @@
+<div class="add-modal-body" ng-cloak>
+	<div class="add-modal-header">
+		<h2 class="add-modal-header-title">
+			<!-- <i class="fa {{icon}}"></i> -->
+			<span class="p-l-1">
+				Add New
+			</span>
+		</h2>
+
+		<a class="add-modal-header-close" ng-click="dismiss();">
+			<i class="fa fa-remove"></i>
+		</a>
+	</div>
+
+	<div class="modal-content">
+
+		<div class="add-confirm-modal p-1">
+			<form class="gf-form-group section m-0 dflex">
+				<div class="bg-modal">
+					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">NAME</label>
+						<input type="text" class="gf-form-input " placeholder="name" />
+					</div>
+					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">DESCRIPTION</label>
+						<input type="text" class="gf-form-input " placeholder="description" />
+					</div>
+					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">COLLEGE HEAD</label>
+						<input type="text" class="gf-form-input " placeholder="college head" />
+					</div>
+					<div class="gf-form-button-row p-r-4">
+						<button type="submit" class="btn btn-success border-bottom">Save</button>
+						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-content-confirm-text" ng-if="confirmText">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;" placeholder="Type {{confirmText}} to confirm"
+			 ng-model="confirmInput" ng-change="updateConfirmText(confirmInput)">
+		</div>
+
+	</div>
+
+</div>

@@ -120,7 +120,7 @@ export class AlertRuleList extends PureComponent<Props, any> {
               <i className="fa fa-info-circle" /> How to add an alert
             </a>
           </div>
-          <div className="bg-heading dflex">
+          {/* <div className="bg-heading dflex">
             <h4>Academic Year 2018-2019</h4>
             <div>
               <a className="btn btn-primary wauto">Add New Role</a>
@@ -532,7 +532,7 @@ export class AlertRuleList extends PureComponent<Props, any> {
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
 
           <section>
             <ol className="alert-rule-list">

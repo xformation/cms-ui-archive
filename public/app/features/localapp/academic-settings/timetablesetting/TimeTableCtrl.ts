@@ -1,15 +1,15 @@
-import { appEvents } from 'app/core/core';
-
-export class LegalEntitiesCtrl {
+export class TimeTableCtrl {
   navModel: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo-placeholder.png';
+  bgSrc = '/public/img/dashboard.png';
   $scope;
   /** @ngInject */
   constructor($scope) {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     $scope.getFile = this.getFile.bind(this);
+    $scope.getbgFile = this.getbgFile.bind(this);
   }
 
   activateTab(tabIndex) {
@@ -28,21 +28,16 @@ export class LegalEntitiesCtrl {
     };
     fileReader.readAsDataURL(file);
   }
-
-  showSignatoryModal() {
-    const text = 'Do you want to delete the ';
-
-    appEvents.emit('signatory-modal', {
-      text: text,
-      icon: 'fa-trash',
-    });
-  }
-  showBankModal() {
-    const text = 'Do you want to delete the ';
-
-    appEvents.emit('bank-modal', {
-      text: text,
-      icon: 'fa-trash',
-    });
+  getbgFile(file) {
+    if (!file) {
+      return;
+    }
+    const fileReader = new FileReader();
+    const that = this;
+    fileReader.onloadend = e => {
+      that.bgSrc = e.target['result'];
+      this.$scope.$apply();
+    };
+    fileReader.readAsDataURL(file);
   }
 }
