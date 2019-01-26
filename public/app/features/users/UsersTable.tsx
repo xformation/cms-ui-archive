@@ -41,7 +41,7 @@ const UsersTable: SFC<Props> = props => {
                     className="gf-form-input"
                     onChange={event => onRoleChange(event.target.value, user)}
                   >
-                    {['Viewer', 'Editor', 'Admin'].map((option, index) => {
+                    {['Teacher', 'Student', 'Admin'].map((option, index) => {
                       return (
                         <option value={option} key={`${option}-${index}`}>
                           {option}
