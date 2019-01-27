@@ -14,7 +14,6 @@ export class LocationsCtrl {
     this.getLocations();
     this.$scope = $scope;
     $scope.create = () => {
-      console.log('Create start');
       if (!$scope.locationForm.$valid) {
         return;
       }

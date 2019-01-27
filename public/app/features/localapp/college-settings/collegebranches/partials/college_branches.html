@@ -65,28 +65,29 @@
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
-      <tr>
-        <td>Bangalore</td>
-        <td>Not Available</td>
-        <td>Mr. Khan</td>
-        <td>
-          <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p"
-            aria-hidden="true"></i>
-          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
+      <tr ng-repeat="branch in ctrl.branches">
+        <td class="width-4 text-center link-td">
+          <a ng-click="ctrl.showModal(branch)">
+            {{branch.branchName}}
+          </a>
         </td>
-      </tr>
-      <tr>
-        <td>Hyderabad</td>
-        <td>Not Available</td>
-        <td>Mr. Khan</td>
-        <td>
+        <td class="width-4 text-center link-td">
+          {{branch.description}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{branch.collegeHead}}
+        </td>
+        <td class="link-td text-right">
+          <a ng-click="ctrl.deleteBranch(branch)">
+            <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+          </a>
           <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
-          <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+
           <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
         </td>
       </tr>
       <tr>
-        <td colspan="4">Total:2</td>
+        <td colspan="4">Total: {{ctrl.branches.length}}</td>
       </tr>
     </tbody>
   </table>
