@@ -65,10 +65,10 @@ export class LocationsCtrl {
     appEvents.emit('add-modal', {
       text: text,
       icon: 'fa-trash',
-      onCreate: () => {
-        this.backendSrv.post('http://localhost:8080/api/locations').then(() => {
-          this.getLocations();
-        });
+      onCreate: (locationForm, location) => {
+        this.$scope.locationForm = locationForm;
+        this.$scope.location = location;
+        this.$scope.create();
       },
     });
   }

@@ -102,8 +102,9 @@ export class UtilSrv {
       scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
     };
 
-    scope.create = payload.onCreate;
-
+    scope.create = () => {
+      payload.onCreate(scope.locationForm, scope.location);
+    };
     scope.title = payload.title;
     scope.text = payload.text;
     scope.text2 = payload.text2;
