@@ -1,0 +1,29 @@
+<div class="page-container page-body groups-main-container">
+    <div class="border-container">
+        <div class="groups-btn-container text-right p-2">
+            <button class="link-btn mr-1" ng-click="ctrl.showAddGroupModal()">Create New Group</button>
+            <button class="link-btn mr-1" ng-click="ctrl.showAssignRoleModal()">Assign Role</button>
+            <button class="link-btn mr-1">Search Group</button>
+            <input type="text" class="gf-form-input max-width-18 search-groups-textbox" placeholder="Search Group" />
+        </div>
+        <div class="groups-table-container">
+            <table class="groups-table">
+                <thead>
+                    <td>Name</td>
+                    <td>Roles Assigned</td>
+                </thead>
+                <tr ng-repeat="group in ctrl.groups">
+                    <td>
+                        <input type="checkbox" id={{$index}} />
+                        <label for={{$index}}>{{group.name}}</label>
+                    </td>
+                    <td>
+                        <label ng-repeat="role in group.roles">
+                            {{role}}
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

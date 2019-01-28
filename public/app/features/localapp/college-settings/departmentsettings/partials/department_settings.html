@@ -74,28 +74,29 @@
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
-      <tr>
-        <td>Engineering</td>
-        <td>Not Available</td>
-        <td>Mr. Khan</td>
-        <td>
-          <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i><i class="fa fa-trash-o fa-1-5x table-p"
-            aria-hidden="true"></i>
-          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
+      <tr ng-repeat="department in ctrl.departments">
+        <td class="width-4 text-center link-td">
+          <a ng-click="ctrl.showModal(branch)">
+            {{department.name}}
+          </a>
         </td>
-      </tr>
-      <tr>
-        <td>Engineering</td>
-        <td>Not Available</td>
-        <td>Mr. Khan</td>
-        <td>
+        <td class="width-4 text-center link-td">
+          {{department.description}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{department.deptHead}}
+        </td>
+        <td class="link-td text-right">
+          <a ng-click="ctrl.deleteDepartment(department)">
+            <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+          </a>
           <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
-          <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+
           <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i>
         </td>
       </tr>
       <tr>
-        <td colspan="4">Total:2</td>
+        <td colspan="4">Total: {{ctrl.departments.length}}</td>
       </tr>
     </tbody>
   </table>

@@ -1,17 +1,53 @@
 import { appEvents } from 'app/core/core';
 
 export class CollegeBranchesCtrl {
+  branches: any;
   navModel: any;
+  query: any;
   activeTabIndex = 0;
-  $scope;
+  $scope: any;
   /** @ngInject */
-  constructor($scope) {
+  constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
+    this.query = '';
+    this.getBranches();
     this.$scope = $scope;
+    $scope.create = () => {
+      if (!$scope.branchForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/branches/', $scope.branch).then(() => {
+        this.getBranches();
+      });
+    };
   }
 
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
+  }
+
+  getBranches() {
+    this.backendSrv.get(`http://localhost:8080/api/branches/`).then(result => {
+      this.branches = result;
+    });
+  }
+
+  navigateToPage(page) {
+    this.getBranches();
+  }
+
+  deleteBranch(branch) {
+    appEvents.emit('confirm-modal', {
+      title: 'Delete',
+      text: 'Do you want to delete ' + branch.branchName + '?',
+      icon: 'fa-trash',
+      yesText: 'Delete',
+      onConfirm: () => {
+        this.backendSrv.delete('http://localhost:8080/api/branches/' + branch.id).then(() => {
+          this.getBranches();
+        });
+      },
+    });
   }
 
   showModal() {
@@ -20,6 +56,11 @@ export class CollegeBranchesCtrl {
     appEvents.emit('branch-modal', {
       text: text,
       icon: 'fa-trash',
+      onCreate: (branchForm, branch) => {
+        this.$scope.branchForm = branchForm;
+        this.$scope.branch = branch;
+        this.$scope.create();
+      },
     });
   }
 }

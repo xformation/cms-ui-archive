@@ -6,7 +6,9 @@
   </h3>
 
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
-    <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div>
+    <div class="authorized-signatory-container m-b-1">
+      <h4 class="bg-heading ht ptl-06">Academic Year</h4>
+    </div>
     <table id="academic">
       <thead>
         <th>Year</th>
@@ -91,10 +93,13 @@
     <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
       <h4 class="ptl-06">Academic Year</h4>
       <div>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Holiday</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateBtn(1)">Add Holiday</a>
+        <a class="btn btn-primary" ng-click="create()">Save</a>
       </div>
     </div>
+
+    <!-- Holidays -->
+
     <table class="academicyear">
       <thead>
         <th>Sr.No.</th>
@@ -103,46 +108,39 @@
         <th>Active</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Bhogi, Sankranti</td>
-          <td>14/01/2019</td>
+        <tr ng-repeat="holiday in ctrl.holidays">
+          <td class="text-center link-td">
+            {{ $index + 1 | number }}
+          </td>
+          <td class="text-center link-td">
+            {{holiday.holidayDesc}}
+          </td>
+          <td class="text-center link-td">
+            {{holiday.holidayDate}}
+          </td>
           <td>
+            {{holiday.holidayStatus}}
             <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Bhogi, Sankranti</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Bhogi, Sankranti</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Bhogi, Sankranti</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Bhogi, Sankranti</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
+        <form name="holidayForm">
+          <tr ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
+            <td class="text-center link-td">
+
+            </td>
+            <td class="text-center link-td">
+              <input type="text" required ng-model="holiday.holidayDesc" class="gf-form-input" />
+            </td>
+            <td class="text-center link-td">
+              <input type="date" required ng-model="holiday.holidayDate" class="gf-form-input" />
+            </td>
+            <td>
+              <label class="switch"> <input type="checkbox" ng-model="holiday.holidayStatus" ng-true-value="'ACTIVE'"
+                  ng-false-value="'DEACTIVE'" /> <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </form>
       </tbody>
     </table>
   </div>
@@ -150,10 +148,13 @@
     <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
       <h4 class="ptl-06">Academic Year</h4>
       <div>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Term</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateBtn(2)">Add Term</a>
+        <a class="btn btn-primary" ng-click="create()">Save</a>
       </div>
     </div>
+
+    <!-- Terms -->
+
     <table class="academicyear">
       <thead>
         <th>Sr.No.</th>
@@ -163,51 +164,44 @@
         <th>Active</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Term 1</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
+        <tr ng-repeat="term in ctrl.terms">
+          <td class="text-center link-td">
+            {{ $index + 1 | number }}
+          </td>
+          <td class="text-center link-td">
+            {{term.termsDesc}}
+          </td>
+          <td class="text-center link-td">
+            {{term.startDate}}
+          </td>
+          <td class="text-center link-td">
+            {{term.endDate}}
+          </td>
           <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+            <label class="switch"> <input type="checkbox" ng-model="term.termStatus" ng-true-value="'ACTIVE'"
+                ng-false-value="'DEACTIVE'" /> <span class="slider"></span> </label>
           </td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Term 2</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Term 3</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Term 4</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Term 5</td>
-          <td>14/01/2018</td>
-          <td>14/01/2019</td>
-          <td>
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
-          </td>
-        </tr>
+        <form name="termForm">
+          <tr ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
+            <td class="text-center link-td">
+            </td>
+            <td class="text-center link-td">
+              <input type="text" required ng-model="term.termsDesc" class="gf-form-input" />
+            </td>
+            <td class="text-center link-td">
+              <input type="date" required ng-model="term.startDate" class="gf-form-input" />
+            </td>
+            <td class="text-center link-td">
+              <input type="date" required ng-model="term.endDate" class="gf-form-input" />
+            </td>
+            <td>
+              <label class="switch"> <input type="checkbox" ng-model="term.termStatus" ng-true-value="'ACTIVE'"
+                  ng-false-value="'DEACTIVE'" /> <span class="slider"></span>
+              </label>
+            </td>
+          </tr>
+        </form>
       </tbody>
     </table>
   </div>

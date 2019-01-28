@@ -7,19 +7,23 @@
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Department Setup</h4>
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)"> Add Department</a>
-      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+      <!-- <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)"> Add Department</a>
+      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a> -->
     </div>
   </div>
   <table id="tds">
     <thead>
       <th>Department Name</th>
-      <th>University</th>
+      <th>Department Head</th>
     </thead>
     <tbody>
-      <tr>
-        <td><input type="text" placeholder="Manual entry of Departments" /></td>
-        <td><input type="text" placeholder="Manual entry of University" /></td>
+      <tr ng-repeat="department in ctrl.departments">
+        <td class="width-4 text-center link-td">
+          {{department.name}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{department.deptHead}}
+        </td>
       </tr>
     </tbody>
   </table>

@@ -17,6 +17,12 @@ export class UtilSrv {
     appEvents.on('import-department-modal', this.importDepartmentModal.bind(this), this.$rootScope);
     appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
     appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
+    appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
+    appEvents.on('add-group-modal', this.addGroupModal.bind(this), this.$rootScope);
+    appEvents.on('assign-role-modal', this.assignRoleModal.bind(this), this.$rootScope);
+    appEvents.on('assign-group-modal', this.assignGroupModal.bind(this), this.$rootScope);
+    appEvents.on('add-user-modal', this.addUserModal.bind(this), this.$rootScope);
+    appEvents.on('edit-user-modal', this.editUserModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -88,30 +94,11 @@ export class UtilSrv {
   }
 
   addModal(payload) {
-    const scope = payload.scope ? payload.scope : this.$rootScope.$new();
+    const scope = this.$rootScope.$new();
 
-    scope.onAdd = () => {
-      payload.onAdd();
-      scope.dismiss();
+    scope.create = () => {
+      payload.onCreate(scope.locationForm, scope.location);
     };
-
-    scope.updateAddText = value => {
-      scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
-    };
-
-    scope.title = payload.title;
-    scope.text = payload.text;
-    scope.text2 = payload.text2;
-    scope.input = payload.input;
-    scope.addText = payload.addText;
-
-    scope.onAdd = payload.onAdd;
-    scope.onAltAction = payload.onAltAction;
-    scope.altActionText = payload.altActionText;
-    scope.icon = payload.icon || 'fa-check';
-    scope.yesText = payload.yesText || 'Yes';
-    scope.noText = payload.noText || 'Cancel';
-    scope.addTextValid = scope.addText ? false : true;
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/locations/partials/add_modal.html',
@@ -123,6 +110,10 @@ export class UtilSrv {
   branchModal(payload) {
     const scope = this.$rootScope.$new();
 
+    scope.create = () => {
+      payload.onCreate(scope.branchForm, scope.branch);
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
       scope: scope,
@@ -132,6 +123,10 @@ export class UtilSrv {
 
   departmentModal(payload) {
     const scope = this.$rootScope.$new();
+
+    scope.create = () => {
+      payload.onCreate(scope.departmentForm, scope.department);
+    };
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/departmentsettings/partials/department_modal.html',
@@ -167,6 +162,64 @@ export class UtilSrv {
       src: 'public/app/features/localapp/college-settings/legalentities/partials/bank_modal.html',
       scope: scope,
       modalClass: 'bank-modal',
+    });
+  }
+
+  addRoleModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/roles/partials/add_new_role.html',
+      scope: scope,
+      modalClass: 'add-new-role',
+    });
+  }
+
+  addGroupModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/groups/partials/create_group.html',
+      scope: scope,
+      modalClass: 'add-new-group',
+    });
+  }
+
+  assignRoleModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.roles = payload.roles;
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/groups/partials/assign_role.html',
+      scope: scope,
+      modalClass: 'assign-role',
+    });
+  }
+
+  assignGroupModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.groups = payload.groups;
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/assign_group.html',
+      scope: scope,
+      modalClass: 'assign-group',
+    });
+  }
+
+  addUserModal(payload) {
+    const scope = this.$rootScope.$new();
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/add_user.html',
+      scope: scope,
+      modalClass: 'add-user',
+    });
+  }
+
+  editUserModal(payload) {
+    const scope = this.$rootScope.$new();
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/edit_user.html',
+      scope: scope,
+      modalClass: 'edit-user',
     });
   }
 }

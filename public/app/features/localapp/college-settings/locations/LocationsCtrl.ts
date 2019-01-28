@@ -9,12 +9,10 @@ export class LocationsCtrl {
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
-    // this.$scope = $scope;
     this.query = '';
     this.getLocations();
     this.$scope = $scope;
     $scope.create = () => {
-      console.log('Create start');
       if (!$scope.locationForm.$valid) {
         return;
       }
@@ -66,12 +64,11 @@ export class LocationsCtrl {
     appEvents.emit('add-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: () => {
-        this.backendSrv.post('http://localhost:8080/api/locations').then(() => {
-          this.getLocations();
-        });
+      onCreate: (locationForm, location) => {
+        this.$scope.locationForm = locationForm;
+        this.$scope.location = location;
+        this.$scope.create();
       },
-      scope: this.$scope,
     });
   }
 }

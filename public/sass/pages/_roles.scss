@@ -5,14 +5,26 @@
   .gf-tabs-link.active:focus {
     color: #3697ef !important;
   }
+
   .gf-tabs-link {
     color: black !important;
   }
+
+  .border-container {
+    border: 1px solid #ababab;
+  }
+
+  .link-btn {
+    background: #fff;
+    color: #3697ef;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+
+  //Roles tab css
   .roles-main-container {
-    .border-container {
-      border: 1px solid #ababab;
-      padding: 20px;
-    }
     .roles-container {
       .radio-button-container {
         margin-top: 10px;
@@ -26,6 +38,91 @@
       .transition-preference-label {
         padding-top: 20px;
         padding-bottom: 20px;
+      }
+      .tab-content {
+        margin-bottom: 20px;
+      }
+      .preference-btn-container {
+        float: right;
+      }
+      .exclusive-roles-container {
+        .checkbox-button-container {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  //Groups tab css
+  .groups-main-container {
+    .groups-btn-container {
+      border-bottom: 1px solid #ababab;
+      .search-groups-textbox {
+        display: inline-block !important;
+      }
+    }
+    .groups-table-container {
+      .groups-table {
+        width: 100%;
+        font-size: 14px !important;
+        thead {
+          td {
+            color: #3697ef;
+            font-size: 19px;
+            border-bottom: 1px solid #dadada !important;
+          }
+        }
+        td {
+          border: none !important;
+          &:first-child {
+            width: 30%;
+            border-right: 1px solid #dadada !important;
+          }
+          &:last-child {
+            width: 70%;
+          }
+          label {
+            display: inline-block !important;
+            margin-right: 20px;
+            font-size: 14px !important;
+          }
+        }
+      }
+    }
+  }
+
+  //Users tab css
+  .users-main-container {
+    .users-btn-container {
+      border-bottom: 1px solid #ababab;
+      .search-users-textbox {
+        display: inline-block !important;
+      }
+    }
+    .users-table-container {
+      .users-table {
+        width: 100%;
+        font-size: 14px !important;
+        thead {
+          td {
+            color: #3697ef;
+            font-size: 19px;
+            border-bottom: 1px solid #dadada !important;
+          }
+        }
+        td {
+          border: none !important;
+          width: 20%;
+          border-right: 1px solid #dadada !important;
+          &:last-child {
+            width: 60% !important;
+          }
+          label {
+            display: inline-block !important;
+            margin-right: 20px;
+            font-size: 14px !important;
+          }
+        }
       }
     }
   }
@@ -56,5 +153,63 @@
   }
   label {
     padding-left: 6px;
+  }
+}
+
+.clear-both {
+  clear: both;
+}
+
+//assign group modal
+.assign-role,
+.assign-group {
+  max-width: 80% !important;
+  .modal-content {
+    overflow: auto;
+    max-height: 400px;
+  }
+}
+.assign-role-modal-container,
+.assign-group-modal-container {
+  .bg-modal {
+    width: 100%;
+    .assign-table {
+      width: 100%;
+      .header {
+        td {
+          label {
+            color: #3697ef;
+            font-size: 15px !important;
+            font-weight: bold;
+          }
+        }
+      }
+      .left-part,
+      .right-part {
+        width: 45%;
+      }
+      .assign-content {
+        .left-part,
+        .right-part {
+          border: 1px solid #abbaba;
+          background: white !important;
+        }
+        .check-box-container {
+          margin-bottom: 15px;
+          label {
+            display: inline !important;
+            color: #7b7b7b;
+            padding-left: 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    table,
+    tr,
+    td,
+    th {
+      border: none;
+    }
   }
 }

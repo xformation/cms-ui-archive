@@ -1,8 +1,10 @@
 <div class="page-container page-body roles-main-container">
-    <div class="roles-container border-container">
+    <div class="roles-container p-2 border-container">
         <div class="radio-button-container" ng-repeat="role in ctrl.roles">
             <input name="roles" type="radio" id={{role.id}} />&nbsp;<label class="d-inline-block" for={{role.id}}>{{role.title}}</label>
         </div>
+        <button class="link-btn pull-right mt-1" ng-click="ctrl.showModal()"><i class="fa fa-plus-circle"></i> Add new Role</button>
+        <div class="clear-both"></div>
     </div>
     <div class="transition-preference">
         <div class="transition-preference-label">Set transition preferences</div>
@@ -16,25 +18,30 @@
             </ul>
             <div class="clearfix"></div>
         </div>
-        <div class="tab-content border-container">
-            <div ng-class="{'hide':ctrl.preferenceId !== 'permitted'}">
+        <div class="border-container p-2">
+            <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'permitted'}">
                 <div class="preference-container tree-view-container" ng-repeat="permittedRole in ctrl.permittedRoles">
                     <tree-view family="permittedRole"></tree-view>
                 </div>
             </div>
-            <div ng-class="{'hide':ctrl.preferenceId !== 'prohibited'}">
+            <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'prohibited'}">
                 <div class="prohibitable-roles tree-view-container" ng-repeat="prohibitableRole in ctrl.prohibitableRoles">
                     <tree-view family="prohibitableRole"></tree-view>
                 </div>
             </div>
-            <div ng-class="{'hide':ctrl.preferenceId !== 'exclusive_role'}">
+            <div class="tab-content exclusive-roles-container" ng-class="{'hide':ctrl.preferenceId !== 'exclusive_role'}">
                 <div class="checkbox-button-container" ng-repeat="role in ctrl.exclusiveRoles">
                     <input name="{{role.id}}" type="checkbox" id={{role.id}} />&nbsp;<label class="d-inline-block" for={{role.id}}>{{role.title}}</label>
                 </div>
             </div>
-            <div ng-class="{'hide':ctrl.preferenceId !== 'general'}">
+            <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'general'}">
                 This is general
             </div>
+            <div class="preference-btn-container">
+                <button class="apply-preference-btn btn-success btn">Apply</button>
+                <button class="cancel-preference-btn btn-danger btn">Cancel</button>
+            </div>
+            <div class="clear-both"></div>
         </div>
     </div>
 </div>
