@@ -91,7 +91,7 @@ export class UtilSrv {
   }
 
   addModal(payload) {
-    const scope = payload.scope ? payload.scope : this.$rootScope.$new();
+    const scope = this.$rootScope.$new();
 
     scope.onAdd = () => {
       payload.onAdd();
@@ -101,6 +101,8 @@ export class UtilSrv {
     scope.updateAddText = value => {
       scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
     };
+
+    scope.create = payload.onCreate;
 
     scope.title = payload.title;
     scope.text = payload.text;
