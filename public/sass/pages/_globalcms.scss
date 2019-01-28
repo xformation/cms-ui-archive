@@ -592,3 +592,45 @@ table#tmtd {
   margin-left: 0rem;
   margin-right: 0rem;
 }
+.dash-nav {
+  background-color: #3697ef;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+}
+.clg-name {
+  display: flex;
+  align-items: center;
+  h4 {
+    border-right: 1px solid #cecece;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    margin-left: 1rem;
+  }
+}
+
+.search-name {
+  ::placeholder {
+    color: #cecece;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  input[type='search'] {
+    background-color: #447aae;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  a {
+    margin-left: 1rem;
+    color: #fff;
+  }
+  a.rnd {
+    border-radius: 50px;
+    width: 2rem;
+    height: 2rem;
+    padding: 5px 10px;
+    background-color: #307dc2;
+  }
+}
