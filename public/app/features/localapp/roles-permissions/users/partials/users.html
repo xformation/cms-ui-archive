@@ -1,0 +1,34 @@
+<div class="page-container page-body users-main-container">
+    <div class="border-container">
+        <div class="users-btn-container text-right p-2">
+            <button class="link-btn mr-1" ng-click="ctrl.showAddUserModal()">Add User</button>
+            <button class="link-btn mr-1" ng-click="ctrl.showEditUserModal()">Edit User</button>
+            <button class="link-btn mr-1" ng-click="ctrl.showAssignGroupModal()">Assign Group</button>
+            <button class="link-btn mr-1">Search User</button>
+            <input type="text" class="gf-form-input max-width-18 search-users-textbox" placeholder="Search User" />
+        </div>
+        <div class="users-table-container">
+            <table class="users-table">
+                <thead>
+                    <td>Name</td>
+                    <td>User Name</td>
+                    <td>Groups assigned to users</td>
+                </thead>
+                <tr ng-repeat="user in ctrl.users">
+                    <td>
+                        <input type="checkbox" id={{user.userName}} />
+                        <label for={{user.userName}}>{{user.name}}</label>
+                    </td>
+                    <td>
+                        <label>{{user.userName}}</label>
+                    </td>
+                    <td>
+                        <label ng-repeat="group in user.groups">
+                            {{group}}
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

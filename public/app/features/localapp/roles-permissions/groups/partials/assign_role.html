@@ -14,26 +14,31 @@
             <div class="add-confirm-modal p-1">
                 <form class="gf-form-group section m-0 dflex">
                     <div class="bg-modal">
-                        <div class="left-part pull-left">
-                            <div class="search-group-container">
-                                <input placeholder="SEARCH GROUP" type="text" class="gf-form-input"/>
-                            </div>
-                            <div class="group-list"></div>
+                        <table class="assign-table">
+                            <tr class="header">
+                                <td class="left-part">
+                                    <input placeholder="SEARCH GROUP" type="text" class="gf-form-input"/>
+                                </td>
+                                <td class="middle-part"></td>
+                                <td class="right-part">
+                                    <label>SELECT ROLE TO ASSIGN</label>
+                                </td>
+                            </tr>
+                            <tr class="assign-content">
+                                <td class="left-part"></td>
+                                <td class="middle-part"></td>
+                                <td class="right-part">
+                                    <div class="check-box-container" ng-repeat="role in roles">
+                                        <input type="checkbox" id={{role.id}}>
+                                        <label for={{role.id}}>{{role.title}}</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="gf-form-button-row p-r-0">
+                            <button type="submit" class="btn btn-success border-bottom">Save</button>
+                            <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom m-r-0">Cancel</button>
                         </div>
-                        <div class="right-part pull-right">
-                            <div class="role-container-label">SELECT ROLE TO ASSIGN</div>
-                            <div class="role-container">
-                                <div class="role" ng-repeat="role in roles">
-                                    <input type="checkbox" id={{role.id}}>
-                                    <label for={{role.id}}>{{role.title}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear-both"></div>
-                    </div>
-                    <div class="gf-form-button-row p-r-4">
-                        <button type="submit" class="btn btn-success border-bottom">Save</button>
-                        <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
                     </div>
                 </form>
             </div>

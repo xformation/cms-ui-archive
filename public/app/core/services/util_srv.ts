@@ -20,6 +20,9 @@ export class UtilSrv {
     appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
     appEvents.on('add-group-modal', this.addGroupModal.bind(this), this.$rootScope);
     appEvents.on('assign-role-modal', this.assignRoleModal.bind(this), this.$rootScope);
+    appEvents.on('assign-group-modal', this.assignGroupModal.bind(this), this.$rootScope);
+    appEvents.on('add-user-modal', this.addUserModal.bind(this), this.$rootScope);
+    appEvents.on('edit-user-modal', this.editUserModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -183,13 +186,40 @@ export class UtilSrv {
   }
 
   assignRoleModal(payload) {
-    const scope = payload.scope || this.$rootScope.$new();
+    const scope = this.$rootScope.$new();
     scope.roles = payload.roles;
-    scope.text = 'ha ha ha';
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/groups/partials/assign_role.html',
       scope: scope,
       modalClass: 'assign-role',
+    });
+  }
+
+  assignGroupModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.groups = payload.groups;
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/assign_group.html',
+      scope: scope,
+      modalClass: 'assign-group',
+    });
+  }
+
+  addUserModal(payload) {
+    const scope = this.$rootScope.$new();
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/add_user.html',
+      scope: scope,
+      modalClass: 'add-user',
+    });
+  }
+
+  editUserModal(payload) {
+    const scope = this.$rootScope.$new();
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/edit_user.html',
+      scope: scope,
+      modalClass: 'edit-user',
     });
   }
 }
