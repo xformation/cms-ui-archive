@@ -30,7 +30,7 @@
 						<input type="text" required ng-model="location.appliesTo" class="gf-form-input" />
 					</div>
 					<div class="gf-form-button-row p-r-4">
-						<button type="submit" ng-click="create()" class="btn btn-success border-bottom">Save</button>
+						<button type="submit" ng-click="create(); dismiss();" class="btn btn-success border-bottom">Save</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>

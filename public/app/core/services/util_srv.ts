@@ -93,31 +93,9 @@ export class UtilSrv {
   addModal(payload) {
     const scope = this.$rootScope.$new();
 
-    scope.onAdd = () => {
-      payload.onAdd();
-      scope.dismiss();
-    };
-
-    scope.updateAddText = value => {
-      scope.addTextValid = payload.addText.toLowerCase() === value.toLowerCase();
-    };
-
     scope.create = () => {
       payload.onCreate(scope.locationForm, scope.location);
     };
-    scope.title = payload.title;
-    scope.text = payload.text;
-    scope.text2 = payload.text2;
-    scope.input = payload.input;
-    scope.addText = payload.addText;
-
-    scope.onAdd = payload.onAdd;
-    scope.onAltAction = payload.onAltAction;
-    scope.altActionText = payload.altActionText;
-    scope.icon = payload.icon || 'fa-check';
-    scope.yesText = payload.yesText || 'Yes';
-    scope.noText = payload.noText || 'Cancel';
-    scope.addTextValid = scope.addText ? false : true;
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/locations/partials/add_modal.html',
@@ -129,6 +107,10 @@ export class UtilSrv {
   branchModal(payload) {
     const scope = this.$rootScope.$new();
 
+    scope.create = () => {
+      payload.onCreate(scope.branchForm, scope.branch);
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
       scope: scope,
@@ -138,6 +120,10 @@ export class UtilSrv {
 
   departmentModal(payload) {
     const scope = this.$rootScope.$new();
+
+    scope.create = () => {
+      payload.onCreate(scope.departmentForm, scope.department);
+    };
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/departmentsettings/partials/department_modal.html',

@@ -180,22 +180,22 @@ table.academicyear {
   }
   background-color: white !important;
   td:first-child {
-    padding-left: 4rem !important;
-    padding-right: 4rem !important;
+    // padding-left: 4rem !important;
+    // padding-right: 4rem !important;
   }
   td:nth-child(2) {
-    padding-right: 20rem !important;
-    padding-left: 2rem !important;
+    // padding-right: 20rem !important;
+    // padding-left: 2rem !important;
   }
   td:nth-child(3) {
     text-align: center;
-    padding-left: 4rem !important;
-    padding-right: 4rem !important;
+    // padding-left: 4rem !important;
+    // padding-right: 4rem !important;
   }
   td:last-child {
     text-align: center;
-    padding-left: 4rem !important;
-    padding-right: 4rem !important;
+    // padding-left: 4rem !important;
+    // padding-right: 4rem !important;
   }
 }
 .fa-university {
@@ -591,4 +591,8 @@ table#tmtd {
 .ttlect {
   margin-left: 0rem;
   margin-right: 0rem;
+}
+
+.p-0 {
+  padding: 0px !important;
 }

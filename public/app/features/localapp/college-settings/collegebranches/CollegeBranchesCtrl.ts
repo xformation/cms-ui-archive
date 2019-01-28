@@ -3,13 +3,23 @@ import { appEvents } from 'app/core/core';
 export class CollegeBranchesCtrl {
   branches: any;
   navModel: any;
+  query: any;
   activeTabIndex = 0;
   $scope: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
-    this.$scope = $scope;
+    this.query = '';
     this.getBranches();
+    this.$scope = $scope;
+    $scope.create = () => {
+      if (!$scope.branchForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/branches/', $scope.branch).then(() => {
+        this.getBranches();
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -46,12 +56,11 @@ export class CollegeBranchesCtrl {
     appEvents.emit('branch-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: () => {
-        this.backendSrv.post('http://localhost:8080/api/branches').then(() => {
-          this.getBranches();
-        });
+      onCreate: (branchForm, branch) => {
+        this.$scope.branchForm = branchForm;
+        this.$scope.branch = branch;
+        this.$scope.create();
       },
-      scope: this.$scope,
     });
   }
 }

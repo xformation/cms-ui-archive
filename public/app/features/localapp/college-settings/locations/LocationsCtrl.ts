@@ -9,7 +9,6 @@ export class LocationsCtrl {
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
-    // this.$scope = $scope;
     this.query = '';
     this.getLocations();
     this.$scope = $scope;

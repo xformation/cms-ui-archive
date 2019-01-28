@@ -15,22 +15,22 @@
 	<div class="modal-content">
 
 		<div class="add-confirm-modal p-1">
-			<form class="gf-form-group section m-0 dflex">
+			<form name="departmentForm" class="gf-form-group section m-0 dflex">
 				<div class="bg-modal">
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">NAME</label>
-						<input type="text" class="gf-form-input " placeholder="name" />
+						<input type="text" required ng-model="department.name" class="gf-form-input " placeholder="name" />
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">DESCRIPTION</label>
-						<input type="text" class="gf-form-input " placeholder="description" />
+						<input type="text" required ng-model="department.description" class="gf-form-input " placeholder="description" />
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">DEPARTMENT HEAD</label>
-						<input type="text" class="gf-form-input " placeholder="department head" />
+						<input type="text" required ng-model="department.deptHead" class="gf-form-input " placeholder="department head" />
 					</div>
 					<div class="gf-form-button-row p-r-4">
-						<button type="submit" class="btn btn-success border-bottom">Save</button>
+						<button type="submit" ng-click="create(); dismiss();" class="btn btn-success border-bottom">Save</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>
