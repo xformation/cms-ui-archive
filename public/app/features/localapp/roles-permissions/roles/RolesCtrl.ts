@@ -1,3 +1,5 @@
+import { appEvents } from 'app/core/core';
+
 export class RolesCtrl {
   roles: any[] = [];
   preferences = [];
@@ -5,56 +7,60 @@ export class RolesCtrl {
   permittedRoles = [];
   prohibitableRoles = [];
   exclusiveRoles = [];
-  constructor() {
+  $scope: any;
+  constructor($scope) {
     this.getRoles();
     this.getPreferences();
     this.preferenceId = 'permitted';
     this.getPermittedRoles();
     this.getProhibitableRoles();
     this.getExclusiveRoles();
+    this.$scope = $scope;
   }
 
   getRoles() {
-    this.roles.push({
-      id: 'super_admin',
-      title: 'SUPER ADMINISTRATOR',
-    });
-    this.roles.push({
-      id: 'admin',
-      title: 'ADMINISTRATOR',
-    });
-    this.roles.push({
-      id: 'teacher',
-      title: 'TEACHER',
-    });
-    this.roles.push({
-      id: 'principal',
-      title: 'PRINCIPAL',
-    });
-    this.roles.push({
-      id: 'hod',
-      title: 'HOD',
-    });
-    this.roles.push({
-      id: 'housekeeping',
-      title: 'HOUSEKEEPING',
-    });
-    this.roles.push({
-      id: 'inventory_head',
-      title: 'INVENTORY HEAD',
-    });
-    this.roles.push({
-      id: 'driver',
-      title: 'DRIVER',
-    });
-    this.roles.push({
-      id: 'librarian',
-      title: 'LIBRARIAN',
-    });
-    this.roles.push({
-      id: 'finance_admin',
-      title: 'FINANCE ADMIN',
-    });
+    this.roles = [
+      {
+        id: 'super_admin',
+        title: 'SUPER ADMINISTRATOR',
+      },
+      {
+        id: 'admin',
+        title: 'ADMINISTRATOR',
+      },
+      {
+        id: 'teacher',
+        title: 'TEACHER',
+      },
+      {
+        id: 'principal',
+        title: 'PRINCIPAL',
+      },
+      {
+        id: 'hod',
+        title: 'HOD',
+      },
+      {
+        id: 'housekeeping',
+        title: 'HOUSEKEEPING',
+      },
+      {
+        id: 'inventory_head',
+        title: 'INVENTORY HEAD',
+      },
+      {
+        id: 'driver',
+        title: 'DRIVER',
+      },
+      {
+        id: 'librarian',
+        title: 'LIBRARIAN',
+      },
+      {
+        id: 'finance_admin',
+        title: 'FINANCE ADMIN',
+      },
+    ];
   }
 
   getPreferences() {
@@ -403,5 +409,15 @@ export class RolesCtrl {
         title: 'HOD',
       },
     ];
+  }
+
+  showModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('add-role-modal', {
+      text: text,
+      icon: 'fa-trash',
+      onAdd: () => {},
+    });
   }
 }

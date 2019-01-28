@@ -17,6 +17,9 @@ export class UtilSrv {
     appEvents.on('import-department-modal', this.importDepartmentModal.bind(this), this.$rootScope);
     appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
     appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
+    appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
+    appEvents.on('add-group-modal', this.addGroupModal.bind(this), this.$rootScope);
+    appEvents.on('assign-role-modal', this.assignRoleModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -167,6 +170,37 @@ export class UtilSrv {
       src: 'public/app/features/localapp/college-settings/legalentities/partials/bank_modal.html',
       scope: scope,
       modalClass: 'bank-modal',
+    });
+  }
+
+  addRoleModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/roles/partials/add_new_role.html',
+      scope: scope,
+      modalClass: 'add-new-role',
+    });
+  }
+
+  addGroupModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/groups/partials/create_group.html',
+      scope: scope,
+      modalClass: 'add-new-group',
+    });
+  }
+
+  assignRoleModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+    scope.roles = payload.roles;
+    scope.text = 'ha ha ha';
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/groups/partials/assign_role.html',
+      scope: scope,
+      modalClass: 'assign-role',
     });
   }
 }

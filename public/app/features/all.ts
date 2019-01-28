@@ -24,5 +24,6 @@ import './localapp/college-settings/locations';
 import './localapp/college-settings/collegebranches';
 import './localapp/college-settings/departmentsettings';
 import './localapp/roles-permissions/roles';
+import './localapp/roles-permissions/groups';
 import './teams/CreateTeamCtrl';
 import './profile/all';
