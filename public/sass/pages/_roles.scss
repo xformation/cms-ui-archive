@@ -90,6 +90,42 @@
       }
     }
   }
+
+  //Users tab css
+  .users-main-container {
+    .users-btn-container {
+      border-bottom: 1px solid #ababab;
+      .search-users-textbox {
+        display: inline-block !important;
+      }
+    }
+    .users-table-container {
+      .users-table {
+        width: 100%;
+        font-size: 14px !important;
+        thead {
+          td {
+            color: #3697ef;
+            font-size: 19px;
+            border-bottom: 1px solid #dadada !important;
+          }
+        }
+        td {
+          border: none !important;
+          width: 20%;
+          border-right: 1px solid #dadada !important;
+          &:last-child {
+            width: 60% !important;
+          }
+          label {
+            display: inline-block !important;
+            margin-right: 20px;
+            font-size: 14px !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 .tree-view-container {
@@ -125,29 +161,55 @@
 }
 
 //assign group modal
-.assign-role {
+.assign-role,
+.assign-group {
   max-width: 80% !important;
+  .modal-content {
+    overflow: auto;
+    max-height: 400px;
+  }
 }
-.assign-role-modal-container {
+.assign-role-modal-container,
+.assign-group-modal-container {
   .bg-modal {
     width: 100%;
-    .left-part,
-    .right-part {
-      width: 40%;
-    }
-    .right-part {
-      .role-container-label {
-        color: #3697ef;
-      }
-    }
-    .role-container {
-      .role {
-        margin-bottom: 15px;
-        label {
-          padding-left: 10px;
-          font-size: 15px;
+    .assign-table {
+      width: 100%;
+      .header {
+        td {
+          label {
+            color: #3697ef;
+            font-size: 15px !important;
+            font-weight: bold;
+          }
         }
       }
+      .left-part,
+      .right-part {
+        width: 45%;
+      }
+      .assign-content {
+        .left-part,
+        .right-part {
+          border: 1px solid #abbaba;
+          background: white !important;
+        }
+        .check-box-container {
+          margin-bottom: 15px;
+          label {
+            display: inline !important;
+            color: #7b7b7b;
+            padding-left: 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    table,
+    tr,
+    td,
+    th {
+      border: none;
     }
   }
 }
