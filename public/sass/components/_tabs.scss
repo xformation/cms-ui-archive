@@ -15,9 +15,10 @@
   margin-right: $spacer/2;
   position: relative;
   display: block;
-  border-width: 0 1px 1px;
-  border-radius: 3px 3px 0 0;
+  border-width: 0 0px 0px;
+  border-radius: 0px 0px 0 0;
   color: $text-color;
+  top: -1px;
 
   i {
     margin-right: 5px;
@@ -47,9 +48,9 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 2px;
+      height: 0px;
       top: 0;
-      background-image: linear-gradient(to right, #ffd500 0%, #ff4400 99%, #ff4400 100%);
+      // background-image: linear-gradient(to right, #ffd500 0%, #ff4400 99%, #ff4400 100%);
     }
   }
 
