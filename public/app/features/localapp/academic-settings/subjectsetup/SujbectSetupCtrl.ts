@@ -1,52 +1,61 @@
 export class SubjectSetupCtrl {
-  studentSubjects: any;
+  subjects: any;
+  departments: any;
+  teachers: any;
+  batches: any;
   navModel: any;
   query: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo-placeholder.png';
-  bgSrc = '/public/img/dashboard.png';
   $scope: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
     this.query = '';
     this.$scope = $scope;
-    this.getstudentSubjects();
-    $scope.getFile = this.getFile.bind(this);
-    $scope.getbgFile = this.getbgFile.bind(this);
+    this.getSubjects();
+    this.getDepartments();
+    this.getTeachers();
+    this.getBatches();
+    $scope.create = () => {
+      if (!$scope.subjectForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/subjects/', $scope.subject).then(() => {
+        this.getSubjects();
+      });
+    };
   }
 
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
   }
 
-  getFile(file) {
-    if (!file) {
-      return;
-    }
-    const fileReader = new FileReader();
-    const that = this;
-    fileReader.onloadend = e => {
-      that.logoSrc = e.target['result'];
-      this.$scope.$apply();
-    };
-    fileReader.readAsDataURL(file);
+  abc() {
+    console.log(this.subjects);
   }
-  getbgFile(file) {
-    if (!file) {
-      return;
-    }
-    const fileReader = new FileReader();
-    const that = this;
-    fileReader.onloadend = e => {
-      that.bgSrc = e.target['result'];
-      this.$scope.$apply();
-    };
-    fileReader.readAsDataURL(file);
-  }
-  getstudentSubjects() {
+
+  getSubjects() {
     this.backendSrv.get(`http://localhost:8080/api/subjects/`).then(result => {
-      this.studentSubjects = result;
+      this.subjects = result;
+      console.log('Subjects', this.subjects);
+    });
+  }
+  getDepartments() {
+    this.backendSrv.get(`http://localhost:8080/api/departments/`).then(result => {
+      this.departments = result;
+      console.log('departments', this.departments);
+    });
+  }
+  getTeachers() {
+    this.backendSrv.get(`http://localhost:8080/api/teachers/`).then(result => {
+      this.teachers = result;
+      console.log('teachers', this.teachers);
+    });
+  }
+  getBatches() {
+    this.backendSrv.get(`http://localhost:8080/api/batches/`).then(result => {
+      this.batches = result;
+      console.log('Batches', this.batches);
     });
   }
 }
