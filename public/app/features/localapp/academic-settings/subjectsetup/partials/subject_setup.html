@@ -1,9 +1,10 @@
 <page-header model="ctrl.navModel"></page-header>
-<!-- optional--> <h3 class="bg-heading p-5">
-    <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Subject Setup
-  </h3>
+<!-- optional-->
+<h3 class="bg-heading p-5">
+  <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Subject Setup
+</h3>
 <div class="page-container page-body legal-entities-main-container">
- 
+
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Subject Setup</h4>
     <div>
@@ -22,50 +23,54 @@
       <th>Elective</th>
     </thead>
     <tbody>
-      <tr>
-        <td><input type="text" placeholder="Write Subject name here"></td>
-        <td>
-        
-            <select>
+      <form name="">
+        <tr ng-repeat="studentSubject in ctrl.studentSubjects">
+          <td><input type="text" required ng-model="studentSubject.subject" placeholder="Write Subject name here"></td>
+          <td>
+            <select type="text" ng-model="department.name" class="gf-form-input width-10">
+              <option ng-repeat="department in departments" value="{{department.id}}">{{department.name}}</option>
+            </select>
+            <!-- <select>
               <option value="">Computer Science</option>
               <option value="">Electrical</option>
               <option value="">Information Technology</option>
-            </select>
-            
-        </td>
-        <td>
-        
+            </select> -->
+
+          </td>
+          <td>
+
             <select>
               <option value="">Year 1</option>
               <option value="">Year 2</option>
               <option value="">Year 3</option>
               <option value="">Year 4</option>
             </select>
-             
-          
-        </td>
-        <td>
-          
+
+
+          </td>
+          <td>
+
             <select>
               <option value="">Teacher 1</option>
               <option value="">Teacher 2</option>
               <option value="">Teacher 3</option>
               <option value="">Teacher 4</option>
             </select>
-         
-        </td>
-        <td>
-          <div class="btn-switch">
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
-          </div> 
-        </td>
-            <td>
-              <div class="btn-switch">
-                <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label>
-              </div>
-            </td>
-              </tr>      
+
+          </td>
+          <td>
+            <div class="btn-switch">
+              <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
+            </div>
+          </td>
+          <td>
+            <div class="btn-switch">
+              <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label>
+            </div>
+          </td>
+        </tr>
+      </form>
     </tbody>
   </table>
-  </div>
+</div>
 </div>
