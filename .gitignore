@@ -17,6 +17,7 @@ tools/phantomjs/phantomjs
 tools/phantomjs/phantomjs.exe
 profile.out
 coverage.txt
+conf/defaults.ini
 
 docs/AWS_S3_BUCKET
 docs/GIT_BRANCH
