@@ -1,13 +1,17 @@
 export class SubjectSetupCtrl {
+  studentSubjects: any;
   navModel: any;
+  query: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo-placeholder.png';
   bgSrc = '/public/img/dashboard.png';
-  $scope;
+  $scope: any;
   /** @ngInject */
-  constructor($scope) {
+  constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
+    this.query = '';
     this.$scope = $scope;
+    this.getstudentSubjects();
     $scope.getFile = this.getFile.bind(this);
     $scope.getbgFile = this.getbgFile.bind(this);
   }
@@ -39,5 +43,10 @@ export class SubjectSetupCtrl {
       this.$scope.$apply();
     };
     fileReader.readAsDataURL(file);
+  }
+  getstudentSubjects() {
+    this.backendSrv.get(`http://localhost:8080/api/subjects/`).then(result => {
+      this.studentSubjects = result;
+    });
   }
 }
