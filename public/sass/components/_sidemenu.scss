@@ -28,7 +28,7 @@
 @include media-breakpoint-up(sm) {
   .sidemenu-open {
     .sidemenu {
-      background: $side-menu-bg;
+      background: white;
       position: initial;
       height: auto;
       box-shadow: $side-menu-shadow;
