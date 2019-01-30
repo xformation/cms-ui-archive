@@ -2,7 +2,7 @@
   .table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 70% !important;
+    width: 100% !important;
   }
 
   thead,
@@ -60,7 +60,7 @@
     <h3>Departments</h3>
     <small> Create and manage departments. </small>
   </div>
-  <div class="w-46">
+  <div>
     <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
     <button ng-click="ctrl.showImportModal()" class="pull-right"><i class="fa fa-plus-circle " aria-hidden="true"></i>
       Import
@@ -86,7 +86,7 @@
         <td class="width-4 text-center link-td">
           {{department.deptHead}}
         </td>
-        <td class="link-td text-right">
+        <td class="width-4 text-center link-td">
           <a ng-click="ctrl.deleteDepartment(department)">
             <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
           </a>

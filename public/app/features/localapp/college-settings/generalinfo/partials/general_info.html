@@ -7,38 +7,40 @@
     </div>
     <form name="collegeForm" class="gf-form-group section m-b-1">
       <h5 class="form-h5">SHORT NAME</h5>
-      <div class="gf-form"><input type="text" ng-modal="college.shortName" class="gf-form-input max-width-18"
+      <div class="gf-form"><input type="text" required ng-model="college.shortName" class="gf-form-input max-width-18"
           placeholder="College Name" /></div>
-    </form>
-    <h5 class="form-h5">LOGO</h5>
-    <small>Logo dimensions cannot exceed 60px height 100px width.</small>
 
-    <div class="logo-container d-flex m-b-1 mt-1">
-      <img ng-src="{{ ctrl.logoSrc }}" class="logo m-b-1" />
-      <div class="gf-form m-b-1">
-        <label class="upload-cursor">
-          <input id="d-none" type="file" file-select="ctrl.getFile(file)" class="gf-form-file-input" accept="image/*" />
-          Upload <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
-        </label>
+      <h5 class="form-h5">LOGO</h5>
+      <small>Logo dimensions cannot exceed 60px height 100px width.</small>
+
+      <div class="logo-container d-flex m-b-1 mt-1">
+        <img ng-src="{{ ctrl.logoSrc }}" class="logo m-b-1" />
+        <div class="gf-form m-b-1">
+          <label class="upload-cursor">
+            <input id="d-none" type="file" file-select="ctrl.getFile(file)" class="gf-form-file-input" accept="image/*" />
+            Upload <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="logo-container ">
-      <h5 class="form-h5">BACKGROUND IMAGE</h5>
-      <small>Background size cannot exceed 2MB and dimensions of 768px height or 200px width.</small>
-      <img ng-src="{{ ctrl.bgSrc }}" class="background mt-1 m-b-1" />
-      <div class="gf-form m-b-1">
-        <label class="upload-cursor">
-          <input id="d-none" type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input" accept="image/*" />
-          PICK DIFFERENT BACKGROUND <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
-        </label>
+      <div class="logo-container ">
+        <h5 class="form-h5">BACKGROUND IMAGE</h5>
+        <small>Background size cannot exceed 2MB and dimensions of 768px height or 200px width.</small>
+        <img ng-src="{{ ctrl.bgSrc }}" class="background mt-1 m-b-1" />
+        <div class="gf-form m-b-1">
+          <label class="upload-cursor">
+            <input id="d-none" type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input" accept="image/*" />
+            PICK DIFFERENT BACKGROUND <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+          </label>
+        </div>
       </div>
-    </div>
-    <form class="gf-form-group section ">
-      <h5 class="form-h5">INSTRUCTION INFORMATION</h5>
-      <small>You can provide instruction or similar information not exceeding 250 characters.</small>
-      <div class="gf-form m-b-1"><textarea type="text" class="gf-form-input ht-150"></textarea></div>
-      <div class="gf-form-button-row">
-        <button type="reset" class="btn bp">Previous</button> <button type="submit" class="btn bs">Save</button>
+      <div class="section ">
+        <h5 class="form-h5">INSTRUCTION INFORMATION</h5>
+        <small>You can provide instruction or similar information not exceeding 250 characters.</small>
+        <div class="gf-form m-b-1"><textarea type="text" class="gf-form-input ht-150" ng-model="college.instructionInformation"></textarea></div>
+        <div class="gf-form-button-row">
+          <!-- <button type="reset" class="btn bp">Previous</button>  -->
+          <button type="submit" ng-click="create()" class="btn bs">Save</button>
+        </div>
       </div>
     </form>
   </div>
