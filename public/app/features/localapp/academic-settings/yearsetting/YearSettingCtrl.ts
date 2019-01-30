@@ -10,8 +10,10 @@ export class YearSettingCtrl {
     this.activeTabIndex = 0;
     this.activeBtnIndex = 0;
     this.$scope = $scope;
+    this.getHolidays();
+    this.getTerms();
     $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
-    $scope.create = () => {
+    $scope.createHoliday = () => {
       if (!$scope.holidayForm.$valid) {
         return;
       }
@@ -19,9 +21,8 @@ export class YearSettingCtrl {
         this.getHolidays();
       });
     };
-    this.getHolidays();
     $scope.terms = { termsDesc: '', startDate: '', endDate: '', termStatus: 'ACTIVE' };
-    $scope.create = () => {
+    $scope.createTerm = () => {
       if (!$scope.termForm.$valid) {
         return;
       }
@@ -29,7 +30,6 @@ export class YearSettingCtrl {
         this.getTerms();
       });
     };
-    this.getTerms();
   }
 
   activateTab(tabIndex) {
