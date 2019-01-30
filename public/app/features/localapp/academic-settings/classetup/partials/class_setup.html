@@ -1,19 +1,22 @@
 <page-header model="ctrl.navModel"></page-header>
-<!-- optional--><h3 class="bg-heading p-5">
-    <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Class Setup
-  </h3>
+<!-- optional-->
+<h3 class="bg-heading p-5">
+  <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Class Setup
+</h3>
 <div class="page-container page-body legal-entities-main-container">
-  
+
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Class Setup</h4>
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(1)">
         Add Class</a>
       <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
     </div>
   </div>
-  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
-    <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div>
+  <div class="info-container">
+    <div class="authorized-signatory-container m-b-1">
+      <h4 class="bg-heading ht ptl-06">Academic Year</h4>
+    </div>
     <table id="acs" class="fwidth">
       <thead>
         <th>Department</th>
@@ -27,169 +30,189 @@
       <tbody>
         <tr>
           <td>
-            
+            Department 1
+          </td>
+          <td>
+            First Year
+          </td>
+          <td>
+            Teacher 1
+          </td>
+          <td>
+            OU
+          </td>
+          <td>
+            100
+          </td>
+          <td>
+            50
+          </td>
+          <td>
+            <div class="m-b-3"></div>
+          </td>
+        </tr>
+        <form>
+          <tr ng-class="{'hide':ctrl.activeTabIndex !== 1}">
+            <td>
               <select name="" id="">
                 <option value="">Department 1</option>
                 <option value="">Department 2</option>
                 <option value="">Department 3</option>
               </select>
-           
-          </td>
-          <td>
-            
+            </td>
+            <td>
               <select name="" id="">
                 <option value="">Year 1</option>
                 <option value="">Year 2</option>
                 <option value="">Year 3</option>
                 <option value="">Year 4</option>
               </select>
-            
-          </td>
-          <td>
-          
+            </td>
+            <td>
+
               <select name="" id="">
                 <option value="">Teacher 1</option>
                 <option value="">Teacher 2</option>
                 <option value="">Teacher 3</option>
               </select>
-            
-          </td>
-          <td>
-              
-                  <select name="" id="">
-                    <option value="">University 1</option>
-                    <option value="">University 2</option>
-                    <option value="">University 3</option>
-                  </select>
-                
-          </td>
-          <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-            </span> {{studentCount}}
-           <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
-             <i class="fa fa-minus" aria-hidden="true"></i>
-            </span>
-            </div>
-          </td>
-          <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-            </span> {{count}}
-           <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-             <i class="fa fa-minus" aria-hidden="true"></i>
-            </span>
-            </div>
-          </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Add Section</a></td>
-        </tr>
-       
+
+            </td>
+            <td>
+
+              <select name="" id="">
+                <option value="">University 1</option>
+                <option value="">University 2</option>
+                <option value="">University 3</option>
+              </select>
+
+            </td>
+            <td>
+              <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1"
+                  ng-init="studentCount = 100">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span> {{studentCount}}
+                <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                </span>
+              </div>
+            </td>
+            <td>
+              <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span> {{count}}
+                <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                </span>
+              </div>
+            </td>
+            <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Add Section</a></td>
+          </tr>
+        </form>
       </tbody>
     </table>
   </div>
-  
+
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
-    <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-      <div>
-        <!-- <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Add Term</a> -->
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
-      </div>
+    <div class="m-b-1">
+
     </div>
-  <!-- Add Section part -->
-   <table id="acs" class="fwidth">
-    <thead>
-      <th>Section Name</th>
-      <th>Class Teacher</th>
-      <th>Subjects</th>
-      <th>TimeTable</th>
-      <th>No of Students</th>
-      <th>Active</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
+    <!-- Add Section part -->
+    <table id="acs" class="fwidth">
+      <thead>
+        <th>Section Name</th>
+        <th>Class Teacher</th>
+        <th>Subjects</th>
+        <th>TimeTable</th>
+        <th>No of Students</th>
+        <th>Active</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
             <div class="t-students">
-              CS 1st Year  Div 1
+              CS 1st Year Div 1
             </div>
-        </td>
-        <td>
+          </td>
+          <td>
             <select name="" id="">
               <option value="">Thomson Clerik</option>
               <option value="">Jaray Simpson</option>
               <option value="">Thampy Clerik</option>
               <option value="">Peter Parker</option>
             </select>
-        </td>
-        <td>        
+          </td>
+          <td>
             <select name="" id="">
               <option value="">Subjects 11</option>
               <option value="">Subjects 12</option>
               <option value="">Subjects 13</option>
-            </select>          
-        </td>
-        <td>            
-              <div class="w-160 t-students mrn">
-                View / Create Time Table
-              </div>             
-        </td>
-        <td>
-          <div class="t-students">
-              <span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 50">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                </span> {{count}}
-                <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-                  <i class="fa fa-minus" aria-hidden="true"></i>
-                </span>
-          </div>
-        </td>
-        <td>
-           
-                <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
-               
-        </td>
-      </tr>
-      <tr>
-          <td>
-              <div class="t-students">
-                CS 1st Year  Div 2
-              </div>
+            </select>
           </td>
           <td>
-              <select name="" id="">
-                <option value="">Thomson Clerik</option>
-                <option value="">Jaray Simpson</option>
-                <option value="">Thampy Clerik</option>
-                <option value="">Peter Parker</option>
-              </select>
-          </td>
-          <td>        
-              <select name="" id="">
-                <option value="">Subjects 11</option>
-                <option value="">Subjects 12</option>
-                <option value="">Subjects 13</option>
-              </select>          
-          </td>
-          <td>            
-                <div class="w-160 t-students mrn">
-                  View / Create Time Table
-                </div>             
-          </td>
-          <td>
-            <div class="t-students">
-                <span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 50">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                  </span> {{count}}
-                  <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-                    <i class="fa fa-minus" aria-hidden="true"></i>
-                  </span>
+            <div class="w-160 t-students mrn">
+              View / Create Time Table
             </div>
           </td>
           <td>
-             
-                  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
-                 
+            <div class="t-students">
+              <span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 50">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{count}}
+              <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+            </div>
+          </td>
+          <td>
+
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
+
           </td>
         </tr>
-    </tbody>
-  </table>
+        <tr>
+          <td>
+            <div class="t-students">
+              CS 1st Year Div 2
+            </div>
+          </td>
+          <td>
+            <select name="" id="">
+              <option value="">Thomson Clerik</option>
+              <option value="">Jaray Simpson</option>
+              <option value="">Thampy Clerik</option>
+              <option value="">Peter Parker</option>
+            </select>
+          </td>
+          <td>
+            <select name="" id="">
+              <option value="">Subjects 11</option>
+              <option value="">Subjects 12</option>
+              <option value="">Subjects 13</option>
+            </select>
+          </td>
+          <td>
+            <div class="w-160 t-students mrn">
+              View / Create Time Table
+            </div>
+          </td>
+          <td>
+            <div class="t-students">
+              <span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 50">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span> {{count}}
+              <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+            </div>
+          </td>
+          <td>
+
+            <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  </div>
+</div>
 </div>

@@ -8,9 +8,9 @@
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Subject Setup</h4>
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(1)">
         Add Subject</a>
-      <a class="btn btn-primary" ng-click="ctrl.abc()">Save</a>
+      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
     </div>
   </div>
   <table id="subject-table" class="fwidth">
@@ -97,7 +97,7 @@
         </td>
       </tr>
       <form name="subjectForm">
-        <tr>
+        <tr ng-class="{'hide':ctrl.activeTabIndex !== 1}">
           <td><input type="text" required ng-model="subject.subjectDesc" placeholder="Write Subject name here"></td>
           <td>
             <select type="text" ng-model="subject.departmentName" class="gf-form-input width-10" ng-options="name as department.name for department in ctrl.departments"></select>
