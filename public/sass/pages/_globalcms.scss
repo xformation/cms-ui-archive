@@ -647,3 +647,9 @@ table#tmtd {
   display: flex;
   justify-content: space-between;
 }
+.l-grid {
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: auto auto;
+  width: 350px !important;
+}
