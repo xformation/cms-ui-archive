@@ -60,7 +60,7 @@
   @include media-breakpoint-up(sm) {
     &.active,
     &:hover {
-      background-color: $side-menu-item-hover-bg;
+      background-color: whitesmoke;
       @include left-brand-border-gradient();
 
       .dropdown-menu {
@@ -93,9 +93,9 @@
   text-align: center;
 
   img {
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    // border-radius: 50%;
+    width: 32px;
+    height: 32px;
     box-shadow: 0 0 14px 2px rgba(255, 255, 255, 0.05);
   }
 }
