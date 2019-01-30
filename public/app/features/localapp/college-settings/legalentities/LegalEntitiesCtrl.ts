@@ -3,7 +3,7 @@ import { appEvents } from 'app/core/core';
 export class LegalEntitiesCtrl {
   navModel: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo-placeholder.png';
+  logoSrc = '/public/img/logo.png';
   $scope;
   /** @ngInject */
   constructor($scope) {

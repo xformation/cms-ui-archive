@@ -3,7 +3,7 @@ export class GeneralInfoCtrl {
   navModel: any;
   query: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo-placeholder.png';
+  logoSrc = '/public/img/logo.png';
   bgSrc = '/public/img/dashboard.png';
   $scope: any;
   /** @ngInject */
