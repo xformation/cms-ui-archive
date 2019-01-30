@@ -636,9 +636,21 @@ table#tmtd {
   }
 }
 
+.yflex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .s-univ {
   color: #447aae;
   font-size: 2rem;
   padding-left: 4px;
   padding-top: 4px;
+}
+
+.l-grid {
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: auto auto;
+  width: 350px !important;
 }
