@@ -652,9 +652,18 @@ table#tmtd {
   display: grid;
   justify-content: flex-start;
   grid-template-columns: auto auto;
-  width: 350px !important;
+  width: 250px !important;
 }
 
 .white-color {
   color: white;
+}
+
+.s-flex {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.m-3 {
+  margin: 3rem !important;
 }

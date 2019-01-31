@@ -58,6 +58,19 @@ export class LocationsCtrl {
     });
   }
 
+  editLocation(location) {
+    const text = location.name;
+    appEvents.emit('edit-modal', {
+      text: text,
+      icon: 'fa-trash',
+      onUpdate: (locationForm, location) => {
+        this.$scope.locationForm = locationForm;
+        this.$scope.location = location;
+        this.$scope.update();
+      },
+    });
+  }
+
   showModal() {
     const text = 'Do you want to delete the ';
 
