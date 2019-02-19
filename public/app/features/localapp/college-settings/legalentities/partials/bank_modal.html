@@ -15,35 +15,34 @@
 	<div class="modal-content">
 
 		<div class="add-confirm-modal p-1">
-			<form class="gf-form-group section m-0 dflex">
+			<form name="bankForm" class="gf-form-group section m-0 dflex">
 				<div class="bg-modal">
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">NAME OF BANK</label>
-						<select class="gf-form-input">
-							<option label="SBI" value="0" selected="selected">SBI</option>
-							<option label="HDFC" value="1">HDFC</option>
-							<option label="ICICI" value="2">ICICI</option>
-						</select>
-
+						<select type="text" ng-model="bankAccount.nameOfBank" class="gf-form-input width-10" ng-options="f for f in ['HDFC', 'SBI', 'ICICI', 'ANDHRABANK']"></select>
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">ACCOUNT NUMBER</label>
-						<input type="text" class="gf-form-input " placeholder="" />
+						<input type="text" required ng-model="bankAccount.accountNumber" class="gf-form-input" placeholder="" />
+					</div>
+					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">TYPE OF ACCOUNT</label>
+						<input type="text" required ng-model="bankAccount.typeOfAccount" class="gf-form-input" placeholder="" />
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">IFSC CODE</label>
-						<input type="text" class="gf-form-input " placeholder="" />
+						<input type="text" required ng-model="bankAccount.ifsCode" class="gf-form-input " placeholder="" />
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">BRANCH</label>
-						<input type="text" class="gf-form-input " placeholder="" />
+						<input type="text" ng-model="bankAccount.branch" class="gf-form-input" placeholder="" />
 					</div>
 					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">CORPORATE ID</label>
-						<input type="text" class="gf-form-input " placeholder="" />
+						<input type="text" ng-model="bankAccount.corporateId" class="gf-form-input " placeholder="" />
 					</div>
 					<div class="gf-form-button-row p-r-4">
-						<button type="submit" class="btn btn-success border-bottom">Save</button>
+						<button ng-click="create(); dismiss();" type="submit" class="btn btn-success border-bottom">Save</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>

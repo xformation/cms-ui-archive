@@ -12,6 +12,7 @@ export class UtilSrv {
     appEvents.on('hide-modal', this.hideModal.bind(this), this.$rootScope);
     appEvents.on('confirm-modal', this.showConfirmModal.bind(this), this.$rootScope);
     appEvents.on('add-modal', this.addModal.bind(this), this.$rootScope);
+    appEvents.on('edit-modal', this.editModal.bind(this), this.$rootScope);
     appEvents.on('branch-modal', this.branchModal.bind(this), this.$rootScope);
     appEvents.on('department-modal', this.departmentModal.bind(this), this.$rootScope);
     appEvents.on('import-department-modal', this.importDepartmentModal.bind(this), this.$rootScope);
@@ -107,6 +108,21 @@ export class UtilSrv {
     });
   }
 
+  editModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.text = payload.text;
+
+    scope.update = () => {
+      payload.onUpdate(scope.locationForm, scope.location);
+    };
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/college-settings/locations/partials/edit_modal.html',
+      scope: scope,
+      modalClass: 'edit-modal',
+    });
+  }
+
   branchModal(payload) {
     const scope = this.$rootScope.$new();
 
@@ -157,6 +173,10 @@ export class UtilSrv {
 
   bankModal(payload) {
     const scope = this.$rootScope.$new();
+
+    scope.create = () => {
+      payload.onCreate(scope.bankForm, scope.bankAccount);
+    };
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/legalentities/partials/bank_modal.html',

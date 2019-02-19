@@ -1,4 +1,4 @@
-<div class="page-container page-body legal-entities-main-container">
+<div class="page-container legal-entities-main-container p-t-1">
   <div class="info-container">
     <div class="authorized-signatory-container">
       <h3>Legal Entity</h3>
@@ -18,64 +18,61 @@
       </div>
     </div>
     <div class="authorized-signatory-container ">
-      <h5 class="form-h5">AUTHORIZED SIGNATORY</h5>
-      <div class="signatory-list ">
-        <div class="tile m-r-2 l-grid">
-          <div class="tile-circle yellow"><b>J</b></div>
-          <div class="tile-right-part">
-            <div class="tile-name"><span>John</span></div>
-            <div class="tile-info">CEO</div>
-          </div>
-        </div>
+      <div class="s-flex">
+        <h5 class="form-h5">AUTHORIZED SIGNATORY</h5>
         <div class="tile"><a ng-click="ctrl.showSignatoryModal()" type="submit" class="upload-cursor">+ Add New
             Signatory</a></div>
+      </div>
+      <div class="signatory-list">
+        <div class="tile m-r-2 l-grid" ng-repeat="authorizedSignatory in ctrl.authorizedSignatories">
+          <div class="tile-circle yellow"><b>J</b></div>
+          <div class="tile-right-part">
+            <div class="tile-name"><span>{{authorizedSignatory.signatoryName}}</span></div>
+            <div class="tile-info">{{authorizedSignatory.signatoryDesignation}}</div>
+          </div>
+        </div>
+
         <div class="clearfix"></div>
       </div>
     </div>
     <div class="back-account-container  mt-0">
-      <h5 class="form-h5">BANK ACCOUNTS</h5>
-      <div class="bank-account-list">
-        <div class="tile m-r-2">
-          <div class="tile-circle green">&#8377;</div>
-          <div class="tile-right-part">
-            <div class="tile-name"><span>HDFC Bank</span></div>
-            <div class="tile-info">Madhapur</div>
-          </div>
-        </div>
-        <div class="tile m-r-2">
-          <div class="tile-circle blue">&#8377;</div>
-          <div class="tile-right-part">
-            <div class="tile-name"><span>State Bank Of India</span></div>
-            <div class="tile-info">Banglore</div>
-          </div>
-        </div>
+      <div class="s-flex">
+        <h5 class="form-h5">BANK ACCOUNTS</h5>
         <div class="tile"><a ng-click="ctrl.showBankModal()" type="submit" class="upload-cursor">+ Add Bank Account</a></div>
-        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="bank-account-list" ng-repeat="bankAccount in ctrl.bankAccounts">
+      <div class="tile m-r-2">
+        <div class="tile-circle green">&#8377;</div>
+        <div class="tile-right-part">
+          <div class="tile-name"><span>{{bankAccount.nameOfBank}} Bank</span></div>
+          <div class="tile-info">{{bankAccount.branch}}</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="tab-container">
-    <div class="tab-header">
-      <h5 class="form-h5 ">Registration & Tax information</h5>
-      <ul class="legal-gf-tabs">
-        <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(0)">
-          <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 0}">Collage Info</a>
-        </li>
-        <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(1)">
-          <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 1}">IT Info</a>
-        </li>
-        <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(2)">
-          <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 2}">PF Info</a>
-        </li>
-        <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(3)">
-          <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 3}">ESI Info</a>
-        </li>
-        <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(4)">
-          <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 4}">PT Info</a>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
-    </div>
+</div>
+<div class="tab-container m-3">
+  <div class="tab-header">
+    <h5 class="form-h5 ">Registration & Tax information</h5>
+    <ul class="legal-gf-tabs">
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(0)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 0}">Collage Info</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(1)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 1}">IT Info</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(2)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 2}">PF Info</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(3)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 3}">ESI Info</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(4)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 4}">PT Info</a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
     <div class="tab-content" style="margin: 0px 0px !important; padding: 2rem  !important; margin-bottom: 3rem !important;">
       <div ng-class="{'hide':ctrl.activeTabIndex !== 0}">
         <div class="contnet">
@@ -299,5 +296,7 @@
       </div>
     </div>
   </div>
+
+</div>
 </div>
 <i class="fa fa-phone orange"></i>

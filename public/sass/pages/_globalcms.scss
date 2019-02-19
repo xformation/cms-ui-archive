@@ -636,6 +636,11 @@ table#tmtd {
   }
 }
 
+.yflex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .s-univ {
   color: #447aae;
   font-size: 2rem;
@@ -643,13 +648,22 @@ table#tmtd {
   padding-top: 4px;
 }
 
-.yflex {
-  display: flex;
-  justify-content: space-between;
-}
 .l-grid {
   display: grid;
   justify-content: flex-start;
   grid-template-columns: auto auto;
-  width: 350px !important;
+  width: 250px !important;
+}
+
+.white-color {
+  color: white;
+}
+
+.s-flex {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.m-3 {
+  margin: 3rem !important;
 }
