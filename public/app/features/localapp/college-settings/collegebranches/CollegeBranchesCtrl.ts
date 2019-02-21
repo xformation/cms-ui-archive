@@ -2,6 +2,7 @@ import { appEvents } from 'app/core/core';
 
 export class CollegeBranchesCtrl {
   branches: any;
+  states: any;
   navModel: any;
   query: any;
   activeTabIndex = 0;
@@ -11,6 +12,7 @@ export class CollegeBranchesCtrl {
     this.activeTabIndex = 0;
     this.query = '';
     this.getBranches();
+    this.getStates();
     this.$scope = $scope;
     $scope.create = () => {
       if (!$scope.branchForm.$valid) {
@@ -29,6 +31,13 @@ export class CollegeBranchesCtrl {
   getBranches() {
     this.backendSrv.get(`http://localhost:8080/api/branches/`).then(result => {
       this.branches = result;
+    });
+  }
+
+  getStates() {
+    this.backendSrv.get(`http://localhost:8080/api/states/`).then(result => {
+      this.states = result;
+      console.log('states', this.states);
     });
   }
 

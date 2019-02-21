@@ -25,7 +25,7 @@ export class LocationsCtrl {
         return;
       }
       backendSrv.put('http://localhost:8080/api/locations/' + $scope.location.id, $scope.location).then(() => {
-        this.getLocations();
+        // this.getLocations();
       });
     };
   }

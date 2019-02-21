@@ -20,10 +20,10 @@ export class AcademicSettingsCtrl {
       title: 'SUBJECT SETUP',
       id: 'subject_setup',
     });
-    this.sections.push({
-      title: 'CLASS SETUP',
-      id: 'class_setup',
-    });
+    // this.sections.push({
+    //   title: 'CLASS SETUP',
+    //   id: 'class_setup',
+    // });
     this.sections.push({
       title: 'TIMETABLE SETTING',
       id: 'timetable_setting',

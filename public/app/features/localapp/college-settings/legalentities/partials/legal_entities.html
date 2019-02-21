@@ -23,9 +23,9 @@
         <div class="tile"><a ng-click="ctrl.showSignatoryModal()" type="submit" class="upload-cursor">+ Add New
             Signatory</a></div>
       </div>
-      <div class="signatory-list">
-        <div class="tile m-r-2 l-grid" ng-repeat="authorizedSignatory in ctrl.authorizedSignatories">
-          <div class="tile-circle yellow"><b>J</b></div>
+      <div class="signatory-list" ng-repeat="authorizedSignatory in ctrl.authorizedSignatories">
+        <div class="tile m-r-2 l-grid">
+          <div class="tile-circle yellow"><b>{{authorizedSignatory.signatoryName.charAt(0)}}</b></div>
           <div class="tile-right-part">
             <div class="tile-name"><span>{{authorizedSignatory.signatoryName}}</span></div>
             <div class="tile-info">{{authorizedSignatory.signatoryDesignation}}</div>
@@ -38,15 +38,16 @@
     <div class="back-account-container  mt-0">
       <div class="s-flex">
         <h5 class="form-h5">BANK ACCOUNTS</h5>
-        <div class="tile"><a ng-click="ctrl.showBankModal()" type="submit" class="upload-cursor">+ Add Bank Account</a></div>
+        <div class="tile"><a ng-click="ctrl.showBankModal()" type="submit" class="upload-cursor">+ Add Bank Account</a>
+        </div>
       </div>
     </div>
     <div class="bank-account-list" ng-repeat="bankAccount in ctrl.bankAccounts">
       <div class="tile m-r-2">
-        <div class="tile-circle green">&#8377;</div>
+        <div class="tile-circle {{bankAccount.nameOfBank}}">&#8377;</div>
         <div class="tile-right-part">
-          <div class="tile-name"><span>{{bankAccount.nameOfBank}} Bank</span></div>
-          <div class="tile-info">{{bankAccount.branch}}</div>
+          <div class="tile-name"><span>{{bankAccount.nameOfBank}}</span></div>
+          <div class="tile-info">{{bankAccount.branchAddress}}</div>
         </div>
       </div>
     </div>
@@ -54,7 +55,24 @@
 </div>
 <div class="tab-container m-3">
   <div class="tab-header">
-    <h5 class="form-h5 ">Registration & Tax information</h5>
+    <div class="dflex">
+      <h5 class="form-h5 ">Registration & Tax information</h5>
+      <div class="gf-form-select-wrapper">
+        <select class="gf-form-input">
+          <option value="0" selected="selected">Select State</option>
+        </select>
+      </div>
+      <div class="gf-form-select-wrapper">
+        <select class="gf-form-input">
+          <option value="0" selected="selected">Select City</option>
+        </select>
+      </div>
+      <div class="gf-form-select-wrapper">
+        <select class="gf-form-input">
+          <option value="0" selected="selected">Select Branch</option>
+        </select>
+      </div>
+    </div>
     <ul class="legal-gf-tabs">
       <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(0)">
         <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 0}">Collage Info</a>
@@ -73,7 +91,8 @@
       </li>
     </ul>
     <div class="clearfix"></div>
-    <div class="tab-content" style="margin: 0px 0px !important; padding: 2rem  !important; margin-bottom: 3rem !important;">
+    <div class="tab-content"
+      style="height:350px !important; margin: 0px 0px 10px 0px !important; padding: 2rem  !important; border: 1px solid #b9bec6;">
       <div ng-class="{'hide':ctrl.activeTabIndex !== 0}">
         <div class="contnet">
           <form class="gf-form-group section m-0 dflex">
@@ -117,7 +136,8 @@
                 <input type="text" class="gf-form-input width-12" placeholder="PIN CODE" />
               </div>
               <div class="gf-form-button-row">
-                <button type="submit" class="btn btn-success border-bottom">Save</button>
+                <button type="submit" ng-click="ctrl.activateTab(1)"
+                  class="btn btn-success border-bottom">Continue</button>
                 <button type="reset" class="btn btn-danger border-bottom">Clear</button>
               </div>
             </div>
@@ -156,7 +176,8 @@
             </div>
 
             <div class="gf-form-button-row">
-              <button type="submit" class="btn btn-success border-bottom">Save</button>
+              <button type="submit" ng-click="ctrl.activateTab(2)"
+                class="btn btn-success border-bottom">Continue</button>
               <button type="reset" class="btn btn-danger border-bottom">Clear</button>
             </div>
           </form>
@@ -194,7 +215,8 @@
                 <input type="text" class="gf-form-input " placeholder="CEO" />
               </div>
               <div class="gf-form-button-row">
-                <button type="submit" class="btn btn-success border-bottom">Save</button>
+                <button type="submit" ng-click="ctrl.activateTab(3)"
+                  class="btn btn-success border-bottom">Continue</button>
                 <button type="reset" class="btn btn-danger border-bottom">Clear</button>
               </div>
             </div>
@@ -233,7 +255,8 @@
                 <input type="text" class="gf-form-input " placeholder="CEO" />
               </div>
               <div class="gf-form-button-row flex">
-                <button type="submit" class="btn btn-success border-bottom">Save</button>
+                <button type="submit" ng-click="ctrl.activateTab(4)"
+                  class="btn btn-success border-bottom">Continue</button>
                 <button type="reset" class="btn btn-danger border-bottom">Clear</button>
               </div>
             </div>

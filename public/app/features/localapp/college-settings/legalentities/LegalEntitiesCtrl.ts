@@ -13,6 +13,7 @@ export class LegalEntitiesCtrl {
     this.$scope = $scope;
     $scope.getFile = this.getFile.bind(this);
     this.getBank();
+    this.getSignatory();
 
     $scope.createBank = () => {
       if (!$scope.bankForm.$valid) {
@@ -20,18 +21,19 @@ export class LegalEntitiesCtrl {
       }
       backendSrv.post('http://localhost:8080/api/bank-accounts/', $scope.bankAccount).then(() => {
         this.getBank();
+        console.log('Bank:', this.bankAccounts);
       });
     };
 
-    // this.getSignatory();
-    // $scope.createSignatory = () => {
-    //   if (!$scope.signatoryForm.$valid) {
-    //     return;
-    //   }
-    //   backendSrv.post('http://localhost:8080/api/authorizedSignatories/', $scope.authorizedSignatory).then(() => {
-    //     this.getSignatory();
-    //   });
-    // };
+    $scope.createSignatory = () => {
+      if (!$scope.signatoryForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/authorized-signatories/', $scope.authorizedSignatory).then(() => {
+        this.getSignatory();
+        console.log('Authorised:', this.authorizedSignatories);
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -54,27 +56,30 @@ export class LegalEntitiesCtrl {
   getBank() {
     this.backendSrv.get(`http://localhost:8080/api/bank-accounts/`).then(result => {
       this.bankAccounts = result;
-      console.log('Bank:', this.bankAccounts);
     });
   }
 
-  // getSignatory() {
-  //   this.backendSrv.get(`http://localhost:8080/api/authorizedSignatories/`).then(result => {
-  //     this.authorizedSignatories = result;
-  //     console.log('authorised', this.authorizedSignatories);
-  //   });
-  // }
+  getSignatory() {
+    this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/`).then(result => {
+      this.authorizedSignatories = result;
+    });
+  }
 
   showSignatoryModal() {
-    const text = 'Do you want to delete the ';
+    const text = 'Add New';
 
     appEvents.emit('signatory-modal', {
       text: text,
       icon: 'fa-trash',
+      onCreate: (signatoryForm, authorizedSignatory) => {
+        this.$scope.signatoryForm = signatoryForm;
+        this.$scope.authorizedSignatory = authorizedSignatory;
+        this.$scope.createSignatory();
+      },
     });
   }
   showBankModal() {
-    const text = 'Do you want to delete the ';
+    const text = 'Add New';
 
     appEvents.emit('bank-modal', {
       text: text,

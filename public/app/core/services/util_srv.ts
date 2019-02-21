@@ -164,6 +164,10 @@ export class UtilSrv {
   signatoryModal(payload) {
     const scope = this.$rootScope.$new();
 
+    scope.createSignatory = () => {
+      payload.onCreate(scope.signatoryForm, scope.authorizedSignatory);
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/legalentities/partials/signatory_modal.html',
       scope: scope,
@@ -174,7 +178,7 @@ export class UtilSrv {
   bankModal(payload) {
     const scope = this.$rootScope.$new();
 
-    scope.create = () => {
+    scope.createBank = () => {
       payload.onCreate(scope.bankForm, scope.bankAccount);
     };
 
