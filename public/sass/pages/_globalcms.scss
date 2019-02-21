@@ -114,10 +114,10 @@ table#academic {
   }
   td,
   th {
-    width: auto;
     background: white;
-    color: #cccccc;
-    font-size: 10px;
+    color: gray;
+    font-size: 13px;
+    border: 1px solid gray;
   }
   span {
     margin-right: 10px;
@@ -136,12 +136,12 @@ table#academic {
   td:first-child {
     padding-right: 4rem !important;
   }
-  td:nth-child(4) {
-    padding-right: 3rem !important;
-  }
-  td:last-child {
-    padding-right: 3rem !important;
-  }
+  // td:nth-child(4) {
+  //   padding-right: 3rem !important;
+  // }
+  // td:last-child {
+  //   padding-right: 3rem !important;
+  // }
 }
 .wauto {
   width: auto;
@@ -682,4 +682,30 @@ table#tmtd {
 
 .ICICI {
   background-color: #922827;
+}
+
+.ysideone {
+  grid-area: sidebar;
+}
+
+.ysidetwo {
+  grid-area: content;
+}
+
+.yheader {
+  grid-area: header;
+}
+
+.yfooter {
+  grid-area: footer;
+}
+
+.yeargrid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-areas:
+    'yheader  yheader yheader yheader'
+    'ysideone ysideone ysidetwo ysidetwo'
+    'yfooter  yfooter  yfooter yfooter';
 }

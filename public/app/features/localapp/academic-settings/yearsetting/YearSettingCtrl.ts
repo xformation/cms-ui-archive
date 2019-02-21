@@ -1,3 +1,5 @@
+import { appEvents } from 'app/core/core';
+
 export class YearSettingCtrl {
   holidays: any;
   terms: any;
@@ -49,6 +51,20 @@ export class YearSettingCtrl {
   getTerms() {
     this.backendSrv.get(`http://localhost:8080/api/terms/`).then(result => {
       this.terms = result;
+    });
+  }
+
+  showModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('year-modal', {
+      text: text,
+      icon: 'fa-trash',
+      onCreate: (yearForm, academicYear) => {
+        this.$scope.yearForm = yearForm;
+        this.$scope.academicYear = academicYear;
+        this.$scope.createYear();
+      },
     });
   }
 }

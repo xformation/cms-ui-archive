@@ -24,6 +24,7 @@ export class UtilSrv {
     appEvents.on('assign-group-modal', this.assignGroupModal.bind(this), this.$rootScope);
     appEvents.on('add-user-modal', this.addUserModal.bind(this), this.$rootScope);
     appEvents.on('edit-user-modal', this.editUserModal.bind(this), this.$rootScope);
+    appEvents.on('year-modal', this.yearModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -134,6 +135,20 @@ export class UtilSrv {
       src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
       scope: scope,
       modalClass: 'branch-modal',
+    });
+  }
+
+  yearModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    scope.createYear = () => {
+      payload.onCreate(scope.yearForm, scope.academicYear);
+    };
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/academic-settings/yearsetting/partials/year_modal.html',
+      scope: scope,
+      modalClass: 'year-modal',
     });
   }
 

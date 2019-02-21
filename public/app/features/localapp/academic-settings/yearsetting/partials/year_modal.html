@@ -1,0 +1,55 @@
+<div class="add-modal-body" ng-cloak>
+	<div class="add-modal-header">
+		<h2 class="add-modal-header-title">
+			<!-- <i class="fa {{icon}}"></i> -->
+			<span class="p-l-1">
+				Add New
+			</span>
+		</h2>
+
+		<a class="add-modal-header-close" ng-click="dismiss();">
+			<i class="fa fa-remove"></i>
+		</a>
+	</div>
+
+	<div class="modal-content">
+
+		<div class="add-confirm-modal p-1">
+			<form name="branchForm" class="gf-form-group section m-0">
+				<div class="bg-modal modal-fwidth yeargrid">
+						<div class="fwidth-modal-text m-r-1 yheader">
+							<label class="gf-form-label b-0 bg-transparent">STATE ID</label>
+							<input type="number" required ng-model="branch.stateId" class="gf-form-input "
+								placeholder="name" />
+							
+						</div>
+					<div class="mdflex modal-fwidth ysideone">
+						<div class="fwidth-modal-text">
+							<label class="gf-form-label b-0 bg-transparent">CITY ID</label>
+							<input type="number" required ng-model="branch.cityId" class="gf-form-input "
+								placeholder="description" />
+						</div>
+					</div>
+					<div class="fwidth-modal-text modal-fwidth ysidetwo">
+						<label class="gf-form-label b-0 bg-transparent">BRANCH NAME</label>
+						<input type="text" required ng-model="branch.branchName" class="gf-form-input "
+							placeholder="college head" />
+					</div>					
+					<div class="m-t-1 text-center yfooter">
+						<button type="submit" ng-click="create(); dismiss();"
+							class="btn btn-success border-bottom m-r-1">Save</button>
+						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-content-confirm-text" ng-if="confirmText">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;"
+				placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+				ng-change="updateConfirmText(confirmInput)">
+		</div>
+
+	</div>
+
+</div>
