@@ -32,6 +32,14 @@ export class YearSettingCtrl {
         this.getTerms();
       });
     };
+    $scope.createYear = () => {
+      if (!$scope.yearForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/academic-years', $scope.academicYear).then(() => {
+        // this.getYears();
+      });
+    };
   }
 
   activateTab(tabIndex) {

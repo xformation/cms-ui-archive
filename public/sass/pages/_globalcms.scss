@@ -684,28 +684,49 @@ table#tmtd {
   background-color: #922827;
 }
 
-.ysideone {
-  grid-area: sidebar;
+// .ysideone {
+//   grid-area: sidebar;
+// }
+
+// .ysidetwo {
+//   grid-area: content;
+// }
+
+// .yheader {
+//   grid-area: header;
+// }
+
+// .yfooter {
+//   grid-area: footer;
+// }
+
+// .yeargrid {
+//   display: grid;
+//   grid-gap: 10px;
+//   grid-template-columns: 200px 200px 200px;
+//   grid-template-areas:
+//     'yheader  yheader yheader yheader'
+//     'ysideone ysideone ysidetwo ysidetwo'
+//     'yfooter  yfooter  yfooter yfooter';
+// }
+
+[type='date'] {
+  background: #fff url(/public/img/calendar.svg) 97% 50% no-repeat;
+}
+[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
 }
 
-.ysidetwo {
-  grid-area: content;
-}
+/* custom styles */
 
-.yheader {
-  grid-area: header;
-}
-
-.yfooter {
-  grid-area: footer;
-}
-
-.yeargrid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 200px 200px 200px;
-  grid-template-areas:
-    'yheader  yheader yheader yheader'
-    'ysideone ysideone ysidetwo ysidetwo'
-    'yfooter  yfooter  yfooter yfooter';
+input {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 190px;
 }
