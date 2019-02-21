@@ -17,12 +17,12 @@ export class LocalAppCtrl {
     this.sections.push({
       title: 'College Settings',
       id: 'college_settings',
-      description: 'General Info, Legal entities, Locations, College branches, Department settings',
+      description: 'College Info, College branches, Legal entities',
     });
     this.sections.push({
       title: 'Academic settings',
       id: 'academic_settings',
-      description: 'Year Setting, Department setup, Subject Setup, Class Setup, Timetable Setting',
+      description: 'Year Setting, Department setup, Subject Setup, Timetable Setting',
     });
 
     this.sections.push({

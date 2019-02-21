@@ -4,6 +4,53 @@
   <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Department Setup
 </h3>
 <div class="page-container page-body legal-entities-main-container">
+  <div class="authorized-signatory-container m-b-1">
+    <h3>Departments</h3>
+    <small> Create and manage departments. </small>
+  </div>
+  <div>
+    <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
+    <button ng-click="ctrl.showImportModal()" class="pull-right"><i class="fa fa-plus-circle " aria-hidden="true"></i>
+      Import
+      Departments</button>
+  </div>
+  <table class="table m-b-3">
+    <thead>
+      <th>Name</th>
+      <th>DESCRIPTION</th>
+      <th>DEPARTMENT HEAD</th>
+      <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="department in ctrl.departments">
+        <td class="width-4 text-center link-td">
+          <a ng-click="ctrl.showModal(branch)">
+            {{department.name}}
+          </a>
+        </td>
+        <td class="width-4 text-center link-td">
+          {{department.description}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{department.deptHead}}
+        </td>
+        <td class="width-4 text-center link-td">
+          <a ng-click="ctrl.deleteDepartment(department)">
+            <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
+          </a>
+          <!-- <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
+
+          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i> -->
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">Total: {{ctrl.departments.length}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <i class="fa fa-phone orange"></i>
+</div>
+<div class="page-container page-body legal-entities-main-container">
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Department Setup</h4>
     <div>

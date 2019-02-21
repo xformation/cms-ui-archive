@@ -59,35 +59,42 @@
   <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
   <table class="table m-b-3">
     <thead>
+      <th>State</th>
+      <th>City</th>
       <th>Branch Name</th>
-      <th>Description</th>
-      <th>College head</th>
+      <th>Address</th>
+      <th>Branch Head</th>
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
       <tr ng-repeat="branch in ctrl.branches">
         <td class="width-4 text-center link-td">
-          <a ng-click="ctrl.showModal(branch)">
-            {{branch.branchName}}
-          </a>
+          {{branch.stateId}}
         </td>
         <td class="width-4 text-center link-td">
-          {{branch.description}}
+          {{branch.cityId}}
         </td>
         <td class="width-4 text-center link-td">
-          {{branch.collegeHead}}
+          {{branch.branchName}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{branch.address1}} {{branch.address2}}
+        </td>
+        <td class="width-4 text-center link-td">
+          {{branch.branchHead}}
         </td>
         <td class="width-4 text-center link-td">
           <a ng-click="ctrl.deleteBranch(branch)">
             <i class="fa fa-trash-o fa-1-5x table-p" aria-hidden="true"></i>
           </a>
-          <!-- <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
-
-          <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i> -->
+          <a ng-click="ctrl.showModal(branch)">
+            <i class="fa fa-pencil-square-o fa-1-5x" aria-hidden="true"></i>
+          </a>
+          <!-- <i class="fa fa-user fa-1-5x table-p" aria-hidden="true"></i> -->
         </td>
       </tr>
       <tr>
-        <td colspan="4">Total: {{ctrl.branches.length}}</td>
+        <td class="text-align" colspan="6">Total: {{ctrl.branches.length}}</td>
       </tr>
     </tbody>
   </table>

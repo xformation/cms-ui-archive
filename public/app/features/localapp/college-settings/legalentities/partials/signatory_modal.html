@@ -18,57 +18,81 @@
 			<form name="signatoryForm" class="gf-form-group m-0">
 				<div class="bg-modal">
 					<div class="mdflex">
-						<div class="m-b-1">
+						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY NAME</label>
-							<input type="text" required ng-model="authorizedSignatory.signatoryName" class="gf-form-input" placeholder="name" />
+							<input type="text" required ng-model="authorizedSignatory.signatoryName"
+								class="gf-form-input" placeholder="name" />
 						</div>
-						<div class="m-b-1">
+						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY FATHER NAME</label>
-							<input type="text" required ng-model="authorizedSignatory.signatoryFatherName" class="gf-form-input" placeholder="father name" />
+							<input type="text" required ng-model="authorizedSignatory.signatoryFatherName"
+								class="gf-form-input" placeholder="father name" />
 						</div>
-						<div class="m-b-1">
+						<div class="modal-fwidth modal-text">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY DESIGNATION</label>
-							<input type="text" required ng-model="authorizedSignatory.signatoryDesignation" class="gf-form-input"
-							 placeholder="designation" />
+							<input type="text" required ng-model="authorizedSignatory.signatoryDesignation"
+								class="gf-form-input" placeholder="designation" />
 						</div>
 					</div>
 					<div class="fwidth-signatory-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">ADDRESS</label>
-						<input type="text" required ng-model="authorizedSignatory.address" class="gf-form-input m-b-1" placeholder="" />
-						<input type="text" class="gf-form-input m-b-1" placeholder="" />
+						<input type="text" required ng-model="authorizedSignatory.address1" class="gf-form-input m-b-1"
+							placeholder="" />
+						<input type="text" ng-model="authorizedSignatory.address2" class="gf-form-input m-b-1"
+							placeholder="" />
 					</div>
 					<div class="mdflex">
-						<div class="m-b-1">
-							<input type="text" class="gf-form-input" placeholder="" />
+						<div class="modal-fwidth modal-text m-r-1">
+							<input type="text" ng-model="authorizedSignatory.address3" class="gf-form-input"
+								placeholder="" />
 						</div>
-						<div class="m-b-1">
-							<input type="text" class="gf-form-input" placeholder="" />
+						<div class="modal-fwidth modal-text m-r-1">
+							<input type="text" ng-model="authorizedSignatory.address4" class="gf-form-input"
+								placeholder="" />
 						</div>
-						<div class="m-b-1">
-							<input type="text" class="gf-form-input" placeholder="" />
+						<div class="modal-fwidth modal-text m-r-1">
+							<input type="text" ng-model="authorizedSignatory.address5" class="gf-form-input"
+								placeholder="" />
 						</div>
 					</div>
 					<div class="mdflex">
-						<div class="modal-fwidth m-r-3 m-b-1">
+						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">EMAIL</label>
-							<input type="text" required ng-model="authorizedSignatory.email" class="gf-form-input" placeholder="email" />
+							<input type="text" required ng-model="authorizedSignatory.email" class="gf-form-input"
+								placeholder="email" />
 						</div>
-						<div class="modal-fwidth m-b-1">
+						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">PAN CARD NUMBER</label>
-							<input type="text" required ng-model="authorizedSignatory.panCardNumber" class="gf-form-input" placeholder="pan number" />
+							<input type="text" required ng-model="authorizedSignatory.panCardNumber"
+								class="gf-form-input" placeholder="pan number" />
 						</div>
 					</div>
-					<div class="gf-form-button-row p-r-0">
-						<button type="submit" ng-click="createSignatory()" class="btn btn-success border-bottom">Save</button>
-						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom m-r-0">Cancel</button>
+					<!-- <div class="mdflex m-b-1">
+						<div class="modal-fwidth modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">COLLEGE ID</label>
+							<input type="text" required ng-model="authorizedSignatory.collegeId" class="gf-form-input"
+								placeholder="college id" />
+						</div>
+						<div class="modal-fwidth modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">BRANCH ID</label>
+							<input type="text" required ng-model="authorizedSignatory.branchId" class="gf-form-input"
+								placeholder="branch number" />
+						</div>
+					</div> -->
+					<div class="m-t-1 text-center">
+						<button type="submit" ng-click="createSignatory();"
+							class="btn btn-success border-bottom m-r-1">Save</button>
+						<button ng-click="dismiss()" type="reset"
+							class="btn btn-danger border-bottom m-r-0">Cancel</button>
 					</div>
 				</div>
 			</form>
 		</div>
 
 		<div class="modal-content-confirm-text" ng-if="confirmText">
-			<input type="text" class="gf-form-input width-16" style="display: inline-block;" placeholder="Type {{confirmText}} to confirm"
-			 ng-model="confirmInput" ng-change="updateConfirmText(confirmInput)">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;"
+				placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+				ng-change="updateConfirmText(confirmInput)">
 		</div>
 
 	</div>

@@ -16,21 +16,55 @@
 
 		<div class="add-confirm-modal p-1">
 			<form name="branchForm" class="gf-form-group section m-0 dflex">
-				<div class="bg-modal">
-					<div class="fwidth-modal-text">
-						<label class="gf-form-label b-0 bg-transparent">NAME</label>
-						<input type="text" required ng-model="branch.branchName" class="gf-form-input " placeholder="name" />
+				<div class="bg-modal modal-fwidth">
+					<div class="mdflex modal-fwidth">
+						<div class="fwidth-modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">STATE ID</label>
+							<input type="number" required ng-model="branch.stateId" class="gf-form-input "
+								placeholder="name" />
+							<!-- <select type="text" ng-model="branch.stateName" class="gf-form-input width-10"
+								ng-options="stateName as branch.stateName for branch in ctrl.branches"></select> -->
+						</div>
+						<div class="fwidth-modal-text">
+							<label class="gf-form-label b-0 bg-transparent">CITY ID</label>
+							<input type="number" required ng-model="branch.cityId" class="gf-form-input "
+								placeholder="description" />
+						</div>
 					</div>
-					<div class="fwidth-modal-text">
-						<label class="gf-form-label b-0 bg-transparent">DESCRIPTION</label>
-						<input type="text" required ng-model="branch.description" class="gf-form-input " placeholder="description" />
+					<div class="fwidth-modal-text modal-fwidth">
+						<label class="gf-form-label b-0 bg-transparent">BRANCH NAME</label>
+						<input type="text" required ng-model="branch.branchName" class="gf-form-input "
+							placeholder="college head" />
 					</div>
-					<div class="fwidth-modal-text">
-						<label class="gf-form-label b-0 bg-transparent">COLLEGE HEAD</label>
-						<input type="text" required ng-model="branch.collegeHead" class="gf-form-input " placeholder="college head" />
+
+					<div class="mdflex modal-fwidth">
+						<div class="fwidth-modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">ADDRESS</label>
+							<input type="text" required ng-model="branch.address1" class="gf-form-input "
+								placeholder="address line 2" />
+						</div>
+						<div class="fwidth-modal-text">
+							<label class="gf-form-label b-0 bg-transparent"></label>
+							<input type="text" required ng-model="branch.address2" class="gf-form-input "
+								placeholder="addresss line 1" />
+						</div>
+
 					</div>
-					<div class="gf-form-button-row p-r-4">
-						<button type="submit" ng-click="create(); dismiss();" class="btn btn-success border-bottom">Save</button>
+					<div class="mdflex modal-fwidth">
+						<div class="fwidth-modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">BRANCH HEAD</label>
+							<input type="text" required ng-model="branch.branchHead" class="gf-form-input "
+								placeholder="college head" />
+						</div>
+						<div class="fwidth-modal-text">
+							<label class="gf-form-label b-0 bg-transparent">COLLEGE ID</label>
+							<input type="number" required ng-model="branch.collegeId" class="gf-form-input "
+								placeholder="description" />
+						</div>
+					</div>
+					<div class="m-t-1 text-center">
+						<button type="submit" ng-click="create(); dismiss();"
+							class="btn btn-success border-bottom m-r-1">Save</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>
@@ -38,8 +72,9 @@
 		</div>
 
 		<div class="modal-content-confirm-text" ng-if="confirmText">
-			<input type="text" class="gf-form-input width-16" style="display: inline-block;" placeholder="Type {{confirmText}} to confirm"
-			 ng-model="confirmInput" ng-change="updateConfirmText(confirmInput)">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;"
+				placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+				ng-change="updateConfirmText(confirmInput)">
 		</div>
 
 	</div>

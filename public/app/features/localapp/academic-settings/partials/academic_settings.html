@@ -8,10 +8,19 @@
     <div class="clearfix"></div>
   </div>
   <div class="tab-content">
-    <div ng-class="{'hide':ctrl.activeTabId !== 'year_setting'}"><year-setting><year-setting/></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'department_setup'}"><department-setup></department-setup></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'subject_setup'}"><subject-setup></subject-setup></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'class_setup'}"><class-setup></class-setup></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'timetable_setting'}"><timetable-setting></timetable-setting></div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'year_setting'}">
+      <year-setting>
+        <year-setting />
+    </div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'department_setup'}">
+      <department-setup></department-setup>
+    </div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'subject_setup'}">
+      <subject-setup></subject-setup>
+    </div>
+    <!-- <div ng-class="{'hide':ctrl.activeTabId !== 'class_setup'}"><class-setup></class-setup></div> -->
+    <div ng-class="{'hide':ctrl.activeTabId !== 'timetable_setting'}">
+      <timetable-setting></timetable-setting>
+    </div>
   </div>
 </div>
