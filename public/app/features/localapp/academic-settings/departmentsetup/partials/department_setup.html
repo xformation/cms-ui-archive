@@ -6,7 +6,7 @@
 <div class="page-container page-body legal-entities-main-container">
   <div class="authorized-signatory-container m-b-1">
     <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-      <h4 class="ptl-06">Academic Year</h4>
+      <h4 class="ptl-06">Departments</h4>
       <div>
         <a class="btn btn-primary" style="width: 150px;" ng-click="ctrl.showModal()">
           Add Department</a>
@@ -22,25 +22,24 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr ng-repeat="academicYear in ctrl.academicYears">
+        <tr ng-repeat="department in ctrl.departments">
           <td>{{department.name}}
           </td>
           <td>
             {{department.deptHead}}
           </td>
           <td>
-            {{department.collgeBranch}}
+            {{department.branchId}}
           </td>
           <td>
-            {{department.academicYear}}
+            {{department.academicyearId}}
           </td>
           <td>
-            {{department.comments}}
+            {{department.description}}
           </td>
           <td>
             <a><i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i></a>
-            <a ng-click="ctrl.deleteAcademicYear(academicYear)"><i class="fa fa-trash-o fa-2x"
-                aria-hidden="true"></i></a>
+            <a ng-click="ctrl.deleteDepartment(department)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
           </td>
         </tr>
       </tbody>
