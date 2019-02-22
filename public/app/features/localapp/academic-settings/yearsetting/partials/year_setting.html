@@ -6,12 +6,12 @@
 <div class="page-container page-body legal-entities-main-container">
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
     <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-    <h4 class="ptl-06">Academic Year</h4>
-    <div>
-      <a class="btn btn-primary" style="width: 180px;" ng-click="ctrl.showModal()">
-        Add Academic Year</a>
+      <h4 class="ptl-06">Academic Year</h4>
+      <div>
+        <a class="btn btn-primary" style="width: 150px;" ng-click="ctrl.showModal()">
+          Add Academic Year</a>
+      </div>
     </div>
-  </div>
     <table id="academic" class="fwidth">
       <thead>
         <th>Year</th>
@@ -22,47 +22,35 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr>
-          <td>2018-2019</td>
-          <td>            
-            2019-08-15            
+        <tr ng-repeat="academicYear in ctrl.academicYears">
+          <td>{{academicYear.year}}</td>
+          <td>
+            {{academicYear.startDate}}
           </td>
-          <td>          
-            2019-08-15            
+          <td>
+            {{academicYear.endDate}}
           </td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
           <td>
-            <i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i>
-            <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+            <a><i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i></a>
+            <a ng-click="ctrl.deleteAcademicYear(academicYear)"><i class="fa fa-trash-o fa-2x"
+                aria-hidden="true"></i></a>
           </td>
         </tr>
-        <!-- <tr>
-          <td>2019-2020</td>
-          <td>
-            <label for="" class="yflex">
-              <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2019-08-09" />
-              <i class="fa fa-calendar-o" aria-hidden="true"></i>
-            </label>
-          </td>
-          <td>
-            <label for="" class="yflex">
-              <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2020-08-09" />
-              <i class="fa fa-calendar-o" aria-hidden="true"></i>
-            </label>
-          </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
-        </tr> -->
       </tbody>
     </table>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
     <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
       <h4 class="ptl-06">Academic Year</h4>
-      <div>
+      <div ng-class="{'hide':ctrl.activeBtnIndex === 2}">
         <a class="btn btn-primary" ng-click="ctrl.activateBtn(1)">Add Holiday</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+      </div>
+      <div ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
         <a class="btn btn-primary" ng-click="createHoliday(); ctrl.activateBtn(0)">Save</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
       </div>
     </div>
 
@@ -87,8 +75,9 @@
             {{ holiday.holidayDate }}
           </td>
           <td>
-            {{ holiday.holidayStatus }}
-            <label class="switch"> <input type="checkbox" checked /> <span class="slider"></span> </label>
+            <label class="switch"> <input disabled type="checkbox" ng-model="holiday.holidayStatus"
+                ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" /> <span class="slider disabledCursor"></span>
+            </label>
           </td>
         </tr>
         <form name="holidayForm">
@@ -102,12 +91,8 @@
             </td>
             <td>
               <label class="switch">
-                <input
-                  type="checkbox"
-                  ng-model="holiday.holidayStatus"
-                  ng-true-value="'ACTIVE'"
-                  ng-false-value="'DEACTIVE'"
-                />
+                <input type="checkbox" ng-model="holiday.holidayStatus" ng-true-value="'ACTIVE'"
+                  ng-false-value="'DEACTIVE'" />
                 <span class="slider"></span>
               </label>
             </td>
@@ -122,9 +107,13 @@
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
     <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
       <h4 class="ptl-06">Academic Year</h4>
-      <div>
+      <div ng-class="{'hide':ctrl.activeBtnIndex === 2}">
         <a class="btn btn-primary" ng-click="ctrl.activateBtn(2)">Add Term</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+      </div>
+      <div ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
         <a class="btn btn-primary" ng-click="createTerm(); ctrl.activateBtn(0)">Save</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
       </div>
     </div>
 
@@ -154,8 +143,9 @@
           </td>
           <td>
             <label class="switch">
-              <input type="checkbox" ng-model="term.termStatus" ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" />
-              <span class="slider"></span>
+              <input type="checkbox" disabled ng-model="term.termStatus" ng-true-value="'ACTIVE'"
+                ng-false-value="'DEACTIVE'" />
+              <span class="slider disabledCursor"></span>
             </label>
           </td>
         </tr>
@@ -173,12 +163,8 @@
             </td>
             <td>
               <label class="switch">
-                <input
-                  type="checkbox"
-                  ng-model="term.termStatus"
-                  ng-true-value="'ACTIVE'"
-                  ng-false-value="'DEACTIVE'"
-                />
+                <input type="checkbox" ng-model="term.termStatus" ng-true-value="'ACTIVE'"
+                  ng-false-value="'DEACTIVE'" />
                 <span class="slider"></span>
               </label>
             </td>

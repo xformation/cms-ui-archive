@@ -1,6 +1,7 @@
 import { appEvents } from 'app/core/core';
 
 export class YearSettingCtrl {
+  academicYears: any;
   holidays: any;
   terms: any;
   navModel: any;
@@ -14,6 +15,7 @@ export class YearSettingCtrl {
     this.$scope = $scope;
     this.getHolidays();
     this.getTerms();
+    this.getYears();
     $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
     $scope.createHoliday = () => {
       if (!$scope.holidayForm.$valid) {
@@ -37,7 +39,7 @@ export class YearSettingCtrl {
         return;
       }
       backendSrv.post('http://localhost:8080/api/academic-years', $scope.academicYear).then(() => {
-        // this.getYears();
+        this.getYears();
       });
     };
   }
@@ -62,6 +64,12 @@ export class YearSettingCtrl {
     });
   }
 
+  getYears() {
+    this.backendSrv.get(`http://localhost:8080/api/academic-years/`).then(result => {
+      this.academicYears = result;
+    });
+  }
+
   showModal() {
     const text = 'Do you want to delete the ';
 
@@ -72,6 +80,20 @@ export class YearSettingCtrl {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
         this.$scope.createYear();
+      },
+    });
+  }
+
+  deleteAcademicYear(academicYear) {
+    appEvents.emit('confirm-modal', {
+      title: 'Delete',
+      text: 'Do you want to delete ' + academicYear.name + '?',
+      icon: 'fa-trash',
+      yesText: 'Delete',
+      onConfirm: () => {
+        this.backendSrv.delete('http://localhost:8080/api/academic-years/' + academicYear.id).then(() => {
+          this.getYears();
+        });
       },
     });
   }

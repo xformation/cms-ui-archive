@@ -160,7 +160,7 @@ export class UtilSrv {
     };
 
     appEvents.emit('show-modal', {
-      src: 'public/app/features/localapp/college-settings/departmentsettings/partials/department_modal.html',
+      src: 'public/app/features/localapp/academic-settings/departmentsetup/partials/department_modal.html',
       scope: scope,
       modalClass: 'department-modal',
     });
