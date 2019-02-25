@@ -1,3 +1,80 @@
-<div>
-  Staff List is working!
+<h3 class="bg-heading p-5">
+  <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Staff Setup
+</h3>
+<div class="page-container page-body legal-entities-main-container">
+  <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+    <h4 class="ptl-06">Class Setup</h4>
+    <div>
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(1)"> Add Class</a>
+      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+    </div>
+  </div>
+
+  <div class="staff-management">
+    <div>
+      <label htmlFor="">Department</label>
+      <select>
+        <option value="">Computer Science</option>
+        <option value="">Electric Engineering</option>
+        <option value="">Petroleum Engineering</option>
+        <option value="">Electronic Engineering</option>
+      </select>
+    </div>
+    <div>
+      <label htmlFor="">Subject</label>
+      <select>
+        <option value="">First Year</option>
+        <option value="">Second Year</option>
+        <option value="">Third Year</option>
+        <option value="">Fourth Year</option>
+      </select>
+    </div>
+    <div>
+      <label htmlFor="">Gender</label>
+      <select>
+        <option value="">Male</option>
+        <option value="">Female</option>
+      </select>
+    </div>
+    <div>
+      <label htmlFor="">Staff Type</label>
+      <select>
+        <option value="">Scholarship</option>
+        <option value="">Management</option>
+      </select>
+    </div>
+    <div class="margin-bott">
+      <label htmlFor="">Search</label>
+      <input type="search" name="" id="" />
+    </div>
+  </div>
+
+  <table class="staff-management-table">
+    <thead>
+      <th><input type="checkbox" name="" id="" /></th>
+      <th>Name</th>
+      <th>Emp Id</th>
+      <th>Designation</th>
+      <th>Department</th>
+      <th>Gender</th>
+      <th>Type</th>
+      <th>Subjects</th>
+      <th>status</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox" name="" id="" /></td>
+        <td>
+          Staff Name
+        </td>
+        <td>1234</td>
+        <td>teacher</td>
+        <td>cse</td>
+        <td>Male</td>
+        <td>Day Scholar</td>
+        <td>Operating system</td>
+        <td>Present</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
