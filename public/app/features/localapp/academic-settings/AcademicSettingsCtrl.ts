@@ -17,6 +17,10 @@ export class AcademicSettingsCtrl {
       id: 'department_setup',
     });
     this.sections.push({
+      title: 'STAFF SETUP',
+      id: 'staff_setup',
+    });
+    this.sections.push({
       title: 'SUBJECT SETUP',
       id: 'subject_setup',
     });
