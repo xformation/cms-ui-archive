@@ -5,6 +5,7 @@ export function classSetup() {
   return {
     restrict: 'E',
     templateUrl: 'public/app/features/localapp/academic-settings/classetup/partials/class_setup.html',
+    styleUrls: ['public/app/features/localapp/academic-settings/classetup/partials/class_setup.scss'],
     controller: ClassSetupCtrl,
     bindToController: true,
     controllerAs: 'ctrl',
