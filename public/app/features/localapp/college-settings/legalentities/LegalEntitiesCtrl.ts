@@ -3,6 +3,7 @@ import { appEvents } from 'app/core/core';
 export class LegalEntitiesCtrl {
   bankAccounts: any;
   authorizedSignatories: any;
+  legalEntities: any;
   navModel: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo.png';
@@ -34,6 +35,16 @@ export class LegalEntitiesCtrl {
         console.log('Authorised:', this.authorizedSignatories);
       });
     };
+
+    $scope.createLegalEntity = () => {
+      console.log('Legal:', this.legalEntities);
+      if (!$scope.legalForm.$valid) {
+        return;
+      }
+      backendSrv.post('http://localhost:8080/api/legal-entities/', $scope.legalEntity).then(() => {
+        console.log('Legal:', this.legalEntities);
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -62,6 +73,12 @@ export class LegalEntitiesCtrl {
   getSignatory() {
     this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/`).then(result => {
       this.authorizedSignatories = result;
+    });
+  }
+
+  getLegalEntity() {
+    this.backendSrv.get(`http://localhost:8080/api/legal-entities/`).then(result => {
+      this.legalEntities = result;
     });
   }
 
