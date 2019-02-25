@@ -24,10 +24,10 @@ export class CollegeSettingsCtrl {
     //   title: 'LOCATIONS',
     //   id: 'locations',
     // });
-    this.sections.push({
-      title: 'DEPARTMENTS',
-      id: 'department_settings',
-    });
+    // this.sections.push({
+    //   title: 'DEPARTMENTS',
+    //   id: 'department_settings',
+    // });
   }
 
   setActiveTab(id) {

@@ -8,10 +8,16 @@
     <div class="clearfix"></div>
   </div>
   <div class="tab-content">
-    <div ng-class="{'hide':ctrl.activeTabId !== 'general_info'}"><general-info></general-info></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'legal_entities'}"><legal-entities></legal-entities></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'locations'}"><locations></locations></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'college_branches'}"><college></college></div>
-    <div ng-class="{'hide':ctrl.activeTabId !== 'department_settings'}"><department></department></div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'general_info'}">
+      <general-info></general-info>
+    </div>
+    <div ng-class="{'hide':ctrl.activeTabId !== 'legal_entities'}" class="p-b-2">
+      <legal-entities></legal-entities>
+    </div>
+    <!-- <div ng-class="{'hide':ctrl.activeTabId !== 'locations'}"><locations></locations></div> -->
+    <div ng-class="{'hide':ctrl.activeTabId !== 'college_branches'}">
+      <college></college>
+    </div>
+    <!-- <div ng-class="{'hide':ctrl.activeTabId !== 'department_settings'}"><department></department></div> -->
   </div>
 </div>
