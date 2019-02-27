@@ -905,7 +905,7 @@ h5 {
   .fh {
     display: flex;
     h5 {
-      width: 12rem;
+      width: 10.3 rem;
     }
     h5:last-child {
       color: #111111 !important;
@@ -930,4 +930,15 @@ h5 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.hflex {
+  display: flex;
+  justify-content: space-between;
+}
+.pdn-1 {
+  padding: 1px;
+}
+.hflex > h4 {
+  flex-grow: 1;
+}
+
 // Staff Management

@@ -1,234 +1,189 @@
-<section class="plugin-bg-white">
-    <h3 class="bg-heading p-1">
-      <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true" /> Admin
-      - Staff Management
-    </h3>
-    <div class="hflex bg-heading mt-3 mr-18 ml-18">
-      <h4>Staff Profile</h4>
-      <div class="hhflex">
-        <!-- {/* <Link to={`/plugins/xformation-petclinic-panel/page/students`}>Save </Link> */} -->
-      </div>
-  </div>
+<!-- <div class="plugin-bg-white pdn-1">
+  </div> -->
+  <form name="teacherForm">
   <div class="grid">
     <div class="leftbar">
       <img src="/public/img/cubes.png" alt="" />
       <div class="form-justify">
-        <label htmlFor="">*Admission No:</label>
-        <input class="border-plugin input-width" type="text" />
+        <label htmlFor="">*Employee Id:</label>
+        <input ng-model="teacher.employeeId" class="border-plugin input-width" type="number" />
       </div>
       <div class="form-justify">
-        <label htmlFor="">*Student Id:</label>
-        <input class="border-plugin input-width" type="text" />
+        <label htmlFor="">*Designation:</label>
+        <input ng-model="teacher.designation" class="border-plugin input-width" type="text" />
       </div>
       <div class="form-justify">
-        <label htmlFor="">*Department:</label>
-        <select name="" id="" class="input-width">
-          <option value="">ECE</option>
-          <option value="">EEE</option>
-          <option value="">CSE</option>
-        </select>
+        <label htmlFor="">*Staff Type:</label>
+        <input ng-model="teacher.staffType" class="border-plugin input-width" type="text" />
       </div>
       <div class="form-justify">
-          <label htmlFor="">*Year:</label>
-          <select name="" id="" class="input-width">
-            <option value="">Year 1</option>
-            <option value="">Year 2</option>
-            <option value="">Year 3</option>
-            <option value="">Year 4</option>
-          </select>
+          <label htmlFor="">*Department:</label>
+          <input ng-model="teacher.departmentId" class="border-plugin input-width" type="number" />
         </div>
         <div class="form-justify">
-          <label htmlFor="">*Semester:</label>
-          <select name="" id="" class="input-width">
-            <option value="">Sem 1</option>
-            <option value="">Sem 2</option>
-            <option value="">Sem 3</option>
-            <option value="">Sem 4</option>
-          </select>
-        </div>
-        <div class="form-justify">
-          <label htmlFor="">*Section:</label>
-          <select name="" id="" class="input-width">
-            <option value="">Sec 1</option>
-            <option value="">Sec 2</option>
-            <option value="">Sec 3</option>
-            <option value="">Sec 4</option>
-          </select>
-        </div>
-        <div class="form-justify">
-          <label htmlFor="">Student Type:</label>
-          <select name="" id="" class="input-width">
-            <option value="">cse</option>
-            <option value="">Civil engineers</option>
-            <option value="">petro engineers</option>
-          </select>
+          <label htmlFor="">*Branch:</label>
+          <input ng-model="teacher.branchId" class="border-plugin input-width" type="number" />
         </div>
       </div>
       <div class="rightbar">
         <h3 class="bg-heading p-1 b-1">Personal Details</h3>
-        <form action="" class="form-grid">
+        <div class="form-grid">
           <div>
             <label htmlFor="">Name*</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.teacherName" class="border-plugin fwidth" type="text" />
           </div>
           <div>
             <label htmlFor="">Middle Name*</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.teacherMiddleName" class="border-plugin fwidth" type="text" />
           </div>
           <div>
          <label htmlFor="">Last Name*</label>
-         <input class="border-plugin fwidth" type="text" />
+         <input ng-model="teacher.teacherLastName" class="border-plugin fwidth" type="text" />
        </div>
        <div>
          <label htmlFor="">Father Name*</label>
-         <input class="border-plugin fwidth" type="text" />
+         <input ng-model="teacher.fatherName" class="border-plugin fwidth" type="text" />
        </div>
        <div>
          <label htmlFor="">Father Middle Name*</label>
-         <input class="border-plugin fwidth" type="text" />
+         <input ng-model="teacher.fatherMiddleName" class="border-plugin fwidth" type="text" />
        </div>
        <div>
          <label htmlFor="">Father Last Name*</label>
-         <input class="border-plugin fwidth" type="text" />
+         <input ng-model="teacher.fatherLastName" class="border-plugin fwidth" type="text" />
        </div>
        <div>
          <label htmlFor="">Mother Name*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.motherName" class="border-plugin fwidth" type="text" />
        </div>
           <div>
            <label htmlFor="">Mother Middle Name*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.motherMiddleName" class="border-plugin fwidth" type="text" />
       </div>
     <div>
       <label htmlFor="">Mother Last Name*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.motherLastName" class="border-plugin fwidth" type="text" />
     </div>
  <div>
      <label htmlFor="">Adhar No*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.aadharNo" class="border-plugin fwidth" type="number" />
     </div>
     <div>
       <label htmlFor="">Date Of Birth*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.dateOfBirth" class="border-plugin fwidth" type="date" />
     </div>
     <div>
       <label htmlFor="">Place Of Birth*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.placeOfBirth" class="border-plugin fwidth" type="text" />
     </div>
     <div>
       <label htmlFor="">Religion*</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.religion" class="border-plugin fwidth" type="text" />
       </div>
     <div>
          <label htmlFor="">Cast*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.caste" class="border-plugin fwidth" type="text" />
          </div>
          <div>
            <label htmlFor="">Subcasat*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.subCaste" class="border-plugin fwidth" type="text" />
          </div>
          <div>
            <label htmlFor="">Age*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.age" class="border-plugin fwidth" type="number" />
          </div>
          <div>
            <label htmlFor="">Sex*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.sex" class="border-plugin fwidth" type="text" />
          </div>
          <div>
            <label htmlFor="">Blood Group*</label>
-           <input class="border-plugin fwidth" type="text" />
+           <input ng-model="teacher.bloodGroup" class="border-plugin fwidth" type="text" />
          </div>
-       </form>
+       </div>
 
      <h3 class="bg-heading p-1 b-1">Contact Details</h3>
-     <form action="" class="form-grid">
+     <div class="form-grid">
     <div>
       <label htmlFor="">Address Line 1*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.addressLineOne" class="border-plugin fwidth" type="text" />
     </div>
     <div>
       <label htmlFor="">Address Line 2</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.addressLineTwo" class="border-plugin fwidth" type="text" />
     </div>
     <div>
       <label htmlFor="">Town*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.town" class="border-plugin fwidth" type="text" />
     </div>
     <div>
       <label htmlFor="">State*</label>
-      <input class="border-plugin fwidth" type="text" />
+      <input ng-model="teacher.state" class="border-plugin fwidth" type="text" />
     </div>
     <div>
       <label htmlFor="">Country*</label>
-        <input class="border-plugin fwidth" type="text" />
+        <input ng-model="teacher.country" class="border-plugin fwidth" type="text" />
     </div>
           <div>
         <label htmlFor="">Pin Code*</label>
-        <input class="border-plugin fwidth" type="text" />
+        <input ng-model="teacher.pincode" class="border-plugin fwidth" type="number" />
           </div>
           <div>
             <label htmlFor="">Contact Number*</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.teacherContactNumber" class="border-plugin fwidth" type="number" />
           </div>
           <div>
             <label htmlFor="">Alternate Contact Number 1</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.alternateContactNumber" class="border-plugin fwidth" type="number" />
           </div>
           <br />
           <div>
             <label htmlFor="">Email Address*</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.teacherEmailAddress" class="border-plugin fwidth" type="text" />
           </div>
            <div>
             <label htmlFor="">Alternate Email Address</label>
-            <input class="border-plugin fwidth" type="text" />
+            <input ng-model="teacher.alternateEmailAddress" class="border-plugin fwidth" type="text" />
           </div>
-        </form>
+        </div>
          <h3 class="bg-heading p-1 b-1">Primary And Emergency contact Details</h3>
-        <form action="">
+        <div>
           <div class="reln">
             <label htmlFor="">Relation with Student*</label>
-            <select name="" id="">
-              <option value="">Father</option>
-              <option value="">Mother</option>
-            </select>
+            <input ng-model="teacher.relationWithStaff" class="border-plugin input-width" type="text" />
           </div>
           <div class="form-grid">
             <div>
               <label htmlFor="">Name*</label>
-              <input class="border-plugin fwidth" type="text" />
+              <input ng-model="teacher.name"class="border-plugin fwidth" type="text" />
             </div>
             <div>
               <label htmlFor="">Middle Name*</label>
-              <input class="border-plugin fwidth" type="text" />
+              <input ng-model="teacher.middleName" class="border-plugin fwidth" type="text" />
             </div>
             <div>
               <label htmlFor="">Last Name*</label>
-              <input class="border-plugin fwidth" type="text" />
+              <input ng-model="teacher.lastName" class="border-plugin fwidth" type="text" />
             </div>
             <div>
               <label htmlFor="">Contact Number*</label>
-              <input class="border-plugin fwidth" type="text" />
+              <input ng-model="teacher.contactNo" class="border-plugin fwidth" type="number" />
             </div>
             <div>
               <label htmlFor="">Email Address*</label>
-              <input class="border-plugin fwidth" type="text" />
+              <input ng-model="teacher.emailAddress" class="border-plugin fwidth" type="text" />
             </div>
             <div class="rel-radio">
               <label htmlFor="">Make this Primary</label>
-              <input class="border-plugin fwidth" type="radio" />
+              <input  class="border-plugin fwidth" type="radio" />
             </div>
           </div>
-        </form>
+        </div>
         <hr />
-        <form action="">
+        <div action="">
           <div class="reln">
             <label htmlFor="">Relation with Student*</label>
-            <select name="" id="">
-              <option value="">Father</option>
-              <option value="">Mother</option>
-            </select>
+            <input class="border-plugin input-width" type="text" />
           </div>
           <div class="form-grid">
             <div>
@@ -256,61 +211,12 @@
               <input class="border-plugin fwidth" type="radio" />
             </div>
           </div>
-        </form>
-        <h3 class="bg-heading p-1 b-1">Facilities</h3>
-        <form action="">
-          <div class="form-grid">
-            <div class="rel-radio">
-              <label htmlFor="">Transport</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Mess</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Gym</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Cultural Class</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Library</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Sports</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-            <div class="rel-radio">
-              <label htmlFor="">Swimming</label>
-              <input class="border-plugin fwidth" type="radio" />
-            </div>
-           <div class="rel-radio">
-             <label htmlFor="">Extra Class</label>
-             <input class="border-plugin fwidth" type="radio" />
-           </div>
-           <div class="rel-radio">
-             <label htmlFor="">Handicrafts</label>
-             <input class="border-plugin fwidth" type="radio" />
-           </div>
-           <div class="rel-radio">
-             <label htmlFor="">Add</label>
-             <input class="border-plugin fwidth" type="radio" />
-           </div>
-           <div class="rel-radio">
-             <label htmlFor="">Add</label>
-             <input class="border-plugin fwidth" type="radio" />
-           </div>
-           <div class="rel-radio">
-             <label htmlFor="">Add</label>
-             <input class="border-plugin fwidth" type="radio" />
-           </div>
-         </div>
-       </form>
+        </div>
      </div>
    </div>
+   <input ng-model="teacher.uploadPhoto" class="border-plugin fwidth" type="number" />
+   <input ng-model="teacher.addressLineThree" class="border-plugin fwidth" type="text" />
+   <button type="submit" ng-click="create();">save</button>
+  </form>
  </section>
  
