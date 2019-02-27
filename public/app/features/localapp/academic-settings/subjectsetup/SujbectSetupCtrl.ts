@@ -1,7 +1,9 @@
+import { appEvents } from 'app/core/core';
+
 export class SubjectSetupCtrl {
   subjects: any;
-  departments: any;
   teachers: any;
+  departments: any;
   batches: any;
   navModel: any;
   query: any;
@@ -30,10 +32,6 @@ export class SubjectSetupCtrl {
     this.activeTabIndex = tabIndex;
   }
 
-  abc() {
-    console.log(this.subjects);
-  }
-
   getSubjects() {
     this.backendSrv.get(`http://localhost:8080/api/subjects/`).then(result => {
       this.subjects = result;
@@ -56,6 +54,34 @@ export class SubjectSetupCtrl {
     this.backendSrv.get(`http://localhost:8080/api/batches/`).then(result => {
       this.batches = result;
       console.log('Batches', this.batches);
+    });
+  }
+
+  deleteSubject(subject) {
+    appEvents.emit('confirm-modal', {
+      title: 'Delete',
+      text: 'Do you want to delete ' + subject.name + '?',
+      icon: 'fa-trash',
+      yesText: 'Delete',
+      onConfirm: () => {
+        this.backendSrv.delete('http://localhost:8080/api/subjects/' + subject.id).then(() => {
+          this.getSubjects();
+        });
+      },
+    });
+  }
+
+  showModal() {
+    const text = 'Do you want to delete the ';
+
+    appEvents.emit('subject-modal', {
+      text: text,
+      icon: 'fa-trash',
+      onCreate: (subjectForm, subject) => {
+        this.$scope.subjectForm = subjectForm;
+        this.$scope.subject = subject;
+        this.$scope.create();
+      },
     });
   }
 }

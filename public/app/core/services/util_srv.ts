@@ -16,6 +16,7 @@ export class UtilSrv {
     appEvents.on('branch-modal', this.branchModal.bind(this), this.$rootScope);
     appEvents.on('department-modal', this.departmentModal.bind(this), this.$rootScope);
     appEvents.on('import-department-modal', this.importDepartmentModal.bind(this), this.$rootScope);
+    appEvents.on('subject-modal', this.subjectModal.bind(this), this.$rootScope);
     appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
     appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
     appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
@@ -163,6 +164,19 @@ export class UtilSrv {
       src: 'public/app/features/localapp/academic-settings/departmentsetup/partials/department_modal.html',
       scope: scope,
       modalClass: 'department-modal',
+    });
+  }
+  subjectModal(payload) {
+    const scope = this.$rootScope.$new();
+
+    scope.create = () => {
+      payload.onCreate(scope.subjectForm, scope.subject);
+    };
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/academic-settings/subjectsetup/partials/subject_modal.html',
+      scope: scope,
+      modalClass: 'subject-modal',
     });
   }
 

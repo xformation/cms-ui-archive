@@ -1,125 +1,56 @@
 <page-header model="ctrl.navModel"></page-header>
 <!-- optional-->
 <h3 class="bg-heading p-5">
-  <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Subject Setup
+  <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic subject Setup
 </h3>
 <div class="page-container page-body legal-entities-main-container">
-
-  <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-    <h4 class="ptl-06">Subject Setup</h4>
-    <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(1)">
-        Add Subject</a>
-      <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Save</a>
+  <div class="authorized-signatory-container m-b-1">
+    <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+      <h4 class="ptl-06">subjects</h4>
+      <div>
+        <a class="btn btn-primary" style="width: 150px;" ng-click="ctrl.showModal()"> Add Subject</a>
+      </div>
     </div>
-  </div>
-  <table id="subject-table" class="fwidth">
-    <thead>
-      <th>Subject</th>
-      <th>Department</th>
-      <th>Year</th>
-      <th>Teacher</th>
-      <th>Status</th>
-      <th>Elective</th>
-    </thead>
-    <tbody>
-      <!-- <tr ng-repeat="subject in ctrl.subjects"> -->
-      <tr>
-        <td class="text-center link-td">
-          <!-- {{subject.subjectDesc}} -->
-          Operating System
-        </td>
-        <td class="text-center link-td">
-          Computer Science Engineering
-        </td>
-        <td class="text-center link-td">
-          Second Year
-        </td>
-        <td class="text-center link-td">
-          Teacher 1
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" /> <span class="slider"></span> </label>
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" />
-            <span class="slider"></span> </label>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-center link-td">
-          <!-- {{subject.subjectDesc}} -->
-          DBMS
-        </td>
-        <td class="text-center link-td">
-          Computer Science Engineering
-        </td>
-        <td class="text-center link-td">
-          Second Year
-        </td>
-        <td class="text-center link-td">
-          Teacher 2
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" /> <span class="slider"></span> </label>
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" />
-            <span class="slider"></span> </label>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-center link-td">
-          <!-- {{subject.subjectDesc}} -->
-          Physics
-        </td>
-        <td class="text-center link-td">
-          Information Technology
-        </td>
-        <td class="text-center link-td">
-          First Year
-        </td>
-        <td class="text-center link-td">
-          Teacher 3
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" /> <span class="slider"></span> </label>
-        </td>
-        <td>
-          <label class="switch"> <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'ACTIVE'"
-              ng-false-value="'DEACTIVE'" />
-            <span class="slider"></span> </label>
-        </td>
-      </tr>
-      <form name="subjectForm">
-        <tr ng-class="{'hide':ctrl.activeTabIndex !== 1}">
-          <td><input type="text" required ng-model="subject.subjectDesc" placeholder="Write Subject name here"></td>
+    <table id="academic" class="fwidth">
+      <thead>
+        <th>Subject</th>
+        <th>Subject Code</th>
+        <th>Department</th>
+        <th>Year</th>
+        <th>Teacher</th>
+        <th>Elective</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="subject in ctrl.subjects">
           <td>
-            <select type="text" ng-model="subject.departmentName" class="gf-form-input width-10" ng-options="name as department.name for department in ctrl.departments"></select>
+            {{ subject.subjectDesc }}
           </td>
           <td>
-            <select type="text" ng-model="subject.batch" class="gf-form-input width-10" ng-options="batch as batch.batch for batch in ctrl.batches"></select>
+            {{ subject.subjectCode }}
           </td>
           <td>
-            <select type="text" ng-model="subject.teacherName" class="gf-form-input width-10" ng-options="teacherName as teacher.teacherName for teacher in ctrl.teachers"></select>
+            {{ subject.departmentId }}
           </td>
           <td>
-            <label class="switch"> <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'"
-                ng-false-value="'DEACTIVE'" /> <span class="slider"></span> </label>
+            {{ subject.batchId }}
           </td>
           <td>
-            <label class="switch"> <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'ACTIVE'"
-                ng-false-value="'DEACTIVE'" />
-              <span class="slider"></span> </label>
+            {{ subject.teacherId }}
+          </td>
+          <td>
+            {{ subject.subjectType }}
+          </td>
+          <td>
+            {{ subject.status }}
+          </td>
+          <td>
+            <a><i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i></a>
+            <a ng-click="ctrl.deleteSubject(subject)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
           </td>
         </tr>
-      </form>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
 </div>
