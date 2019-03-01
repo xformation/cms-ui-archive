@@ -47,15 +47,12 @@
             {{ subject.status }}
           </td>
           <td>
-            <a><i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i></a>
+            <a ng-click="ctrl.editSubject(subject)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
+                aria-hidden="true"></i></a>
             <a ng-click="ctrl.deleteSubject(subject)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
           </td>
         </tr>
       </tbody>
     </table>
-    <select class="gf-form-input" ng-model="teacher.id">
-      <option ng-repeat="teacher in ctrl.teachers" value="{{teacher.id}}" selected="selected">
-        {{teacher.id}}</option>
-    </select>
   </div>
 </div>
