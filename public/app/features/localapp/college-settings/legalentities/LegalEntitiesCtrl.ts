@@ -3,8 +3,12 @@ import { appEvents } from 'app/core/core';
 export class LegalEntitiesCtrl {
   bankAccounts: any;
   authorizedSignatories: any;
+  authSignatory: any;
   legalEntities: any;
   navModel: any;
+  branches: any;
+  states: any;
+  cities: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo.png';
   $scope;
@@ -15,7 +19,11 @@ export class LegalEntitiesCtrl {
     $scope.getFile = this.getFile.bind(this);
     this.getBank();
     this.getSignatory();
-
+    this.getLegalEntity();
+    this.getBranch();
+    this.getState();
+    this.getCity();
+    this.Check();
     $scope.createBank = () => {
       if (!$scope.bankForm.$valid) {
         return;
@@ -36,7 +44,7 @@ export class LegalEntitiesCtrl {
       });
     };
 
-    $scope.createLegalEntity = () => {
+    $scope.create = () => {
       console.log('Legal:', this.legalEntities);
       if (!$scope.legalForm.$valid) {
         return;
@@ -70,10 +78,39 @@ export class LegalEntitiesCtrl {
     });
   }
 
+  getState() {
+    this.backendSrv.get(`http://localhost:8080/api/states/`).then(result => {
+      this.states = result;
+    });
+  }
+
+  getCity() {
+    this.backendSrv.get(`http://localhost:8080/api/cities/`).then(result => {
+      this.cities = result;
+    });
+  }
+
+  getBranch() {
+    this.backendSrv.get(`http://localhost:8080/api/branches/`).then(result => {
+      this.branches = result;
+    });
+  }
+
   getSignatory() {
     this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/`).then(result => {
       this.authorizedSignatories = result;
     });
+  }
+
+  Check() {
+    console.log('Function printed');
+  }
+
+  getSignatorySetId(authorizedSignatory) {
+    this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/` + 1201).then(() => {
+      // this.authSignatory = result;
+    });
+    console.log('IdData:', authorizedSignatory);
   }
 
   getLegalEntity() {

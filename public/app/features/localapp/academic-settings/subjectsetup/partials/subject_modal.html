@@ -19,35 +19,20 @@
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text modal-fwidth m-r-1">
               <label class="gf-form-label b-0 bg-transparent">subject Name</label>
-              <input
-                type="text"
-                required
-                ng-model="subject.subjectDesc"
-                class="gf-form-input "
-                placeholder="subject name"
-              />
+              <input type="text" required ng-model="subject.subjectDesc" class="gf-form-input "
+                placeholder="subject name" />
             </div>
             <div class="fwidth-modal-text modal-fwidth">
               <label class="gf-form-label b-0 bg-transparent">subject Code</label>
-              <input
-                type="text"
-                required
-                ng-model="subject.subjectCode"
-                class="gf-form-input"
-                placeholder="subject Code"
-              />
+              <input type="text" required ng-model="subject.subjectCode" class="gf-form-input"
+                placeholder="subject Code" />
             </div>
           </div>
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Department</label>
-              <input
-                type="number"
-                required
-                ng-model="subject.departmentId"
-                class="gf-form-input "
-                placeholder="branch"
-              />
+              <input type="number" required ng-model="subject.departmentId" class="gf-form-input "
+                placeholder="branch" />
             </div>
             <div class="fwidth-modal-text">
               <label class="gf-form-label b-0 bg-transparent">Year</label>
@@ -55,9 +40,13 @@
             </div>
           </div>
           <div class="mdflex modal-fwidth">
+
             <!-- <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Assign Teacher</label>
-              <input type="text" class="gf-form-input " ng-model="subject.teacherId" placeholder="description" />
+              <select class="gf-form-input" ng-model="teacher.id">
+                <option ng-repeat="teacher in ctrl.teachers" value="{{teacher.id}}" selected="selected">
+                  {{teacher.id}}</option>
+              </select>
             </div> -->
             <div class="fwidth-modal-text m-r-1 switch-flex">
               <label class="switch">
@@ -65,12 +54,8 @@
                 <span class="slider disabledCursor"></span>
               </label>
               <label class="switch">
-                <input
-                  type="checkbox"
-                  ng-model="subject.subjectType"
-                  ng-true-value="'COMMON'"
-                  ng-false-value="'ELECTIVE'"
-                />
+                <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'COMMON'"
+                  ng-false-value="'ELECTIVE'" />
                 <span class="slider disabledCursor"></span>
               </label>
             </div>
@@ -84,14 +69,9 @@
     </div>
 
     <div class="modal-content-confirm-text" ng-if="confirmText">
-      <input
-        type="text"
-        class="gf-form-input width-16"
-        style="display: inline-block;"
-        placeholder="Type {{ confirmText }} to confirm"
-        ng-model="confirmInput"
-        ng-change="updateConfirmText(confirmInput)"
-      />
+      <input type="text" class="gf-form-input width-16" style="display: inline-block;"
+        placeholder="Type {{ confirmText }} to confirm" ng-model="confirmInput"
+        ng-change="updateConfirmText(confirmInput)" />
     </div>
   </div>
 </div>

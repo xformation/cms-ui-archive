@@ -57,23 +57,32 @@
   <div class="tab-header">
     <div class="dflex m-b-1">
       <h5 class="form-h5 m-r-1 fwidth">Registration & Tax information</h5>
-      <div class="dflex fwidth">
+      <form class="dflex fwidth">
         <div class="gf-form-select-wrapper fwidth m-r-1">
-          <select class="gf-form-input">
-            <option value="0" selected="selected">Select State</option>
+          <select class="gf-form-input" ng-model="legalEntity.stateId">
+            <option value="">
+              Select State</option>
+            <option ng-repeat="state in ctrl.states" value="{{state.id}}">
+              {{state.stateName}}</option>
           </select>
         </div>
         <div class="gf-form-select-wrapper fwidth m-r-1">
-          <select class="gf-form-input">
-            <option value="0" selected="selected">Select City</option>
+          <select class="gf-form-input" ng-model="legalEntity.cityId">
+            <option value="">
+              Select City</option>
+            <option ng-repeat="city in ctrl.cities" value="{{city.id}}">
+              {{city.cityName}}</option>
           </select>
         </div>
         <div class="gf-form-select-wrapper fwidth">
-          <select class="gf-form-input">
-            <option value="0" selected="selected">Select Branch</option>
+          <select class="gf-form-input" ng-model="legalEntity.branchId">
+            <option value="">
+              Select Branch</option>
+            <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}">
+              {{branch.branchName}}</option>
           </select>
         </div>
-      </div>
+      </form>
     </div>
     <ul class="legal-gf-tabs">
       <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(0)">
@@ -129,13 +138,11 @@
                   placeholder="ADDRESS LINE 1" />
               </div>
               <div class="m-b-1 ">
-                <!-- <label class="empty-form-label gf-form-label b-0 bg-white "></label> -->
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress2" class="gf-form-input "
                   placeholder="ADDRESS LINE 2" />
               </div>
 
               <div class="flex">
-                <!-- <label class="empty-form-label gf-form-label "></label> -->
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress3" class="gf-form-input width-12"
                   placeholder="CITY" />
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress4" class="gf-form-input width-12 mx"
@@ -177,8 +184,10 @@
             <div class="m-b-1 width-18">
               <label class="gf-form-label b-0 bg-white">FORM 16 SIGNATORY</label>
               <div class="gf-form-select-wrapper">
-                <select class="gf-form-input" ng-model="legalEntity.formSignatory"
-                  ng-options="signatoryName as authorizedSignatory.signatoryName for authorizedSignatory in ctrl.authorizedSignatories">
+                <select class="gf-form-input" ng-model="legalEntity.formSignatory">
+                  <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
+                    value="{{authorizedSignatory.signatoryName}}">
+                    {{authorizedSignatory.signatoryName}}</option>
                 </select>
               </div>
             </div>
@@ -198,20 +207,23 @@
               <div class="form-left">
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">PF NUMBER</label>
-                  <input type="text" ng-model="legalEntity.pfNumber" class="gf-form-input "
+                  <input type="text" ng-change="Check();" ng-model="legalEntity.pfNumber" class="gf-form-input "
                     placeholder="SYNEM839549052" />
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY</label>
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.pfSignatory"
-                      ng-options="signatoryName as authorizedSignatory.signatoryName for authorizedSignatory in ctrl.authorizedSignatories">
+                      ng-change="ctrl.getSignatorySetId();">
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
+                        value="{{authorizedSignatory.id}}">
+                        {{authorizedSignatory.signatoryName}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY'S FATHER'S NAME</label>
-                  <input type="text" ng-model="legalEntity.formSignatory" class="gf-form-input " />
+                  <input type="text" disabled value="{{authorizedSignatory.signatoryName}}" class="gf-form-input " />
                 </div>
               </div>
               <div class="form-right">
@@ -221,7 +233,7 @@
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY DESIGNATION</label>
-                  <input type="text" class="gf-form-input" ng-model="legalEntity.pfSignatory" />
+                  <input type="text" disabled class="gf-form-input" ng-model="legalEntity.pfSignatory" />
                 </div>
               </div>
             </div>
@@ -246,14 +258,16 @@
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY</label>
                   <div class="gf-form-select-wrapper">
-                    <select class="gf-form-input" ng-model="legalEntity.esiSignatory"
-                      ng-options="signatoryName as authorizedSignatory.signatoryName for authorizedSignatory in ctrl.authorizedSignatories">
+                    <select class="gf-form-input" ng-model="legalEntity.esiSignatory">
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
+                        value="{{authorizedSignatory.signatoryName}}">
+                        {{authorizedSignatory.signatoryName}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY'S FATHER'S NAME</label>
-                  <input type="text" class="gf-form-input" ng-model="legalEntity.ptsignatory" />
+                  <input type="text" class="gf-form-input" ng-model="legalEntity.ptSignatory" />
                 </div>
               </div>
               <div class="form-right">
@@ -277,28 +291,6 @@
       <div ng-class="{'hide':ctrl.activeTabIndex !== 4}">
         <div class="contnet">
           <form name="legalForm" class="section fwidth">
-            <!-- <div class="gf-form-group">
-              <h3 class="page-heading">Karnataka</h3>
-              <div class="dflex">
-                <div class="m-b-1 width-18">
-                  <label class="gf-form-label b-0 bg-white ">PT NUMBER</label>
-                  <input type="text" class="gf-form-input " placeholder="4548768779" />
-                </div>
-                <div class="m-b-1 width-18 mx">
-                  <label class="gf-form-label b-0 bg-white ">PT REGISTRATION DATE</label>
-                  <input type="date" class="gf-form-input " />
-                </div>
-                <div class="m-b-1 width-18">
-                  <label class="gf-form-label b-0 bg-white ">PT SIGNATORY</label>
-                  <div class="gf-form-select-wrapper">
-                    <select class="gf-form-input">
-                      <option label="John" value="0" selected="selected">John</option>
-                      <option label="Doe" value="1">Doe</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             <div class="gf-form-group">
               <h3 class="page-heading">Telangana</h3>
               <div class="flex">
@@ -309,20 +301,22 @@
                 <div class="m-b-1 width-18 mx">
                   <label class="gf-form-label b-0 bg-white">PT REGISTRATION DATE</label>
                   <input type="date" class="gf-form-input" ng-model="legalEntity.ptRegistrationDate" />
-                  <input type="date" class="gf-form-input" ng-model="legalEntity.logo" />
+                  <input type="text" class="gf-form-input" ng-model="legalEntity.logo" />
                 </div>
                 <div class="m-b-1 width-18">
                   <label class="gf-form-label b-0 bg-white">PT SIGNATORY</label>
                   <div class="gf-form-select-wrapper">
-                    <select class="gf-form-input" ng-model="legalEntity.ptSignatory"
-                      ng-options="signatoryName as authorizedSignatory.signatoryName for authorizedSignatory in ctrl.authorizedSignatories">
+                    <select class="gf-form-input" ng-model="legalEntity.ptSignatory">
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
+                        value="{{authorizedSignatory.signatoryName}}">
+                        {{authorizedSignatory.signatoryName}}</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="gf-form-button-row p-r-0">
-              <button type="submit" ng-click="createLegalEntity();" class="btn btn-success border-bottom">Save</button>
+              <button type="submit" ng-click="create();" class="btn btn-success border-bottom">Save</button>
               <button type="reset" class="btn btn-danger border-bottom">Clear</button>
             </div>
           </form>
@@ -331,5 +325,5 @@
     </div>
   </div>
 </div>
-</div>
+<!-- </div> -->
 <i class="fa fa-phone orange"></i>

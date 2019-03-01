@@ -155,7 +155,6 @@ export class UtilSrv {
 
   departmentModal(payload) {
     const scope = this.$rootScope.$new();
-
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
     };
