@@ -24,16 +24,15 @@
             Signatory</a></div>
       </div>
       <div class="signatory-list" ng-repeat="authorizedSignatory in ctrl.authorizedSignatories">
-        <div class="tile m-r-2 l-grid">
+        <div class="tile m-r-2 ">
           <div class="tile-circle yellow"><b>{{authorizedSignatory.signatoryName.charAt(0)}}</b></div>
           <div class="tile-right-part">
             <div class="tile-name"><span>{{authorizedSignatory.signatoryName}}</span></div>
             <div class="tile-info">{{authorizedSignatory.signatoryDesignation}}</div>
           </div>
         </div>
-
-        <div class="clearfix"></div>
       </div>
+      <div class="clearfix"></div>
     </div>
     <div class="back-account-container  mt-0">
       <div class="s-flex">
