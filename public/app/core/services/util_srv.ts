@@ -127,6 +127,7 @@ export class UtilSrv {
 
   branchModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.branch = payload.branch;
 
     scope.create = () => {
       payload.onCreate(scope.branchForm, scope.branch);
@@ -141,6 +142,7 @@ export class UtilSrv {
 
   yearModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.academicYear = payload.academicYear;
 
     scope.createYear = () => {
       payload.onCreate(scope.yearForm, scope.academicYear);
@@ -155,6 +157,7 @@ export class UtilSrv {
 
   departmentModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.department = payload.department;
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
     };
@@ -167,9 +170,17 @@ export class UtilSrv {
   }
   subjectModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.text = payload.text;
+    scope.subject = payload.subject;
 
     scope.create = () => {
       payload.onCreate(scope.subjectForm, scope.subject);
+      scope.dismiss();
+    };
+
+    scope.update = () => {
+      payload.onUpdate(scope.subjectForm, scope.subject);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -191,6 +202,7 @@ export class UtilSrv {
 
   signatoryModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.authorizedSignatory = payload.authorizedSignatory;
 
     scope.createSignatory = () => {
       payload.onCreate(scope.signatoryForm, scope.authorizedSignatory);
@@ -205,6 +217,7 @@ export class UtilSrv {
 
   bankModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.bankAccount = payload.bankAccount;
 
     scope.createBank = () => {
       payload.onCreate(scope.bankForm, scope.bankAccount);
