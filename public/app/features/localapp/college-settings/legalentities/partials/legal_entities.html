@@ -185,7 +185,7 @@
               <div class="gf-form-select-wrapper">
                 <select class="gf-form-input" ng-model="legalEntity.formSignatory">
                   <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
-                    value="{{authorizedSignatory.signatoryName}}">
+                    value="{{authorizedSignatory.id}}">
                     {{authorizedSignatory.signatoryName}}</option>
                 </select>
               </div>
@@ -222,7 +222,7 @@
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY'S FATHER'S NAME</label>
-                  <input type="text" disabled value="{{authorizedSignatory.signatoryName}}" class="gf-form-input " />
+                  <input type="text" disabled value="{{authorizedSignatory.fatherName}}" class="gf-form-input " />
                 </div>
               </div>
               <div class="form-right">
@@ -232,7 +232,7 @@
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY DESIGNATION</label>
-                  <input type="text" disabled class="gf-form-input" ng-model="legalEntity.pfSignatory" />
+                  <input type="text" disabled class="gf-form-input" ng-model="authorizedSignatory.designation" />
                 </div>
               </div>
             </div>
@@ -259,24 +259,24 @@
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.esiSignatory">
                       <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
-                        value="{{authorizedSignatory.signatoryName}}">
+                        value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY'S FATHER'S NAME</label>
-                  <input type="text" class="gf-form-input" ng-model="legalEntity.ptSignatory" />
+                  <input type="text" disabled class="gf-form-input" ng-model="authorizedSignatory.fatherName" />
                 </div>
               </div>
               <div class="form-right">
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">REGISTRATION DATE</label>
-                  <input type="date" class="gf-form-input" ng-model="legalEntity.esiRegistrationDate" />
+                  <input type="date" disabled class="gf-form-input" ng-model="legalEntity.esiRegistrationDate" />
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY DESIGNATION</label>
-                  <input type="text" class="gf-form-input" ng-model="legalEntity.esiSignatory" />
+                  <input type="text" class="gf-form-input" ng-model="authorizedSignatory.designation" />
                 </div>
               </div>
             </div>
@@ -300,6 +300,7 @@
                 <div class="m-b-1 width-18 mx">
                   <label class="gf-form-label b-0 bg-white">PT REGISTRATION DATE</label>
                   <input type="date" class="gf-form-input" ng-model="legalEntity.ptRegistrationDate" />
+                  <label class="gf-form-label b-0 bg-white">Logo input</label>
                   <input type="text" class="gf-form-input" ng-model="legalEntity.logo" />
                 </div>
                 <div class="m-b-1 width-18">
@@ -307,7 +308,7 @@
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.ptSignatory">
                       <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
-                        value="{{authorizedSignatory.signatoryName}}">
+                        value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
                   </div>

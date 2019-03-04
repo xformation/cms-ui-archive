@@ -31,12 +31,11 @@
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Department</label>
-              <input type="number" required ng-model="subject.departmentId" class="gf-form-input "
-                placeholder="branch" />
+              <input type="number" ng-model="subject.departmentId" class="gf-form-input " placeholder="branch" />
             </div>
             <div class="fwidth-modal-text">
               <label class="gf-form-label b-0 bg-transparent">Year</label>
-              <input type="number" required ng-model="subject.batchId" class="gf-form-input " placeholder="" />
+              <input type="number" ng-model="subject.batchId" class="gf-form-input " placeholder="" />
             </div>
           </div>
           <div class="mdflex modal-fwidth">
@@ -45,20 +44,30 @@
               <input type="text" class="gf-form-input " ng-model="subject.teacherId" placeholder="description" />
             </div>
             <div class="fwidth-modal-text m-r-1 switch-flex">
-              <label class="switch">
-                <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" />
-                <span class="slider disabledCursor"></span>
-              </label>
-              <label class="switch">
-                <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'COMMON'"
-                  ng-false-value="'ELECTIVE'" />
-                <span class="slider disabledCursor"></span>
-              </label>
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">Elective</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.status" ng-true-value="'ACTIVE'"
+                    ng-false-value="'DEACTIVE'" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">Status</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.subjectType" ng-true-value="'COMMON'"
+                    ng-false-value="'ELECTIVE'" />
+                  <span class="slider"></span>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="gf-form-button-row p-r-4">
-            <button type="submit" ng-click="create(); dismiss();" class="btn btn-success border-bottom">Save</button>
-            <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+          <div class="m-t-1 text-center">
+            <button ng-hide="text=='update'" type="submit" ng-click="create();"
+              class="btn btn-success border-bottom">Save</button>
+            <button ng-hide="text=='create'" type="submit" ng-click="update();"
+              class="btn btn-success border-bottom">Update</button>
+            <button ng-click="dismiss();" type="reset" class="btn btn-danger border-bottom">Cancel</button>
           </div>
         </div>
       </form>

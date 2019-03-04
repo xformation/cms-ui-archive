@@ -26,6 +26,14 @@ export class SubjectSetupCtrl {
         this.getSubjects();
       });
     };
+    $scope.update = () => {
+      if (!$scope.subjectForm.$valid) {
+        return;
+      }
+      backendSrv.put('http://localhost:8080/api/subjects/', $scope.subject).then(() => {
+        this.getSubjects();
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -60,7 +68,7 @@ export class SubjectSetupCtrl {
   deleteSubject(subject) {
     appEvents.emit('confirm-modal', {
       title: 'Delete',
-      text: 'Do you want to delete ' + subject.name + '?',
+      text: 'Do you want to delete ' + subject.subjectDesc + '?',
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
@@ -74,25 +82,21 @@ export class SubjectSetupCtrl {
   editSubject(subject) {
     appEvents.emit('subject-modal', {
       icon: 'fa-trash',
-      onCreate: (subjectForm, subject) => {
+      text: 'update',
+      subject: subject,
+      onUpdate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
-        this.$scope.create();
-      },
-      getSubjects() {
-        this.backendSrv.get(`http://localhost:8080/api/subjects/`).then(result => {
-          this.subjects = result;
-          console.log('Subjects', this.subjects);
-        });
+        this.$scope.update();
       },
     });
   }
 
   showModal() {
-    const text = 'Do you want to delete the ';
+    // const text = 'Do you want to delete the ';
 
     appEvents.emit('subject-modal', {
-      text: text,
+      text: 'create',
       icon: 'fa-trash',
       onCreate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
