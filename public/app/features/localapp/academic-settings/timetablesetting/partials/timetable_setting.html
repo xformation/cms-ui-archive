@@ -19,20 +19,19 @@
         <thead>
           <th>Department</th>
           <th>Year</th>
-          <th>Primary Teacher</th>
-          <th>University</th>
-          <th>Max No of Students</th>
-          <th>Max No of Division</th>
-          <th>Add Section</th>
+          <th>Semester</th>
+          <th>Section</th>
+          <th>No of Lectures</th>
+          <th>Status</th>
         </thead>
         <tbody>
           <tr>
             <td>              
-                <select name="" id="">
-                  <option value="">Department 1</option>
-                  <option value="">Department 2</option>
-                  <option value="">Department 3</option>
-                </select>             
+              <select class="gf-form-input" ng-model="teacher.departmentId">
+                <option ng-repeat="department in ctrl.departments" 
+                value="{{department.id}}">
+                {{department.id}}</option>
+                </select>        
             </td>
             <td>              
                 <select name="" id="">
@@ -56,20 +55,16 @@
                       <option value="">University 3</option>
                     </select>                  
             </td>
-            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = ['1', '2']">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span> {{studentCount}}
              <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
                <i class="fa fa-minus" aria-hidden="true"></i>
               </span>
-              </div>
-            </td>
-            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </span> {{count}}
-             <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-               <i class="fa fa-minus" aria-hidden="true"></i>
-              </span>
+              <ul>
+                  <li ng-repeat="x in studentCount">Counts:{{x}}</li>
+                  
+                </ul>
               </div>
             </td>
             <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">save</a></td>
@@ -119,13 +114,13 @@
                       <option value="">University 3</option>
                     </select>                  
             </td>
-            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 100">
+            <!-- <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 5">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span> {{studentCount}}
              <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
                <i class="fa fa-minus" aria-hidden="true"></i>
               </span>
-              </div>
+              </div> -->
             </td>
             <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
                 <i class="fa fa-plus" aria-hidden="true"></i>
