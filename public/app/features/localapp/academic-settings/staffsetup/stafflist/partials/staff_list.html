@@ -45,7 +45,7 @@
     </div>
     <div class="margin-bott">
       <label htmlFor="">Search</label>
-      <input type="search" name="" id="" />
+      <input type="search" ng-model="search.teacherName" placeholder="search by name" />
     </div>
   </div>
 
@@ -62,11 +62,11 @@
       <th>status</th>
     </thead>
     <tbody>
-      <tr ng-repeat="teacher in ctrl.teachers">
+      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
         <td>
           <input type="checkbox" ng-model="item.Selected" />
         </td>
-        <td>
+        <td ng-search="filter:search">
           {{ teacher.teacherName }}
         </td>
         <td>{{ teacher.employeeId }}</td>
