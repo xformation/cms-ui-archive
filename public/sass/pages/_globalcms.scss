@@ -758,7 +758,7 @@ table.staff-management-table {
   .border-plugin {
     border: 1px solid #cecece;
     border-radius: 5px;
-    padding: 4px;
+    padding: 4px + 4px;
     box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.2) !important;
   }
   .form-grid {
@@ -930,6 +930,13 @@ table.staff-management-table {
   }
   .hflex > h4 {
     flex-grow: 1;
+  }
+  .staff-flex {
+    display: flex;
+    justify-content: space-between;
+    h3.staff-h3 {
+      flex-grow: 1;
+    }
   }
 }
 

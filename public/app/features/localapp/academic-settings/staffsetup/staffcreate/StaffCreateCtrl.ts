@@ -2,6 +2,7 @@ export class StaffCreateCtrl {
   navModel: any;
   sections: any[];
   activeTabIndex = 0;
+  // activateBtnRelation = 0;
   $scope: any;
   teachers: any;
   departments: any;
@@ -9,6 +10,7 @@ export class StaffCreateCtrl {
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
+    // this.activateBtnRelationIndex = 0;
     this.$scope = $scope;
     this.getTeachers();
     this.getDepartments();
@@ -40,4 +42,8 @@ export class StaffCreateCtrl {
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
   }
+
+  // activateBtnRelation(tabIndex) {
+  //   this.activateBtnRelationIndex = tabIndex;
+  // }
 }

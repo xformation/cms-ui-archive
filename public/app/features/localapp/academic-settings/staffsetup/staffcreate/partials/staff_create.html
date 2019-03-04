@@ -1,5 +1,12 @@
 <!-- <div class="plugin-bg-white pdn-1">
   </div> -->
+  <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+      <h4 class="ptl-06">Staff Profile</h4>
+      <div>
+      
+      <a class="btn btn-primary" >Save</a>
+      </div>
+    </div>
 <form name="teacherForm">
   <div class="grid">
     <div class="leftbar">
@@ -121,10 +128,13 @@
           </select>
         </div>
       </div>
-
-      <h3 class="bg-heading p-1 b-1">Contact Details</h3>
+<div class="staff-flex">
+  <h3 class="bg-heading p-1 b-1">Contact Details</h3>
+       <a class="" ng-click="ctrl.activateBtnContact(1)"><i class="fa fa-plus"></i></a>
+</div>
+      
       <div class="form-grid">
-        <div>
+          <div ng-class="{'hide':ctrl.activateBtnContactIndex !== 1}">
           <label htmlFor="">Address Line 1*</label>
           <input ng-model="teacher.addressLineOne" class="border-plugin fwidth" type="text" />
         </div>
@@ -170,11 +180,15 @@
           <input ng-model="teacher.alternateEmailAddress" class="border-plugin fwidth" type="text" />
         </div>
       </div>
-      <h3 class="bg-heading p-1 b-1">Primary And Emergency contact Details</h3>
-      <div>
+      <div class="bg-heading p-1 b-1 staff-flex">
+        <h3 class="staf-h3">Primary And Emergency contact Details</h3>  
+        <a class="staf-fa-plus" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
+        <!-- <a class="staf-fa-minus" ng-click="ctrl.activateBtnRelation(0)"><i class="fa fa-minus"></i></a> -->
+      </div>
+    
+      <div ng-class="{'show':ctrl.activateBtnRelationIndex === 1}">
         <div class="reln">
           <label htmlFor="">Relation with Staff*</label>
-
           <select
             ng-model="teacher.relationWithStaff"
             ng-options="f for f in ['FATHER','MOTHER','GUARDIAN']"
