@@ -3,11 +3,19 @@
 <h3 class="bg-heading p-5">
   <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic Staff Setup
 </h3>
-<div class="p-2 page-body legal-entities-main-container"> 
+<div class="p-2 page-body legal-entities-main-container">
   <a class="btn btn-primary" ng-click="ctrl.activeTabStaffCreate()"> Create</a>
   <a class="btn btn-primary" ng-click="ctrl.activeTabStaffList()">List</a>
   <a class="btn btn-primary" ng-click="ctrl.activeTabStaffProfile()">Profile</a>
   <div class="authorized-signatory-container m-b-1">
+    <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
+      <h4 class="ptl-06">Staff Details</h4>
+      <div>
+        <a ng-click="ctrl.activeTabStaffCreate()" class="btn btn-primary" style="width: 135px;">
+          Create New Staff</a>
+        <a class="btn btn-primary">Export</a>
+      </div>
+    </div>
     <div class="tab-content">
       <div ng-class="{'hide':ctrl.activeTabStaffId !== 'staff_list'}">
         <staff-list>
@@ -20,4 +28,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
