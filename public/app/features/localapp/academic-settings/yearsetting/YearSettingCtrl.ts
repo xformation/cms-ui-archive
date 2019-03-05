@@ -42,6 +42,14 @@ export class YearSettingCtrl {
         this.getYears();
       });
     };
+    $scope.updateYear = () => {
+      if (!$scope.yearForm.$valid) {
+        return;
+      }
+      backendSrv.put('http://localhost:8080/api/academic-years/', $scope.academicYear).then(() => {
+        this.getYears();
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -71,15 +79,26 @@ export class YearSettingCtrl {
   }
 
   showModal() {
-    const text = 'Do you want to delete the ';
-
     appEvents.emit('year-modal', {
-      text: text,
+      text: 'create',
       icon: 'fa-trash',
       onCreate: (yearForm, academicYear) => {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
         this.$scope.createYear();
+      },
+    });
+  }
+
+  editYear(academicYear) {
+    appEvents.emit('year-modal', {
+      icon: 'fa-trash',
+      text: 'update',
+      academicYear: academicYear,
+      onUpdate: (yearForm, academicYear) => {
+        this.$scope.yearForm = yearForm;
+        this.$scope.academicYear = academicYear;
+        this.$scope.update();
       },
     });
   }

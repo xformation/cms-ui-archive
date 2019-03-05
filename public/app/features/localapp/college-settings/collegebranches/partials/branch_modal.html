@@ -63,8 +63,10 @@
 						</div>
 					</div>
 					<div class="m-t-1 text-center">
-						<button type="submit" ng-click="create(); dismiss();"
-							class="btn btn-success border-bottom m-r-1">Save</button>
+						<button ng-hide="text=='update'" type="submit" ng-click="create();"
+							class="btn btn-success border-bottom">Save</button>
+						<button ng-hide="text=='create'" type="submit" ng-click="update();"
+							class="btn btn-success border-bottom">Update</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>

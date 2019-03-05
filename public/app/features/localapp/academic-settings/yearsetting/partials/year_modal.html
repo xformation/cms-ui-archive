@@ -20,32 +20,34 @@
 					<div class="mdflex modal-fwidth">
 						<div class="fwidth-modal-text modal-fwidth m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">Academic Year</label>
-							<input type="number" required ng-model="academicYear.year" class="gf-form-input "
+							<input type="text" required ng-model="academicYear.year" class="gf-form-input "
 								placeholder="college head" />
 						</div>
-						<div class="fwidth-modal-text modal-fwidth">
+						<!-- <div class="fwidth-modal-text modal-fwidth">
 							<label class="gf-form-label b-0 bg-transparent">Academic Year</label>
 							<input type="text" required ng-model="academicYear.desc" class="gf-form-input "
 								placeholder="college head" />
-						</div>
+						</div> -->
 					</div>
 
 					<div class="mdflex modal-fwidth">
 						<div class="fwidth-modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">Start Date</label>
 							<input type="date" required ng-model="academicYear.startDate" class="gf-form-input "
-								placeholder="address line 2" />
+								placeholder="" />
 						</div>
 						<div class="fwidth-modal-text">
 							<label class="gf-form-label b-0 bg-transparent">End Date</label>
 							<input type="date" required ng-model="academicYear.endDate" class="gf-form-input "
-								placeholder="addresss line 1" />
+								placeholder="" />
 						</div>
 
 					</div>
 					<div class="m-t-1 text-center">
-						<button type="submit" ng-click="createYear(); dismiss();"
-							class="btn btn-success border-bottom m-r-1">Save</button>
+						<button ng-hide="text=='update'" type="submit" ng-click="createYear();"
+							class="btn btn-success border-bottom">Save</button>
+						<button ng-hide="text=='create'" type="submit" ng-click="updateYear();"
+							class="btn btn-success border-bottom">Update</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
 				</div>

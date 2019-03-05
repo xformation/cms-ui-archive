@@ -127,10 +127,16 @@ export class UtilSrv {
 
   branchModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.text = payload.text;
     scope.branch = payload.branch;
 
     scope.create = () => {
       payload.onCreate(scope.branchForm, scope.branch);
+    };
+
+    scope.update = () => {
+      payload.onUpdate(scope.branchForm, scope.branch);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -142,10 +148,16 @@ export class UtilSrv {
 
   yearModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.text = payload.text;
     scope.academicYear = payload.academicYear;
 
     scope.createYear = () => {
       payload.onCreate(scope.yearForm, scope.academicYear);
+    };
+
+    scope.updateYear = () => {
+      payload.onUpdate(scope.yearForm, scope.academicYear);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -157,9 +169,16 @@ export class UtilSrv {
 
   departmentModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.text = payload.text;
     scope.department = payload.department;
+
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
+    };
+
+    scope.update = () => {
+      payload.onUpdate(scope.departmentForm, scope.department);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {

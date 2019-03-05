@@ -22,6 +22,14 @@ export class CollegeBranchesCtrl {
         this.getBranches();
       });
     };
+    $scope.update = () => {
+      if (!$scope.branchForm.$valid) {
+        return;
+      }
+      backendSrv.put('http://localhost:8080/api/branches/', $scope.branch).then(() => {
+        this.getBranches();
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -59,11 +67,22 @@ export class CollegeBranchesCtrl {
     });
   }
 
-  showModal() {
-    const text = 'Do you want to delete the ';
-
+  editBranch(branch) {
     appEvents.emit('branch-modal', {
-      text: text,
+      icon: 'fa-trash',
+      text: 'update',
+      branch: branch,
+      onUpdate: (branchForm, branch) => {
+        this.$scope.branchForm = branchForm;
+        this.$scope.branch = branch;
+        this.$scope.update();
+      },
+    });
+  }
+
+  showModal() {
+    appEvents.emit('branch-modal', {
+      text: 'create',
       icon: 'fa-trash',
       onCreate: (branchForm, branch) => {
         this.$scope.branchForm = branchForm;
