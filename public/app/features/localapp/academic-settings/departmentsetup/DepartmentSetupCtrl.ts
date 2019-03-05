@@ -20,6 +20,14 @@ export class DepartmentSetupCtrl {
         this.getDepartments();
       });
     };
+    $scope.update = () => {
+      if (!$scope.departmentForm.$valid) {
+        return;
+      }
+      backendSrv.put('http://localhost:8080/api/departments/', $scope.department).then(() => {
+        this.getDepartments();
+      });
+    };
   }
 
   activateTab(tabIndex) {
@@ -47,10 +55,8 @@ export class DepartmentSetupCtrl {
   }
 
   showModal() {
-    const text = 'Do you want to delete the ';
-
     appEvents.emit('department-modal', {
-      text: text,
+      text: 'create',
       icon: 'fa-trash',
       onCreate: (departmentForm, department) => {
         this.$scope.departmentForm = departmentForm;
@@ -60,16 +66,15 @@ export class DepartmentSetupCtrl {
     });
   }
 
-  showImportModal() {
-    const text = 'Do you want to delete the ';
-
-    appEvents.emit('import-department-modal', {
-      text: text,
+  editDepartment(department) {
+    appEvents.emit('department-modal', {
       icon: 'fa-trash',
-      onCreate: (departmentForm, department) => {
+      text: 'update',
+      department: department,
+      onUpdate: (departmentForm, department) => {
         this.$scope.departmentForm = departmentForm;
         this.$scope.department = department;
-        this.$scope.create();
+        this.$scope.update();
       },
     });
   }

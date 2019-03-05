@@ -38,7 +38,8 @@
             {{department.description}}
           </td>
           <td>
-            <a><i class="fa fa-pencil-square-o fa-2x m-r-1" aria-hidden="true"></i></a>
+            <a ng-click="ctrl.editDepartment(department)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
+                aria-hidden="true"></i></a>
             <a ng-click="ctrl.deleteDepartment(department)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
           </td>
         </tr>
