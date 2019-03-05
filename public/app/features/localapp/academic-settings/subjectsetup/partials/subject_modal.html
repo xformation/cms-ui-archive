@@ -31,7 +31,11 @@
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Department</label>
-              <input type="number" ng-model="subject.departmentId" class="gf-form-input " placeholder="branch" />
+              <!-- <input type="number" ng-model="subject.departmentId" class="gf-form-input " placeholder="branch" /> -->
+              <select class="gf-form-input" ng-model="subject.departmentId">
+                <option ng-repeat="department in ctrl.departments" value="{{department.id}}">
+                  {{department.id}}</option>
+              </select>
             </div>
             <div class="fwidth-modal-text">
               <label class="gf-form-label b-0 bg-transparent">Year</label>

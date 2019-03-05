@@ -45,11 +45,11 @@
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
     <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
       <h4 class="ptl-06">Academic Year</h4>
-      <div ng-class="{'hide':ctrl.activeBtnIndex === 2}">
+      <div ng-class="{'hide':ctrl.activeBtnIndex === 1}">
         <a class="btn btn-primary" ng-click="ctrl.activateBtn(1)">Add Holiday</a>
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
       </div>
-      <div ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
+      <div ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
         <a class="btn btn-primary" ng-click="createHoliday(); ctrl.activateBtn(0)">Save</a>
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
       </div>
@@ -97,9 +97,9 @@
                 <span class="slider"></span>
               </label>
             </td>
-            <td class="text-center link-td">
+            <!-- <td class="text-center link-td">
               <input type="number" required ng-model="holiday.academicYearId" class="gf-form-input" />
-            </td>
+            </td> -->
           </tr>
         </form>
       </tbody>

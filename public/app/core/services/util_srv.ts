@@ -190,6 +190,7 @@ export class UtilSrv {
   subjectModal(payload) {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
+    scope.departments = payload.departments;
     scope.subject = payload.subject;
 
     scope.create = () => {

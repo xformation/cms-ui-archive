@@ -98,6 +98,7 @@ export class SubjectSetupCtrl {
     appEvents.emit('subject-modal', {
       text: 'create',
       icon: 'fa-trash',
+      departments: this.departments,
       onCreate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
