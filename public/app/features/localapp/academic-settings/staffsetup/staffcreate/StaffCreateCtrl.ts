@@ -1,16 +1,20 @@
 export class StaffCreateCtrl {
   navModel: any;
   sections: any[];
-  activeTabIndex = 0;
-  // activateBtnRelation = 0;
+  activeTabPersonalIndex = 0;
+  activeTabContactIndex = 0;
+  activeTabPrimaryIndex = 0;
+  activeBtnIndex = 0;
   $scope: any;
   teachers: any;
   departments: any;
   branches: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
-    this.activeTabIndex = 0;
-    // this.activateBtnRelationIndex = 0;
+    this.activeTabPersonalIndex = 0;
+    this.activeTabContactIndex = 0;
+    this.activeTabPrimaryIndex = 0;
+    this.activeBtnIndex = 0;
     this.$scope = $scope;
     this.getTeachers();
     this.getDepartments();
@@ -39,11 +43,19 @@ export class StaffCreateCtrl {
     });
   }
 
-  activateTab(tabIndex) {
-    this.activeTabIndex = tabIndex;
+  activateTabPersonal(tabIndex) {
+    this.activeTabPersonalIndex = tabIndex;
   }
 
-  // activateBtnRelation(tabIndex) {
-  //   this.activateBtnRelationIndex = tabIndex;
-  // }
+  activateTabContact(tabIndex) {
+    this.activeTabContactIndex = tabIndex;
+  }
+
+  activateTabPrimary(tabIndex) {
+    this.activeTabPrimaryIndex = tabIndex;
+  }
+
+  activateBtn(tabIndex) {
+    this.activeBtnIndex = tabIndex;
+  }
 }

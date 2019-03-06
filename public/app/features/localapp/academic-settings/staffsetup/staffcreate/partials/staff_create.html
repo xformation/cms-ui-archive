@@ -12,11 +12,8 @@
       </div>
       <div class="form-justify">
         <label htmlFor="">*Staff Type:</label>
-        <select
-          ng-model="teacher.staffType"
-          ng-options="f for f in ['TEACHING', 'NONTEACHING', 'GUEST']"
-          class="border-plugin"
-        >
+        <select ng-model="teacher.staffType" ng-options="f for f in ['TEACHING', 'NONTEACHING', 'GUEST']"
+          class="border-plugin">
         </select>
       </div>
       <div class="form-justify">
@@ -34,163 +31,171 @@
     </div>
     <div class="rightbar">
       <div class="bg-heading p-s5 b-1 staff-flex">
-        <h3 class="staf-h3">Personal Details</h3>
-        <a class="staf-fa-plus" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
-      </div>
-      <div class="form-grid">
+        <h6 class="pt-bold">Personal Details</h6>
         <div>
-          <label htmlFor="">Name*</label>
-          <input ng-model="teacher.teacherName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Middle Name*</label>
-          <input ng-model="teacher.teacherMiddleName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Last Name*</label>
-          <input ng-model="teacher.teacherLastName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Father Name*</label>
-          <input ng-model="teacher.fatherName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Father Middle Name*</label>
-          <input ng-model="teacher.fatherMiddleName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Father Last Name*</label>
-          <input ng-model="teacher.fatherLastName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Mother Name*</label>
-          <input ng-model="teacher.motherName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Mother Middle Name*</label>
-          <input ng-model="teacher.motherMiddleName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Mother Last Name*</label>
-          <input ng-model="teacher.motherLastName" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Adhar No*</label>
-          <input ng-model="teacher.aadharNo" class="border-plugin fwidth" type="number" />
-        </div>
-        <div>
-          <label htmlFor="">Date Of Birth*</label>
-          <input ng-model="teacher.dateOfBirth" class="border-plugin fwidth" type="date" />
-        </div>
-        <div>
-          <label htmlFor="">Place Of Birth*</label>
-          <input ng-model="teacher.placeOfBirth" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Religion*</label>
-          <select
-            ng-model="teacher.religion"
-            ng-options="f for f in ['HINDU', 'MUSLIM', 'CHRISTIAN']"
-            class="gf-form-input border-plugin"
-          >
-          </select>
-        </div>
-        <div>
-          <label htmlFor="">Caste*</label>
-          <select
-            ng-model="teacher.caste"
-            ng-options="f for f in ['OC', 'BC', 'SC', 'ST']"
-            class="gf-form-input border-plugin"
-          >
-          </select>
-        </div>
-        <div>
-          <label htmlFor="">Subcaste*</label>
-          <input ng-model="teacher.subCaste" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Age*</label>
-          <input ng-model="teacher.age" class="border-plugin fwidth" type="number" />
-        </div>
-        <div>
-          <label htmlFor="">Sex*</label>
-          <select ng-model="teacher.sex" ng-options="f for f in ['MALE', 'FEMALE']" class="gf-form-input border-plugin">
-          </select>
-        </div>
-        <div>
-          <label htmlFor="">Blood Group*</label>
-          <select
-            ng-model="teacher.bloodGroup"
-            ng-options="f for f in ['ABPOSITIVE','ABNEGATIVE','OPOSITIVE','BPOSITIVE','BNEGATIVE']"
-            class="gf-form-input border-plugin"
-          >
-          </select>
+          <a ng-class="{'hide':ctrl.activeTabPersonalIndex === 1}" ng-click="ctrl.activateTabPersonal(1)"><i
+              class="fa fa-plus"></i></a>
+          <a ng-class="{'hide':ctrl.activeTabPersonalIndex !== 1}" ng-click="ctrl.activateTabPersonal(0)"><i
+              class="fa fa-minus"></i></a>
         </div>
       </div>
-      <div class="bg-heading p-s5 b-1 staff-flex">
-        <h3 class="staf-h3">Contact Details</h3>
-        <a class="staf-fa-plus" ng-class="{'hide':ctrl.activateBtnContactIndex !== 1}" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
-      </div>
-      <div class="form-grid">
-        <div>
-          <label htmlFor="">Address Line 1*</label>
-          <input ng-model="teacher.addressLineOne" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Address Line 2</label>
-          <input ng-model="teacher.addressLineTwo" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Address Line 3</label>
-          <input ng-model="teacher.addressLineThree" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Town*</label>
-          <input ng-model="teacher.town" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">State*</label>
-          <input ng-model="teacher.state" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Country*</label>
-          <input ng-model="teacher.country" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Pin Code*</label>
-          <input ng-model="teacher.pincode" class="border-plugin fwidth" type="number" />
-        </div>
-        <div>
-          <label htmlFor="">Contact Number*</label>
-          <input ng-model="teacher.teacherContactNumber" class="border-plugin fwidth" type="number" />
-        </div>
-        <div>
-          <label htmlFor="">Alternate Contact Number 1</label>
-          <input ng-model="teacher.alternateContactNumber" class="border-plugin fwidth" type="number" />
-        </div>
-        <div>
-          <label htmlFor="">Email Address*</label>
-          <input ng-model="teacher.teacherEmailAddress" class="border-plugin fwidth" type="text" />
-        </div>
-        <div>
-          <label htmlFor="">Alternate Email Address</label>
-          <input ng-model="teacher.alternateEmailAddress" class="border-plugin fwidth" type="text" />
+      <div ng-class="{'hide':ctrl.activeTabPersonalIndex !== 1}">
+        <div class="form-grid">
+          <div>
+            <label htmlFor="">Name*</label>
+            <input ng-model="teacher.teacherName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Middle Name*</label>
+            <input ng-model="teacher.teacherMiddleName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Last Name*</label>
+            <input ng-model="teacher.teacherLastName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Father Name*</label>
+            <input ng-model="teacher.fatherName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Father Middle Name*</label>
+            <input ng-model="teacher.fatherMiddleName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Father Last Name*</label>
+            <input ng-model="teacher.fatherLastName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Mother Name*</label>
+            <input ng-model="teacher.motherName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Mother Middle Name*</label>
+            <input ng-model="teacher.motherMiddleName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Mother Last Name*</label>
+            <input ng-model="teacher.motherLastName" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Adhar No*</label>
+            <input ng-model="teacher.aadharNo" class="border-plugin fwidth" type="number" />
+          </div>
+          <div>
+            <label htmlFor="">Date Of Birth*</label>
+            <input ng-model="teacher.dateOfBirth" class="border-plugin fwidth" type="date" />
+          </div>
+          <div>
+            <label htmlFor="">Place Of Birth*</label>
+            <input ng-model="teacher.placeOfBirth" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Religion*</label>
+            <select ng-model="teacher.religion" ng-options="f for f in ['HINDU', 'MUSLIM', 'CHRISTIAN']"
+              class="gf-form-input border-plugin">
+            </select>
+          </div>
+          <div>
+            <label htmlFor="">Caste*</label>
+            <select ng-model="teacher.caste" ng-options="f for f in ['OC', 'BC', 'SC', 'ST']"
+              class="gf-form-input border-plugin">
+            </select>
+          </div>
+          <div>
+            <label htmlFor="">Subcaste*</label>
+            <input ng-model="teacher.subCaste" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Age*</label>
+            <input ng-model="teacher.age" class="border-plugin fwidth" type="number" />
+          </div>
+          <div>
+            <label htmlFor="">Sex*</label>
+            <select ng-model="teacher.sex" ng-options="f for f in ['MALE', 'FEMALE']"
+              class="gf-form-input border-plugin">
+            </select>
+          </div>
+          <div>
+            <label htmlFor="">Blood Group*</label>
+            <select ng-model="teacher.bloodGroup"
+              ng-options="f for f in ['ABPOSITIVE','ABNEGATIVE','OPOSITIVE','BPOSITIVE','BNEGATIVE']"
+              class="gf-form-input border-plugin">
+            </select>
+          </div>
         </div>
       </div>
       <div class="bg-heading p-s5 b-1 staff-flex">
-        <h3 class="staf-h3">Primary And Emergency contact Details</h3>
-        <a class="staf-fa-plus" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
-        <!-- <a class="staf-fa-minus" ng-click="ctrl.activateBtnRelation(0)"><i class="fa fa-minus"></i></a> -->
+        <h6 class="pt-bold">Contact Details</h6>
+        <div>
+          <a ng-class="{'hide':ctrl.activeTabContactIndex === 1}" ng-click="ctrl.activateTabContact(1)"><i
+              class="fa fa-plus"></i></a>
+          <a ng-class="{'hide':ctrl.activeTabContactIndex !== 1}" ng-click="ctrl.activateTabContact(0)"><i
+              class="fa fa-minus"></i></a>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabContactIndex !== 1}">
+        <div class="form-grid">
+          <div>
+            <label htmlFor="">Address Line 1*</label>
+            <input ng-model="teacher.addressLineOne" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Address Line 2</label>
+            <input ng-model="teacher.addressLineTwo" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Address Line 3</label>
+            <input ng-model="teacher.addressLineThree" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Town*</label>
+            <input ng-model="teacher.town" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">State*</label>
+            <input ng-model="teacher.state" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Country*</label>
+            <input ng-model="teacher.country" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Pin Code*</label>
+            <input ng-model="teacher.pincode" class="border-plugin fwidth" type="number" />
+          </div>
+          <div>
+            <label htmlFor="">Contact Number*</label>
+            <input ng-model="teacher.teacherContactNumber" class="border-plugin fwidth" type="number" />
+          </div>
+          <div>
+            <label htmlFor="">Alternate Contact Number 1</label>
+            <input ng-model="teacher.alternateContactNumber" class="border-plugin fwidth" type="number" />
+          </div>
+          <div>
+            <label htmlFor="">Email Address*</label>
+            <input ng-model="teacher.teacherEmailAddress" class="border-plugin fwidth" type="text" />
+          </div>
+          <div>
+            <label htmlFor="">Alternate Email Address</label>
+            <input ng-model="teacher.alternateEmailAddress" class="border-plugin fwidth" type="text" />
+          </div>
+        </div>
+      </div>
+      <div class="bg-heading p-s5 b-1 staff-flex">
+        <h6 class="pt-bold">Primary And Emergency contact Details</h6>
+        <div>
+          <a ng-class="{'hide':ctrl.activeTabPrimaryIndex === 1}" ng-click="ctrl.activateTabPrimary(1)"><i
+              class="fa fa-plus"></i></a>
+          <a ng-class="{'hide':ctrl.activeTabPrimaryIndex !== 1}" ng-click="ctrl.activateTabPrimary(0)"><i
+              class="fa fa-minus"></i></a>
+        </div>
       </div>
 
-      <div ng-class="{'show':ctrl.activateBtnRelationIndex === 1}">
+      <div ng-class="{'hide':ctrl.activeTabPrimaryIndex !== 1}">
         <div class="reln">
           <label htmlFor="">Relation with Staff*</label>
-          <select
-            ng-model="teacher.relationWithStaff"
-            ng-options="f for f in ['FATHER','MOTHER','GUARDIAN']"
-            class="gf-form-input border-plugin"
-          >
+          <select ng-model="teacher.relationWithStaff" ng-options="f for f in ['FATHER','MOTHER','GUARDIAN']"
+            class="gf-form-input border-plugin">
           </select>
         </div>
         <div class="form-grid">
