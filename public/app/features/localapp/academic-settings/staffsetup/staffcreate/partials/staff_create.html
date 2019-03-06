@@ -33,7 +33,10 @@
       </div>
     </div>
     <div class="rightbar">
-      <h3 class="bg-heading p-1 b-1">Personal Details</h3>
+      <div class="bg-heading p-s5 b-1 staff-flex">
+        <h3 class="staf-h3">Personal Details</h3>
+        <a class="staf-fa-plus" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
+      </div>
       <div class="form-grid">
         <div>
           <label htmlFor="">Name*</label>
@@ -94,7 +97,11 @@
         </div>
         <div>
           <label htmlFor="">Caste*</label>
-          <select ng-model="teacher.caste" ng-options="f for f in ['OC', 'BC', 'SC', 'ST']" class="gf-form-input border-plugin">
+          <select
+            ng-model="teacher.caste"
+            ng-options="f for f in ['OC', 'BC', 'SC', 'ST']"
+            class="gf-form-input border-plugin"
+          >
           </select>
         </div>
         <div>
@@ -107,7 +114,8 @@
         </div>
         <div>
           <label htmlFor="">Sex*</label>
-          <select ng-model="teacher.sex" ng-options="f for f in ['MALE', 'FEMALE']" class="gf-form-input border-plugin"> </select>
+          <select ng-model="teacher.sex" ng-options="f for f in ['MALE', 'FEMALE']" class="gf-form-input border-plugin">
+          </select>
         </div>
         <div>
           <label htmlFor="">Blood Group*</label>
@@ -119,13 +127,12 @@
           </select>
         </div>
       </div>
-<div class="staff-flex">
-  <h3 class="bg-heading p-1 b-1">Contact Details</h3>
-       <a class="" ng-click="ctrl.activateBtnContact(1)"><i class="fa fa-plus"></i></a>
-</div>
-      
+      <div class="bg-heading p-s5 b-1 staff-flex">
+        <h3 class="staf-h3">Contact Details</h3>
+        <a class="staf-fa-plus" ng-class="{'hide':ctrl.activateBtnContactIndex !== 1}" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
+      </div>
       <div class="form-grid">
-          <div ng-class="{'hide':ctrl.activateBtnContactIndex !== 1}">
+        <div>
           <label htmlFor="">Address Line 1*</label>
           <input ng-model="teacher.addressLineOne" class="border-plugin fwidth" type="text" />
         </div>
@@ -134,7 +141,7 @@
           <input ng-model="teacher.addressLineTwo" class="border-plugin fwidth" type="text" />
         </div>
         <div>
-          <label htmlFor="">Address Line 2</label>
+          <label htmlFor="">Address Line 3</label>
           <input ng-model="teacher.addressLineThree" class="border-plugin fwidth" type="text" />
         </div>
         <div>
@@ -161,7 +168,6 @@
           <label htmlFor="">Alternate Contact Number 1</label>
           <input ng-model="teacher.alternateContactNumber" class="border-plugin fwidth" type="number" />
         </div>
-        <br />
         <div>
           <label htmlFor="">Email Address*</label>
           <input ng-model="teacher.teacherEmailAddress" class="border-plugin fwidth" type="text" />
@@ -171,12 +177,12 @@
           <input ng-model="teacher.alternateEmailAddress" class="border-plugin fwidth" type="text" />
         </div>
       </div>
-      <div class="bg-heading p-1 b-1 staff-flex">
-        <h3 class="staf-h3">Primary And Emergency contact Details</h3>  
+      <div class="bg-heading p-s5 b-1 staff-flex">
+        <h3 class="staf-h3">Primary And Emergency contact Details</h3>
         <a class="staf-fa-plus" ng-click="ctrl.activateBtnRelation(1)"><i class="fa fa-plus"></i></a>
         <!-- <a class="staf-fa-minus" ng-click="ctrl.activateBtnRelation(0)"><i class="fa fa-minus"></i></a> -->
       </div>
-    
+
       <div ng-class="{'show':ctrl.activateBtnRelationIndex === 1}">
         <div class="reln">
           <label htmlFor="">Relation with Staff*</label>
@@ -208,14 +214,10 @@
             <label htmlFor="">Email Address*</label>
             <input ng-model="teacher.emailAddress" class="border-plugin fwidth" type="text" />
           </div>
-          <!-- <div class="rel-radio">
-                <label htmlFor="">Make this Primary</label>
-                <input  class="border-plugin fwidth" type="radio" />
-              </div> -->
         </div>
       </div>
     </div>
   </div>
-  <input ng-model="teacher.uploadPhoto" class="border-plugin fwidth" type="number" />
-  <button type="submit" ng-click="create();">save</button>
+  <!-- <input ng-model="teacher.uploadPhoto" class="border-plugin fwidth" type="number" /> -->
+  <button class="btn btn-primary" type="submit" ng-click="create();">save</button>
 </form>

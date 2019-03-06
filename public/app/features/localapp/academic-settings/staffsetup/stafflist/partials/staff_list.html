@@ -49,10 +49,16 @@
       <input type="search" ng-model="search.teacherName" placeholder="search by name" />
     </div>
   </div>
-
+  <gf-form-checkbox
+  on-change="ctrl.onSelectAllChanged()"
+  checked="ctrl.selectAllChecked"
+  switch-class="gf-form-checkbox--transparent"
+/>
   <table class="staff-management-table">
     <thead>
-      <th><input type="checkbox" name="" id="" ng-model="selectedAll" ng-click="checkAll()" /></th>
+      <th>
+        <input type="checkbox" style="width:18px; height: 18px;" ng-model="teachers.allItemsSelected" ng-change="selectAll()" />
+      </th>
       <th>Name</th>
       <th>Emp Id</th>
       <th>Designation</th>
@@ -65,7 +71,12 @@
     <tbody>
       <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
         <td>
-          <input type="checkbox" ng-model="item.Selected" />
+          <input
+            type="checkbox"
+            style="width:18px; height: 18px;"
+            ng-model="teacher.Selected"
+            ng-change="CheckUncheckHeader()"
+          />
         </td>
         <td ng-search="filter:search">
           {{ teacher.teacherName }}

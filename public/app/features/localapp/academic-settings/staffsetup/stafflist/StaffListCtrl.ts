@@ -2,8 +2,8 @@ export class StaffListCtrl {
   navModel: any;
   sections: any[];
   activeTabIndex = 0;
+  IsAllChecked: any;
   $scope: any;
-  CheckAllModule: any;
   teachers: any;
 
   /** @ngInject */
@@ -11,6 +11,7 @@ export class StaffListCtrl {
     this.activeTabIndex = 0;
     this.getTeachers();
   }
+
   getTeachers() {
     this.backendSrv.get(`http://localhost:8080/api/teachers`).then(result => {
       this.teachers = result;
