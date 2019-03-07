@@ -132,6 +132,7 @@ export class UtilSrv {
 
     scope.create = () => {
       payload.onCreate(scope.branchForm, scope.branch);
+      scope.dismiss();
     };
 
     scope.update = () => {
@@ -153,6 +154,7 @@ export class UtilSrv {
 
     scope.createYear = () => {
       payload.onCreate(scope.yearForm, scope.academicYear);
+      scope.dismiss();
     };
 
     scope.updateYear = () => {
@@ -174,6 +176,7 @@ export class UtilSrv {
 
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
+      scope.dismiss();
     };
 
     scope.update = () => {
@@ -226,6 +229,7 @@ export class UtilSrv {
 
     scope.createSignatory = () => {
       payload.onCreate(scope.signatoryForm, scope.authorizedSignatory);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -241,6 +245,7 @@ export class UtilSrv {
 
     scope.createBank = () => {
       payload.onCreate(scope.bankForm, scope.bankAccount);
+      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
