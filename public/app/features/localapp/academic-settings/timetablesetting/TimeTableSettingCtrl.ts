@@ -6,15 +6,47 @@ export class TimeTableSettingCtrl {
   constructor($scope) {
     this.activeTabIndex = 0;
     this.$scope = $scope;
-  }
 
-  // filter(range, function() {
-  //   return function(input, total) {
-  //     total = parseInt(total);
-  //     for (let i = 0; i < total; i++) input.push(i);
-  //     return input;
-  //   };
-  // });
+    $scope.choices = [];
+
+    $scope.addNewChoice = () => {
+      const newItemNo = $scope.choices.length + 1;
+      for (let i = 0; i < 3; i++) {
+        $scope.choices.push({ id: 'choice' + newItemNo, name: 'choice' + newItemNo });
+      }
+    };
+
+    $scope.removeNewChoice = () => {
+      const newItemNo = $scope.choices.length - 1;
+      if (newItemNo !== 0) {
+        $scope.choices.pop();
+      }
+    };
+
+    $scope.showAddChoice = choice => {
+      return choice.id === $scope.choices[$scope.choices.length - 1].id;
+    };
+
+    // $scope.choices = [];
+
+    // $scope.addNewChoice = () => {
+    //   const newItemNo = $scope.choices.length + 1;
+    //   for (let i = 0; i < 3; i++) {
+    //     $scope.choices.push({ newItemNo });
+    //   }
+    // };
+
+    // $scope.removeNewChoice = () => {
+    //   const newItemNo = $scope.choices.length - 1;
+    //   if (newItemNo !== 0) {
+    //     $scope.choices.pop();
+    //   }
+    // };
+
+    // $scope.showAddChoice = (choice) => {
+    //   return choice.id === $scope.choices[$scope.choices.length - 1].id;
+    // };
+  }
 
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;

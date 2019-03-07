@@ -22,7 +22,7 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr ng-repeat="department in ctrl.departments">
+        <tr ng-repeat="department in ctrl.departments | limitTo:2">
           <td>{{department.name}}
           </td>
           <td>
