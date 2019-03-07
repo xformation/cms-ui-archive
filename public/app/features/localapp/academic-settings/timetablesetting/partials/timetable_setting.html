@@ -9,12 +9,11 @@
   <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
     <h4 class="ptl-06">Create Timetable Template</h4>
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
+      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)"> 
         save</a>
     </div>
   </div>
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
-    <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
     <table id="tts" class="fwidth b-0">
         <thead>
           <th>Department</th>
@@ -55,7 +54,7 @@
                       <option value="">University 3</option>
                     </select>                  
             </td>
-            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = ['1', '2']">
+            <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </span> {{studentCount}}
              <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
@@ -63,7 +62,6 @@
               </span>
               <ul>
                   <li ng-repeat="x in studentCount">Counts:{{x}}</li>
-                  
                 </ul>
               </div>
             </td>
@@ -75,13 +73,12 @@
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
     <table id="tts" class="fwidth">
         <thead>
-          <th>Department</th>
-          <th>Year</th>
-          <th>Primary Teacher</th>
-          <th>University</th>
-          <th>Max No of Students</th>
-          <th>Max No of Division</th>
-          <th>Add Section</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Semester</th>
+            <th>Section</th>
+            <th>No of Lectures</th>
+            <th>Status</th>
         </thead>
         <tbody>
           <tr>
@@ -114,13 +111,6 @@
                       <option value="">University 3</option>
                     </select>                  
             </td>
-            <!-- <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="studentCount = studentCount + 1" ng-init="studentCount = 5">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </span> {{studentCount}}
-             <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
-               <i class="fa fa-minus" aria-hidden="true"></i>
-              </span>
-              </div> -->
             </td>
             <td><div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -144,45 +134,13 @@
             <th>Break After</th>
           </thead>
           <tbody>
-            <tr>
+            <tr ng-repeat="n in [] | range:5">
               <td>1</td>
               <td>Lecture 1</td>
               <td><input type="time" name="" id=""></td>
               <td><input type="time" name="" id=""></td>
               <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
               <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Lecture 2</td>
-              <td><input type="time" name="" id=""></td>
-              <td><input type="time" name="" id=""></td>
-              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
-              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Lecture 3</td>
-              <td><input type="time" name="" id=""></td>
-              <td><input type="time" name="" id=""></td>
-              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
-              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Lecture 4</td>
-              <td><input type="time" name="" id=""></td>
-              <td><input type="time" name="" id=""></td>
-              <td>  <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
-              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Lecture 5</td>
-              <td><input type="time" name="" id=""></td>
-              <td><input type="time" name="" id=""></td>
-              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
-              <td>  <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
             </tr>
           </tbody>
         </table>

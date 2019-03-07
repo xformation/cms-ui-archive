@@ -1,11 +1,15 @@
 <div class="dashboard-list">
-  <div class="page-action-bar page-action-bar--narrow" ng-hide="ctrl.folderId && !ctrl.hasFilters && ctrl.sections.length === 0">
+  <div class="page-action-bar page-action-bar--narrow"
+    ng-hide="ctrl.folderId && !ctrl.hasFilters && ctrl.sections.length === 0">
     <label class="gf-form gf-form--grow gf-form--has-input-icon">
-      <input type="text" class="gf-form-input max-width-30" placeholder="Find Dashboard by name" tabindex="1" give-focus="true" ng-model="ctrl.query.query" ng-model-options="{ debounce: 500 }" spellcheck='false' ng-change="ctrl.onQueryChange()" />
+      <input type="text" class="gf-form-input max-width-30" placeholder="Find Dashboard by name" tabindex="1"
+        give-focus="true" ng-model="ctrl.query.query" ng-model-options="{ debounce: 500 }" spellcheck='false'
+        ng-change="ctrl.onQueryChange()" />
       <i class="gf-form-input-icon fa fa-search"></i>
     </label>
     <div class="page-action-bar__spacer"></div>
-    <a class="btn btn-success" ng-href="{{ctrl.createDashboardUrl()}}" ng-if="ctrl.hasEditPermissionInFolders || ctrl.canSave">
+    <a class="btn btn-success" ng-href="{{ctrl.createDashboardUrl()}}"
+      ng-if="ctrl.hasEditPermissionInFolders || ctrl.canSave">
       <i class="fa fa-plus"></i>
       Dashboard
     </a>
@@ -13,7 +17,8 @@
       <i class="fa fa-plus"></i>
       Folder
     </a>
-    <a class="btn btn-success" href="{{ctrl.importDashboardUrl()}}" ng-if="ctrl.hasEditPermissionInFolders || ctrl.canSave">
+    <a class="btn btn-success" href="{{ctrl.importDashboardUrl()}}"
+      ng-if="ctrl.hasEditPermissionInFolders || ctrl.canSave">
       <i class="fa fa-plus"></i>
       Import
     </a>
@@ -55,48 +60,33 @@
       No dashboards matching your query were found.
     </em>
   </div>
-	<div class="search-results" ng-show="!ctrl.folderId && !ctrl.hasFilters && ctrl.sections.length === 0">
+  <div class="search-results" ng-show="!ctrl.folderId && !ctrl.hasFilters && ctrl.sections.length === 0">
     <em class="muted">
-        No dashboards found.
+      No dashboards found.
     </em>
   </div>
-
   <div class="search-results" ng-show="ctrl.sections.length > 0">
     <div class="search-results-filter-row">
-      <gf-form-checkbox
-        on-change="ctrl.onSelectAllChanged()"
-        checked="ctrl.selectAllChecked"
-        switch-class="gf-form-checkbox--transparent"
-      />
+      <gf-form-checkbox on-change="ctrl.onSelectAllChanged()" checked="ctrl.selectAllChecked"
+        switch-class="gf-form-checkbox--transparent" />
       <div class="search-results-filter-row__filters">
         <div class="gf-form-select-wrapper" ng-show="!(ctrl.canMove || ctrl.canDelete)">
-          <select
-            class="search-results-filter-row__filters-item gf-form-input"
-            ng-model="ctrl.selectedStarredFilter"
+          <select class="search-results-filter-row__filters-item gf-form-input" ng-model="ctrl.selectedStarredFilter"
             ng-options="t.text disable when t.disabled for t in ctrl.starredFilterOptions"
-            ng-change="ctrl.onStarredFilterChange()"
-          />
+            ng-change="ctrl.onStarredFilterChange()" />
         </div>
         <div class="gf-form-select-wrapper" ng-show="!(ctrl.canMove || ctrl.canDelete)">
-          <select
-            class="search-results-filter-row__filters-item gf-form-input"
-            ng-model="ctrl.selectedTagFilter"
+          <select class="search-results-filter-row__filters-item gf-form-input" ng-model="ctrl.selectedTagFilter"
             ng-options="t.term disable when t.disabled for t in ctrl.tagFilterOptions"
-            ng-change="ctrl.onTagFilterChange()"
-          />
+            ng-change="ctrl.onTagFilterChange()" />
         </div>
         <div class="gf-form-button-row" ng-show="ctrl.canMove || ctrl.canDelete">
-          <button	type="button"
-            class="btn gf-form-button btn-inverse"
-            ng-disabled="!ctrl.canMove"
-            ng-click="ctrl.moveTo()"
-            bs-tooltip="ctrl.canMove ? '' : 'Select a dashboard to move (cannot move folders)'"
+          <button type="button" class="btn gf-form-button btn-inverse" ng-disabled="!ctrl.canMove"
+            ng-click="ctrl.moveTo()" bs-tooltip="ctrl.canMove ? '' : 'Select a dashboard to move (cannot move folders)'"
             data-placement="bottom">
-          <i class="fa fa-exchange"></i>&nbsp;&nbsp;Move
+            <i class="fa fa-exchange"></i>&nbsp;&nbsp;Move
           </button>
-          <button type="button"
-            class="btn gf-form-button btn-danger"
-            ng-click="ctrl.delete()"
+          <button type="button" class="btn gf-form-button btn-danger" ng-click="ctrl.delete()"
             ng-disabled="!ctrl.canDelete">
             <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete
           </button>
@@ -104,12 +94,8 @@
       </div>
     </div>
     <div class="search-results-container">
-      <dashboard-search-results
-        results="ctrl.sections"
-        editable="true"
-        on-selection-changed="ctrl.selectionChanged()"
-        on-tag-selected="ctrl.filterByTag($tag)"
-      />
+      <dashboard-search-results results="ctrl.sections" editable="true" on-selection-changed="ctrl.selectionChanged()"
+        on-tag-selected="ctrl.filterByTag($tag)" />
     </div>
   </div>
 
