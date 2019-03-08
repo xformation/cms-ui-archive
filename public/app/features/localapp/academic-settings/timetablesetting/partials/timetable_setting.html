@@ -162,17 +162,16 @@
       <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Choice</button>
       <button ng-click="removeNewChoice()">Remove Choice</button> -->
 
-      <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Choice</button>
-      <button ng-click="removeNewChoice()">Remove Choice</button>
+      <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Save</button>
+      <button ng-click="removeNewChoice()">Remove</button>
 
       <div class="form-group">
         <label for="choice" ng-show="showChoiceLabel(choice)">Choices</label>
-
-        <tr data-ng-repeat="choice in choices">
-          <td> <input ng-modal="{{choice.name}}" type="text" placeholder="Serial No." /> </td>
-          <td><input ng-modal="{{choice.name}}" type="text" placeholder="Enter Lecture Name" /> </td>
-          <td><input ng-modal="{{choice.name}}" type="time" name="" id=""></td>
-          <td><input ng-modal="{{choice.name}}" type="time" name="" id=""></td>
+        <tr ng-repeat="choice in choices">
+          <td> <input class="time-table" ng-modal="{{choice.name}}" type="text" placeholder="Serial No." /> </td>
+          <td><input class="time-table" ng-modal="{{choice.name}}" type="text" placeholder="Enter Lecture Name" /> </td>
+          <td><input class="time-table" ng-modal="{{choice.name}}" type="time" name="" id=""></td>
+          <td><input class="time-table" ng-modal="{{choice.name}}" type="time" name="" id=""></td>
           <td> <label ng-modal="{{choice.name}}" class="switch"> <input type="checkbox" /> <span
                 class="slider m-0"></span> </label></td>
           <td> <label ng-modal="{{choice.name}}" class="switch"> <input type="checkbox" checked /> <span

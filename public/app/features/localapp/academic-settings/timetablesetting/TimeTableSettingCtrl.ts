@@ -8,10 +8,10 @@ export class TimeTableSettingCtrl {
     this.$scope = $scope;
 
     $scope.choices = [];
-
+    const counter = 5;
     $scope.addNewChoice = () => {
       const newItemNo = $scope.choices.length + 1;
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < counter; i++) {
         $scope.choices.push({ id: 'choice' + newItemNo, name: 'choice' + newItemNo });
       }
     };
