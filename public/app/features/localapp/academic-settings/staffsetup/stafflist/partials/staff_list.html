@@ -53,12 +53,8 @@
   <table class="staff-management-table">
     <thead>
       <th>
-        <input
-          type="checkbox"
-          style="width:18px; height: 18px;"
-          ng-model="ctrl.checked"
-          ng-change="ctrl.internalOnChange()"
-        />
+        <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
+          ng-change="ctrl.internalOnChange()" />
       </th>
       <th>Name</th>
       <th>Emp Id</th>
@@ -72,15 +68,11 @@
     <tbody>
       <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
         <td>
-          <input
-            type="checkbox"
-            style="width:18px; height: 18px;"
-            ng-model="ctrl.checked"
-            ng-change="ctrl.internalOnChange()"
-          />
+          <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
+            ng-change="ctrl.internalOnChange()" />
         </td>
         <td ng-search="filter:search">
-          {{ teacher.teacherName }}
+          {{ teacher.teacherName + ' ' + teacher.teacherLastName }}
         </td>
         <td>{{ teacher.employeeId }}</td>
         <td>{{ teacher.designation }}</td>
