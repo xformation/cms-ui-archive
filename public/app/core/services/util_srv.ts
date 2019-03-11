@@ -194,6 +194,7 @@ export class UtilSrv {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
     scope.departments = payload.departments;
+    scope.batches = payload.batches;
     scope.subject = payload.subject;
 
     scope.create = () => {
