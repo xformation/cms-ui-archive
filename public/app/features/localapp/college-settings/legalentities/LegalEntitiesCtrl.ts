@@ -1,21 +1,22 @@
 import { appEvents } from 'app/core/core';
+import { config } from '../../config';
 
 export class LegalEntitiesCtrl {
   bankAccounts: any;
   authorizedSignatories: any;
-  authSignatory: any;
+  selectedSignatories: any = [];
   legalEntities: any;
   navModel: any;
-  branches: any;
-  states: any;
-  cities: any;
+  clgObject: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/logo.png';
   $scope;
+  dependedObj = {};
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.activeTabIndex = 0;
     this.$scope = $scope;
+    this.$scope.legalEntity = {};
     $scope.getFile = this.getFile.bind(this);
     this.getBank();
     this.getSignatory();
@@ -24,11 +25,14 @@ export class LegalEntitiesCtrl {
     this.getState();
     this.getCity();
     this.Check();
+
+    this.clgObject = {};
+
     $scope.createBank = () => {
       if (!$scope.bankForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/bank-accounts/', $scope.bankAccount).then(() => {
+      backendSrv.post(`${config.api_url}/api/bank-accounts/`, $scope.bankAccount).then(() => {
         this.getBank();
         console.log('Bank:', this.bankAccounts);
       });
@@ -38,18 +42,17 @@ export class LegalEntitiesCtrl {
       if (!$scope.signatoryForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/authorized-signatories/', $scope.authorizedSignatory).then(() => {
+      backendSrv.post(`${config.api_url}/api/authorized-signatories/`, $scope.authorizedSignatory).then(() => {
         this.getSignatory();
         console.log('Authorised:', this.authorizedSignatories);
       });
     };
 
     $scope.create = () => {
-      console.log('Legal:', this.legalEntities);
       if (!$scope.legalForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/legal-entities/', $scope.legalEntity).then(() => {
+      backendSrv.post(`${config.api_url}/api/legal-entities/`, $scope.legalEntity).then(() => {
         console.log('Legal:', this.legalEntities);
       });
     };
@@ -73,31 +76,31 @@ export class LegalEntitiesCtrl {
   }
 
   getBank() {
-    this.backendSrv.get(`http://localhost:8080/api/bank-accounts/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/bank-accounts/`).then(result => {
       this.bankAccounts = result;
     });
   }
 
   getState() {
-    this.backendSrv.get(`http://localhost:8080/api/states/`).then(result => {
-      this.states = result;
+    this.backendSrv.get(`${config.api_url}/api/states/`).then(result => {
+      this.clgObject.states = result;
     });
   }
 
   getCity() {
-    this.backendSrv.get(`http://localhost:8080/api/cities/`).then(result => {
-      this.cities = result;
+    this.backendSrv.get(`${config.api_url}/api/cities/`).then(result => {
+      this.clgObject.cities = result;
     });
   }
 
   getBranch() {
-    this.backendSrv.get(`http://localhost:8080/api/branches/`).then(result => {
-      this.branches = result;
+    this.backendSrv.get(`${config.api_url}/api/branches/`).then(result => {
+      this.clgObject.branches = result;
     });
   }
 
   getSignatory() {
-    this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/authorized-signatories/`).then(result => {
       this.authorizedSignatories = result;
     });
   }
@@ -106,15 +109,8 @@ export class LegalEntitiesCtrl {
     console.log('Function printed');
   }
 
-  getSignatorySetId(authorizedSignatory) {
-    this.backendSrv.get(`http://localhost:8080/api/authorized-signatories/` + 1201).then(() => {
-      // this.authSignatory = result;
-    });
-    console.log('IdData:', authorizedSignatory);
-  }
-
   getLegalEntity() {
-    this.backendSrv.get(`http://localhost:8080/api/legal-entities/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/legal-entities/`).then(result => {
       this.legalEntities = result;
     });
   }
@@ -132,6 +128,7 @@ export class LegalEntitiesCtrl {
       },
     });
   }
+
   showBankModal() {
     const text = 'Add New';
 
@@ -144,5 +141,88 @@ export class LegalEntitiesCtrl {
         this.$scope.createBank();
       },
     });
+  }
+
+  onChangeState() {
+    const { stateId } = this.$scope.legalEntity;
+    this.$scope.legalEntity = {};
+    this.$scope.legalEntity.stateId = stateId;
+    const { cities } = this.clgObject;
+    const selectedCities = [];
+    for (const i in cities) {
+      const city = cities[i];
+      if (city.stateId === parseInt(stateId, 10)) {
+        selectedCities.push(city);
+      }
+    }
+    this.clgObject.selectedCities = selectedCities;
+  }
+
+  onChangeCity() {
+    const { stateId, cityId } = this.$scope.legalEntity;
+    this.$scope.legalEntity = {
+      stateId,
+      cityId
+    };
+    const { branches } = this.clgObject;
+    const selectedBranches = [];
+    for (const i in branches) {
+      const branch = branches[i];
+      if (branch.cityId === parseInt(cityId, 10)) {
+        selectedBranches.push(branch);
+      }
+    }
+    this.clgObject.selectedBranches = selectedBranches;
+  }
+
+  onChangeBranch() {
+    const { branchId, cityId, stateId } = this.$scope.legalEntity;
+    this.selectedSignatories = [];
+    for (const i in this.legalEntities) {
+      const legalEntity = this.legalEntities[i];
+      if (legalEntity.branchId === parseInt(branchId, 10)) {
+        this.$scope.legalEntity = {
+          ...legalEntity,
+          stateId,
+          cityId,
+          branchId,
+          dateOfIncorporation: new Date(legalEntity["dateOfIncorporation"]),
+          pfRegistrationDate: new Date(legalEntity["pfRegistrationDate"]),
+          esiRegistrationDate: new Date(legalEntity["esiRegistrationDate"]),
+          ptRegistrationDate: new Date(legalEntity["ptRegistrationDate"])
+        };
+        break;
+      }
+    }
+    for (const i in this.authorizedSignatories) {
+      const signatory = this.authorizedSignatories[i];
+      if (signatory.branchId === parseInt(branchId, 10)) {
+        this.selectedSignatories.push(signatory);
+      }
+    }
+  }
+
+  onChangePfSignatory() {
+    const { pfSignatory } = this.$scope.legalEntity;
+    for (const i in this.selectedSignatories) {
+      const signatory = this.selectedSignatories[i];
+      if (signatory.id === parseInt(pfSignatory, 10)) {
+        this.$scope.legalEntity.pfSignatoryFatherName = signatory.signatoryFatherName;
+        this.$scope.legalEntity.pfSignatoryDesignation = signatory.signatoryDesignation;
+        break;
+      }
+    }
+  }
+
+  onChangeEsiSignatory() {
+    const { esiSignatory } = this.$scope.legalEntity;
+    for (const i in this.selectedSignatories) {
+      const signatory = this.selectedSignatories[i];
+      if (signatory.id === parseInt(esiSignatory, 10)) {
+        this.$scope.legalEntity.esiSignatoryFatherName = signatory.signatoryFatherName;
+        this.$scope.legalEntity.esiSignatoryDesignation = signatory.signatoryDesignation;
+        break;
+      }
+    }
   }
 }
