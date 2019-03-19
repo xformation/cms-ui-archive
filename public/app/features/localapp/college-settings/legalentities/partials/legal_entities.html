@@ -184,7 +184,7 @@
               <label class="gf-form-label b-0 bg-white">FORM 16 SIGNATORY</label>
               <div class="gf-form-select-wrapper">
                 <select class="gf-form-input" ng-model="legalEntity.formSignatory">
-                  <option ng-repeat="authorizedSignatory in ctrl.selectedSignatories"
+                  <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
                     value="{{authorizedSignatory.id}}">
                     {{authorizedSignatory.signatoryName}}</option>
                 </select>
@@ -214,7 +214,7 @@
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.pfSignatory"
                       ng-change="ctrl.onChangePfSignatory();">
-                      <option ng-repeat="authorizedSignatory in ctrl.selectedSignatories"
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
@@ -258,7 +258,7 @@
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY</label>
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.esiSignatory" ng-change="ctrl.onChangeEsiSignatory()">
-                      <option ng-repeat="authorizedSignatory in ctrl.selectedSignatories"
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
@@ -307,7 +307,7 @@
                   <label class="gf-form-label b-0 bg-white">PT SIGNATORY</label>
                   <div class="gf-form-select-wrapper">
                     <select class="gf-form-input" ng-model="legalEntity.ptSignatory">
-                      <option ng-repeat="authorizedSignatory in ctrl.selectedSignatories"
+                      <option ng-repeat="authorizedSignatory in ctrl.authorizedSignatories"
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>

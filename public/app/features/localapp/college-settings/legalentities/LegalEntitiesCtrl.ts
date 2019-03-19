@@ -4,7 +4,6 @@ import { config } from '../../config';
 export class LegalEntitiesCtrl {
   bankAccounts: any;
   authorizedSignatories: any;
-  selectedSignatories: any = [];
   legalEntities: any;
   navModel: any;
   clgObject: any;
@@ -177,7 +176,6 @@ export class LegalEntitiesCtrl {
 
   onChangeBranch() {
     const { branchId, cityId, stateId } = this.$scope.legalEntity;
-    this.selectedSignatories = [];
     for (const i in this.legalEntities) {
       const legalEntity = this.legalEntities[i];
       if (legalEntity.branchId === parseInt(branchId, 10)) {
@@ -194,18 +192,12 @@ export class LegalEntitiesCtrl {
         break;
       }
     }
-    for (const i in this.authorizedSignatories) {
-      const signatory = this.authorizedSignatories[i];
-      if (signatory.branchId === parseInt(branchId, 10)) {
-        this.selectedSignatories.push(signatory);
-      }
-    }
   }
 
   onChangePfSignatory() {
     const { pfSignatory } = this.$scope.legalEntity;
-    for (const i in this.selectedSignatories) {
-      const signatory = this.selectedSignatories[i];
+    for (const i in this.authorizedSignatories) {
+      const signatory = this.authorizedSignatories[i];
       if (signatory.id === parseInt(pfSignatory, 10)) {
         this.$scope.legalEntity.pfSignatoryFatherName = signatory.signatoryFatherName;
         this.$scope.legalEntity.pfSignatoryDesignation = signatory.signatoryDesignation;
@@ -216,8 +208,8 @@ export class LegalEntitiesCtrl {
 
   onChangeEsiSignatory() {
     const { esiSignatory } = this.$scope.legalEntity;
-    for (const i in this.selectedSignatories) {
-      const signatory = this.selectedSignatories[i];
+    for (const i in this.authorizedSignatories) {
+      const signatory = this.authorizedSignatories[i];
       if (signatory.id === parseInt(esiSignatory, 10)) {
         this.$scope.legalEntity.esiSignatoryFatherName = signatory.signatoryFatherName;
         this.$scope.legalEntity.esiSignatoryDesignation = signatory.signatoryDesignation;
