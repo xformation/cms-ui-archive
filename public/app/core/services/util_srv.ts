@@ -196,7 +196,7 @@ export class UtilSrv {
     scope.departments = payload.departments;
     scope.batches = payload.batches;
     scope.subject = payload.subject;
-
+    scope.teachers = payload.teachers;
     scope.create = () => {
       payload.onCreate(scope.subjectForm, scope.subject);
       scope.dismiss();

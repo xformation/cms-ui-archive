@@ -1,4 +1,5 @@
 import { appEvents } from 'app/core/core';
+import { config } from '../../config';
 
 export class SubjectSetupCtrl {
   subjects: any;
@@ -22,7 +23,7 @@ export class SubjectSetupCtrl {
       if (!$scope.subjectForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/subjects/', $scope.subject).then(() => {
+      backendSrv.post(`${config.api_url}/api/subjects/`, $scope.subject).then(() => {
         this.getSubjects();
       });
     };
@@ -30,7 +31,7 @@ export class SubjectSetupCtrl {
       if (!$scope.subjectForm.$valid) {
         return;
       }
-      backendSrv.put('http://localhost:8080/api/subjects/', $scope.subject).then(() => {
+      backendSrv.put(`${config.api_url}/api/subjects/`, $scope.subject).then(() => {
         this.getSubjects();
       });
     };
@@ -41,25 +42,25 @@ export class SubjectSetupCtrl {
   }
 
   getSubjects() {
-    this.backendSrv.get(`http://localhost:8080/api/subjects/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/subjects/`).then(result => {
       this.subjects = result;
       console.log('Subjects', this.subjects);
     });
   }
   getDepartments() {
-    this.backendSrv.get(`http://localhost:8080/api/departments/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/departments/`).then(result => {
       this.departments = result;
       console.log('departments', this.departments);
     });
   }
   getTeachers() {
-    this.backendSrv.get(`http://localhost:8080/api/teachers/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/teachers/`).then(result => {
       this.teachers = result;
       console.log('teachers', this.teachers);
     });
   }
   getBatches() {
-    this.backendSrv.get(`http://localhost:8080/api/batches/`).then(result => {
+    this.backendSrv.get(`${config.api_url}/api/batches/`).then(result => {
       this.batches = result;
       console.log('Batches', this.batches);
     });
@@ -72,7 +73,7 @@ export class SubjectSetupCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete('http://localhost:8080/api/subjects/' + subject.id).then(() => {
+        this.backendSrv.delete('${config.api_url}/api/subjects/' + subject.id).then(() => {
           this.getSubjects();
         });
       },
@@ -86,6 +87,7 @@ export class SubjectSetupCtrl {
       subject: subject,
       departments: this.departments,
       batches: this.batches,
+      teachers: this.teachers,
       onUpdate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
