@@ -104,6 +104,7 @@ export class SubjectSetupCtrl {
       icon: 'fa-trash',
       departments: this.departments,
       batches: this.batches,
+      teachers: this.teachers,
       onCreate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
