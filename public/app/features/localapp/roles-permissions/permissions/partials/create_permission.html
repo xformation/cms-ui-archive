@@ -12,27 +12,28 @@
     </div>
     <div class="modal-content">
         <div class="add-confirm-modal p-1">
-            <form class="gf-form-group section m-0 dflex">
+            <form name="permissionForm" class="gf-form-group section m-0 dflex">
                 <div class="bg-modal">
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">VERSION</label>
-                        <input id={{scope.permission.version}} type="text" class="gf-form-input " placeholder="" />
+                        <input ng-model="permission.version" type="text" class="gf-form-input " placeholder="" />
                     </div>
                     <div class="fwidth-modal-text">
-                        <label class="gf-form-label b-0 bg-transparent">NAME*</label>
-                        <input id={{scope.permission.name}} type="text" class="gf-form-input " placeholder="" />
+                        <label class="gf-form-label b-0 bg-transparent">NAME</label>
+                        <input required ng-model="permission.name" type="text" class="gf-form-input " placeholder="" />
                     </div>
                     <div class="fwidth-modal-text">
-                        <label class="gf-form-label b-0 bg-transparent">PERMISSION*</label>
-                        <input id={{scope.permission.permission}} type="text" class="gf-form-input " placeholder="" />
+                        <label class="gf-form-label b-0 bg-transparent">PERMISSION</label>
+                        <input required ng-model="permission.permission" type="text" class="gf-form-input "
+                            placeholder="" />
                     </div>
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">DESCRIPTION</label>
-                        <textarea id={{scope.permission.description}} class="gf-form-input " placeholder=""></textarea>
+                        <textarea ng-model="permission.description" class="gf-form-input " placeholder=""></textarea>
                     </div>
                     <div class="gf-form-button-row p-r-4">
-                        <button type="submit" class="btn btn-success border-bottom"
-                            ng-click="$scope.PermissionsCtrl.savePermission()">Save</button>
+                        <button type="button" class="btn btn-success border-bottom"
+                            ng-click="savePermission();">Save</button>
                         <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
                     </div>
                 </div>

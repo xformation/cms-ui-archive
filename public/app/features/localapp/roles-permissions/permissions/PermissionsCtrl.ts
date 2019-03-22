@@ -2,8 +2,21 @@ import { appEvents } from 'app/core/core';
 
 export class PermissionsCtrl {
   permissions: any[];
-  constructor() {
+  $scope: any;
+  $http: any;
+  /** @ngInject */
+  constructor($scope, $http) {
+    this.$scope = $scope;
+    this.$http = $http;
     this.getPermissions();
+
+    $scope.savePermission = () => {
+      if (!$scope.permissionForm.$valid) {
+        console.log('No valid for found');
+        return;
+      }
+      console.log('Save it: ', $scope.permissionForm.permission);
+    };
   }
 
   getPermissions() {
@@ -60,13 +73,7 @@ export class PermissionsCtrl {
     appEvents.emit('add-permission-modal', {
       text: 'Add new premission',
       icon: 'fa-trash',
-      onAdd: $scope => {
-        this.savePermission($scope);
-      },
+      onAdd: () => {},
     });
-  }
-
-  savePermission($scope) {
-    console.log('Save it: ' + $scope.permission.name);
   }
 }
