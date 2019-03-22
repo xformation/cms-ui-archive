@@ -56,11 +56,17 @@ export class PermissionsCtrl {
   }
 
   showAddPermissionModal() {
-    const text = 'Do you want to delete the ';
-    appEvents.emit('add-permissions-modal', {
-      text: text,
+    console.log('Calling event: add-permission-modal');
+    appEvents.emit('add-permission-modal', {
+      text: 'Add new premission',
       icon: 'fa-trash',
-      onAdd: () => {},
+      onAdd: $scope => {
+        this.savePermission($scope);
+      },
     });
+  }
+
+  savePermission($scope) {
+    console.log('Save it: ' + $scope.permission.name);
   }
 }

@@ -19,6 +19,7 @@ export class UtilSrv {
     appEvents.on('subject-modal', this.subjectModal.bind(this), this.$rootScope);
     appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
     appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
+    appEvents.on('add-permission-modal', this.addPermissionModal.bind(this), this.$rootScope);
     appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
     appEvents.on('add-group-modal', this.addGroupModal.bind(this), this.$rootScope);
     appEvents.on('assign-role-modal', this.assignRoleModal.bind(this), this.$rootScope);
@@ -278,7 +279,8 @@ export class UtilSrv {
 
   addPermissionModal(payload) {
     const scope = payload.scope || this.$rootScope.$new();
-
+    console.log('Again event call: show-model');
+    console.log(payload);
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/permissions/partials/create_permission.html',
       scope: scope,
