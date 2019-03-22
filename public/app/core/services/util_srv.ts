@@ -276,6 +276,16 @@ export class UtilSrv {
     });
   }
 
+  addPermissionModal(payload) {
+    const scope = payload.scope || this.$rootScope.$new();
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/permissions/partials/create_permission.html',
+      scope: scope,
+      modalClass: 'add-new-permission',
+    });
+  }
+
   assignRoleModal(payload) {
     const scope = this.$rootScope.$new();
     scope.roles = payload.roles;
