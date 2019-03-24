@@ -1,71 +1,33 @@
 import { appEvents } from 'app/core/core';
+import { config } from 'app/features/localapp/config';
 
 export class PermissionsCtrl {
   permissions: any[];
   $scope: any;
-  $http: any;
+  backendSrv: any;
   /** @ngInject */
-  constructor($scope, $http) {
+  constructor($scope, backendSrv) {
     this.$scope = $scope;
-    this.$http = $http;
+    this.backendSrv = backendSrv;
     this.getPermissions();
 
     $scope.savePermission = () => {
+      console.log('Permission: ', $scope.permission);
       if (!$scope.permissionForm.$valid) {
         console.log('No valid for found');
         return;
       }
-      console.log('Save it: ', $scope.permissionForm.permission);
+      this.backendSrv.post(config.PERMS_CREATE, $scope.premission).then(response => {
+        console.log('Api response: ', response);
+      });
+      console.log('Save it: ', $scope.permission);
     };
   }
 
   getPermissions() {
-    this.permissions = [
-      {
-        name: 'SUPER ADMINISTRATOR',
-        description: '',
-      },
-      {
-        name: 'ADMINISTRATOR',
-        description: '',
-      },
-      {
-        name: 'TEACHER',
-        description: '',
-      },
-      {
-        name: 'PRINICIPAL',
-        description: '',
-      },
-      {
-        name: 'HOD',
-        description: '',
-      },
-      {
-        name: 'STUDENT',
-        description: '',
-      },
-      {
-        name: 'STUDENT',
-        description: '',
-      },
-      {
-        name: 'TRANSPORT',
-        description: '',
-      },
-      {
-        name: 'CANTEEN',
-        description: '',
-      },
-      {
-        name: 'HOUSE KEEPING',
-        description: '',
-      },
-      {
-        name: 'STUDENT',
-        description: '',
-      },
-    ];
+    this.backendSrv.get(config.PERMS_LIST_ALL).then(response => {
+      this.permissions = response;
+    });
   }
 
   showAddPermissionModal() {
@@ -73,7 +35,12 @@ export class PermissionsCtrl {
     appEvents.emit('add-permission-modal', {
       text: 'Add new premission',
       icon: 'fa-trash',
-      onAdd: () => {},
+      onCreate: (permissionForm, permission) => {
+        this.$scope.permissionForm = permissionForm;
+        this.$scope.permission = permission;
+        this.$scope.savePermission();
+        this.getPermissions();
+      },
     });
   }
 }

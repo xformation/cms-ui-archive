@@ -278,9 +278,16 @@ export class UtilSrv {
   }
 
   addPermissionModal(payload) {
+    console.log(payload);
     const scope = payload.scope || this.$rootScope.$new();
     console.log('Again event call: show-model');
-    console.log(payload);
+    scope.permission = payload.permission;
+
+    scope.savePermission = () => {
+      payload.onCreate(scope.permissionForm, scope.permission);
+      scope.dismiss();
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/permissions/partials/create_permission.html',
       scope: scope,
