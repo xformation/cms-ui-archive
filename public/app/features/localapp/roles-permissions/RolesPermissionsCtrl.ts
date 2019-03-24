@@ -9,6 +9,10 @@ export class RolesPerissionsCtrl {
   buildSectionList() {
     this.sections = [];
     this.sections.push({
+      title: 'Permissions',
+      id: 'permissions',
+    });
+    this.sections.push({
       title: 'Roles',
       id: 'roles',
     });

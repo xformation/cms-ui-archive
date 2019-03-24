@@ -1,0 +1,28 @@
+<div class="page-container page-body groups-main-container">
+    <div class="border-container">
+        <div class="groups-btn-container text-right p-2">
+            <button class="link-btn mr-1" ng-click="ctrl.showAddPermissionModal()"><i
+                    class="fa fa-plus-circle"></i>Create New Permission</button>
+            <button class="link-btn mr-1">Search Permission</button>
+            <input type="text" class="gf-form-input max-width-18 search-groups-textbox"
+                placeholder="Search Permissions" />
+        </div>
+        <div class="groups-table-container">
+            <table class="groups-table">
+                <thead>
+                    <td>Name</td>
+                    <td>Description</td>
+                </thead>
+                <tr ng-repeat="permission in ctrl.permissions">
+                    <td>
+                        <input type="checkbox" id={{permission.id}} />
+                        <label for={{permission.id}}>{{permission.name}}</label>
+                    </td>
+                    <td>
+                        <label>{{permission.description}}</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

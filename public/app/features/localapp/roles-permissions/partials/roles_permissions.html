@@ -8,6 +8,9 @@
     <div class="clearfix"></div>
   </div>
   <div class="tab-content">
+    <div ng-class="{'hide':ctrl.activeTabId !== 'permissions'}">
+      <permissions></permissions>
+    </div>
     <div ng-class="{'hide':ctrl.activeTabId !== 'roles'}">
       <roles></roles>
     </div>

@@ -19,6 +19,7 @@ export class UtilSrv {
     appEvents.on('subject-modal', this.subjectModal.bind(this), this.$rootScope);
     appEvents.on('signatory-modal', this.signatoryModal.bind(this), this.$rootScope);
     appEvents.on('bank-modal', this.bankModal.bind(this), this.$rootScope);
+    appEvents.on('add-permission-modal', this.addPermissionModal.bind(this), this.$rootScope);
     appEvents.on('add-role-modal', this.addRoleModal.bind(this), this.$rootScope);
     appEvents.on('add-group-modal', this.addGroupModal.bind(this), this.$rootScope);
     appEvents.on('assign-role-modal', this.assignRoleModal.bind(this), this.$rootScope);
@@ -273,6 +274,24 @@ export class UtilSrv {
       src: 'public/app/features/localapp/roles-permissions/groups/partials/create_group.html',
       scope: scope,
       modalClass: 'add-new-group',
+    });
+  }
+
+  addPermissionModal(payload) {
+    console.log(payload);
+    const scope = payload.scope || this.$rootScope.$new();
+    console.log('Again event call: show-model');
+    scope.permission = payload.permission;
+
+    scope.savePermission = () => {
+      payload.onCreate(scope.permissionForm, scope.permission);
+      scope.dismiss();
+    };
+
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/permissions/partials/create_permission.html',
+      scope: scope,
+      modalClass: 'add-new-permission',
     });
   }
 
