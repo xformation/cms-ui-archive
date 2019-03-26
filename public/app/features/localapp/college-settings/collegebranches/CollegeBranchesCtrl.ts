@@ -122,6 +122,7 @@ export class CollegeBranchesCtrl {
         this.$scope.cities = cities;
         this.$scope.selectedCities = selectedCities;
         this.$scope.onChangeState();
+        return this.$scope.selectedCities;
       },
     });
   }
@@ -145,6 +146,7 @@ export class CollegeBranchesCtrl {
         this.$scope.cities = cities;
         this.$scope.selectedCities = selectedCities;
         this.$scope.onChangeState();
+        return this.$scope.selectedCities;
       },
     });
   }

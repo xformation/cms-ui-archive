@@ -144,7 +144,7 @@ export class UtilSrv {
       scope.dismiss();
     };
     scope.onChangeState = () => {
-      payload.onChange(scope.branchForm, scope.branch, scope.cities, scope.selectedCities);
+      scope.selectedCities = payload.onChange(scope.branchForm, scope.branch, scope.cities, scope.selectedCities);
     };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
