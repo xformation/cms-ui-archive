@@ -19,16 +19,28 @@
 				<div class="bg-modal modal-fwidth">
 					<div class="mdflex modal-fwidth">
 						<div class="fwidth-modal-text m-r-1">
-							<label class="gf-form-label b-0 bg-transparent">STATE ID</label>
-							<input type="number" required ng-model="branch.stateId" class="gf-form-input "
+							<label class="gf-form-label b-0 bg-transparent">STATE</label>
+							<!--<input type="number" required ng-model="branch.stateId" class="gf-form-input "
 								placeholder="name" />
-							<!-- <select type="text" ng-model="branch.stateName" class="gf-form-input width-10"
+							 	<select type="text" ng-model="branch.stateName" class="gf-form-input width-10"
 								ng-options="stateName as branch.stateName for branch in ctrl.branches"></select> -->
-						</div>
+								<select class="gf-form-input" ng-model="branch.stateId" ng-change="onChangeState()">
+									<option value="">
+									  Select State</option>
+									<option ng-repeat="state in states" value="{{state.id}}">
+									  {{state.stateName}}</option>
+								</select>
+							</div>
 						<div class="fwidth-modal-text">
-							<label class="gf-form-label b-0 bg-transparent">CITY ID</label>
-							<input type="number" required ng-model="branch.cityId" class="gf-form-input "
-								placeholder="description" />
+							<label class="gf-form-label b-0 bg-transparent">CITY</label>
+							<!--<input type="number" required ng-model="branch.cityId" class="gf-form-input "
+								placeholder="description" />-->
+								<select class="gf-form-input" ng-model="branch.cityId" >
+									<option value="">
+									  Select City</option>
+									<option ng-repeat="city in selectedCities" value="{{city.id}}">
+									  {{city.cityName}}</option>
+								</select>
 						</div>
 					</div>
 					<div class="fwidth-modal-text modal-fwidth">
@@ -57,9 +69,15 @@
 								placeholder="college head" />
 						</div>
 						<div class="fwidth-modal-text">
-							<label class="gf-form-label b-0 bg-transparent">COLLEGE ID</label>
-							<input type="number" required ng-model="branch.collegeId" class="gf-form-input "
-								placeholder="description" />
+							<label class="gf-form-label b-0 bg-transparent">COLLEGE</label>
+							<!--<input type="number" required ng-model="branch.collegeId" class="gf-form-input "
+								placeholder="description" /> -->
+								<select class="gf-form-input" ng-model="branch.collegeId" >
+									<option value="">
+									  Select College</option>
+									<option ng-repeat="college in colleges" value="{{college.id}}">
+									  {{college.shortName}}</option>
+								</select>
 						</div>
 					</div>
 					<div class="m-t-1 text-center">

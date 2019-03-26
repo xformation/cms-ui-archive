@@ -1,3 +1,5 @@
+import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+
 export class GeneralInfoCtrl {
   colleges: any;
   navModel: any;
@@ -5,9 +7,14 @@ export class GeneralInfoCtrl {
   activeTabIndex = 0;
   logoSrc = '/public/img/logo.png';
   bgSrc = '/public/img/dashboard.png';
+  isCollegeLogoChanged = false;
+  isCollegeBgChanged = false;
   $scope: any;
+  RestUrl: any;
+
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.query = '';
@@ -18,8 +25,19 @@ export class GeneralInfoCtrl {
       if (!$scope.collegeForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/colleges/', $scope.college).then(() => {
+      if (this.isCollegeLogoChanged) {
+        $scope.cmsCollegeVo.logoImage = this.logoSrc;
+      }
+      if (this.isCollegeBgChanged) {
+        $scope.cmsCollegeVo.bgImage = this.bgSrc;
+      }
+      backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
         this.getColleges();
+        if (result === 200 || result === 201) {
+          alert('College data saved successfully.');
+        } else {
+          alert('Due to some error college data could not be saved!');
+        }
       });
     };
   }
@@ -39,6 +57,7 @@ export class GeneralInfoCtrl {
       this.$scope.$apply();
     };
     fileReader.readAsDataURL(file);
+    this.isCollegeLogoChanged = true;
   }
   getbgFile(file) {
     if (!file) {
@@ -51,10 +70,11 @@ export class GeneralInfoCtrl {
       this.$scope.$apply();
     };
     fileReader.readAsDataURL(file);
+    this.isCollegeBgChanged = true;
   }
 
   getColleges() {
-    this.backendSrv.get(`http://localhost:8080/api/colleges/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
       this.colleges = result;
       console.log(this.colleges);
     });

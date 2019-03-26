@@ -130,7 +130,10 @@ export class UtilSrv {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
     scope.branch = payload.branch;
-
+    scope.states = payload.states;
+    scope.cities = payload.cities;
+    scope.selectedCities = payload.selectedCities;
+    scope.colleges = payload.colleges;
     scope.create = () => {
       payload.onCreate(scope.branchForm, scope.branch);
       scope.dismiss();
@@ -140,7 +143,9 @@ export class UtilSrv {
       payload.onUpdate(scope.branchForm, scope.branch);
       scope.dismiss();
     };
-
+    scope.onChangeState = () => {
+      payload.onChange(scope.branchForm, scope.branch, scope.cities, scope.selectedCities);
+    };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/collegebranches/partials/branch_modal.html',
       scope: scope,

@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { config } from '../../config';
+import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class LegalEntitiesCtrl {
   bankAccounts: any;
@@ -11,8 +12,10 @@ export class LegalEntitiesCtrl {
   logoSrc = '/public/img/logo.png';
   $scope;
   dependedObj = {};
+  RestUrl: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.$scope.legalEntity = {};
@@ -81,19 +84,19 @@ export class LegalEntitiesCtrl {
   }
 
   getState() {
-    this.backendSrv.get(`${config.api_url}/api/states/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getStateRestUrl()).then(result => {
       this.clgObject.states = result;
     });
   }
 
   getCity() {
-    this.backendSrv.get(`${config.api_url}/api/cities/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getCityRestUrl()).then(result => {
       this.clgObject.cities = result;
     });
   }
 
   getBranch() {
-    this.backendSrv.get(`${config.api_url}/api/branches/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
       this.clgObject.branches = result;
     });
   }
@@ -161,7 +164,7 @@ export class LegalEntitiesCtrl {
     const { stateId, cityId } = this.$scope.legalEntity;
     this.$scope.legalEntity = {
       stateId,
-      cityId
+      cityId,
     };
     const { branches } = this.clgObject;
     const selectedBranches = [];
@@ -184,10 +187,10 @@ export class LegalEntitiesCtrl {
           stateId,
           cityId,
           branchId,
-          dateOfIncorporation: new Date(legalEntity["dateOfIncorporation"]),
-          pfRegistrationDate: new Date(legalEntity["pfRegistrationDate"]),
-          esiRegistrationDate: new Date(legalEntity["esiRegistrationDate"]),
-          ptRegistrationDate: new Date(legalEntity["ptRegistrationDate"])
+          dateOfIncorporation: new Date(legalEntity['dateOfIncorporation']),
+          pfRegistrationDate: new Date(legalEntity['pfRegistrationDate']),
+          esiRegistrationDate: new Date(legalEntity['esiRegistrationDate']),
+          ptRegistrationDate: new Date(legalEntity['ptRegistrationDate']),
         };
         break;
       }

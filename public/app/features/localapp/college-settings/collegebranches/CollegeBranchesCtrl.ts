@@ -1,24 +1,35 @@
 import { appEvents } from 'app/core/core';
+import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class CollegeBranchesCtrl {
   branches: any;
-  states: any;
   navModel: any;
+  states: any;
+  cities: any;
+  colleges: any;
   query: any;
   activeTabIndex = 0;
   $scope: any;
+  RestUrl: any;
+  selectedCities: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.query = '';
-    this.getBranches();
-    this.getStates();
     this.$scope = $scope;
+    this.getBranches();
+    this.getState();
+    this.getCity();
+    this.getColleges();
+    this.$scope.getState = this.getState.bind(this);
+    this.$scope.getCity = this.getCity.bind(this);
+    this.selectedCities = {};
     $scope.create = () => {
       if (!$scope.branchForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/branches/', $scope.branch).then(() => {
+      backendSrv.post(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
         this.getBranches();
       });
     };
@@ -26,9 +37,22 @@ export class CollegeBranchesCtrl {
       if (!$scope.branchForm.$valid) {
         return;
       }
-      backendSrv.put('http://localhost:8080/api/branches/', $scope.branch).then(() => {
+      backendSrv.put(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
         this.getBranches();
       });
+    };
+    $scope.onChangeState = () => {
+      const { stateId } = this.$scope.branch;
+      this.$scope.branch = {};
+      this.$scope.branch.stateId = stateId;
+      const selCities = [];
+      for (const i in this.cities) {
+        const city = this.cities[i];
+        if (city.stateId === parseInt(stateId, 10)) {
+          selCities.push(city);
+        }
+      }
+      $scope.selectedCities = selCities;
     };
   }
 
@@ -37,15 +61,26 @@ export class CollegeBranchesCtrl {
   }
 
   getBranches() {
-    this.backendSrv.get(`http://localhost:8080/api/branches/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
       this.branches = result;
     });
   }
 
-  getStates() {
-    this.backendSrv.get(`http://localhost:8080/api/states/`).then(result => {
+  getState() {
+    this.backendSrv.get(this.RestUrl.getStateRestUrl()).then(result => {
       this.states = result;
-      console.log('states', this.states);
+    });
+  }
+
+  getCity() {
+    this.backendSrv.get(this.RestUrl.getCityRestUrl()).then(result => {
+      this.cities = result;
+    });
+  }
+
+  getColleges() {
+    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+      this.colleges = result;
     });
   }
 
@@ -60,7 +95,7 @@ export class CollegeBranchesCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete('http://localhost:8080/api/branches/' + branch.id).then(() => {
+        this.backendSrv.delete(this.RestUrl.getBranchRestUrl() + branch.id).then(() => {
           this.getBranches();
         });
       },
@@ -72,10 +107,21 @@ export class CollegeBranchesCtrl {
       icon: 'fa-trash',
       text: 'update',
       branch: branch,
+      states: this.states,
+      cities: this.cities,
+      colleges: this.colleges,
+      selectedCities: this.$scope.selectedCities,
       onUpdate: (branchForm, branch) => {
         this.$scope.branchForm = branchForm;
         this.$scope.branch = branch;
         this.$scope.update();
+      },
+      onChange: (branchForm, branch, cities, selectedCities) => {
+        this.$scope.branchForm = branchForm;
+        this.$scope.branch = branch;
+        this.$scope.cities = cities;
+        this.$scope.selectedCities = selectedCities;
+        this.$scope.onChangeState();
       },
     });
   }
@@ -84,10 +130,21 @@ export class CollegeBranchesCtrl {
     appEvents.emit('branch-modal', {
       text: 'create',
       icon: 'fa-trash',
+      states: this.states,
+      cities: this.cities,
+      colleges: this.colleges,
+      selectedCities: this.$scope.selectedCities,
       onCreate: (branchForm, branch) => {
         this.$scope.branchForm = branchForm;
         this.$scope.branch = branch;
         this.$scope.create();
+      },
+      onChange: (branchForm, branch, cities, selectedCities) => {
+        this.$scope.branchForm = branchForm;
+        this.$scope.branch = branch;
+        this.$scope.cities = cities;
+        this.$scope.selectedCities = selectedCities;
+        this.$scope.onChangeState();
       },
     });
   }
