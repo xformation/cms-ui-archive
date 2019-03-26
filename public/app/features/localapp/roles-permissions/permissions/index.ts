@@ -3,7 +3,7 @@ import { PermissionsCtrl } from './PermissionsCtrl';
 
 export function permissions() {
   return {
-    restrict: 'P',
+    restrict: 'E',
     templateUrl: 'public/app/features/localapp/roles-permissions/permissions/partials/permissions.html',
     controller: PermissionsCtrl,
     bindToController: true,

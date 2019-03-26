@@ -10,13 +10,21 @@
         <div class="groups-table-container">
             <table class="groups-table">
                 <thead>
+                    <td>Version</td>
                     <td>Name</td>
+                    <td>Permission</td>
                     <td>Description</td>
                 </thead>
                 <tr ng-repeat="permission in ctrl.permissions">
                     <td>
+                        <label>{{permission.version}}</label>
+                    </td>
+                    <td>
                         <input type="checkbox" id={{permission.id}} />
                         <label for={{permission.id}}>{{permission.name}}</label>
+                    </td>
+                    <td>
+                        <label>{{permission.permission}}</label>
                     </td>
                     <td>
                         <label>{{permission.description}}</label>

@@ -1,4 +1,5 @@
 import { appEvents } from 'app/core/core';
+//import { config } from 'app/features/localapp/config';
 
 export class RolesCtrl {
   roles: any[] = [];
@@ -7,8 +8,9 @@ export class RolesCtrl {
   permittedRoles = [];
   prohibitableRoles = [];
   exclusiveRoles = [];
+  backendSrv: any;
   $scope: any;
-  constructor($scope) {
+  constructor($scope, backendSrv) {
     this.getRoles();
     this.getPreferences();
     this.preferenceId = 'permitted';
@@ -16,9 +18,13 @@ export class RolesCtrl {
     this.getProhibitableRoles();
     this.getExclusiveRoles();
     this.$scope = $scope;
+    this.backendSrv = backendSrv;
   }
 
   getRoles() {
+    //this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
+    //  this.roles = response;
+    //});
     this.roles = [
       {
         id: 'super_admin',

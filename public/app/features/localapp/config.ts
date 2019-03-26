@@ -6,4 +6,8 @@ export const config = {
   PERMS_CREATE: secSrvUrl + '/security/permissions/create',
   PERMS_UPDATE: secSrvUrl + '/security/permissions/update',
   PERMS_GET: secSrvUrl + '/security/permissions/',
+  ROLES_LIST_ALL: secSrvUrl + '/security/roles/listAll',
+  ROLES_CREATE: secSrvUrl + '/security/roles/create',
+  ROLES_UPDATE: secSrvUrl + '/security/roles/update',
+  ROLES_GET: secSrvUrl + '/security/roles/',
 };

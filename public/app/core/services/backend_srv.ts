@@ -88,7 +88,14 @@ export class BackendSrv {
         options.url = options.url.substring(1);
       }
     }
+    const originHdr = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+    };
+    options.headers = originHdr;
 
+    console.log(options);
     return this.$http(options).then(
       results => {
         if (options.method !== 'GET') {

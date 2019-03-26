@@ -17,10 +17,11 @@ export class PermissionsCtrl {
         console.log('No valid for found');
         return;
       }
-      this.backendSrv.post(config.PERMS_CREATE, $scope.premission).then(response => {
+      const perm = $scope.permission;
+      console.log('Save it: ', perm);
+      this.backendSrv.post(config.PERMS_CREATE, perm).then(response => {
         console.log('Api response: ', response);
       });
-      console.log('Save it: ', $scope.permission);
     };
   }
 
