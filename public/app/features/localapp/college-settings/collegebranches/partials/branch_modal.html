@@ -13,7 +13,8 @@
 	</div>
 
 	<div class="modal-content">
-
+		<div ng-if="is_success_bar === '0'" style="background-color:red;width: 50%; height: 10px;margin:auto;"></div>
+		<div ng-if="is_success_bar === '1'" style="background-color:green;width: 50%; height: 10px;margin:auto;"></div>
 		<div class="add-confirm-modal p-1">
 			<form name="branchForm" class="gf-form-group section m-0 dflex">
 				<div class="bg-modal modal-fwidth">

@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) {}
+  constructor(private $rootScope, private $modal) { }
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -134,14 +134,23 @@ export class UtilSrv {
     scope.cities = payload.cities;
     scope.selectedCities = payload.selectedCities;
     scope.colleges = payload.colleges;
+    scope.is_success_bar = "";
     scope.create = () => {
-      payload.onCreate(scope.branchForm, scope.branch);
-      scope.dismiss();
+      payload.onCreate(scope.branchForm, scope.branch, (isSuccess) => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 3000);
+      });
     };
 
     scope.update = () => {
-      payload.onUpdate(scope.branchForm, scope.branch);
-      scope.dismiss();
+      payload.onUpdate(scope.branchForm, scope.branch, (isSuccess) => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 3000);
+      });
     };
     scope.onChangeState = () => {
       scope.selectedCities = payload.onChange(scope.branchForm, scope.branch, scope.cities, scope.selectedCities);

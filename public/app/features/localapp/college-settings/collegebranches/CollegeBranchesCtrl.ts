@@ -25,20 +25,34 @@ export class CollegeBranchesCtrl {
     this.$scope.getState = this.getState.bind(this);
     this.$scope.getCity = this.getCity.bind(this);
     this.selectedCities = {};
-    $scope.create = () => {
+    $scope.create = (cb) => {
       if (!$scope.branchForm.$valid) {
         return;
       }
-      backendSrv.post(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
+      return backendSrv.post(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
         this.getBranches();
+        if (cb) {
+          cb("1");
+        }
+      }, () => {
+        if (cb) {
+          cb("0");
+        }
       });
     };
-    $scope.update = () => {
+    $scope.update = (cb) => {
       if (!$scope.branchForm.$valid) {
         return;
       }
       backendSrv.put(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
         this.getBranches();
+        if (cb) {
+          cb("1");
+        }
+      }, () => {
+        if (cb) {
+          cb("0");
+        }
       });
     };
     $scope.onChangeState = () => {
@@ -111,10 +125,10 @@ export class CollegeBranchesCtrl {
       cities: this.cities,
       colleges: this.colleges,
       selectedCities: this.$scope.selectedCities,
-      onUpdate: (branchForm, branch) => {
+      onUpdate: (branchForm, branch, cb) => {
         this.$scope.branchForm = branchForm;
         this.$scope.branch = branch;
-        this.$scope.update();
+        this.$scope.update(cb);
       },
       onChange: (branchForm, branch, cities, selectedCities) => {
         this.$scope.branchForm = branchForm;
@@ -135,10 +149,10 @@ export class CollegeBranchesCtrl {
       cities: this.cities,
       colleges: this.colleges,
       selectedCities: this.$scope.selectedCities,
-      onCreate: (branchForm, branch) => {
+      onCreate: (branchForm, branch, cb) => {
         this.$scope.branchForm = branchForm;
         this.$scope.branch = branch;
-        this.$scope.create();
+        this.$scope.create(cb);
       },
       onChange: (branchForm, branch, cities, selectedCities) => {
         this.$scope.branchForm = branchForm;
