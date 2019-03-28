@@ -10,7 +10,7 @@ export class LegalEntitiesCtrl {
   cmsBranches: any;
   clgObject: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo.png';
+  logoSrc = '/public/img/legalentity_logo.png';
   $scope;
   dependedObj = {};
   RestUrl: any;

@@ -5,7 +5,7 @@ export class GeneralInfoCtrl {
   navModel: any;
   query: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo.png';
+  logoSrc = '/public/img/college_logo.png';
   bgSrc = '/public/img/dashboard.png';
   isCollegeLogoChanged = false;
   isCollegeBgChanged = false;
