@@ -3,7 +3,7 @@
 		<h2 class="add-modal-header-title">
 			<!-- <i class="fa {{icon}}"></i> -->
 			<span class="p-l-1">
-				Add New
+				Add New Authorized Signatory
 			</span>
 		</h2>
 
@@ -67,6 +67,28 @@
 								class="gf-form-input" placeholder="pan number" />
 						</div>
 					</div>
+
+					<div class="mdflex">
+						<div class="modal-fwidth modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">COLLEGE</label>
+							<select class="gf-form-input" required ng-model="authorizedSignatory.collegeId" >
+								<option value="">
+								  Select College</option>
+								<option ng-repeat="college in colleges" value="{{college.id}}">
+								  {{college.shortName}}</option>
+							</select>
+						</div>
+						<div class="modal-fwidth modal-text m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">BRANCH</label>
+							<select class="gf-form-input" required ng-model="authorizedSignatory.branchId" >
+								<option value="">
+								  Select Branch</option>
+								<option ng-repeat="branch in cmsBranches" value="{{branch.id}}">
+								  {{branch.branchName}}</option>
+							  </select>
+						</div>
+					</div>
+
 					<!-- <div class="mdflex m-b-1">
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">COLLEGE ID</label>
