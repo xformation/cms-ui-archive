@@ -242,10 +242,11 @@ export class UtilSrv {
   signatoryModal(payload) {
     const scope = this.$rootScope.$new();
     scope.authorizedSignatory = payload.authorizedSignatory;
-
+    scope.colleges = payload.colleges;
+    scope.cmsBranches = payload.cmsBranches;
     scope.createSignatory = () => {
       payload.onCreate(scope.signatoryForm, scope.authorizedSignatory);
-      scope.dismiss();
+      //scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -261,7 +262,7 @@ export class UtilSrv {
 
     scope.createBank = () => {
       payload.onCreate(scope.bankForm, scope.bankAccount);
-      scope.dismiss();
+      //scope.dismiss();
     };
 
     appEvents.emit('show-modal', {

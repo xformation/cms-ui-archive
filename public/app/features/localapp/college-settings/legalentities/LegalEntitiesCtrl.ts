@@ -1,5 +1,4 @@
 import { appEvents } from 'app/core/core';
-import { config } from '../../config';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class LegalEntitiesCtrl {
@@ -7,9 +6,11 @@ export class LegalEntitiesCtrl {
   authorizedSignatories: any;
   legalEntities: any;
   navModel: any;
+  colleges: any;
+  cmsBranches: any;
   clgObject: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo.png';
+  logoSrc = '/public/img/legalentity_logo.png';
   $scope;
   dependedObj = {};
   RestUrl: any;
@@ -27,14 +28,14 @@ export class LegalEntitiesCtrl {
     this.getState();
     this.getCity();
     this.Check();
-
+    this.getColleges();
     this.clgObject = {};
 
     $scope.createBank = () => {
       if (!$scope.bankForm.$valid) {
         return;
       }
-      backendSrv.post(`${config.api_url}/api/bank-accounts/`, $scope.bankAccount).then(() => {
+      backendSrv.post(this.RestUrl.getBankAccountRestUrl(), $scope.bankAccount).then(() => {
         this.getBank();
         console.log('Bank:', this.bankAccounts);
       });
@@ -44,7 +45,7 @@ export class LegalEntitiesCtrl {
       if (!$scope.signatoryForm.$valid) {
         return;
       }
-      backendSrv.post(`${config.api_url}/api/authorized-signatories/`, $scope.authorizedSignatory).then(() => {
+      backendSrv.post(this.RestUrl.getAuthorizedSignatoryRestUrl(), $scope.authorizedSignatory).then(() => {
         this.getSignatory();
         console.log('Authorised:', this.authorizedSignatories);
       });
@@ -54,7 +55,7 @@ export class LegalEntitiesCtrl {
       if (!$scope.legalForm.$valid) {
         return;
       }
-      backendSrv.post(`${config.api_url}/api/legal-entities/`, $scope.legalEntity).then(() => {
+      backendSrv.post(this.RestUrl.getLegalEntitiesRestUrl(), $scope.legalEntity).then(() => {
         console.log('Legal:', this.legalEntities);
       });
     };
@@ -78,7 +79,7 @@ export class LegalEntitiesCtrl {
   }
 
   getBank() {
-    this.backendSrv.get(`${config.api_url}/api/bank-accounts/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getBankAccountRestUrl()).then(result => {
       this.bankAccounts = result;
     });
   }
@@ -98,21 +99,27 @@ export class LegalEntitiesCtrl {
   getBranch() {
     this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
       this.clgObject.branches = result;
+      this.cmsBranches = result;
     });
   }
 
   getSignatory() {
-    this.backendSrv.get(`${config.api_url}/api/authorized-signatories/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getAuthorizedSignatoryRestUrl()).then(result => {
       this.authorizedSignatories = result;
     });
   }
 
+  getColleges() {
+    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+      this.colleges = result;
+    });
+  }
   Check() {
     console.log('Function printed');
   }
 
   getLegalEntity() {
-    this.backendSrv.get(`${config.api_url}/api/legal-entities/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getLegalEntitiesRestUrl()).then(result => {
       this.legalEntities = result;
     });
   }
@@ -123,6 +130,8 @@ export class LegalEntitiesCtrl {
     appEvents.emit('signatory-modal', {
       text: text,
       icon: 'fa-trash',
+      colleges: this.colleges,
+      cmsBranches: this.cmsBranches,
       onCreate: (signatoryForm, authorizedSignatory) => {
         this.$scope.signatoryForm = signatoryForm;
         this.$scope.authorizedSignatory = authorizedSignatory;
@@ -170,8 +179,10 @@ export class LegalEntitiesCtrl {
     const selectedBranches = [];
     for (const i in branches) {
       const branch = branches[i];
-      if (branch.cityId === parseInt(cityId, 10)) {
-        selectedBranches.push(branch);
+      if (branch.city != null) {
+        if (branch.city.id === parseInt(cityId, 10)) {
+          selectedBranches.push(branch);
+        }
       }
     }
     this.clgObject.selectedBranches = selectedBranches;

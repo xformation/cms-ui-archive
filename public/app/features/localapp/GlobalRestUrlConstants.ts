@@ -26,4 +26,13 @@ export class GlobalRestUrlConstants {
   getBranchRestUrl() {
     return this.getBaseRestUrl() + '/cmsbranches/';
   }
+  getLegalEntitiesRestUrl() {
+    return this.getBaseRestUrl() + '/legal-entities/';
+  }
+  getAuthorizedSignatoryRestUrl() {
+    return this.getBaseRestUrl() + '/authorized-signatories/';
+  }
+  getBankAccountRestUrl() {
+    return this.getBaseRestUrl() + '/bank-accounts/';
+  }
 }
