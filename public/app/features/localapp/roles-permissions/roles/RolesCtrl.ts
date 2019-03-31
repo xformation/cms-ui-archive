@@ -4,11 +4,11 @@ import { config } from 'app/features/localapp/config';
 export class RolesCtrl {
   roles: any[] = [];
   permissions: any[] = [];
-  preferences = [];
+  preferences: any[] = [];
   preferenceId = '';
-  permittedRoles = [];
-  prohibitableRoles = [];
-  exclusiveRoles = [];
+  permittedRoles: any[] = [];
+  prohibitableRoles: any[] = [];
+  exclusiveRoles: any[] = [];
   $scope: any;
   backendSrv: any;
   /** @ngInject */
@@ -39,7 +39,12 @@ export class RolesCtrl {
 
   getRoles() {
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      this.roles = response;
+      response.forEach(role => {
+        console.log('Log: ', role);
+        if (!role.group) {
+          this.roles.push(role);
+        }
+      });
     });
   }
 

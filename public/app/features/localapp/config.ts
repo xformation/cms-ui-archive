@@ -10,4 +10,8 @@ export const config = {
   ROLES_CREATE: secSrvUrl + '/security/roles/create',
   ROLES_UPDATE: secSrvUrl + '/security/roles/update',
   ROLES_GET: secSrvUrl + '/security/roles/',
+  USERS_LIST_ALL: secSrvUrl + '/security/users/listAll',
+  USERS_CREATE: secSrvUrl + '/security/users/create',
+  USERS_UPDATE: secSrvUrl + '/security/users/update',
+  USERS_GET: secSrvUrl + '/security/users/',
 };

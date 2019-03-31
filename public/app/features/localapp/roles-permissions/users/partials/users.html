@@ -3,7 +3,6 @@
         <div class="users-btn-container text-right p-2">
             <button class="link-btn mr-1" ng-click="ctrl.showAddUserModal()">Add User</button>
             <button class="link-btn mr-1" ng-click="ctrl.showEditUserModal()">Edit User</button>
-            <button class="link-btn mr-1" ng-click="ctrl.showAssignGroupModal()">Assign Group</button>
             <button class="link-btn mr-1">Search User</button>
             <input type="text" class="gf-form-input max-width-18 search-users-textbox" placeholder="Search User" />
         </div>
@@ -12,19 +11,19 @@
                 <thead>
                     <td>Name</td>
                     <td>User Name</td>
-                    <td>Groups assigned to users</td>
+                    <td>Roles assigned to users</td>
                 </thead>
                 <tr ng-repeat="user in ctrl.users">
                     <td>
-                        <input type="checkbox" id={{user.userName}} />
-                        <label for={{user.userName}}>{{user.name}}</label>
+                        <input type="checkbox" id={{user.username}} />
+                        <label for={{user.username}}>{{user.email}}</label>
                     </td>
                     <td>
-                        <label>{{user.userName}}</label>
+                        <label>{{user.username}}</label>
                     </td>
                     <td>
-                        <label ng-repeat="group in user.groups">
-                            {{group}}
+                        <label ng-repeat="role in user.roles">
+                            {{role.name}} {{role.description}}
                         </label>
                     </td>
                 </tr>

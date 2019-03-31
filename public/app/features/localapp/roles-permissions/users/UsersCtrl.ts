@@ -1,105 +1,44 @@
 import { appEvents } from 'app/core/core';
+import { config } from 'app/features/localapp/config';
 
 export class UsersCtrl {
   users: any[];
+  roles: any[];
+  permissions: any[];
   groups: any[];
-  constructor() {
+  $scope: any;
+  backendSrv: any;
+  /** @ngInject */
+  constructor($scope, backendSrv) {
+    this.$scope = $scope;
+    this.backendSrv = backendSrv;
     this.getUsers();
-    this.getGroups();
+    this.getRoles();
+    this.getPermissions();
   }
 
   getUsers() {
-    this.users = [
-      {
-        name: 'USER1',
-        userName: 'USER1@collage.com',
-        groups: ['Student', 'Transport', 'Library'],
-      },
-      {
-        name: 'USER2',
-        userName: 'USER2@collage.com',
-        groups: ['Student', 'Transport', 'Library'],
-      },
-      {
-        name: 'USER3',
-        userName: 'USER3@collage.com',
-        groups: ['HOD', 'Principal'],
-      },
-      {
-        name: 'USER4',
-        userName: 'USER4@collage.com',
-        groups: ['Driver', 'House keeping'],
-      },
-      {
-        name: 'USER5',
-        userName: 'USER5@collage.com',
-        groups: [],
-      },
-      {
-        name: 'USER6',
-        userName: 'USER6@collage.com',
-        groups: [],
-      },
-      {
-        name: 'USER7',
-        userName: 'USER7@collage.com',
-        groups: [],
-      },
-      {
-        name: 'USER8',
-        userName: 'USER8@collage.com',
-        groups: [],
-      },
-    ];
+    this.backendSrv.get(config.USERS_LIST_ALL).then(response => {
+      this.users = response;
+    });
   }
 
-  getGroups() {
-    this.groups = [
-      {
-        name: 'SUPER ADMINISTRATOR',
-        roles: ['SUPER ADMINISTRATOR'],
-      },
-      {
-        name: 'ADMINISTRATOR',
-        roles: ['ADMINISTRATOR'],
-      },
-      {
-        name: 'TEACHER',
-        roles: ['TEACHER'],
-      },
-      {
-        name: 'PRINICIPAL',
-        roles: ['PRINICIPAL', 'TEACHER'],
-      },
-      {
-        name: 'HOD',
-        roles: ['HOD', 'PRINCIPAL', 'TEACHER'],
-      },
-      {
-        name: 'STUDENT',
-        roles: [],
-      },
-      {
-        name: 'STUDENT',
-        roles: [],
-      },
-      {
-        name: 'TRANSPORT',
-        roles: [],
-      },
-      {
-        name: 'CANTEEN',
-        roles: [],
-      },
-      {
-        name: 'HOUSE KEEPING',
-        roles: [],
-      },
-      {
-        name: 'STUDENT',
-        roles: [],
-      },
-    ];
+  getRoles() {
+    this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
+      response.forEach(role => {
+        if (!role.group) {
+          this.roles.push(role);
+        } else {
+          this.groups.push(role);
+        }
+      });
+    });
+  }
+
+  getPermissions() {
+    this.backendSrv.get(config.PERMS_LIST_ALL).then(response => {
+      this.permissions = response;
+    });
   }
 
   showAddUserModal() {
@@ -117,15 +56,6 @@ export class UsersCtrl {
       text: text,
       icon: 'fa-trash',
       onAdd: () => {},
-    });
-  }
-
-  showAssignGroupModal() {
-    const text = 'Do you want to delete the ';
-    appEvents.emit('assign-group-modal', {
-      text: text,
-      icon: 'fa-trash',
-      groups: this.groups,
     });
   }
 }

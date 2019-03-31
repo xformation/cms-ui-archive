@@ -2,7 +2,6 @@
     <div class="border-container">
         <div class="groups-btn-container text-right p-2">
             <button class="link-btn mr-1" ng-click="ctrl.showAddGroupModal()">Create New Group</button>
-            <button class="link-btn mr-1" ng-click="ctrl.showAssignRoleModal()">Assign Role</button>
             <button class="link-btn mr-1">Search Group</button>
             <input type="text" class="gf-form-input max-width-18 search-groups-textbox" placeholder="Search Group" />
         </div>
@@ -14,12 +13,12 @@
                 </thead>
                 <tr ng-repeat="group in ctrl.groups">
                     <td>
-                        <input type="checkbox" id={{$index}} />
-                        <label for={{$index}}>{{group.name}}</label>
+                        <input type="checkbox" id={{group.id}} />
+                        <label for={{group.id}}>{{group.name}}</label>
                     </td>
                     <td>
                         <label ng-repeat="role in group.roles">
-                            {{role}}
+                            {{role.name}} {{role.description}}
                         </label>
                     </td>
                 </tr>
