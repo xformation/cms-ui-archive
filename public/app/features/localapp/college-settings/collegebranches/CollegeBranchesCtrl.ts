@@ -117,6 +117,11 @@ export class CollegeBranchesCtrl {
   }
 
   editBranch(branch) {
+    branch.stateId = branch.state.id.toString();
+    this.$scope.branch = branch;
+    this.$scope.onChangeState();
+    branch.cityId = branch.city.id.toString();
+    branch.collegeId = branch.college.id.toString();
     appEvents.emit('branch-modal', {
       icon: 'fa-trash',
       text: 'update',
