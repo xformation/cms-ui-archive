@@ -38,14 +38,56 @@ export class RolesCtrl {
   }
 
   getRoles() {
-    this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      response.forEach(role => {
-        console.log('Log: ', role);
-        if (!role.group) {
-          this.roles.push(role);
-        }
-      });
-    });
+    // this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
+    //   response.forEach(role => {
+    //     console.log('Log: ', role);
+    //     if (!role.group) {
+    //       this.roles.push(role);
+    //     }
+    //   });
+    // });
+    this.roles = [
+      {
+        id: 'super_admin',
+        title: 'SUPER ADMINISTRATOR',
+      },
+      {
+        id: 'admin',
+        title: 'ADMINISTRATOR',
+      },
+      {
+        id: 'teacher',
+        title: 'TEACHER',
+      },
+      {
+        id: 'principal',
+        title: 'PRINCIPAL',
+      },
+      {
+        id: 'hod',
+        title: 'HOD',
+      },
+      {
+        id: 'housekeeping',
+        title: 'HOUSEKEEPING',
+      },
+      {
+        id: 'inventory_head',
+        title: 'INVENTORY HEAD',
+      },
+      {
+        id: 'driver',
+        title: 'DRIVER',
+      },
+      {
+        id: 'librarian',
+        title: 'LIBRARIAN',
+      },
+      {
+        id: 'finance_admin',
+        title: 'FINANCE ADMIN',
+      },
+    ];
   }
 
   getPermissions() {
@@ -76,32 +118,342 @@ export class RolesCtrl {
   }
 
   getPermittedRoles() {
-    this.permittedRoles = this.roles;
+    this.permittedRoles = [
+      {
+        name: 'STUDENT',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'ATTENDENCE',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'EXAM',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'CONFIGURATION SETTING',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'ACADEMIC YEAR',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'CLASS SETUP',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'SUBJECT SETUP',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'TIMETABLE',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+    ];
   }
 
   getProhibitableRoles() {
-    this.prohibitableRoles = this.roles;
+    this.prohibitableRoles = [
+      {
+        name: 'STUDENT',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'ATTENDENCE',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'EXAM',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'CONFIGURATION SETTING',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'ACADEMIC YEAR',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'CLASS SETUP',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'SUBJECT SETUP',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+      {
+        name: 'TIMETABLE',
+        collapse: true,
+        children: [
+          {
+            name: 'CREATE STUDENT',
+          },
+          {
+            name: 'EDIT STUDENT',
+          },
+          {
+            name: 'VIEW STUDENT',
+          },
+          {
+            name: 'DELETE STUDENT',
+          },
+        ],
+      },
+    ];
   }
 
   getExclusiveRoles() {
-    this.exclusiveRoles = this.roles;
+    this.exclusiveRoles = [
+      {
+        id: 'super_admin',
+        title: 'SUPER ADMINISTRATOR',
+      },
+      {
+        id: 'admin',
+        title: 'ADMINISTRATOR',
+      },
+      {
+        id: 'teacher',
+        title: 'TEACHER',
+      },
+      {
+        id: 'principal',
+        title: 'PRINICIPAL',
+      },
+      {
+        id: 'hod',
+        title: 'HOD',
+      },
+    ];
   }
 
   showAddRoleModal() {
     const text = 'Do you want to add the ';
-
     appEvents.emit('add-role-modal', {
       text: text,
       icon: 'fa-trash',
       onAdd: (roleForm, role) => {
         this.$scope.roleForm = roleForm;
         this.$scope.role = role;
-        this.getRoles();
-        this.getPermissions();
-        this.getPermittedRoles();
-        this.getProhibitableRoles();
-        this.getExclusiveRoles();
       },
+      preferenceId: this.preferenceId,
+      preferences: this.preferences,
+      permittedRoles: this.permittedRoles,
+      prohibitableRoles: this.prohibitableRoles,
+      exclusiveRoles: this.exclusiveRoles
     });
   }
 }

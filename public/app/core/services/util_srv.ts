@@ -273,13 +273,20 @@ export class UtilSrv {
   }
 
   addRoleModal(payload) {
-    console.log(payload);
-    const scope = payload.scope || this.$rootScope.$new();
-    scope.role = payload.role;
+    const scope = this.$rootScope.$new();
+    scope.preferences = payload.preferences;
+    scope.permittedRoles = payload.permittedRoles;
+    scope.prohibitableRoles = payload.prohibitableRoles;
+    scope.exclusiveRoles = payload.exclusiveRoles;
+    scope.preferenceId = payload.preferenceId;
 
     scope.saveRole = () => {
       payload.onAdd(scope.roleForm, scope.role);
       scope.dismiss();
+    };
+
+    scope.setPreference = (id) => {
+      scope.preferenceId = id;
     };
 
     appEvents.emit('show-modal', {

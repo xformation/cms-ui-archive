@@ -1,7 +1,7 @@
 <div class="page-container page-body roles-main-container">
     <div class="roles-container p-2 border-container">
         <div class="radio-button-container" ng-repeat="role in ctrl.roles">
-            <div ng-if="{{role.group}}">
+            <div ng-if="role.group">
                 <input name="roles" type="radio" id={{role.id}} />
                 <label class="d-inline-block" for={{role.id}}>{{role.name}}</label>
                 <label class="d-inline-block">{{role.description}}</label>
