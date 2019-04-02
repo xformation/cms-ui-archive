@@ -6,7 +6,7 @@ export class GlobalRestUrlConstants {
   BASE_URL: string;
   constructor() {
     this.PROTOCOL = 'http';
-    this.IP = 'localhost';
+    this.IP = 'localhost'; //18.234.66.133
     this.PORT = '8080';
     this.ROOT_API = 'api';
     this.BASE_URL = this.PROTOCOL + '://' + this.IP + ':' + this.PORT + '/' + this.ROOT_API;
@@ -26,8 +26,11 @@ export class GlobalRestUrlConstants {
   getBranchRestUrl() {
     return this.getBaseRestUrl() + '/cmsbranches/';
   }
+  getBranchesByCollegeIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsbranches-collegeid/';
+  }
   getLegalEntitiesRestUrl() {
-    return this.getBaseRestUrl() + '/legal-entities/';
+    return this.getBaseRestUrl() + '/cmslegal-entities/';
   }
   getAuthorizedSignatoryRestUrl() {
     return this.getBaseRestUrl() + '/authorized-signatories/';

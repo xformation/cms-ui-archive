@@ -6,6 +6,18 @@
         A Legal Entity is the registered name of your institution. This name is used in all documents such as pay slip,
         offer letter etc.
       </small>
+      <div class="clearfix"></div>
+    </div>
+    
+    <div class="mdflex mt-8">
+        <div>
+            <label class="form-h5">COLLEGE</label>
+            <select required ng-model="ctrl.collegeId" >
+              <option value=0>Select College</option>
+              <option ng-repeat="college in ctrl.clgObject.colleges" value="{{college.id}}">
+                {{college.shortName}}</option>
+            </select>
+        </div>
     </div>
 
     <div class="logo-container d-flex mt-8">

@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) { }
+  constructor(private $rootScope, private $modal) {}
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -134,9 +134,9 @@ export class UtilSrv {
     scope.cities = payload.cities;
     scope.selectedCities = payload.selectedCities;
     scope.colleges = payload.colleges;
-    scope.is_success_bar = "";
+    scope.is_success_bar = '';
     scope.create = () => {
-      payload.onCreate(scope.branchForm, scope.branch, (isSuccess) => {
+      payload.onCreate(scope.branchForm, scope.branch, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
           scope.dismiss();
@@ -145,7 +145,7 @@ export class UtilSrv {
     };
 
     scope.update = () => {
-      payload.onUpdate(scope.branchForm, scope.branch, (isSuccess) => {
+      payload.onUpdate(scope.branchForm, scope.branch, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
           scope.dismiss();
@@ -242,11 +242,16 @@ export class UtilSrv {
   signatoryModal(payload) {
     const scope = this.$rootScope.$new();
     scope.authorizedSignatory = payload.authorizedSignatory;
-    scope.colleges = payload.colleges;
-    scope.cmsBranches = payload.cmsBranches;
+    scope.cmsSelectedBranches = payload.cmsSelectedBranches;
+    scope.collegeId = payload.collegeId;
+    scope.is_success_bar = '';
     scope.createSignatory = () => {
-      payload.onCreate(scope.signatoryForm, scope.authorizedSignatory);
-      //scope.dismiss();
+      payload.onCreate(scope.signatoryForm, scope.authorizedSignatory, scope.collegeId, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
     };
 
     appEvents.emit('show-modal', {
@@ -259,12 +264,17 @@ export class UtilSrv {
   bankModal(payload) {
     const scope = this.$rootScope.$new();
     scope.bankAccount = payload.bankAccount;
-
+    scope.cmsSelectedBranches = payload.cmsSelectedBranches;
+    scope.collegeId = payload.collegeId;
+    scope.is_success_bar = '';
     scope.createBank = () => {
-      payload.onCreate(scope.bankForm, scope.bankAccount);
-      //scope.dismiss();
+      payload.onCreate(scope.bankForm, scope.bankAccount, scope.collegeId, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
     };
-
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/college-settings/legalentities/partials/bank_modal.html',
       scope: scope,

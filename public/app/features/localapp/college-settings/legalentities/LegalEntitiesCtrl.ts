@@ -4,16 +4,20 @@ import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 export class LegalEntitiesCtrl {
   bankAccounts: any;
   authorizedSignatories: any;
+  cmsSelectedBankAccounts: any;
+  cmsSelectedAuthorizedSignatories: any;
   legalEntities: any;
   navModel: any;
   colleges: any;
   cmsBranches: any;
+  cmsSelectedBranches: any;
   clgObject: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/legalentity_logo.png';
   $scope;
   dependedObj = {};
   RestUrl: any;
+  collegeId: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -21,6 +25,8 @@ export class LegalEntitiesCtrl {
     this.$scope = $scope;
     this.$scope.legalEntity = {};
     $scope.getFile = this.getFile.bind(this);
+    $scope.getBranchesByCollegeId = this.getBranchesByCollegeId.bind(this);
+    this.collegeId = 0;
     this.getBank();
     this.getSignatory();
     this.getLegalEntity();
@@ -30,25 +36,44 @@ export class LegalEntitiesCtrl {
     this.Check();
     this.getColleges();
     this.clgObject = {};
-
-    $scope.createBank = () => {
+    this.cmsSelectedBranches = {};
+    $scope.createBank = cb => {
       if (!$scope.bankForm.$valid) {
         return;
       }
-      backendSrv.post(this.RestUrl.getBankAccountRestUrl(), $scope.bankAccount).then(() => {
-        this.getBank();
-        console.log('Bank:', this.bankAccounts);
-      });
+      backendSrv.post(this.RestUrl.getBankAccountRestUrl(), $scope.bankAccount).then(
+        () => {
+          this.getBank();
+          console.log('Bank:', this.bankAccounts);
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
+        }
+      );
     };
 
-    $scope.createSignatory = () => {
+    $scope.createSignatory = cb => {
       if (!$scope.signatoryForm.$valid) {
         return;
       }
-      backendSrv.post(this.RestUrl.getAuthorizedSignatoryRestUrl(), $scope.authorizedSignatory).then(() => {
-        this.getSignatory();
-        console.log('Authorised:', this.authorizedSignatories);
-      });
+      backendSrv.post(this.RestUrl.getAuthorizedSignatoryRestUrl(), $scope.authorizedSignatory).then(
+        () => {
+          this.getSignatory();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
+        }
+      );
     };
 
     $scope.create = () => {
@@ -103,6 +128,24 @@ export class LegalEntitiesCtrl {
     });
   }
 
+  getBranchesByCollegeId() {
+    this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
+      this.cmsSelectedBranches.branches = result;
+    });
+  }
+
+  /*getAuthorizedSignatoriesByCollegeId(){
+    this.backendSrv.get(this.RestUrl.getAuthorizedSignatoriesByCollegeIdRestUrl() + this.collegeId).then(result => {
+      this.cmsSelectedAuthorizedSignatories = result;
+    });
+  }
+
+  getBankAccountsByCollegeId(){
+    this.backendSrv.get(this.RestUrl.getBankAccountsByCollegeIdRestUrl() + this.collegeId).then(result => {
+      this.cmsSelectedBankAccounts = result;
+    });
+  }*/
+
   getSignatory() {
     this.backendSrv.get(this.RestUrl.getAuthorizedSignatoryRestUrl()).then(result => {
       this.authorizedSignatories = result;
@@ -112,6 +155,7 @@ export class LegalEntitiesCtrl {
   getColleges() {
     this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
       this.colleges = result;
+      this.clgObject.colleges = result;
     });
   }
   Check() {
@@ -126,33 +170,50 @@ export class LegalEntitiesCtrl {
 
   showSignatoryModal() {
     const text = 'Add New';
-
+    if (this.collegeId <= 0) {
+      alert('Select a college from college drop down');
+      return;
+    }
+    this.getBranchesByCollegeId();
     appEvents.emit('signatory-modal', {
       text: text,
       icon: 'fa-trash',
-      colleges: this.colleges,
-      cmsBranches: this.cmsBranches,
-      onCreate: (signatoryForm, authorizedSignatory) => {
+      cmsSelectedBranches: this.cmsSelectedBranches,
+      collegeId: this.collegeId,
+      onCreate: (signatoryForm, authorizedSignatory, collegeId, cb) => {
         this.$scope.signatoryForm = signatoryForm;
         this.$scope.authorizedSignatory = authorizedSignatory;
-        this.$scope.createSignatory();
+        this.$scope.authorizedSignatory.collegeId = collegeId;
+        this.$scope.createSignatory(cb);
       },
     });
   }
 
   showBankModal() {
     const text = 'Add New';
-
+    if (this.collegeId <= 0) {
+      alert('Select a college from college drop down');
+      return;
+    }
+    this.getBranchesByCollegeId();
     appEvents.emit('bank-modal', {
       text: text,
       icon: 'fa-trash',
-      onCreate: (bankForm, bankAccount) => {
+      cmsSelectedBranches: this.cmsSelectedBranches,
+      collegeId: this.collegeId,
+      onCreate: (bankForm, bankAccount, collegeId, cb) => {
         this.$scope.bankForm = bankForm;
         this.$scope.bankAccount = bankAccount;
-        this.$scope.createBank();
+        this.$scope.bankAccount.collegeId = collegeId;
+        this.$scope.createBank(cb);
       },
     });
   }
+
+  /*onChangeCollege(){
+    this.getAuthorizedSignatoriesByCollegeId();
+    this.getBankAccountsByCollegeId();
+  }*/
 
   onChangeState() {
     const { stateId } = this.$scope.legalEntity;
