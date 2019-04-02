@@ -28,7 +28,7 @@ export class LegalEntitiesCtrl {
     $scope.getBranchesByCollegeId = this.getBranchesByCollegeId.bind(this);
     this.collegeId = 0;
     this.getBank();
-    this.getSignatory();
+    //this.getSignatory();
     this.getLegalEntity();
     this.getBranch();
     this.getState();
@@ -63,7 +63,8 @@ export class LegalEntitiesCtrl {
       }
       backendSrv.post(this.RestUrl.getAuthorizedSignatoryRestUrl(), $scope.authorizedSignatory).then(
         () => {
-          this.getSignatory();
+          //this.getSignatory();
+          this.getAuthorizedSignatoriesByCollegeId();
           if (cb) {
             cb('1');
           }
@@ -134,23 +135,24 @@ export class LegalEntitiesCtrl {
     });
   }
 
-  /*getAuthorizedSignatoriesByCollegeId(){
+  getAuthorizedSignatoriesByCollegeId() {
     this.backendSrv.get(this.RestUrl.getAuthorizedSignatoriesByCollegeIdRestUrl() + this.collegeId).then(result => {
       this.cmsSelectedAuthorizedSignatories = result;
+      this.authorizedSignatories = result;
     });
   }
 
-  getBankAccountsByCollegeId(){
+  /*getBankAccountsByCollegeId(){
     this.backendSrv.get(this.RestUrl.getBankAccountsByCollegeIdRestUrl() + this.collegeId).then(result => {
       this.cmsSelectedBankAccounts = result;
     });
   }*/
 
-  getSignatory() {
+  /*getSignatory() {
     this.backendSrv.get(this.RestUrl.getAuthorizedSignatoryRestUrl()).then(result => {
       this.authorizedSignatories = result;
     });
-  }
+  }*/
 
   getColleges() {
     this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
@@ -210,10 +212,10 @@ export class LegalEntitiesCtrl {
     });
   }
 
-  /*onChangeCollege(){
+  onChangeCollege() {
     this.getAuthorizedSignatoriesByCollegeId();
-    this.getBankAccountsByCollegeId();
-  }*/
+    //this.getBankAccountsByCollegeId();
+  }
 
   onChangeState() {
     const { stateId } = this.$scope.legalEntity;

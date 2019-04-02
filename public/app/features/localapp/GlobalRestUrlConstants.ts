@@ -33,7 +33,10 @@ export class GlobalRestUrlConstants {
     return this.getBaseRestUrl() + '/cmslegal-entities/';
   }
   getAuthorizedSignatoryRestUrl() {
-    return this.getBaseRestUrl() + '/authorized-signatories/';
+    return this.getBaseRestUrl() + '/cmsauthorized-signatories/';
+  }
+  getAuthorizedSignatoriesByCollegeIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsauthorized-signatories-collegeid/';
   }
   getBankAccountRestUrl() {
     return this.getBaseRestUrl() + '/bank-accounts/';

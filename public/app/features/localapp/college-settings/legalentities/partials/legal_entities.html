@@ -12,7 +12,7 @@
     <div class="mdflex mt-8">
         <div>
             <label class="form-h5">COLLEGE</label>
-            <select required ng-model="ctrl.collegeId" >
+            <select required ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()">
               <option value=0>Select College</option>
               <option ng-repeat="college in ctrl.clgObject.colleges" value="{{college.id}}">
                 {{college.shortName}}</option>
@@ -35,7 +35,7 @@
         <div class="tile"><a ng-click="ctrl.showSignatoryModal()" type="submit" class="upload-cursor">+ Add New
             Signatory</a></div>
       </div>
-      <div class="signatory-list" ng-repeat="authorizedSignatory in ctrl.authorizedSignatories">
+      <div class="signatory-list" ng-repeat="authorizedSignatory in ctrl.cmsSelectedAuthorizedSignatories">
         <div class="tile m-r-2 ">
           <div class="tile-circle yellow"><b>{{authorizedSignatory.signatoryName.charAt(0)}}</b></div>
           <div class="tile-right-part">
