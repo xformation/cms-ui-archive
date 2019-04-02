@@ -1,37 +1,60 @@
 <div class="add-modal-body" ng-cloak>
-        <div class="add-modal-header">
-            <h2 class="add-modal-header-title">
-                <!-- <i class="fa {{icon}}"></i> -->
-                <span class="p-l-1">
-                    Add New Group
-                </span>
-            </h2>
-            <a class="add-modal-header-close" ng-click="dismiss();">
-                <i class="fa fa-remove"></i>
-            </a>
-        </div>
-        <div class="modal-content">
-            <div class="add-confirm-modal p-1">
-                <form class="gf-form-group section m-0 dflex">
-                    <div class="bg-modal">
-                        <div class="fwidth-modal-text">
-                            <label class="gf-form-label b-0 bg-transparent">GROUP NAME</label>
-                            <input type="text" class="gf-form-input " placeholder="" />
+    <div class="add-modal-header">
+        <h2 class="add-modal-header-title">
+            <!-- <i class="fa {{icon}}"></i> -->
+            <span class="p-l-1">
+                Add New Group
+            </span>
+        </h2>
+        <a class="add-modal-header-close" ng-click="dismiss();">
+            <i class="fa fa-remove"></i>
+        </a>
+    </div>
+    <div class="modal-content">
+        <div class="add-confirm-modal p-1">
+            <form class="gf-form-group section m-0 dflex">
+                <div class="bg-modal">
+                    <div class="fwidth-modal-text">
+                        <label class="gf-form-label b-0 bg-transparent">GROUP NAME</label>
+                        <input type="text" class="gf-form-input " placeholder="" />
+                    </div>
+                    <div class="fwidth-modal-text">
+                        <label class="gf-form-label b-0 bg-transparent">GROUP DESCRIPTION</label>
+                        <textarea class="gf-form-input " placeholder=""></textarea>
+                    </div>
+                    <div class="transition-preference">
+                        <div class="transition-preference-label">Set transition preferences</div>
+                        <div class="tab-header">
+                            <ul class="gf-tabs">
+                                <li class="gf-tabs-item">
+                                    <a class="gf-tabs-link" ng-class="{active: true}">
+                                        Roles
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="fwidth-modal-text">
-                            <label class="gf-form-label b-0 bg-transparent">GROUP DESCRIPTION</label>
-                            <textarea class="gf-form-input " placeholder=""></textarea>
-                        </div>
-                        <div class="gf-form-button-row p-r-4">
-                            <button type="submit" class="btn btn-success border-bottom">Save</button>
-                            <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+                        <div class="border-container p-2">
+                            <div class="tab-content exclusive-roles-container">
+                                <div class="checkbox-button-container" ng-repeat="role in ctrl.exclusiveRoles">
+                                    <input name="{{role.id}}" type="checkbox" id={{role.id}} />&nbsp;
+                                    <label class="d-inline-block" for={{role.id}}>{{role.name}}</label>
+                                </div>
+                            </div>
+                            <div class="clear-both"></div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-content-confirm-text" ng-if="confirmText">
-                <input type="text" class="gf-form-input width-16" style="display: inline-block;" placeholder="Type {{confirmText}} to confirm"
-                 ng-model="confirmInput" ng-change="updateConfirmText(confirmInput)">
-            </div>
+                    <div class="gf-form-button-row p-r-4">
+                        <button type="submit" class="btn btn-success border-bottom">Save</button>
+                        <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-content-confirm-text" ng-if="confirmText">
+            <input type="text" class="gf-form-input width-16" style="display: inline-block;"
+                placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+                ng-change="updateConfirmText(confirmInput)">
         </div>
     </div>
+</div>

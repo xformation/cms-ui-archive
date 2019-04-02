@@ -283,7 +283,21 @@ export class UtilSrv {
   }
 
   addRoleModal(payload) {
-    const scope = payload.scope || this.$rootScope.$new();
+    const scope = this.$rootScope.$new();
+    scope.preferences = payload.preferences;
+    scope.permittedRoles = payload.permittedRoles;
+    scope.prohibitableRoles = payload.prohibitableRoles;
+    scope.exclusiveRoles = payload.exclusiveRoles;
+    scope.preferenceId = payload.preferenceId;
+
+    scope.saveRole = () => {
+      payload.onAdd(scope.roleForm, scope.role);
+      scope.dismiss();
+    };
+
+    scope.setPreference = (id) => {
+      scope.preferenceId = id;
+    };
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/roles/partials/add_new_role.html',
