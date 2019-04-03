@@ -123,15 +123,18 @@
                 <label class="gf-form-label b-0 bg-white">LEGAL NAME OF COLLEGE</label>
                 <input type="text" ng-model="legalEntity.legalNameOfTheCollege" class="gf-form-input "
                   placeholder="College Name" required maxlength="255"/>
+                <div ng-if="isSubmitted && !legalEntity.legalNameOfTheCollege" class="form-error">Please enter name of college</div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white">DATE OF INCORPORATION</label>
                 <input type="date" ng-model="legalEntity.dateOfIncorporation" class="gf-form-input " required maxlength="10"/>
+                <div ng-if="isSubmitted && !legalEntity.dateOfIncorporation" class="form-error">Please enter date</div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white">COLLEGE IDENTIFICATION NUMBER</label>
                 <input type="text" ng-model="legalEntity.collegeIdentificationNumber" class="gf-form-input "
                   placeholder="CIN1234567" required maxlength="255"/>
+                <div ng-if="isSubmitted && !legalEntity.collegeIdentificationNumber" class="form-error">Please enter college number</div>
               </div>
             </div>
             <div class="form-right">
@@ -141,12 +144,14 @@
                   <select ng-model="legalEntity.typeOfCollege" ng-options="f for f in ['PRIVATE', 'PUBLIC']"
                     class="gf-form-input" required>
                   </select>
+                  <div ng-if="isSubmitted && !legalEntity.typeOfCollege" class="form-error">Please enter type of college</div>
                 </div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white ">REGISTERED OFFICE ADDRESS</label>
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress1" class="gf-form-input "
                   placeholder="ADDRESS LINE 1" required maxlength="255" />
+                  <div ng-if="isSubmitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please enter registerred address</div>
               </div>
               <div class="m-b-1 ">
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress2" class="gf-form-input "
