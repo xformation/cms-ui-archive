@@ -18,6 +18,7 @@ export class LegalEntitiesCtrl {
   dependedObj = {};
   RestUrl: any;
   collegeId: any;
+  isSubmitted: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -37,6 +38,7 @@ export class LegalEntitiesCtrl {
     this.getColleges();
     this.clgObject = {};
     this.cmsSelectedBranches = {};
+    this.$scope.isSubmitted = false;
     $scope.createBank = cb => {
       if (!$scope.bankForm.$valid) {
         return;
@@ -79,6 +81,7 @@ export class LegalEntitiesCtrl {
     };
 
     $scope.create = () => {
+      $scope.isSubmitted = true;
       if (!$scope.legalForm.$valid) {
         return;
       }
