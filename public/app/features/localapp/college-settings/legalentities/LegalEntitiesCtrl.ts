@@ -27,7 +27,7 @@ export class LegalEntitiesCtrl {
     $scope.getFile = this.getFile.bind(this);
     $scope.getBranchesByCollegeId = this.getBranchesByCollegeId.bind(this);
     this.collegeId = 0;
-    this.getBank();
+    //this.getBank();
     //this.getSignatory();
     this.getLegalEntity();
     this.getBranch();
@@ -43,7 +43,8 @@ export class LegalEntitiesCtrl {
       }
       backendSrv.post(this.RestUrl.getBankAccountRestUrl(), $scope.bankAccount).then(
         () => {
-          this.getBank();
+          //this.getBank();
+          this.getBankAccountsByCollegeId();
           console.log('Bank:', this.bankAccounts);
           if (cb) {
             cb('1');
@@ -104,11 +105,11 @@ export class LegalEntitiesCtrl {
     fileReader.readAsDataURL(file);
   }
 
-  getBank() {
+  /*getBank() {
     this.backendSrv.get(this.RestUrl.getBankAccountRestUrl()).then(result => {
       this.bankAccounts = result;
     });
-  }
+  }*/
 
   getState() {
     this.backendSrv.get(this.RestUrl.getStateRestUrl()).then(result => {
@@ -126,12 +127,16 @@ export class LegalEntitiesCtrl {
     this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
       this.clgObject.branches = result;
       this.cmsBranches = result;
+      this.cmsSelectedBranches.branches = result;
     });
   }
 
   getBranchesByCollegeId() {
     this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
       this.cmsSelectedBranches.branches = result;
+
+      this.clgObject.branches = result;
+      this.cmsBranches = result;
     });
   }
 
@@ -142,11 +147,12 @@ export class LegalEntitiesCtrl {
     });
   }
 
-  /*getBankAccountsByCollegeId(){
+  getBankAccountsByCollegeId() {
     this.backendSrv.get(this.RestUrl.getBankAccountsByCollegeIdRestUrl() + this.collegeId).then(result => {
       this.cmsSelectedBankAccounts = result;
+      this.bankAccounts = result;
     });
-  }*/
+  }
 
   /*getSignatory() {
     this.backendSrv.get(this.RestUrl.getAuthorizedSignatoryRestUrl()).then(result => {
@@ -214,7 +220,8 @@ export class LegalEntitiesCtrl {
 
   onChangeCollege() {
     this.getAuthorizedSignatoriesByCollegeId();
-    //this.getBankAccountsByCollegeId();
+    this.getBankAccountsByCollegeId();
+    this.getBranchesByCollegeId();
   }
 
   onChangeState() {
@@ -230,6 +237,7 @@ export class LegalEntitiesCtrl {
       }
     }
     this.clgObject.selectedCities = selectedCities;
+    this.getBranchesByCollegeId();
   }
 
   onChangeCity() {
@@ -249,6 +257,7 @@ export class LegalEntitiesCtrl {
       }
     }
     this.clgObject.selectedBranches = selectedBranches;
+    this.getBranchesByCollegeId();
   }
 
   onChangeBranch() {

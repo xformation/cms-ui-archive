@@ -39,6 +39,9 @@ export class GlobalRestUrlConstants {
     return this.getBaseRestUrl() + '/cmsauthorized-signatories-collegeid/';
   }
   getBankAccountRestUrl() {
-    return this.getBaseRestUrl() + '/bank-accounts/';
+    return this.getBaseRestUrl() + '/cmsbank-accounts/';
+  }
+  getBankAccountsByCollegeIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsbank-accounts-collegeid/';
   }
 }
