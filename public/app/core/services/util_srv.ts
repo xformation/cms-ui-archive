@@ -295,7 +295,7 @@ export class UtilSrv {
       scope.dismiss();
     };
 
-    scope.setPreference = (id) => {
+    scope.setPreference = id => {
       scope.preferenceId = id;
     };
 
@@ -308,6 +308,12 @@ export class UtilSrv {
 
   addGroupModal(payload) {
     const scope = payload.scope || this.$rootScope.$new();
+    scope.roles = payload.roles;
+
+    scope.saveGroup = () => {
+      payload.onAdd(scope.groupForm, scope.group);
+      scope.dismiss();
+    };
 
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/groups/partials/create_group.html',
