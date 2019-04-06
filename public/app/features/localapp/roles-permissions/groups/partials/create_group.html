@@ -12,15 +12,19 @@
     </div>
     <div class="modal-content">
         <div class="add-confirm-modal p-1">
-            <form class="gf-form-group section m-0 dflex">
+            <form name="groupForm" class="gf-form-group section m-0 dflex">
                 <div class="bg-modal">
                     <div class="fwidth-modal-text">
+                        <label class="gf-form-label b-0 bg-transparent">VERSION</label>
+                        <input type="text" ng-model="group.version" class="gf-form-input " placeholder="" />
+                    </div>
+                    <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">GROUP NAME</label>
-                        <input type="text" class="gf-form-input " placeholder="" />
+                        <input type="text" ng-model="group.name" class="gf-form-input " placeholder="" />
                     </div>
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">GROUP DESCRIPTION</label>
-                        <textarea class="gf-form-input " placeholder=""></textarea>
+                        <textarea ng-model="group.description" class="gf-form-input " placeholder=""></textarea>
                     </div>
                     <div class="transition-preference">
                         <div class="transition-preference-label">Set transition preferences</div>
@@ -36,8 +40,8 @@
                         </div>
                         <div class="border-container p-2">
                             <div class="tab-content exclusive-roles-container">
-                                <div class="checkbox-button-container" ng-repeat="role in ctrl.exclusiveRoles">
-                                    <input name="{{role.id}}" type="checkbox" id={{role.id}} />&nbsp;
+                                <div class="checkbox-button-container" ng-repeat="role in roles">
+                                    <input ng-model="role.sel" type="checkbox" id={{role.id}} />&nbsp;
                                     <label class="d-inline-block" for={{role.id}}>{{role.name}}</label>
                                 </div>
                             </div>
@@ -45,7 +49,7 @@
                         </div>
                     </div>
                     <div class="gf-form-button-row p-r-4">
-                        <button type="submit" class="btn btn-success border-bottom">Save</button>
+                        <button type="submit" ng-click="saveGroup()" class="btn btn-success border-bottom">Save</button>
                         <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
                     </div>
                 </div>

@@ -2,10 +2,10 @@ import { appEvents } from 'app/core/core';
 import { config } from 'app/features/localapp/config';
 
 export class UsersCtrl {
-  users: any[];
-  roles: any[];
-  permissions: any[];
-  groups: any[];
+  users: any[] = [];
+  roles: any[] = [];
+  permissions: any[] = [];
+  groups: any[] = [];
   $scope: any;
   backendSrv: any;
   /** @ngInject */
@@ -26,10 +26,10 @@ export class UsersCtrl {
   getRoles() {
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
       response.forEach(role => {
-        if (!role.group) {
-          this.roles.push(role);
-        } else {
+        if (role.grp) {
           this.groups.push(role);
+        } else {
+          this.roles.push(role);
         }
       });
     });

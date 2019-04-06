@@ -1,41 +1,47 @@
 <div class="page-container page-body roles-main-container">
-    <div class="roles-container p-2 border-container">
-        <div class="radio-button-container" ng-repeat="role in ctrl.roles">
-            <div ng-if="role.group">
-                <input name="roles" type="radio" id={{role.id}} />
-                <label class="d-inline-block" for={{role.id}}>{{role.name}}</label>
-                <label class="d-inline-block">{{role.description}}</label>
-                <div class="clear-both"></div>
-                <div class="transition-preference">
-                    <div class="transition-preference-label">Transition preferences</div>
-                    <div class="tab-header">
-                        <ul class="gf-tabs">
-                            <li class="gf-tabs-item">
-                                <a class="gf-tabs-link" ng-class="{active: true}">
-                                    Permissions
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="border-container p-2">
-                        <div class="tab-content">
-                            <div class="preference-container" ng-repeat="permission in role.permissions">
-                                <label class="d-inline-block">{{permission.name}}</label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <label class="d-inline-block">{{permission.permission}}</label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <label class="d-inline-block">{{permission.description}}</label>
-                            </div>
-                        </div>
-                        <div class="clear-both"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="link-btn pull-right mt-1" ng-click="ctrl.showAddRoleModal()">
-            <i class="fa fa-plus-circle">Add new Role</i>
-        </button>
-        <div class="clear-both"></div>
+    <div class="groups-table-container">
+        <table class="groups-table" style="width: 100%">
+            <thead>
+                <td>Version</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Permissions</td>
+            </thead>
+            <tr ng-repeat="role in ctrl.roles">
+                <td>
+                    <label>{{role.version}}</label>
+                </td>
+                <td>
+                    <input type="checkbox" id={{role.id}} />
+                    <label for={{role.id}}>{{role.name}}</label>
+                </td>
+                <td>
+                    <label>{{role.description}}</label>
+                </td>
+                <td>
+                    <table class="groups-table" style="width: 100%">
+                        <tr ng-repeat="permission in role.permissions">
+                            <td>
+                                <label>{{permission.version}}</label>
+                            </td>
+                            <td>
+                                <label>{{permission.name}}</label>
+                            </td>
+                            <td>
+                                <label>{{permission.permission}}</label>
+                            </td>
+                            <td>
+                                <label>{{permission.description}}</label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
+    <button class="link-btn pull-right mt-1" ng-click="ctrl.showAddRoleModal()">
+        <i class="fa fa-plus-circle">Add new Role</i>
+    </button>
+    <div class="clear-both"></div>
+</div>
 </div>

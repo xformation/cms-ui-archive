@@ -2,8 +2,8 @@ import { appEvents } from 'app/core/core';
 import { config } from 'app/features/localapp/config';
 
 export class GroupsCtrl {
-  groups: any[];
-  roles: any[];
+  groups: any[] = [];
+  roles: any[] = [];
   $scope: any;
   backendSrv: any;
   /** @ngInject */
@@ -13,13 +13,13 @@ export class GroupsCtrl {
     this.getGroups();
 
     $scope.saveGroup = () => {
-      console.log('Role: ', $scope.role);
-      if (!$scope.roleForm.$valid) {
+      console.log('Role: ', $scope.group);
+      if (!$scope.groupForm.$valid) {
         console.log('No valid for found');
         return;
       }
-      const role = $scope.role;
-      role.group = true;
+      const role = $scope.group;
+      role.grp = true;
       console.log('Save it: ', role);
       this.backendSrv.post(config.ROLES_CREATE, role).then(response => {
         console.log('Api response: ', response);
@@ -29,18 +29,14 @@ export class GroupsCtrl {
 
   getGroups() {
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      const rls = [];
-      const grps = [];
       response.forEach(role => {
         console.log('Log: ', role);
-        if (!role.group) {
-          rls.push(role);
+        if (role.grp) {
+          this.groups.push(role);
         } else {
-          grps.push(role);
+          this.roles.push(role);
         }
       });
-      this.roles = rls;
-      this.groups = grps;
     });
   }
 

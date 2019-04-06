@@ -285,13 +285,29 @@ export class UtilSrv {
   addRoleModal(payload) {
     const scope = this.$rootScope.$new();
     scope.preferences = payload.preferences;
-    scope.permittedRoles = payload.permittedRoles;
-    scope.prohibitableRoles = payload.prohibitableRoles;
-    scope.exclusiveRoles = payload.exclusiveRoles;
+    scope.permissions = payload.permissions;
     scope.preferenceId = payload.preferenceId;
 
     scope.saveRole = () => {
-      payload.onAdd(scope.roleForm, scope.role);
+      const rl = scope.role;
+      rl.permissions = [];
+      if (scope.preferenceId === 'prohibited') {
+        scope.permissions.forEach(item => {
+          if (item.prohib) {
+            console.log('prohib: ', item);
+          } else {
+            rl.permissions.push(item);
+          }
+        });
+      } else {
+        scope.permissions.forEach(item => {
+          if (item.permit) {
+            console.log('permit: ', item);
+            rl.permissions.push(item);
+          }
+        });
+      }
+      payload.onAdd(scope.roleForm, rl, scope.preferenceId);
       scope.dismiss();
     };
 
@@ -311,7 +327,15 @@ export class UtilSrv {
     scope.roles = payload.roles;
 
     scope.saveGroup = () => {
-      payload.onAdd(scope.groupForm, scope.group);
+      const rl = scope.group;
+      rl.roles = [];
+      scope.roles.forEach(item => {
+        if (item.sel) {
+          console.log('prohib: ', item);
+          rl.roles.push(item);
+        }
+      });
+      payload.onAdd(scope.groupForm, rl);
       scope.dismiss();
     };
 

@@ -15,6 +15,10 @@
 			<form name="roleForm" class="gf-form-group section m-0 dflex">
 				<div class="bg-modal">
 					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">VERSION</label>
+						<input type="text" ng-model="role.version" class="gf-form-input " placeholder="" />
+					</div>
+					<div class="fwidth-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">ROLE NAME</label>
 						<input type="text" ng-model="role.name" class="gf-form-input " placeholder="" />
 					</div>
@@ -35,25 +39,26 @@
 							</ul>
 							<div class="clearfix"></div>
 						</div>
-						<div class="border-container p-2">
-							<div class="tab-content" ng-class="{'hide':preferenceId !== 'permitted'}">
-								<div class="preference-container tree-view-container"
-									ng-repeat="permittedRole in permittedRoles">
-									<tree-view ng-model="role.permit" family="permittedRole"></tree-view>
-								</div>
+						<div class="border-container p-2" style="max-height: 100px; overflow-y: auto;">
+							<div class="tab-content" ng-class="{'hide': preferenceId !== 'permitted'}">
+								<table style="width: 100%">
+									<tr ng-repeat="permisn in permissions">
+										<td>
+											<input type="checkbox" id="perm-{{permisn.id}}" ng-model="permisn.permit" />
+											<label for={{permisn.id}}>{{permisn.permission}}</label>
+										</td>
+									</tr>
+								</table>
 							</div>
 							<div class="tab-content" ng-class="{'hide':preferenceId !== 'prohibited'}">
-								<div class="prohibitable-roles tree-view-container"
-									ng-repeat="prohibitableRole in prohibitableRoles">
-									<tree-view ng-model="role.prohib" family="prohibitableRole"></tree-view>
-								</div>
-							</div>
-							<div class="tab-content exclusive-roles-container"
-								ng-class="{'hide':preferenceId !== 'exclusive_role'}">
-								<div class="checkbox-button-container" ng-repeat="role in exclusiveRoles">
-									<input name="{{role.id}}" type="checkbox" id={{role.id}} />&nbsp;
-									<label class="d-inline-block" for={{role.id}}>{{role.title}}</label>
-								</div>
+								<table style="width: 100%">
+									<tr ng-repeat="permisn in permissions">
+										<td>
+											<input type="checkbox" id="proh-{{permisn.id}}" ng-model="permisn.prohib" />
+											<label for={{permisn.id}}>{{permisn.permission}}</label>
+										</td>
+									</tr>
+								</table>
 							</div>
 							<div class="clear-both"></div>
 						</div>
