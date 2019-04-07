@@ -44,4 +44,16 @@ export class GlobalRestUrlConstants {
   getBankAccountsByCollegeIdRestUrl() {
     return this.getBaseRestUrl() + '/cmsbank-accounts-collegeid/';
   }
+  getAcademicYearRestUrl() {
+    return this.getBaseRestUrl() + '/cmsacademic-years/';
+  }
+  getDepartmentRestUrl() {
+    return this.getBaseRestUrl() + '/departments/';
+  }
+  getBatchRestUrl() {
+    return this.getBaseRestUrl() + '/batches/';
+  }
+  getTeacherRestUrl() {
+    return this.getBaseRestUrl() + '/teachers/';
+  }
 }

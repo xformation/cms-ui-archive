@@ -1,4 +1,5 @@
 import { appEvents } from 'app/core/core';
+import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class YearSettingCtrl {
   academicYears: any;
@@ -8,8 +9,10 @@ export class YearSettingCtrl {
   activeTabIndex = 0;
   activeBtnIndex = 0;
   $scope: any;
+  RestUrl: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.activeBtnIndex = 0;
     this.$scope = $scope;
@@ -38,7 +41,7 @@ export class YearSettingCtrl {
       if (!$scope.yearForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/academic-years', $scope.academicYear).then(() => {
+      backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(() => {
         this.getYears();
       });
     };
@@ -46,7 +49,7 @@ export class YearSettingCtrl {
       if (!$scope.yearForm.$valid) {
         return;
       }
-      backendSrv.put('http://localhost:8080/api/academic-years/', $scope.academicYear).then(() => {
+      backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(() => {
         this.getYears();
       });
     };
@@ -73,7 +76,7 @@ export class YearSettingCtrl {
   }
 
   getYears() {
-    this.backendSrv.get(`http://localhost:8080/api/academic-years/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getAcademicYearRestUrl()).then(result => {
       this.academicYears = result;
     });
   }
@@ -110,7 +113,7 @@ export class YearSettingCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete('http://localhost:8080/api/academic-years/' + academicYear.id).then(() => {
+        this.backendSrv.delete(this.RestUrl.getAcademicYearRestUrl() + academicYear.id).then(() => {
           this.getYears();
         });
       },

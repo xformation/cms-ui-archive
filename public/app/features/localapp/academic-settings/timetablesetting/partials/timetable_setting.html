@@ -7,188 +7,112 @@
   <h4 class="bg-heading">
     Academic Year 2018-2019
   </h4>
-  <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
-    <h4 class="ptl-06">Create Timetable Template</h4>
+
+  <div class="mdflex mt-8">
     <div>
-      <a class="btn btn-primary" style="width: 135px;" ng-click="ctrl.activateTab(0)">
-        save</a>
+        <label class="form-h5">College</label>
+        <select class="gf-form-input" required ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()">
+          <option value=0>Select College</option>
+          <option ng-repeat="college in ctrl.colleges" value="{{college.id}}">
+            {{college.shortName}}</option>
+        </select>
     </div>
   </div>
-  <!-- <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
+  
+  <div >
+    <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
     <table id="tts" class="fwidth b-0">
       <thead>
         <th>Department</th>
-        <th>Year</th>
-        <th>Semester</th>
-        <th>Section</th>
+        <th>Batch</th>
+        <th>Teacher</th>
+        <th>Branch</th>
         <th>No of Lectures</th>
-        <th>Status</th>
+        <th></th>
+        <th></th>
       </thead>
       <tbody>
         <tr>
           <td>
-            <select class="gf-form-input" ng-model="teacher.departmentId">
+            <select class="gf-form-input"  ng-model="academicTimeTable.departmentId">
+              <option value="">
+                Select Department</option>
               <option ng-repeat="department in ctrl.departments" value="{{department.id}}">
-                {{department.id}}</option>
+                {{department.name}}</option>
             </select>
           </td>
           <td>
-            <select name="" id="">
-              <option value="">Year 1</option>
-              <option value="">Year 2</option>
-              <option value="">Year 3</option>
-              <option value="">Year 4</option>
+            <select class="gf-form-input"  ng-model="academicTimeTable.batchId">
+              <option value="">
+                Select Batch</option>
+              <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">
+                {{bth.batch}}</option>
             </select>
           </td>
           <td>
-            <select name="" id="">
-              <option value="">Teacher 1</option>
-              <option value="">Teacher 2</option>
-              <option value="">Teacher 3</option>
+            <select class="gf-form-input"  ng-model="academicTimeTable.teacherId">
+              <option value="">
+                Select Teacher</option>
+              <option ng-repeat="th in ctrl.teachers" value="{{th.id}}">
+                {{th.teacherName}}</option>
             </select>
           </td>
           <td>
-            <select name="" id="">
-              <option value="">University 1</option>
-              <option value="">University 2</option>
-              <option value="">University 3</option>
+            <select class="gf-form-input"  ng-model="academicTimeTable.branchId">
+              <option value="">
+                Select Branch</option>
+              <option ng-repeat="branch in ctrl.clgObject.selectedBranches" value="{{branch.id}}">
+                {{branch.branchName}}</option>
             </select>
           </td>
           <td>
-            <div class="t-students"><span class="btn btn-primary mr-1 btn-small"
-                ng-click="studentCount = studentCount + 1">
+            <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="ctrl.changeCounter('plus')"
+                ng-init="0">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-              </span> {{studentCount}}
-              <span ng-click="studentCount = studentCount - 1" class="btn btn-primary ml-1 btn-small">
+              </span> {{ctrl.counter}}
+              <span class="btn btn-primary ml-1 btn-small" ng-click="ctrl.changeCounter('minus')">
                 <i class="fa fa-minus" aria-hidden="true"></i>
               </span>
-              <ul>
-                <li ng-repeat="x in studentCount">Counts:{{x}}</li>
-              </ul>
             </div>
           </td>
-          <td><a class="btn btn-primary wauto" ng-click="addMultiple()">save</a></td>
+          <td>
+              <div class="t-students">
+                  Active
+                  <label class="switch" style="height:22px;"><input type="checkbox" checked /> <span class="slider m-0"></span> </label>
+              </div>
+          </td>
+          <td>
+              <input type="button" class="btn btn-primary" ng-click="ctrl.addRows()" value="Create"></input>
+          </td>
         </tr>
       </tbody>
     </table>
-  </div> -->
-  <!-- <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
-    <table id="tts" class="fwidth">
+  </div>
+  <div class="info-container" >    
+    <table id="tttemplt" class="fwidth">
       <thead>
-        <th>Department</th>
-        <th>Year</th>
-        <th>Semester</th>
-        <th>Section</th>
-        <th>No of Lectures</th>
-        <th>Status</th>
+        <th>Sr. No</th>
+        <th>Period Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Saturday Lecture</th>
+        <th>Break After</th>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <select name="" id="">
-              <option value="">Department 1</option>
-              <option value="">Department 2</option>
-              <option value="">Department 3</option>
-            </select>
-          </td>
-          <td>
-            <select name="" id="">
-              <option value="">Year 1</option>
-              <option value="">Year 2</option>
-              <option value="">Year 3</option>
-              <option value="">Year 4</option>
-            </select>
-          </td>
-          <td>
-            <select name="" id="">
-              <option value="">Teacher 1</option>
-              <option value="">Teacher 2</option>
-              <option value="">Teacher 3</option>
-            </select>
-          </td>
-          <td>
-            <select name="" id="">
-              <option value="">University 1</option>
-              <option value="">University 2</option>
-              <option value="">University 3</option>
-            </select>
-          </td>
-          </td>
-          <td>
-            <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1"
-                ng-init="count = 2">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </span> {{count}}
-              <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-                <i class="fa fa-minus" aria-hidden="true"></i>
-              </span>
-            </div>
-          </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Continue</a></td>
-        </tr>
-      </tbody>
-    </table> -->
-  <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="count = count + 1" ng-init="count = 2">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </span> {{count}}
-    <span class="btn btn-primary ml-1 btn-small" ng-click="count = count - 1">
-      <i class="fa fa-minus" aria-hidden="true"></i>
-    </span>
-  </div>
-
-
-  <table id="tttemplt" class="fwidth">
-    <thead>
-      <th>Sr. No</th>
-      <th>Period Name</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Saturday Lecture</th>
-      <th>Break After</th>
-    </thead>
-    <tbody>
-      <!-- <div class="form-group" ng-repeat="choice in choices">
-        <label for="choice" ng-show="showChoiceLabel(choice)">Choices</label>
-
-        <tr>
-          <td> <input type="text" placeholder="Serial No." /> </td>
-          <td><input type="text" placeholder="Enter Lecture Name" /> </td>
+        <tr ng-repeat="lec in ctrl.totalLectures track by $index">
+          <td>{{$index + 1}}</td>
+          <td>Lecture {{$index + 1}}</td>
           <td><input type="time" name="" id=""></td>
           <td><input type="time" name="" id=""></td>
           <td> <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
           <td> <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
         </tr>
-      </div>
-      <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Add Choice</button>
-      <button ng-click="removeNewChoice()">Remove Choice</button> -->
-
-      <button ng-show="showAddChoice(choice)" ng-click="addNewChoice()">Save</button>
-      <button ng-click="removeNewChoice()">Remove</button>
-
-      <div class="form-group">
-        <label for="choice" ng-show="showChoiceLabel(choice)">Choices</label>
-        <tr ng-repeat="choice in choices">
-          <td> <input class="time-table" ng-modal="{{choice.name}}" type="text" placeholder="Serial No." /> </td>
-          <td><input class="time-table" ng-modal="{{choice.name}}" type="text" placeholder="Enter Lecture Name" /> </td>
-          <td><input class="time-table" ng-modal="{{choice.name}}" type="time" name="" id=""></td>
-          <td><input class="time-table" ng-modal="{{choice.name}}" type="time" name="" id=""></td>
-          <td> <label ng-modal="{{choice.name}}" class="switch"> <input type="checkbox" /> <span
-                class="slider m-0"></span> </label></td>
-          <td> <label ng-modal="{{choice.name}}" class="switch"> <input type="checkbox" checked /> <span
-                class="slider m-0"></span> </label></td>
-        </tr>
-      </div>
-</div>
-</tbody>
-</table>
-<!-- <a class="btn btn-primary" style="width: 135px;" ng-click="addMultiple()">
-  Add</a> -->
-</div>
-<!-- Including Timetable details page using ng-include -->
-<!-- <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
+      </tbody>
+    </table>
+  </div>
+  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
     <div ng-include
       src="'public/app/features/localapp/academic-settings/timetabledetails/partials/timetable_details.html'"></div>
   </div>
 </div>
-</div> -->
-<!-- Including Timetable details page using ng-include -->
+</div>
