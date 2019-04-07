@@ -9,21 +9,21 @@
         <div class="users-table-container">
             <table class="users-table">
                 <thead>
-                    <td>Name</td>
+                    <td>Email</td>
                     <td>User Name</td>
-                    <td>Roles assigned to users</td>
+                    <td>Assigned Roles</td>
                 </thead>
                 <tr ng-repeat="user in ctrl.users">
                     <td>
-                        <input type="checkbox" id={{user.username}} />
-                        <label for={{user.username}}>{{user.email}}</label>
+                        <input group="usreadio" type="radio" id={{user.id}} ng-click="ctrl.selUser(user)" />
+                        <label for={{user.id}}>{{user.email}}</label>
                     </td>
                     <td>
                         <label>{{user.username}}</label>
                     </td>
                     <td>
                         <label ng-repeat="role in user.roles">
-                            {{role.name}} {{role.description}}
+                            {{role.name}}
                         </label>
                     </td>
                 </tr>

@@ -4,8 +4,7 @@ import { config } from 'app/features/localapp/config';
 export class UsersCtrl {
   users: any[] = [];
   roles: any[] = [];
-  permissions: any[] = [];
-  groups: any[] = [];
+  user: any;
   $scope: any;
   backendSrv: any;
   /** @ngInject */
@@ -14,7 +13,35 @@ export class UsersCtrl {
     this.backendSrv = backendSrv;
     this.getUsers();
     this.getRoles();
-    this.getPermissions();
+
+    $scope.saveUser = () => {
+      console.log('User: ', $scope.user);
+      if (!$scope.userForm.$valid) {
+        console.log('No valid form found');
+        return;
+      }
+      const usr = $scope.user;
+      console.log('Save it: ', usr);
+      this.backendSrv.post(config.USERS_CREATE, usr).then(response => {
+        console.log('Api response: ', response);
+      });
+    };
+    $scope.updateUser = () => {
+      console.log('User: ', $scope.user);
+      if (!$scope.userForm.$valid) {
+        console.log('No valid form found');
+        return;
+      }
+      const usr = $scope.user;
+      console.log('Update it: ', usr);
+      this.backendSrv.post(config.USERS_UPDATE, usr).then(response => {
+        console.log('Api response: ', response);
+      });
+    };
+  }
+
+  selUser(usr) {
+    this.user = usr;
   }
 
   getUsers() {
@@ -25,37 +52,40 @@ export class UsersCtrl {
 
   getRoles() {
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      response.forEach(role => {
-        if (role.grp) {
-          this.groups.push(role);
-        } else {
-          this.roles.push(role);
-        }
-      });
-    });
-  }
-
-  getPermissions() {
-    this.backendSrv.get(config.PERMS_LIST_ALL).then(response => {
-      this.permissions = response;
+      this.roles = response;
     });
   }
 
   showAddUserModal() {
-    const text = 'Do you want to delete the ';
+    const text = 'Do you want to Add the ';
     appEvents.emit('add-user-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: () => {},
+      onAdd: (userForm, user) => {
+        this.$scope.userForm = userForm;
+        this.$scope.user = user;
+        this.$scope.saveUser();
+      },
+      roles: this.roles,
     });
   }
 
   showEditUserModal() {
-    const text = 'Do you want to delete the ';
+    if (!this.user) {
+      alert('Please select a user first to edit.');
+      return;
+    }
+    const text = 'Do you want to Edit the ';
     appEvents.emit('edit-user-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: () => {},
+      onEdit: (userForm, user) => {
+        this.$scope.userForm = userForm;
+        this.$scope.user = user;
+        this.$scope.updateUser();
+      },
+      roles: this.roles,
+      user: this.user,
     });
   }
 }

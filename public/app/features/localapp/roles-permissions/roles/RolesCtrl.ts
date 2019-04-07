@@ -19,7 +19,7 @@ export class RolesCtrl {
     $scope.saveRole = () => {
       console.log('Role: ', $scope.role);
       if (!$scope.roleForm.$valid) {
-        console.log('No valid for found');
+        console.log('No valid form found');
         return;
       }
       const role = $scope.role;

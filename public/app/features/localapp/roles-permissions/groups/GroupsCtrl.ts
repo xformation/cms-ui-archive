@@ -15,7 +15,7 @@ export class GroupsCtrl {
     $scope.saveGroup = () => {
       console.log('Role: ', $scope.group);
       if (!$scope.groupForm.$valid) {
-        console.log('No valid for found');
+        console.log('No valid form found');
         return;
       }
       const role = $scope.group;

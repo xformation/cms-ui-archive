@@ -386,6 +386,20 @@ export class UtilSrv {
 
   addUserModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.roles = payload.roles;
+
+    scope.saveUser = () => {
+      const usr = scope.user;
+      usr.roles = [];
+      scope.roles.forEach(item => {
+        if (item.sel) {
+          console.log('selected: ', item);
+          usr.roles.push(item);
+        }
+      });
+      payload.onAdd(scope.userForm, usr);
+      scope.dismiss();
+    };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/users/partials/add_user.html',
       scope: scope,
@@ -395,6 +409,28 @@ export class UtilSrv {
 
   editUserModal(payload) {
     const scope = this.$rootScope.$new();
+    scope.roles = payload.roles;
+    scope.user = payload.user;
+    scope.roles.forEach(role => {
+      scope.user.roles.forEach(rl => {
+        if (role.id === rl.id) {
+          role.sel = true;
+        }
+      });
+    });
+
+    scope.updateUser = () => {
+      const usr = scope.user;
+      usr.roles = [];
+      scope.roles.forEach(item => {
+        if (item.sel) {
+          console.log('selected: ', item);
+          usr.roles.push(item);
+        }
+      });
+      payload.onEdit(scope.userForm, usr);
+      scope.dismiss();
+    };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/users/partials/edit_user.html',
       scope: scope,
