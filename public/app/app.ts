@@ -13,6 +13,7 @@ import 'react-dom';
 import 'vendor/bootstrap/bootstrap';
 import 'vendor/angular-ui/ui-bootstrap-tpls';
 import 'vendor/angular-other/angular-strap';
+import 'vendor/angular-shiro-master/angular-shiro.min';
 
 import $ from 'jquery';
 import angular from 'angular';
@@ -111,6 +112,7 @@ export class GrafanaApp {
       'ui.bootstrap',
       'ui.bootstrap.tpls',
       'react',
+      'angularShiro'
     ];
 
     // makes it possible to add dynamic stuff
