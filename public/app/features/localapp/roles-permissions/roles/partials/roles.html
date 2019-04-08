@@ -1,47 +1,43 @@
 <div class="page-container page-body roles-main-container">
-    <div class="groups-table-container">
-        <table class="groups-table" style="width: 100%">
-            <thead>
-                <td>Version</td>
-                <td>Name</td>
-                <td>Description</td>
-                <td>Permissions</td>
-            </thead>
-            <tr ng-repeat="role in ctrl.roles">
-                <td>
-                    <label>{{role.version}}</label>
-                </td>
-                <td>
-                    <input type="checkbox" id={{role.id}} />
-                    <label for={{role.id}}>{{role.name}}</label>
-                </td>
-                <td>
-                    <label>{{role.description}}</label>
-                </td>
-                <td>
-                    <table class="groups-table" style="width: 100%">
-                        <tr ng-repeat="permission in role.permissions">
-                            <td>
-                                <label>{{permission.version}}</label>
-                            </td>
-                            <td>
-                                <label>{{permission.name}}</label>
-                            </td>
-                            <td>
-                                <label>{{permission.permission}}</label>
-                            </td>
-                            <td>
-                                <label>{{permission.description}}</label>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+    <div class="roles-container p-2 border-container">
+        <div class="radio-button-container" ng-repeat="role in ctrl.roles">
+            <input ng-click="ctrl.onRoleClicked(role)" name="roles" type="radio" id="{{role.id + 'role'}}" />&nbsp;<label class="d-inline-block" for="{{role.id + 'role'}}">{{role.name}}</label>
+        </div>
+        <button class="link-btn pull-right mt-1" ng-click="ctrl.showAddRoleModal()"><i class="fa fa-plus-circle"></i> Add new Role</button>
+        <div class="clear-both"></div>
     </div>
-    <button class="link-btn pull-right mt-1" ng-click="ctrl.showAddRoleModal()">
-        <i class="fa fa-plus-circle">Add new Role</i>
-    </button>
-    <div class="clear-both"></div>
-</div>
+    <div class="transition-preference">
+        <div class="transition-preference-label">Set transition preferences</div>
+        <div class="tab-header">
+            <ul class="gf-tabs">
+                <li class="gf-tabs-item" ng-repeat="preference in ctrl.preferences" ng-click="ctrl.setPreference(preference.id)">
+                    <a class="gf-tabs-link" ng-class="{active: ctrl.preferenceId === preference.id}">
+                        {{::preference.title}}
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="border-container p-2">
+            <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'permitted'}">
+                <div class="preference-container tree-view-container" ng-repeat="permission in ctrl.permittedPermissions track by $index">
+                    <input type="checkbox" ng-checked="permission.isChecked" ng-model="permission.isChecked" id="{{permission.id + 'permitted'}}" />&nbsp;<label class="d-inline-block" for="{{permission.id + 'permitted'}}">{{permission.permission}}</label>
+                </div>
+            </div>
+            <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'prohibited'}">
+                <div class="preference-container tree-view-container" ng-repeat="permission in ctrl.prohibitedPermissions track by $index">
+                    <input ng-checked="permission.isChecked" ng-model="permission.isChecked" type="checkbox" id="{{permission.id + 'prohibited'}}" />&nbsp;<label class="d-inline-block" for="{{permission.id + 'prohibited'}}">{{permission.permission}}</label>
+                </div>
+            </div>
+            <div class="preference-btn-container">
+                <button class="apply-preference-btn btn-success btn" ng-click="ctrl.updateRole()" ng-disabled="ctrl.isUpdating || !ctrl.selectedRole">Apply</button>
+                <button class="cancel-preference-btn btn-danger btn">Cancel</button>
+            </div>
+            <div>
+                <div ng-if="ctrl.isSuccess === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is some error!</div>
+                <div ng-if="ctrl.isSuccess === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully!</div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    </div>
 </div>

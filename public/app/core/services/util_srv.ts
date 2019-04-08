@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) {}
+  constructor(private $rootScope, private $modal) { }
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -289,26 +289,12 @@ export class UtilSrv {
     scope.preferenceId = payload.preferenceId;
 
     scope.saveRole = () => {
-      const rl = scope.role;
-      rl.permissions = [];
-      if (scope.preferenceId === 'prohibited') {
-        scope.permissions.forEach(item => {
-          if (item.prohib) {
-            console.log('prohib: ', item);
-          } else {
-            rl.permissions.push(item);
-          }
-        });
-      } else {
-        scope.permissions.forEach(item => {
-          if (item.permit) {
-            console.log('permit: ', item);
-            rl.permissions.push(item);
-          }
-        });
-      }
-      payload.onAdd(scope.roleForm, rl, scope.preferenceId);
-      scope.dismiss();
+      payload.onAdd(scope.role, scope.roleForm, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
     };
 
     scope.setPreference = id => {

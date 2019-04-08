@@ -1,56 +1,77 @@
 import { appEvents } from 'app/core/core';
 import { config } from 'app/features/localapp/config';
-import { isArray } from 'util';
 
 export class RolesCtrl {
+  selectedRole = '';
   roles: any[] = [];
-  permissions: any[];
-  preferences: any[];
-  $scope: any;
+  preferences = [];
+  preferenceId = '';
+  permittedPermissions = [];
+  prohibitedPermissions = [];
   backendSrv: any;
-  /** @ngInject */
+  $scope: any;
+  isSuccess = "";
+  isUpdating = false;
   constructor($scope, backendSrv) {
+    this.selectedRole = '';
     this.$scope = $scope;
     this.backendSrv = backendSrv;
     this.getRoles();
-    this.getPermissions();
     this.getPreferences();
+    this.getPermissions();
+    this.preferenceId = 'permitted';
 
-    $scope.saveRole = () => {
-      console.log('Role: ', $scope.role);
-      if (!$scope.roleForm.$valid) {
-        console.log('No valid form found');
+    $scope.saveRole = (role, roleForm, cb, isUpdating) => {
+      if (roleForm && !roleForm.$valid) {
         return;
       }
-      const role = $scope.role;
       role.grp = false;
-      console.log('Save it: ', role);
       this.backendSrv.post(config.ROLES_CREATE, role).then(response => {
-        console.log('Api response: ', response);
+        this.isSuccess = "1";
+        this.isUpdating = false;
+        if (!isUpdating) {
+          this.getRoles();
+        }
+        if (cb) {
+          cb("1");
+        }
+      }, () => {
+        this.isSuccess = "0";
+        this.isUpdating = false;
+        if (cb) {
+          cb("0");
+        }
       });
     };
   }
 
   getRoles() {
+    this.roles = [];
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      if (isArray(response)) {
-        response.forEach(item => {
-          console.log('Role: ', item.name, 'grp: ', item.grp);
-          if (item.grp) {
-            console.log('Found a group');
-          } else {
-            console.log("It's a role");
-            this.roles.push(item);
-          }
-        });
-      }
+      response.forEach(item => {
+        if (!item.grp) {
+          this.roles.push(item);
+        }
+      });
     });
   }
 
-  getPermissions() {
-    this.backendSrv.get(config.PERMS_LIST_ALL).then(response => {
-      this.permissions = response;
-    });
+  onRoleClicked(selectedRole) {
+    this.isSuccess = "";
+    this.selectedRole = selectedRole;
+    const selectedPermissions = selectedRole.permissions;
+    for (const k in this.permittedPermissions) {
+      this.permittedPermissions[k].isChecked = false;
+    }
+    for (const i in selectedPermissions) {
+      const selectedPermission = selectedPermissions[i];
+      for (const j in this.permittedPermissions) {
+        if (this.permittedPermissions[j].id === selectedPermission.id) {
+          this.permittedPermissions[j].isChecked = true;
+          break;
+        }
+      }
+    }
   }
 
   getPreferences() {
@@ -62,8 +83,19 @@ export class RolesCtrl {
       {
         id: 'prohibited',
         title: 'Prohibited',
-      },
+      }
     ];
+  }
+
+  setPreference(id) {
+    this.preferenceId = id;
+  }
+
+  getPermissions() {
+    this.backendSrv.get(config.PERMS_LIST_ALL).then(response => {
+      this.prohibitedPermissions = response;
+      this.permittedPermissions = JSON.parse(JSON.stringify(response));
+    });
   }
 
   showAddRoleModal() {
@@ -71,15 +103,31 @@ export class RolesCtrl {
     appEvents.emit('add-role-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: (roleForm, role, prefId) => {
-        this.$scope.preferenceId = prefId;
-        this.$scope.roleForm = roleForm;
-        this.$scope.role = role;
-        this.$scope.saveRole();
-      },
-      preferenceId: 'permitted',
-      preferences: this.preferences,
-      permissions: this.permissions,
+      onAdd: (role, roleForm, cb) => {
+        this.$scope.saveRole(role, roleForm, cb, false);
+      }
     });
+  }
+
+  updateRole() {
+    if (this.selectedRole) {
+      this.isUpdating = true;
+      const selectedPermissions = [];
+      for (const i in this.permittedPermissions) {
+        const permission = this.permittedPermissions[i];
+        if (permission.isChecked) {
+          permission.permit = true;
+          selectedPermissions.push(permission);
+        }
+      }
+      for (const i in this.prohibitedPermissions) {
+        const permission = this.prohibitedPermissions[i];
+        if (permission.isChecked) {
+          selectedPermissions.push(permission);
+        }
+      }
+      this.selectedRole["permissions"] = selectedPermissions;
+      this.$scope.saveRole(this.selectedRole, null, null, true);
+    }
   }
 }

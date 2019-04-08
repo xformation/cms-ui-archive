@@ -26,47 +26,13 @@
 						<label class="gf-form-label b-0 bg-transparent">ROLE DESCRIPTION</label>
 						<textarea ng-model="role.description" class="gf-form-input " placeholder=""></textarea>
 					</div>
-					<div class="transition-preference">
-						<div class="transition-preference-label">Set transition preferences</div>
-						<div class="tab-header">
-							<ul class="gf-tabs">
-								<li class="gf-tabs-item" ng-repeat="preference in preferences"
-									ng-click="setPreference(preference.id)">
-									<a class="gf-tabs-link" ng-class="{active: preferenceId === preference.id}">
-										{{::preference.title}}
-									</a>
-								</li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<div class="border-container p-2" style="max-height: 100px; overflow-y: auto;">
-							<div class="tab-content" ng-class="{'hide': preferenceId !== 'permitted'}">
-								<table style="width: 100%">
-									<tr ng-repeat="permisn in permissions">
-										<td>
-											<input type="checkbox" id="perm-{{permisn.id}}" ng-model="permisn.permit" />
-											<label for={{permisn.id}}>{{permisn.permission}}</label>
-										</td>
-									</tr>
-								</table>
-							</div>
-							<div class="tab-content" ng-class="{'hide':preferenceId !== 'prohibited'}">
-								<table style="width: 100%">
-									<tr ng-repeat="permisn in permissions">
-										<td>
-											<input type="checkbox" id="proh-{{permisn.id}}" ng-model="permisn.prohib" />
-											<label for={{permisn.id}}>{{permisn.permission}}</label>
-										</td>
-									</tr>
-								</table>
-							</div>
-							<div class="clear-both"></div>
-						</div>
-					</div>
+					
 					<div class="gf-form-button-row p-r-4">
 						<button type="submit" ng-click="saveRole()" class="btn btn-success border-bottom">Save</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
+					<div ng-if="is_success_bar === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is someerror!</div>
+					<div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully!</div>
 				</div>
 			</form>
 		</div>
