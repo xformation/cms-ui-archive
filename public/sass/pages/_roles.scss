@@ -132,13 +132,13 @@
   .tree-sign {
     position: relative;
     top: -2px;
+    margin-right: 10px;
     &.hide {
       display: none !important;
     }
   }
   p {
     display: inline-block;
-    padding-left: 10px;
   }
   ul {
     list-style-position: inside;
