@@ -123,18 +123,18 @@
                 <label class="gf-form-label b-0 bg-white">LEGAL NAME OF COLLEGE</label>
                 <input type="text" ng-model="legalEntity.legalNameOfTheCollege" class="gf-form-input "
                   placeholder="College Name" required maxlength="255"/>
-                <div ng-if="isSubmitted && !legalEntity.legalNameOfTheCollege" class="form-error">Please enter name of college</div>
+                <div ng-if="legalForm.$submitted && !legalEntity.legalNameOfTheCollege" class="form-error">Please enter name of college</div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white">DATE OF INCORPORATION</label>
-                <input type="date" ng-model="legalEntity.dateOfIncorporation" class="gf-form-input " required maxlength="10"/>
-                <div ng-if="isSubmitted && !legalEntity.dateOfIncorporation" class="form-error">Please enter date</div>
+                <input type="date" ng-model="legalEntity.dateOfIncorporation" class="gf-form-input " (ngModelChange)="legalEntity.dateOfIncorporation = $event" required maxlength="10"/>
+                <div ng-if="legalForm.$submitted && !legalEntity.dateOfIncorporation" class="form-error">Please enter date</div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white">COLLEGE IDENTIFICATION NUMBER</label>
                 <input type="text" ng-model="legalEntity.collegeIdentificationNumber" class="gf-form-input "
                   placeholder="CIN1234567" required maxlength="255"/>
-                <div ng-if="isSubmitted && !legalEntity.collegeIdentificationNumber" class="form-error">Please enter college number</div>
+                <div ng-if="legalForm.$submitted && !legalEntity.collegeIdentificationNumber" class="form-error">Please enter college number</div>
               </div>
             </div>
             <div class="form-right">
@@ -144,14 +144,14 @@
                   <select ng-model="legalEntity.typeOfCollege" ng-options="f for f in ['PRIVATE', 'PUBLIC']"
                     class="gf-form-input" required>
                   </select>
-                  <div ng-if="isSubmitted && !legalEntity.typeOfCollege" class="form-error">Please enter type of college</div>
+                  <div ng-if="legalForm.$submitted && !legalEntity.typeOfCollege" class="form-error">Please enter type of college</div>
                 </div>
               </div>
               <div class="m-b-1 ">
                 <label class="gf-form-label b-0 bg-white ">REGISTERED OFFICE ADDRESS</label>
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress1" class="gf-form-input "
                   placeholder="ADDRESS LINE 1" required maxlength="255" />
-                  <div ng-if="isSubmitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please enter registerred address</div>
+                  <div ng-if="legalForm.$submitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please enter registerred address</div>
               </div>
               <div class="m-b-1 ">
                 <input type="text" ng-model="legalEntity.registeredOfficeAddress2" class="gf-form-input "
@@ -181,20 +181,24 @@
             <div class="m-b-1 width-18">
               <label class="gf-form-label b-0 bg-white ">PAN</label>
               <input type="text" ng-model="legalEntity.pan" class="gf-form-input " placeholder="PAN1212345" required maxlength="255"/>
+              <div ng-if="legalForm.$submitted && !legalEntity.pan" class="form-error">Please enter PAN</div>
             </div>
             <div class="flex">
               <div class="m-b-1 width-18">
                 <label class="gf-form-label b-0 bg-white ">TAN</label>
                 <input type="text" ng-model="legalEntity.tan" class="gf-form-input " placeholder="TAN1212345" required maxlength="255"/>
+                <div ng-if="legalForm.$submitted && !legalEntity.tan" class="form-error">Please enter TAN</div>
               </div>
               <div class="m-b-1 width-18 mx">
                 <label class="gf-form-label b-0 bg-white">TAN CIRCLE NUMBER</label>
                 <input type="text" ng-model="legalEntity.tanCircleNumber" class="gf-form-input " placeholder="575765" required maxlength="255"/>
+                <div ng-if="legalForm.$submitted && !legalEntity.tanCircleNumber" class="form-error">Please enter TAN circle number</div>
               </div>
               <div class="m-b-1 width-18">
                 <label class="gf-form-label b-0 bg-white ">CIT(TDS) LOCATION</label>
                 <input type="text" ng-model="legalEntity.citTdsLocation" class="gf-form-input "
                   placeholder="CITY NAME" required maxlength="255"/>
+                  <div ng-if="legalForm.$submitted && !legalEntity.citTdsLocation" class="form-error">Please enter CIT(TDS) location</div>
               </div>
             </div>
             <div class="m-b-1 width-18">
@@ -205,6 +209,7 @@
                     value="{{authorizedSignatory.id}}">
                     {{authorizedSignatory.signatoryName}}</option>
                 </select>
+                <div ng-if="legalForm.$submitted && !legalEntity.formSignatory" class="form-error">Please select form 16 signatory</div>
               </div>
             </div>
 
@@ -225,6 +230,7 @@
                   <label class="gf-form-label b-0 bg-white ">PF NUMBER</label>
                   <input type="text" ng-change="Check();" ng-model="legalEntity.pfNumber" class="gf-form-input "
                     placeholder="SYNEM839549052" required maxlength="255"/>
+                    <div ng-if="legalForm.$submitted && !legalEntity.pfNumber" class="form-error">Please enter PF number</div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY</label>
@@ -235,6 +241,7 @@
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
+                    <div ng-if="legalForm.$submitted && !legalEntity.pfSignatory" class="form-error">Please select PF signatory</div>
                   </div>
                 </div>
                 <div class="m-b-1">
@@ -245,7 +252,8 @@
               <div class="form-right">
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">REGISTRATION DATE</label>
-                  <input type="date" class="gf-form-input" ng-model="legalEntity.pfRegistrationDate" required maxlength="10"/>
+                  <input type="date" class="gf-form-input" ng-model="legalEntity.pfRegistrationDate" (ngModelChange)="legalEntity.pfRegistrationDate = $event" required maxlength="10"/>
+                  <div ng-if="legalForm.$submitted && !legalEntity.pfRegistrationDate" class="form-error">Please enter PF registration date</div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY DESIGNATION</label>
@@ -270,6 +278,7 @@
                   <label class="gf-form-label b-0 bg-white">ESI NUMBER</label>
                   <input type="text" class="gf-form-input" ng-model="legalEntity.esiNumber"
                     placeholder="454876877985465" required maxlength="255"/>
+                    <div ng-if="legalForm.$submitted && !legalEntity.esiNumber" class="form-error">Please enter ESI number</div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white ">SIGNATORY</label>
@@ -279,6 +288,7 @@
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
+                    <div ng-if="legalForm.$submitted && !legalEntity.esiSignatory" class="form-error">Please select ESI signatory</div>
                   </div>
                 </div>
                 <div class="m-b-1">
@@ -289,7 +299,8 @@
               <div class="form-right">
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">REGISTRATION DATE</label>
-                  <input type="date" class="gf-form-input" ng-model="legalEntity.esiRegistrationDate" required maxlength="10" />
+                  <input type="date" class="gf-form-input" ng-model="legalEntity.esiRegistrationDate" (ngModelChange)="legalEntity.esiRegistrationDate = $event" required maxlength="10" />
+                  <div ng-if="legalForm.$submitted && !legalEntity.esiRegistrationDate" class="form-error">Please enter ESI registration date</div>
                 </div>
                 <div class="m-b-1">
                   <label class="gf-form-label b-0 bg-white">SIGNATORY DESIGNATION</label>
@@ -308,7 +319,6 @@
         <div class="contnet">
            <form name="legalForm" class="section fwidth"> 
             <div class="gf-form-group">
-              <h3 class="page-heading">Telangana</h3>
               <div class="flex">
                 <div class="m-b-1 width-18">
                   <label class="gf-form-label b-0 bg-white">PT NUMBER</label>
@@ -316,9 +326,7 @@
                 </div>
                 <div class="m-b-1 width-18 mx">
                   <label class="gf-form-label b-0 bg-white">PT REGISTRATION DATE</label>
-                  <input type="date" class="gf-form-input" ng-model="legalEntity.ptRegistrationDate" required maxlength="10"/>
-                  <label class="gf-form-label b-0 bg-white">Logo input</label>
-                  <input type="text" class="gf-form-input" ng-model="legalEntity.logo" />
+                  <input type="date" class="gf-form-input" ng-model="legalEntity.ptRegistrationDate" (ngModelChange)="legalEntity.ptRegistrationDate = $event" required maxlength="10"/>
                 </div>
                 <div class="m-b-1 width-18">
                   <label class="gf-form-label b-0 bg-white">PT SIGNATORY</label>
@@ -328,6 +336,7 @@
                         value="{{authorizedSignatory.id}}">
                         {{authorizedSignatory.signatoryName}}</option>
                     </select>
+                    <div ng-if="legalForm.$submitted && !legalEntity.ptSignatory" class="form-error">Please select PT signatory</div>
                   </div>
                 </div>
               </div>

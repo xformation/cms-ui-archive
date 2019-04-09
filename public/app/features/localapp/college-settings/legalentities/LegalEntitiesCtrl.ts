@@ -14,11 +14,11 @@ export class LegalEntitiesCtrl {
   clgObject: any;
   activeTabIndex = 0;
   logoSrc = '/public/img/legalentity_logo.png';
+  isLogoChanged = false;
   $scope;
   dependedObj = {};
   RestUrl: any;
   collegeId: any;
-  isSubmitted: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -38,7 +38,6 @@ export class LegalEntitiesCtrl {
     this.getColleges();
     this.clgObject = {};
     this.cmsSelectedBranches = {};
-    this.$scope.isSubmitted = false;
     $scope.createBank = cb => {
       if (!$scope.bankForm.$valid) {
         return;
@@ -81,9 +80,44 @@ export class LegalEntitiesCtrl {
     };
 
     $scope.create = () => {
-      $scope.isSubmitted = true;
       if (!$scope.legalForm.$valid) {
         return;
+      }
+      if (
+        !$scope.legalEntity.legalNameOfTheCollege ||
+        !$scope.legalEntity.dateOfIncorporation ||
+        !$scope.legalEntity.collegeIdentificationNumber ||
+        !$scope.legalEntity.typeOfCollege ||
+        !$scope.legalEntity.registeredOfficeAddress1
+      ) {
+        this.activateTab(0);
+        return;
+      }
+      if (
+        !$scope.legalEntity.pan ||
+        !$scope.legalEntity.tan ||
+        !$scope.legalEntity.tanCircleNumber ||
+        !$scope.legalEntity.citTdsLocation ||
+        !$scope.legalEntity.formSignatory
+      ) {
+        this.activateTab(1);
+        return;
+      }
+      if (!$scope.legalEntity.pfNumber || !$scope.legalEntity.pfSignatory || !$scope.legalEntity.pfRegistrationDate) {
+        this.activateTab(2);
+        return;
+      }
+      if (
+        !$scope.legalEntity.esiNumber ||
+        !$scope.legalEntity.esiSignatory ||
+        !$scope.legalEntity.esiRegistrationDate
+      ) {
+        this.activateTab(3);
+        return;
+      }
+      $scope.legalEntity.collegeId = this.collegeId;
+      if (this.isLogoChanged) {
+        $scope.legalEntity.logoFile = this.logoSrc;
       }
       backendSrv.post(this.RestUrl.getLegalEntitiesRestUrl(), $scope.legalEntity).then(() => {
         console.log('Legal:', this.legalEntities);
@@ -106,6 +140,7 @@ export class LegalEntitiesCtrl {
       this.$scope.$apply();
     };
     fileReader.readAsDataURL(file);
+    this.isLogoChanged = true;
   }
 
   /*getBank() {
