@@ -37,21 +37,42 @@ export class YearSettingCtrl {
         this.getTerms();
       });
     };
-    $scope.createYear = () => {
+    $scope.createYear = cb => {
       if (!$scope.yearForm.$valid) {
         return;
       }
-      backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(() => {
-        this.getYears();
-      });
+      backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
+        () => {
+          this.getYears();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
+        }
+      );
     };
-    $scope.updateYear = () => {
+
+    $scope.updateYear = cb => {
       if (!$scope.yearForm.$valid) {
         return;
       }
-      backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(() => {
-        this.getYears();
-      });
+      backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
+        () => {
+          this.getYears();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
+        }
+      );
     };
   }
 
@@ -85,10 +106,10 @@ export class YearSettingCtrl {
     appEvents.emit('year-modal', {
       text: 'create',
       icon: 'fa-trash',
-      onCreate: (yearForm, academicYear) => {
+      onCreate: (yearForm, academicYear, cb) => {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
-        this.$scope.createYear();
+        this.$scope.createYear(cb);
       },
     });
   }
@@ -98,10 +119,10 @@ export class YearSettingCtrl {
       icon: 'fa-trash',
       text: 'update',
       academicYear: academicYear,
-      onUpdate: (yearForm, academicYear) => {
+      onUpdate: (yearForm, academicYear, cb) => {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
-        this.$scope.update();
+        this.$scope.updateYear(cb);
       },
     });
   }

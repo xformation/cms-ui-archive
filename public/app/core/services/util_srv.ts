@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) { }
+  constructor(private $rootScope, private $modal) {}
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -166,15 +166,23 @@ export class UtilSrv {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
     scope.academicYear = payload.academicYear;
-
+    scope.is_success_bar = '';
     scope.createYear = () => {
-      payload.onCreate(scope.yearForm, scope.academicYear);
-      scope.dismiss();
+      payload.onCreate(scope.yearForm, scope.academicYear, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 3000);
+      });
     };
 
     scope.updateYear = () => {
-      payload.onUpdate(scope.yearForm, scope.academicYear);
-      scope.dismiss();
+      payload.onUpdate(scope.yearForm, scope.academicYear, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 3000);
+      });
     };
 
     appEvents.emit('show-modal', {
@@ -362,7 +370,7 @@ export class UtilSrv {
 
     scope.selectedGroup = null;
 
-    scope.onChangeGroup = (group) => {
+    scope.onChangeGroup = group => {
       scope.selectedGroup = group;
       for (const i in scope.roles) {
         scope.roles[i].checked = false;
@@ -379,7 +387,7 @@ export class UtilSrv {
       }
     };
 
-    scope.onChangeRole = (role) => {
+    scope.onChangeRole = role => {
       if (scope.selectedGroup) {
         const roles = scope.selectedGroup.roles;
         let index: any = -1;

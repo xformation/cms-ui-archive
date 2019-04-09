@@ -25,10 +25,10 @@
         <tr ng-repeat="academicYear in ctrl.academicYears">
           <td>{{academicYear.year}}</td>
           <td>
-            {{academicYear.startDate}}
+            {{academicYear.strStartDate}}
           </td>
           <td>
-            {{academicYear.endDate}}
+            {{academicYear.strEndDate}}
           </td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
