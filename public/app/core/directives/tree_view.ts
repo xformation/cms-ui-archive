@@ -3,7 +3,10 @@ import coreModule from '../core_module';
 export function treeView($timeout) {
   return {
     restrict: 'E',
-    scope: { family: '=' },
+    scope: {
+      family: '=',
+      onClickRole: '&'
+    },
     template: `<i class="fa fa-plus-square-o tree-sign" ng-click="onClickCollapse(family)"
     ng-class="{'hide': (!family.collapse && family.children.length > 0) || !family.children}"></i>
             <i class="fa fa-minus-square-o tree-sign" ng-click="onClickCollapse(family)"
@@ -24,6 +27,7 @@ export function treeView($timeout) {
       scope.onChangeCheckbox = (family) => {
         if (family.children && family.children.length > 0) {
           const children = family.children;
+          scope.onClickRole(children);
           children.forEach(child => {
             child.checked = family.checked;
           });

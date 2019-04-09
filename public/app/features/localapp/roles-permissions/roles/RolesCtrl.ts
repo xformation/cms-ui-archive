@@ -64,10 +64,14 @@ export class RolesCtrl {
     for (const k in this.permittedPermissions) {
       this.permittedPermissions[k].checked = false;
       this.permittedPermissions[k].collapse = false;
+      this.prohibitedPermissions[k].checked = false;
+      this.prohibitedPermissions[k].collapse = false;
       const children = this.permittedPermissions[k].children;
+      const prohibitedChildren = this.prohibitedPermissions[k].children;
       if (children.length > 0) {
         for (const j in children) {
           children[j].checked = false;
+          prohibitedChildren[j].checked = true;
         }
       }
     }
@@ -75,9 +79,11 @@ export class RolesCtrl {
       const selectedPermission = selectedPermissions[i];
       for (const j in this.permittedPermissions) {
         const children = this.permittedPermissions[j].children;
+        const prohibitedChildren = this.prohibitedPermissions[j].children;
         for (const k in children) {
           if (children[k].id === selectedPermission.id) {
             children[k].checked = true;
+            prohibitedChildren[k].checked = false;
           }
         }
       }
@@ -146,38 +152,26 @@ export class RolesCtrl {
     if (this.selectedRole) {
       this.isUpdating = true;
       let selectedPermissions = [];
-      let anyPermissionClicked = false;
-      for (const i in this.prohibitedPermissions) {
-        const children = this.prohibitedPermissions[i].children;
+      selectedPermissions = [];
+      for (const i in this.permittedPermissions) {
+        const children = this.permittedPermissions[i].children;
         for (const j in children) {
           const child = children[j];
-          if (!child.checked) {
+          if (child.checked) {
+            child.permit = true;
             selectedPermissions.push({
               ...child,
               name: child.dupName
             });
-          }
-          anyPermissionClicked = anyPermissionClicked || child.checked;
-        }
-      }
-      if (!anyPermissionClicked) {
-        selectedPermissions = [];
-        for (const i in this.permittedPermissions) {
-          const children = this.permittedPermissions[i].children;
-          for (const j in children) {
-            const child = children[j];
-            if (child.checked) {
-              child.permit = true;
-              selectedPermissions.push({
-                ...child,
-                name: child.dupName
-              });
-            }
           }
         }
       }
       this.selectedRole["permissions"] = selectedPermissions;
       this.$scope.saveRole(this.selectedRole, null, null, true);
     }
+  }
+
+  onClickTreeRole(role) {
+    console.log(role);
   }
 }
