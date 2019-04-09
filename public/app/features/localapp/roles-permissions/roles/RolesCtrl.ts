@@ -145,17 +145,34 @@ export class RolesCtrl {
   updateRole() {
     if (this.selectedRole) {
       this.isUpdating = true;
-      const selectedPermissions = [];
-      for (const i in this.permittedPermissions) {
-        const children = this.permittedPermissions[i].children;
+      let selectedPermissions = [];
+      let anyPermissionClicked = false;
+      for (const i in this.prohibitedPermissions) {
+        const children = this.prohibitedPermissions[i].children;
         for (const j in children) {
           const child = children[j];
-          if (child.checked) {
-            child.permit = true;
+          if (!child.checked) {
             selectedPermissions.push({
               ...child,
               name: child.dupName
             });
+          }
+          anyPermissionClicked = anyPermissionClicked || child.checked;
+        }
+      }
+      if (!anyPermissionClicked) {
+        selectedPermissions = [];
+        for (const i in this.permittedPermissions) {
+          const children = this.permittedPermissions[i].children;
+          for (const j in children) {
+            const child = children[j];
+            if (child.checked) {
+              child.permit = true;
+              selectedPermissions.push({
+                ...child,
+                name: child.dupName
+              });
+            }
           }
         }
       }
