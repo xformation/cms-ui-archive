@@ -1,5 +1,5 @@
 import { appEvents } from 'app/core/core';
-import { config } from '../../config';
+import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class SubjectSetupCtrl {
   subjects: any;
@@ -10,8 +10,10 @@ export class SubjectSetupCtrl {
   query: any;
   activeTabIndex = 0;
   $scope: any;
+  RestUrl: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.query = '';
     this.$scope = $scope;
@@ -23,7 +25,7 @@ export class SubjectSetupCtrl {
       if (!$scope.subjectForm.$valid) {
         return;
       }
-      backendSrv.post(`${config.api_url}/api/subjects/`, $scope.subject).then(() => {
+      backendSrv.post(this.RestUrl.getSubjectRestUrl(), $scope.subject).then(() => {
         this.getSubjects();
       });
     };
@@ -31,7 +33,7 @@ export class SubjectSetupCtrl {
       if (!$scope.subjectForm.$valid) {
         return;
       }
-      backendSrv.put(`${config.api_url}/api/subjects/`, $scope.subject).then(() => {
+      backendSrv.put(this.RestUrl.getSubjectRestUrl(), $scope.subject).then(() => {
         this.getSubjects();
       });
     };
@@ -42,25 +44,25 @@ export class SubjectSetupCtrl {
   }
 
   getSubjects() {
-    this.backendSrv.get(`${config.api_url}/api/subjects/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getSubjectRestUrl()).then(result => {
       this.subjects = result;
       console.log('Subjects', this.subjects);
     });
   }
   getDepartments() {
-    this.backendSrv.get(`${config.api_url}/api/departments/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
       this.departments = result;
       console.log('departments', this.departments);
     });
   }
   getTeachers() {
-    this.backendSrv.get(`${config.api_url}/api/teachers/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getTeacherRestUrl()).then(result => {
       this.teachers = result;
       console.log('teachers', this.teachers);
     });
   }
   getBatches() {
-    this.backendSrv.get(`${config.api_url}/api/batches/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
       this.batches = result;
       console.log('Batches', this.batches);
     });
@@ -73,7 +75,7 @@ export class SubjectSetupCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete('${config.api_url}/api/subjects/' + subject.id).then(() => {
+        this.backendSrv.delete(this.RestUrl.getSubjectRestUrl() + subject.id).then(() => {
           this.getSubjects();
         });
       },

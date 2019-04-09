@@ -56,4 +56,13 @@ export class GlobalRestUrlConstants {
   getTeacherRestUrl() {
     return this.getBaseRestUrl() + '/teachers/';
   }
+  getHolidayRestUrl() {
+    return this.getBaseRestUrl() + '/holidays/';
+  }
+  getTermRestUrl() {
+    return this.getBaseRestUrl() + '/terms/';
+  }
+  getSubjectRestUrl() {
+    return this.getBaseRestUrl() + '/subjects/';
+  }
 }

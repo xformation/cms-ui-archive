@@ -116,6 +116,9 @@ export class TimeTableSettingCtrl {
   }
 
   getBranchesByCollegeId() {
+    if (!this.collegeId) {
+      return;
+    }
     this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
       this.clgObject.branches = result;
     });

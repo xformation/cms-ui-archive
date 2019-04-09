@@ -24,7 +24,7 @@ export class YearSettingCtrl {
       if (!$scope.holidayForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/holidays/', $scope.holiday).then(() => {
+      backendSrv.post(this.RestUrl.getHolidayRestUrl(), $scope.holiday).then(() => {
         this.getHolidays();
       });
     };
@@ -33,7 +33,7 @@ export class YearSettingCtrl {
       if (!$scope.termForm.$valid) {
         return;
       }
-      backendSrv.post('http://localhost:8080/api/terms/', $scope.term).then(() => {
+      backendSrv.post(this.RestUrl.getTermRestUrl(), $scope.term).then(() => {
         this.getTerms();
       });
     };
@@ -85,13 +85,13 @@ export class YearSettingCtrl {
   }
 
   getHolidays() {
-    this.backendSrv.get(`http://localhost:8080/api/holidays/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getHolidayRestUrl()).then(result => {
       this.holidays = result;
     });
   }
 
   getTerms() {
-    this.backendSrv.get(`http://localhost:8080/api/terms/`).then(result => {
+    this.backendSrv.get(this.RestUrl.getTermRestUrl()).then(result => {
       this.terms = result;
     });
   }
