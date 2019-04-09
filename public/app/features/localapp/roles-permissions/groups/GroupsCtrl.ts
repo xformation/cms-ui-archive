@@ -6,31 +6,34 @@ export class GroupsCtrl {
   roles: any[] = [];
   $scope: any;
   backendSrv: any;
-  /** @ngInject */
   constructor($scope, backendSrv) {
     this.$scope = $scope;
     this.backendSrv = backendSrv;
     this.getGroups();
 
-    $scope.saveGroup = () => {
-      console.log('Role: ', $scope.group);
-      if (!$scope.groupForm.$valid) {
-        console.log('No valid form found');
+    $scope.saveGroup = (group, groupForm, cb) => {
+      if (groupForm && !groupForm.$valid) {
         return;
       }
-      const role = $scope.group;
-      role.grp = true;
-      console.log('Save it: ', role);
-      this.backendSrv.post(config.ROLES_CREATE, role).then(response => {
-        console.log('Api response: ', response);
+      group.grp = true;
+      this.backendSrv.post(config.ROLES_CREATE, group).then(response => {
+        this.getGroups();
+        if (cb) {
+          cb("1");
+        }
+      }, error => {
+        if (cb) {
+          cb("0");
+        }
       });
     };
   }
 
   getGroups() {
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
+      this.groups = [];
+      this.roles = [];
       response.forEach(role => {
-        console.log('Log: ', role);
         if (role.grp) {
           this.groups.push(role);
         } else {
@@ -45,13 +48,22 @@ export class GroupsCtrl {
     appEvents.emit('add-group-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: (groupForm, group) => {
-        this.$scope.groupForm = groupForm;
-        this.$scope.group = group;
-        this.$scope.saveGroup();
-        this.getGroups();
-      },
-      roles: this.roles,
+      onAdd: (groupForm, group, cb) => {
+        this.$scope.saveGroup(group, groupForm, cb);
+      }
+    });
+  }
+
+  showAssignRoleModal() {
+    const text = 'Do you want to delete the ';
+    appEvents.emit('assign-role-modal', {
+      text: text,
+      icon: 'fa-trash',
+      roles: JSON.parse(JSON.stringify(this.roles)),
+      groups: JSON.parse(JSON.stringify(this.groups)),
+      onAdd: (group, cb) => {
+        this.$scope.saveGroup(group, null, cb);
+      }
     });
   }
 }

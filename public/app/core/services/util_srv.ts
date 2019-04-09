@@ -309,20 +309,17 @@ export class UtilSrv {
   }
 
   addGroupModal(payload) {
-    const scope = payload.scope || this.$rootScope.$new();
-    scope.roles = payload.roles;
+    const scope = this.$rootScope.$new();
 
     scope.saveGroup = () => {
       const rl = scope.group;
       rl.roles = [];
-      scope.roles.forEach(item => {
-        if (item.sel) {
-          console.log('prohib: ', item);
-          rl.roles.push(item);
-        }
+      payload.onAdd(scope.groupForm, rl, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
       });
-      payload.onAdd(scope.groupForm, rl);
-      scope.dismiss();
     };
 
     appEvents.emit('show-modal', {
@@ -353,6 +350,53 @@ export class UtilSrv {
   assignRoleModal(payload) {
     const scope = this.$rootScope.$new();
     scope.roles = payload.roles;
+    scope.groups = payload.groups;
+    scope.assignRole = () => {
+      payload.onAdd(scope.selectedGroup, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
+    };
+
+    scope.selectedGroup = null;
+
+    scope.onChangeGroup = (group) => {
+      scope.selectedGroup = group;
+      for (const i in scope.roles) {
+        scope.roles[i].checked = false;
+      }
+      for (const i in group.roles) {
+        const role = group.roles[i];
+        for (const j in scope.roles) {
+          const scopeRole = scope.roles[j];
+          if (scopeRole.id === role.id) {
+            scopeRole.checked = true;
+            break;
+          }
+        }
+      }
+    };
+
+    scope.onChangeRole = (role) => {
+      if (scope.selectedGroup) {
+        const roles = scope.selectedGroup.roles;
+        let index: any = -1;
+        for (const i in roles) {
+          if (roles[i].id === role.id) {
+            index = i;
+            break;
+          }
+        }
+        if (role.checked) {
+          scope.selectedGroup.roles.push(role);
+        } else {
+          scope.selectedGroup.roles.splice(index, 1);
+        }
+      }
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/groups/partials/assign_role.html',
       scope: scope,

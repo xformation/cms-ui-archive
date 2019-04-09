@@ -1,0 +1,57 @@
+<div class="add-modal-body assign-role-modal-container" ng-cloak>
+    <div class="add-modal-header">
+        <h2 class="add-modal-header-title">
+            <!-- <i class="fa {{icon}}"></i> -->
+            <span class="p-l-1">
+                Assign Role
+            </span>
+        </h2>
+        <a class="add-modal-header-close" ng-click="dismiss();">
+            <i class="fa fa-remove"></i>
+        </a>
+    </div>
+    <div class="modal-content">
+        <div class="add-confirm-modal p-1">
+            <form class="gf-form-group section m-0 dflex">
+                <div class="bg-modal">
+                    <table class="assign-table">
+                        <tr class="header">
+                            <td class="left-part">
+                                <input placeholder="SEARCH GROUP" type="text" class="gf-form-input"/>
+                            </td>
+                            <td class="middle-part"></td>
+                            <td class="right-part">
+                                <label>SELECT ROLE TO ASSIGN</label>
+                            </td>
+                        </tr>
+                        <tr class="assign-content">
+                            <td class="left-part" style="vertical-align: top;">
+                                <div class="check-box-container" ng-repeat="group in groups">
+                                    <input ng-click="onChangeGroup(group)" name="group" type="radio" id={{group.id}}>
+                                    <label for={{group.id}}>{{group.name}}</label>
+                                </div>
+                            </td>
+                            <td class="middle-part"></td>
+                            <td class="right-part">
+                                <div class="check-box-container" ng-repeat="role in roles">
+                                    <input type="checkbox" ng-model="role.checked" ng-click="onChangeRole(role)" ng-checked="role.checked" id={{role.id}}>
+                                    <label for={{role.id}}>{{role.name}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="gf-form-button-row p-r-0">
+                        <button ng-click="assignRole()" type="submit" class="btn btn-success border-bottom" ng-disabled="!selectedGroup">Save</button>
+                        <button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom m-r-0">Cancel</button>
+                    </div>
+                    <div ng-if="is_success_bar === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is some error!</div>
+					<div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully!</div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-content-confirm-text" ng-if="confirmText">
+            <input type="text" class="gf-form-input width-16" style="display: inline-block;" placeholder="Type {{confirmText}} to confirm"
+             ng-model="confirmInput" ng-change="updateConfirmText(confirmInput)">
+        </div>
+    </div>
+</div>
