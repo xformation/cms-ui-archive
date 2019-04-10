@@ -12,6 +12,7 @@ export class CollegeBranchesCtrl {
   $scope: any;
   RestUrl: any;
   selectedCities: any;
+  deletionStatus: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -25,35 +26,42 @@ export class CollegeBranchesCtrl {
     this.$scope.getState = this.getState.bind(this);
     this.$scope.getCity = this.getCity.bind(this);
     this.selectedCities = {};
-    $scope.create = (cb) => {
+    this.deletionStatus = 0;
+    $scope.create = cb => {
       if (!$scope.branchForm.$valid) {
         return;
       }
-      return backendSrv.post(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
-        this.getBranches();
-        if (cb) {
-          cb("1");
+      return backendSrv.post(this.RestUrl.getBranchRestUrl(), $scope.branch).then(
+        () => {
+          this.getBranches();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
         }
-      }, () => {
-        if (cb) {
-          cb("0");
-        }
-      });
+      );
     };
-    $scope.update = (cb) => {
+    $scope.update = cb => {
       if (!$scope.branchForm.$valid) {
         return;
       }
-      backendSrv.put(this.RestUrl.getBranchRestUrl(), $scope.branch).then(() => {
-        this.getBranches();
-        if (cb) {
-          cb("1");
+      backendSrv.put(this.RestUrl.getBranchRestUrl(), $scope.branch).then(
+        () => {
+          this.getBranches();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
         }
-      }, () => {
-        if (cb) {
-          cb("0");
-        }
-      });
+      );
     };
     $scope.onChangeState = () => {
       const { stateId } = this.$scope.branch;
@@ -103,13 +111,15 @@ export class CollegeBranchesCtrl {
   }
 
   deleteBranch(branch) {
+    this.deletionStatus = 0;
     appEvents.emit('confirm-modal', {
       title: 'Delete',
       text: 'Do you want to delete ' + branch.branchName + '?',
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete(this.RestUrl.getBranchRestUrl() + branch.id).then(() => {
+        this.backendSrv.delete(this.RestUrl.getBranchRestUrl() + branch.id).then(result => {
+          this.deletionStatus = result;
           this.getBranches();
         });
       },
@@ -117,11 +127,19 @@ export class CollegeBranchesCtrl {
   }
 
   editBranch(branch) {
-    branch.stateId = branch.state.id.toString();
+    this.deletionStatus = 0;
+    if (branch.state != null) {
+      branch.stateId = branch.state.id.toString();
+    }
+    if (branch.city != null) {
+      branch.cityId = branch.city.id.toString();
+    }
+    if (branch.college != null) {
+      branch.collegeId = branch.college.id.toString();
+    }
     this.$scope.branch = branch;
     this.$scope.onChangeState();
-    branch.cityId = branch.city.id.toString();
-    branch.collegeId = branch.college.id.toString();
+
     appEvents.emit('branch-modal', {
       icon: 'fa-trash',
       text: 'update',
@@ -147,6 +165,7 @@ export class CollegeBranchesCtrl {
   }
 
   showModal() {
+    this.deletionStatus = 0;
     appEvents.emit('branch-modal', {
       text: 'create',
       icon: 'fa-trash',

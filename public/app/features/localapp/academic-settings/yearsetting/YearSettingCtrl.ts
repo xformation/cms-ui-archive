@@ -38,6 +38,12 @@ export class YearSettingCtrl {
       });
     };
     $scope.createYear = cb => {
+      if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
+        if (cb) {
+          cb('2');
+        }
+        return;
+      }
       if (!$scope.yearForm.$valid) {
         return;
       }
@@ -57,6 +63,12 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
+      if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
+        if (cb) {
+          cb('2');
+        }
+        return;
+      }
       if (!$scope.yearForm.$valid) {
         return;
       }
