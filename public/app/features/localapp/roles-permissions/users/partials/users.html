@@ -2,28 +2,29 @@
     <div class="border-container">
         <div class="users-btn-container text-right p-2">
             <button class="link-btn mr-1" ng-click="ctrl.showAddUserModal()">Add User</button>
-            <button class="link-btn mr-1" ng-click="ctrl.showEditUserModal()">Edit User</button>
+            <button class="link-btn mr-1" ng-click="ctrl.showEditUserModal()" ng-disabled="!ctrl.user">Edit User</button>
+            <button class="link-btn mr-1" ng-click="ctrl.showAssignGroupModal()">Assign Group</button>
             <button class="link-btn mr-1">Search User</button>
             <input type="text" class="gf-form-input max-width-18 search-users-textbox" placeholder="Search User" />
         </div>
         <div class="users-table-container">
             <table class="users-table">
                 <thead>
-                    <td>Email</td>
                     <td>User Name</td>
-                    <td>Assigned Roles</td>
+                    <td>Email</td>
+                    <td>Groups assigned to users</td>
                 </thead>
                 <tr ng-repeat="user in ctrl.users">
                     <td>
-                        <input group="usreadio" type="radio" id={{user.id}} ng-click="ctrl.selUser(user)" />
-                        <label for={{user.id}}>{{user.email}}</label>
+                        <input name="usreadio" type="radio" id={{user.id}} ng-click="ctrl.setUser(user)" />
+                        <label for={{user.id}}>{{user.username}}</label>
                     </td>
                     <td>
-                        <label>{{user.username}}</label>
+                        <label>{{user.email}}</label>
                     </td>
                     <td>
-                        <label ng-repeat="role in user.roles">
-                            {{role.name}}
+                        <label ng-repeat="role in user.roles" class="m-r-0">
+                            <label ng-if="role.grp">{{role.name}}</label>
                         </label>
                     </td>
                 </tr>

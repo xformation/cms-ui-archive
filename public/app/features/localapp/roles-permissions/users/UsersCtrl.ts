@@ -3,89 +3,119 @@ import { config } from 'app/features/localapp/config';
 
 export class UsersCtrl {
   users: any[] = [];
-  roles: any[] = [];
-  user: any;
+  groups: any[] = [];
   $scope: any;
   backendSrv: any;
-  /** @ngInject */
+  user: any = null;
   constructor($scope, backendSrv) {
     this.$scope = $scope;
     this.backendSrv = backendSrv;
     this.getUsers();
-    this.getRoles();
+    this.getGroups();
 
-    $scope.saveUser = () => {
-      console.log('User: ', $scope.user);
-      if (!$scope.userForm.$valid) {
-        console.log('No valid form found');
+    $scope.saveUser = (user, userForm, cb) => {
+      if (!userForm.$valid) {
         return;
       }
-      const usr = $scope.user;
-      console.log('Save it: ', usr);
-      this.backendSrv.post(config.USERS_CREATE, usr).then(response => {
-        console.log('Api response: ', response);
+      this.backendSrv.post(config.USERS_CREATE, user).then(response => {
+        this.users.push(user);
+        if (cb) {
+          cb("1");
+        }
+      }, error => {
+        if (cb) {
+          cb("0");
+        }
       });
     };
-    $scope.updateUser = () => {
-      console.log('User: ', $scope.user);
-      if (!$scope.userForm.$valid) {
-        console.log('No valid form found');
+
+    $scope.updateUser = (user, userForm, cb) => {
+      if (userForm && !userForm.$valid) {
         return;
       }
-      const usr = $scope.user;
-      console.log('Update it: ', usr);
-      this.backendSrv.post(config.USERS_UPDATE, usr).then(response => {
-        console.log('Api response: ', response);
+      this.backendSrv.post(config.USERS_UPDATE, user).then(response => {
+        if (cb) {
+          cb("1");
+        }
+        this.updateUser(user);
+      }, error => {
+        if (cb) {
+          cb("0");
+        }
       });
     };
-  }
-
-  selUser(usr) {
-    this.user = usr;
   }
 
   getUsers() {
+    this.users = [];
     this.backendSrv.get(config.USERS_LIST_ALL).then(response => {
       this.users = response;
     });
   }
 
-  getRoles() {
+  getGroups() {
+    this.groups = [];
     this.backendSrv.get(config.ROLES_LIST_ALL).then(response => {
-      this.roles = response;
+      response.forEach(role => {
+        if (role.grp) {
+          this.groups.push(role);
+        }
+      });
     });
   }
 
+  updateUser(updatedUser) {
+    for (const i in this.users) {
+      if (this.users[i].id === updatedUser.id) {
+        this.users[i] = updatedUser;
+      }
+    }
+    this.users.forEach(user => {
+
+    });
+  }
+
+  setUser(usr) {
+    this.user = usr;
+  }
+
   showAddUserModal() {
-    const text = 'Do you want to Add the ';
+    const text = 'Do you want to delete the ';
     appEvents.emit('add-user-modal', {
       text: text,
       icon: 'fa-trash',
-      onAdd: (userForm, user) => {
-        this.$scope.userForm = userForm;
-        this.$scope.user = user;
-        this.$scope.saveUser();
+      onAdd: (userForm, user, cb) => {
+        this.$scope.saveUser(user, userForm, cb);
       },
-      roles: this.roles,
     });
   }
 
   showEditUserModal() {
     if (!this.user) {
-      alert('Please select a user first to edit.');
       return;
     }
-    const text = 'Do you want to Edit the ';
+    const text = 'Do you want to delete the ';
     appEvents.emit('edit-user-modal', {
       text: text,
       icon: 'fa-trash',
-      onEdit: (userForm, user) => {
-        this.$scope.userForm = userForm;
-        this.$scope.user = user;
-        this.$scope.updateUser();
+      onAdd: () => { },
+      onEdit: (userForm, user, cb) => {
+        this.$scope.updateUser(user, userForm, cb);
       },
-      roles: this.roles,
-      user: this.user,
+      user: JSON.parse(JSON.stringify(this.user))
+    });
+  }
+
+  showAssignGroupModal() {
+    const text = 'Do you want to delete the ';
+    appEvents.emit('assign-group-modal', {
+      text: text,
+      icon: 'fa-trash',
+      groups: JSON.parse(JSON.stringify(this.groups)),
+      users: JSON.parse(JSON.stringify(this.users)),
+      onEdit: (user, cb) => {
+        this.$scope.updateUser(user, null, cb);
+      }
     });
   }
 }

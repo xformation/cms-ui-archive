@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) {}
+  constructor(private $rootScope, private $modal) { }
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -415,6 +415,54 @@ export class UtilSrv {
   assignGroupModal(payload) {
     const scope = this.$rootScope.$new();
     scope.groups = payload.groups;
+    scope.users = payload.users;
+    scope.isRequestMade = false;
+    scope.onChangeUser = user => {
+      scope.selectedUser = user;
+      for (const i in scope.groups) {
+        scope.groups[i].checked = false;
+      }
+      for (const i in user.roles) {
+        const role = user.roles[i];
+        for (const j in scope.groups) {
+          const scopeGroup = scope.groups[j];
+          if (scopeGroup.id === role.id) {
+            scopeGroup.checked = true;
+            break;
+          }
+        }
+      }
+    };
+
+    scope.onChangeGroup = group => {
+      if (scope.selectedUser) {
+        const roles = scope.selectedUser.roles;
+        let index: any = -1;
+        for (const i in roles) {
+          if (roles[i].id === group.id) {
+            index = i;
+            break;
+          }
+        }
+        if (group.checked) {
+          scope.selectedUser.roles.push(group);
+        } else {
+          scope.selectedUser.roles.splice(index, 1);
+        }
+      }
+    };
+
+    scope.assignGroup = () => {
+      scope.isRequestMade = true;
+      payload.onEdit(scope.selectedUser, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        scope.isRequestMade = false;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
+    };
+
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/users/partials/assign_group.html',
       scope: scope,
@@ -424,19 +472,18 @@ export class UtilSrv {
 
   addUserModal(payload) {
     const scope = this.$rootScope.$new();
-    scope.roles = payload.roles;
-
+    scope.isRequestMade = false;
     scope.saveUser = () => {
-      const usr = scope.user;
-      usr.roles = [];
-      scope.roles.forEach(item => {
-        if (item.sel) {
-          console.log('selected: ', item);
-          usr.roles.push(item);
-        }
+      scope.isRequestMade = true;
+      const user = scope.user;
+      user.roles = [];
+      payload.onAdd(scope.userForm, user, isSuccess => {
+        scope.isRequestMade = false;
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
       });
-      payload.onAdd(scope.userForm, usr);
-      scope.dismiss();
     };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/users/partials/add_user.html',
@@ -447,27 +494,19 @@ export class UtilSrv {
 
   editUserModal(payload) {
     const scope = this.$rootScope.$new();
-    scope.roles = payload.roles;
     scope.user = payload.user;
-    scope.roles.forEach(role => {
-      scope.user.roles.forEach(rl => {
-        if (role.id === rl.id) {
-          role.sel = true;
-        }
-      });
-    });
+    scope.isRequestMade = false;
 
     scope.updateUser = () => {
       const usr = scope.user;
-      usr.roles = [];
-      scope.roles.forEach(item => {
-        if (item.sel) {
-          console.log('selected: ', item);
-          usr.roles.push(item);
-        }
+      scope.isRequestMade = true;
+      payload.onEdit(scope.userForm, usr, isSuccess => {
+        scope.isRequestMade = false;
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
       });
-      payload.onEdit(scope.userForm, usr);
-      scope.dismiss();
     };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/users/partials/edit_user.html',
