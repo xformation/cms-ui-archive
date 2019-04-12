@@ -28,16 +28,26 @@
 								placeholder="department head" />
 						</div>
 					</div>
+				<div class="mdflex modal-fwidth">
+					<div class="fwidth-modal-text m-r-1">
+						<label class="gf-form-label b-0 bg-transparent">COLLEGE BRANCH</label>
+							<select class="gf-form-input" required ng-model="department.branchId" >
+								<option value="">
+								  Select College Branch</option>
+								<option ng-repeat="branch in branches" value="{{branch.id}}">
+								  {{branch.branchName}}</option>
+							</select>
+					</div>
+				</div>
 					<div class="mdflex modal-fwidth">
 						<div class="fwidth-modal-text m-r-1">
-							<label class="gf-form-label b-0 bg-transparent">College Branch</label>
-							<input type="number" required ng-model="department.branchId" class="gf-form-input "
-								placeholder="branch" />
-						</div>
-						<div class="fwidth-modal-text">
-							<label class="gf-form-label b-0 bg-transparent">Academic Year</label>
-							<input type="number" required ng-model="department.academicyearId" class="gf-form-input "
-								placeholder="" />
+						<label class="gf-form-label b-0 bg-transparent">ACADEMIC YEAR</label>
+							<select class="gf-form-input" required ng-model="department.academicyearId" >
+								<option value="">
+								  Select AcademicYear</option>
+								<option ng-repeat="academicYear in academicYears" value="{{academicYear.id}}">
+								  {{academicYear.year}}</option>
+							</select>
 						</div>
 					</div>
 					<div class="modal-fwidth fwidth-modal-text m-r-1">

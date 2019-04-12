@@ -22,17 +22,17 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr ng-repeat="department in ctrl.departments | limitTo:2">
+        <tr ng-repeat="department in ctrl.departments">
           <td>{{department.name}}
           </td>
           <td>
             {{department.deptHead}}
           </td>
           <td>
-            {{department.branchId}}
+            {{department.branch.branchName}}
           </td>
           <td>
-            {{department.academicyearId}}
+            {{department.academicyear.year}}
           </td>
           <td>
             {{department.description}}

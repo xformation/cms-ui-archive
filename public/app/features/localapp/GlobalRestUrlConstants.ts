@@ -6,7 +6,7 @@ export class GlobalRestUrlConstants {
   BASE_URL: string;
   constructor() {
     this.PROTOCOL = 'http';
-    this.IP = 'localhost'; //18.234.66.133
+    this.IP = '18.234.66.133'; //18.234.66.133
     this.PORT = '8080';
     this.ROOT_API = 'api';
     this.BASE_URL = this.PROTOCOL + '://' + this.IP + ':' + this.PORT + '/' + this.ROOT_API;
@@ -64,5 +64,9 @@ export class GlobalRestUrlConstants {
   }
   getSubjectRestUrl() {
     return this.getBaseRestUrl() + '/subjects/';
+  }
+
+  getCmsDepartmentRestUrl() {
+    return this.getBaseRestUrl() + '/cmsdepartments/';
   }
 }

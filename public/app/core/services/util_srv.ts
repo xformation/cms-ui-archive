@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) { }
+  constructor(private $rootScope, private $modal) {}
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -196,6 +196,8 @@ export class UtilSrv {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
     scope.department = payload.department;
+    scope.branches = payload.branches;
+    scope.academicYears = payload.academicYears;
 
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
