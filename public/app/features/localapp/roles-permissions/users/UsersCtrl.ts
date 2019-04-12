@@ -18,7 +18,7 @@ export class UsersCtrl {
         return;
       }
       this.backendSrv.post(config.USERS_CREATE, user).then(response => {
-        this.users.push(user);
+        this.getUsers();
         if (cb) {
           cb("1");
         }
@@ -37,7 +37,7 @@ export class UsersCtrl {
         if (cb) {
           cb("1");
         }
-        this.updateUser(user);
+        this.getUsers();
       }, error => {
         if (cb) {
           cb("0");
@@ -61,17 +61,6 @@ export class UsersCtrl {
           this.groups.push(role);
         }
       });
-    });
-  }
-
-  updateUser(updatedUser) {
-    for (const i in this.users) {
-      if (this.users[i].id === updatedUser.id) {
-        this.users[i] = updatedUser;
-      }
-    }
-    this.users.forEach(user => {
-
     });
   }
 

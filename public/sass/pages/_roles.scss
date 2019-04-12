@@ -1,215 +1,224 @@
 .roles-permission-container {
-  color: black !important;
-  .gf-tabs-link.active,
-  .gf-tabs-link.active:hover,
-  .gf-tabs-link.active:focus {
-    color: #3697ef !important;
-  }
-
-  .gf-tabs-link {
     color: black !important;
-  }
-
-  .border-container {
-    border: 1px solid #ababab;
-  }
-
-  .link-btn {
-    background: #fff;
-    color: #3697ef;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
-  }
-
-  //Roles tab css
-  .roles-main-container {
-    .roles-container {
-      .radio-button-container {
-        margin-top: 10px;
-      }
+    .gf-tabs-link.active,
+    .gf-tabs-link.active:hover,
+    .gf-tabs-link.active:focus {
+        color: #3697ef !important;
     }
-    .transition-preference {
-      margin-top: 30px;
-      .tab-header {
-        margin-bottom: 20px;
-      }
-      .transition-preference-label {
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-      .tab-content {
-        margin-bottom: 20px;
-      }
-      .preference-btn-container {
-        float: right;
-      }
-      .exclusive-roles-container {
-        .checkbox-button-container {
-          margin-bottom: 1rem;
+    .gf-tabs-link {
+        color: black !important;
+    }
+    .border-container {
+        border: 1px solid #ababab;
+    }
+    .tab-header {
+        padding-left: 20px;
+        font-size: 16px;
+    }
+    .tab-content {
+        margin-top: 40px;
+    }
+    .link-btn {
+        background: #fff;
+        color: #3697ef;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 3px;
+        font-weight: bold;
+    } //Roles tab css
+    .roles-main-container {
+        padding: 10px !important;
+        .roles-container {
+            .radio-button-container {
+                margin-top: 10px;
+            }
         }
-      }
-    }
-  }
-
-  //Groups tab css
-  .groups-main-container {
-    .groups-btn-container {
-      border-bottom: 1px solid #ababab;
-      .search-groups-textbox {
-        display: inline-block !important;
-      }
-    }
-    .groups-table-container {
-      .groups-table {
-        width: 100%;
-        font-size: 14px !important;
-        thead {
-          td {
-            color: #3697ef;
-            font-size: 19px;
-            border-bottom: 1px solid #dadada !important;
-          }
+        .transition-preference {
+            margin-top: 30px;
+            .tab-header {
+                margin-bottom: 20px;
+            }
+            .transition-preference-label {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                font-size: 15px;
+                font-weight: bold;
+                border-top: 1px solid #ababab;
+                margin-left: -10px;
+                margin-right: -10px;
+                padding-left: 15px;
+            }
+            .tab-content {
+                margin-top: 0px !important;
+                margin-bottom: 20px;
+            }
+            .preference-btn-container {
+                float: right;
+            }
+            .exclusive-roles-container {
+                .checkbox-button-container {
+                    margin-bottom: 1rem;
+                }
+            }
         }
-        td {
-          border: none !important;
-          &:first-child {
-            width: 30%;
-            border-right: 1px solid #dadada !important;
-          }
-          &:last-child {
-            width: 70%;
-          }
-          label {
-            display: inline-block !important;
-            margin-right: 20px;
-            font-size: 14px !important;
-          }
+    } //Groups tab css
+    .groups-main-container {
+        padding: 10px !important;
+        .groups-btn-container {
+            border-bottom: 1px solid #ababab;
+            .search-groups-textbox {
+                display: inline-block !important;
+            }
         }
-      }
-    }
-  }
-
-  //Users tab css
-  .users-main-container {
-    .users-btn-container {
-      border-bottom: 1px solid #ababab;
-      .search-users-textbox {
-        display: inline-block !important;
-      }
-    }
-    .users-table-container {
-      .users-table {
-        width: 100%;
-        font-size: 14px !important;
-        thead {
-          td {
-            color: #3697ef;
-            font-size: 19px;
-            border-bottom: 1px solid #dadada !important;
-          }
+        .groups-table-container {
+            .groups-table {
+                width: 100%;
+                font-size: 14px !important;
+                thead {
+                    td {
+                        color: #3697ef;
+                        font-size: 19px;
+                        border-bottom: 1px solid #dadada !important;
+                    }
+                }
+                td {
+                    border: none !important;
+                    &:first-child {
+                        width: 30%;
+                        border-right: 1px solid #dadada !important;
+                    }
+                    &:last-child {
+                        width: 70%;
+                    }
+                    label {
+                        display: inline-block !important;
+                        margin-right: 20px;
+                        font-size: 14px !important;
+                    }
+                }
+            }
         }
-        td {
-          border: none !important;
-          width: 20%;
-          border-right: 1px solid #dadada !important;
-          &:last-child {
-            width: 60% !important;
-          }
-          label {
-            display: inline-block !important;
-            margin-right: 20px;
-            font-size: 14px !important;
-          }
+    } //Users tab css
+    .users-main-container {
+        padding: 10px !important;
+        .users-btn-container {
+            border-bottom: 1px solid #ababab;
+            .search-users-textbox {
+                display: inline-block !important;
+            }
         }
-      }
+        .users-table-container {
+            .users-table {
+                width: 100%;
+                font-size: 14px !important;
+                thead {
+                    td {
+                        color: #3697ef;
+                        font-size: 19px;
+                        border-bottom: 1px solid #dadada !important;
+                    }
+                }
+                td {
+                    border: none !important;
+                    width: 20%;
+                    border-right: 1px solid #dadada !important;
+                    &:last-child {
+                        width: 60% !important;
+                    }
+                    label {
+                        display: inline-block !important;
+                        margin-right: 20px;
+                        font-size: 14px !important;
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 .tree-view-container {
-  .tree-sign {
-    position: relative;
-    top: -2px;
-    margin-right: 10px;
-    &.hide {
-      display: none !important;
+    .tree-sign {
+        position: relative;
+        top: -2px;
+        margin-right: 10px;
+        &.hide {
+            display: none !important;
+        }
     }
-  }
-  p {
-    display: inline-block;
-  }
-  ul {
-    list-style-position: inside;
-    list-style: none;
-    > li {
-      padding-left: 35px;
+    p {
+        display: inline-block;
     }
-  }
-  input,
-  label {
-    display: inline-block;
-  }
-  label {
-    padding-left: 6px;
-  }
+    ul {
+        list-style-position: inside;
+        list-style: none;
+        >li {
+            padding-left: 35px;
+        }
+    }
+    input,
+    label {
+        display: inline-block;
+    }
+    label {
+        padding-left: 6px;
+    }
 }
 
 .clear-both {
-  clear: both;
+    clear: both;
 }
 
 //assign group modal
 .assign-role,
 .assign-group {
-  max-width: 80% !important;
-  .modal-content {
-    overflow: auto;
-    max-height: 400px;
-  }
+    max-width: 80% !important;
+    .modal-content {
+        overflow: auto;
+        max-height: 400px;
+    }
 }
+
 .assign-role-modal-container,
 .assign-group-modal-container {
-  .bg-modal {
-    width: 100%;
-    .assign-table {
-      width: 100%;
-      .header {
-        td {
-          label {
-            color: #3697ef;
-            font-size: 15px !important;
-            font-weight: bold;
-          }
+    .bg-modal {
+        width: 100%;
+        .assign-table {
+            width: 100%;
+            .header {
+                td {
+                    label {
+                        color: #3697ef;
+                        font-size: 15px !important;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .left-part,
+            .right-part {
+                width: 45%;
+            }
+            .assign-content {
+                .left-part,
+                .right-part {
+                    border: 1px solid #abbaba;
+                    background: white !important;
+                }
+                .check-box-container {
+                    margin-bottom: 15px;
+                    label {
+                        display: inline !important;
+                        color: #7b7b7b;
+                        padding-left: 10px;
+                        font-size: 14px;
+                    }
+                }
+            }
         }
-      }
-      .left-part,
-      .right-part {
-        width: 45%;
-      }
-      .assign-content {
-        .left-part,
-        .right-part {
-          border: 1px solid #abbaba;
-          background: white !important;
+        table,
+        tr,
+        td,
+        th {
+            border: none;
         }
-        .check-box-container {
-          margin-bottom: 15px;
-          label {
-            display: inline !important;
-            color: #7b7b7b;
-            padding-left: 10px;
-            font-size: 14px;
-          }
-        }
-      }
     }
-    table,
-    tr,
-    td,
-    th {
-      border: none;
-    }
-  }
 }
