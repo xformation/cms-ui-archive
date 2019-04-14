@@ -3,7 +3,7 @@
     <h2 class="add-modal-header-title">
       <!-- <i class="fa {{icon}}"></i> -->
       <span class="p-l-1">
-        Add New
+        Add New Subject
       </span>
     </h2>
 
@@ -13,43 +13,37 @@
   </div>
 
   <div class="modal-content">
+      <div ng-if="is_success_bar === '0'" style="background-color:red;width: 100%; height: 30px;margin:auto;"><label class="gf-form-label b-0 bg-transparent">Due to some error, data could not be saved successfully.</label></div>
+      <div ng-if="is_success_bar === '1'" style="background-color:green;width: 100%; height: 30px;margin:auto;"><label class="gf-form-label b-0 bg-transparent">Data saved successfully.</label></div>
+      
     <div class="add-confirm-modal p-1">
       <form name="subjectForm" class="gf-form-group section m-0 dflex">
         <div class="bg-modal modal-fwidth">
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text modal-fwidth m-r-1">
-              <label class="gf-form-label b-0 bg-transparent">subject Name</label>
+              <label class="gf-form-label b-0 bg-transparent">Subject Name</label>
               <input type="text" required ng-model="subject.subjectDesc" class="gf-form-input "
-                placeholder="subject name" />
+                placeholder="subject name" maxlength="255"/>
             </div>
             <div class="fwidth-modal-text modal-fwidth">
-              <label class="gf-form-label b-0 bg-transparent">subject Code</label>
+              <label class="gf-form-label b-0 bg-transparent">Subject Code</label>
               <input type="text" required ng-model="subject.subjectCode" class="gf-form-input"
-                placeholder="subject Code" />
+                placeholder="subject Code" maxlength="255"/>
             </div>
           </div>
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Department</label>
-              <!-- <input type="number" ng-model="subject.departmentId" class="gf-form-input " placeholder="branch" /> -->
-              <select class="gf-form-input" ng-model="subject.departmentId">
-                <!-- <option ng-repeat="department in departments" value="{{department.id}}" selected="selected">
-                  {{department.id}}
-                </option> -->
-                <option value="{{subject.departmentId}}" ng-selected="{{subject.departmentId}}">
-                  {{subject.departmentId}}
-                </option>
-              </select>
+              <select class="gf-form-select-wrapper" ng-model="subject.departmentId" ng-change="onChangeDepartment()" required >
+                  <option value="">Select Department</option>
+                  <option ng-repeat="department in departments" value="{{department.id}}">{{department.name}}</option>
+                </select>
             </div>
             <div class="fwidth-modal-text">
-              <label class="gf-form-label b-0 bg-transparent">Year {{subject.batchId}}</label>
+              <label class="gf-form-label b-0 bg-transparent">Year</label>
               <select class="gf-form-select-wrapper" ng-model="subject.batchId">
-                <!-- <option value="" selected>
-                  choose
-                </option> -->
-                <option ng-repeat="batch in batches" value="{{batch.id}}">
-                  {{batch.id}}
-                </option>
+                <option value="">Select Year</option>
+                <option ng-repeat="batch in batches" value="{{batch.id}}">{{batch.batch}}</option>
               </select>
             </div>
           </div>
@@ -57,12 +51,8 @@
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Assign Teacher</label>
               <select class="gf-form-select-wrapper" ng-model="subject.teacherId">
-                <!-- <option value="" selected>
-                  choose
-                </option> -->
-                <option ng-repeat="teacher in teachers" value="{{teacher.id}}">
-                  {{teacher.teacherName}}
-                </option>
+                <option value="">Select Teacher</option>
+                <option ng-repeat="teacher in teachers" value="{{teacher.id}}">{{teacher.teacherName}}</option>
               </select>
             </div>
             <div class="fwidth-modal-text m-r-1 switch-flex">

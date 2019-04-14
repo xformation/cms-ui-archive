@@ -8,11 +8,25 @@ export class TimeTableSettingCtrl {
   departments: any;
   batches: any;
   teachers: any;
-  colleges: any;
   clgObject: any;
-  collegeId: any;
   counter: any;
   totalLectures: any;
+  colleges: any;
+  branches: any;
+  collegeId: any;
+  branchId: any;
+  sections: any;
+  batchId: any;
+  departmentId: any;
+  isCollegeSelected: any;
+  isBranchSelected: any;
+  isSectionSelected: any;
+  isNextSelected: any;
+  semesters: any;
+  semesterId: any;
+  sectionId: any;
+  subjects: any;
+  subjectId: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -20,56 +34,69 @@ export class TimeTableSettingCtrl {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.clgObject = {};
-    this.getDepartments();
-    this.getBatches();
-    this.getTeachers();
+    $scope.startTime = [];
+    $scope.endTime = [];
+    $scope.satLec = [];
+    $scope.brkAfter = [];
+    $scope.timeAry = [];
+    $scope.subjectAry = [];
+    // $scope.objsInArr = [];
     this.getColleges();
-    this.getBranchesByCollegeId();
-    this.collegeId = 0;
+    this.getSemester();
+    // this.getDepartments();
+    // this.getBatches();
+
+    // this.getBranchesByCollegeId();
+    this.isCollegeSelected = 0;
+    this.isBranchSelected = 0;
+    this.isSectionSelected = 0;
+    this.isNextSelected = 0;
+    $scope.isReadOnly = true;
     $scope.choices = [];
+    $scope.idx = {};
     this.totalLectures = [];
-    const counter = 5;
-    $scope.addNewChoice = () => {
-      const newItemNo = $scope.choices.length + 1;
-      for (let i = 0; i < counter; i++) {
-        $scope.choices.push({ id: 'choice' + newItemNo, name: 'choice' + newItemNo });
-      }
-    };
+    // const counter = 5;
+    // $scope.addNewChoice = () => {
+    //   const newItemNo = $scope.choices.length + 1;
+    //   for (let i = 0; i < counter; i++) {
+    //     $scope.choices.push({ id: 'choice' + newItemNo, name: 'choice' + newItemNo });
+    //   }
+    // };
 
-    $scope.removeNewChoice = () => {
-      const newItemNo = $scope.choices.length - 1;
-      if (newItemNo !== 0) {
-        $scope.choices.pop();
-      }
-    };
+    // $scope.removeNewChoice = () => {
+    //   const newItemNo = $scope.choices.length - 1;
+    //   if (newItemNo !== 0) {
+    //     $scope.choices.pop();
+    //   }
+    // };
 
-    $scope.showAddChoice = choice => {
-      return choice.id === $scope.choices[$scope.choices.length - 1].id;
-    };
+    // $scope.showAddChoice = choice => {
+    //   return choice.id === $scope.choices[$scope.choices.length - 1].id;
+    // };
 
-    $scope.choices = [];
+    // $scope.choices = [];
 
-    $scope.addNewChoice = () => {
-      const newItemNo = $scope.choices.length + 1;
-      for (let i = 0; i < 3; i++) {
-        $scope.choices.push({ newItemNo });
-      }
-    };
+    // $scope.addNewChoice = () => {
+    //   const newItemNo = $scope.choices.length + 1;
+    //   for (let i = 0; i < 3; i++) {
+    //     $scope.choices.push({ newItemNo });
+    //   }
+    // };
 
-    $scope.removeNewChoice = () => {
-      const newItemNo = $scope.choices.length - 1;
-      if (newItemNo !== 0) {
-        $scope.choices.pop();
-      }
-    };
+    // $scope.removeNewChoice = () => {
+    //   const newItemNo = $scope.choices.length - 1;
+    //   if (newItemNo !== 0) {
+    //     $scope.choices.pop();
+    //   }
+    // };
 
-    $scope.showAddChoice = choice => {
-      return choice.id === $scope.choices[$scope.choices.length - 1].id;
-    };
+    // $scope.showAddChoice = choice => {
+    //   return choice.id === $scope.choices[$scope.choices.length - 1].id;
+    // };
   }
 
   activateTab(tabIndex) {
-    //this.activeTabIndex = tabIndex;
+    this.activeTabIndex = tabIndex;
   }
 
   changeCounter(opt) {
@@ -90,22 +117,22 @@ export class TimeTableSettingCtrl {
     }
   }
 
-  getDepartments() {
-    this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
-      this.departments = result;
-      console.log('Departments ::::::: ', this.departments);
-    });
-  }
+  // getDepartments() {
+  //   this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
+  //     this.departments = result;
+  //     console.log('Departments ::::::: ', this.departments);
+  //   });
+  // }
 
-  getBatches() {
-    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
-      this.batches = result;
-    });
-  }
+  // getBatches() {
+  //   this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+  //     this.batches = result;
+  //   });
+  // }
 
-  getTeachers() {
-    this.backendSrv.get(this.RestUrl.getTeacherRestUrl()).then(result => {
-      this.teachers = result;
+  getSemester() {
+    this.backendSrv.get(this.RestUrl.getSemesterRestUrl()).then(result => {
+      this.semesters = result;
     });
   }
 
@@ -115,24 +142,89 @@ export class TimeTableSettingCtrl {
     });
   }
 
-  getBranchesByCollegeId() {
+  onChangeCollege() {
+    this.isCollegeSelected = 0;
     if (!this.collegeId) {
+      this.branches = {};
       return;
     }
     this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
-      this.clgObject.branches = result;
+      this.branches = result;
     });
   }
 
-  onChangeCollege() {
-    this.getBranchesByCollegeId();
-    //const { branches } = this.clgObject;
-    const selectedBranches = [];
-    for (const i in this.clgObject.branches) {
-      const branch = this.clgObject.branches[i];
-      selectedBranches.push(branch);
+  onChangeBranch() {
+    this.isBranchSelected = 0;
+    if (!this.branchId) {
+      this.departments = {};
+      return;
     }
-    this.clgObject.selectedBranches = selectedBranches;
-    //this.getBranchesByCollegeId();
+    this.backendSrv.get(this.RestUrl.getDepartmentByBranchIdRestUrl() + this.branchId).then(result => {
+      this.departments = result;
+    });
+  }
+
+  onChangeDepartment() {
+    if (!this.departmentId) {
+      this.batches = {};
+      return;
+    }
+    this.backendSrv.get(this.RestUrl.getBatchByDepartmentIdRestUrl() + this.departmentId).then(result => {
+      this.batches = result;
+    });
+  }
+
+  onChangeBatch() {
+    if (!this.batchId) {
+      this.sections = {};
+      return;
+    }
+    this.backendSrv.get(this.RestUrl.getSectionByBatchRestUrl() + this.batchId).then(result => {
+      this.sections = result;
+    });
+  }
+
+  onChangeSection() {
+    if (!this.sectionId) {
+      this.isSectionSelected = 0;
+    } else {
+      this.isSectionSelected = 1;
+    }
+  }
+
+  next() {
+    if (this.counter <= 0) {
+      alert('Please create lectures.');
+    } else {
+      this.isSectionSelected = 0;
+      this.isNextSelected = 1;
+      this.$scope.isReadOnly = false;
+      this.getSubjects();
+      this.getTeachers();
+      this.activateTab(2);
+    }
+  }
+
+  back() {
+    this.isSectionSelected = 1;
+    this.isNextSelected = 0;
+    this.$scope.isReadOnly = true;
+    this.activateTab(0);
+  }
+
+  getSubjects() {
+    this.backendSrv
+      .get(this.RestUrl.getSubjectByDeptBatchIdRestUrl() + 'deptId=' + this.departmentId + '&batchId=' + this.batchId)
+      .then(result => {
+        this.subjects = result;
+      });
+  }
+
+  getTeachers() {
+    this.backendSrv
+      .get(this.RestUrl.getTeacherByQueryParamsRestUrl() + 'deptId=' + this.departmentId + '&branchId=' + this.branchId)
+      .then(result => {
+        this.teachers = result;
+      });
   }
 }

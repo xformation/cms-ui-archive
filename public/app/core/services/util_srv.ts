@@ -222,14 +222,26 @@ export class UtilSrv {
     scope.batches = payload.batches;
     scope.subject = payload.subject;
     scope.teachers = payload.teachers;
+    scope.collegeId = payload.collegeId;
+    scope.branchId = payload.branchId;
+    scope.is_success_bar = '';
+
     scope.create = () => {
-      payload.onCreate(scope.subjectForm, scope.subject);
-      scope.dismiss();
+      payload.onCreate(scope.subjectForm, scope.subject, scope.collegeId, scope.branchId, isSuccess => {
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
     };
 
     scope.update = () => {
       payload.onUpdate(scope.subjectForm, scope.subject);
       scope.dismiss();
+    };
+
+    scope.onChangeDepartment = () => {
+      payload.onChange(scope.subjectForm, scope.subject);
     };
 
     appEvents.emit('show-modal', {

@@ -48,13 +48,22 @@ export class GlobalRestUrlConstants {
     return this.getBaseRestUrl() + '/cmsacademic-years/';
   }
   getDepartmentRestUrl() {
-    return this.getBaseRestUrl() + '/departments/';
+    return this.getBaseRestUrl() + '/cmsdepartments/';
+  }
+  getDepartmentByBranchIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsdepartments-branchid/';
   }
   getBatchRestUrl() {
-    return this.getBaseRestUrl() + '/batches/';
+    return this.getBaseRestUrl() + '/cmsbatches/';
+  }
+  getBatchByDepartmentIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsbatches-departmentid/';
   }
   getTeacherRestUrl() {
-    return this.getBaseRestUrl() + '/teachers/';
+    return this.getBaseRestUrl() + '/cmsteachers/';
+  }
+  getTeacherByQueryParamsRestUrl() {
+    return this.getBaseRestUrl() + '/cmsteachers-qryprms?';
   }
   getHolidayRestUrl() {
     return this.getBaseRestUrl() + '/holidays/';
@@ -63,10 +72,20 @@ export class GlobalRestUrlConstants {
     return this.getBaseRestUrl() + '/terms/';
   }
   getSubjectRestUrl() {
-    return this.getBaseRestUrl() + '/subjects/';
+    return this.getBaseRestUrl() + '/cmssubjects/';
   }
 
-  getCmsDepartmentRestUrl() {
-    return this.getBaseRestUrl() + '/cmsdepartments/';
+  getSubjectByDeptBatchIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmssubjects?';
+  }
+
+  getSemesterRestUrl() {
+    return this.getBaseRestUrl() + '/cmssemesters/';
+  }
+  getSectionRestUrl() {
+    return this.getBaseRestUrl() + '/cmssections/';
+  }
+  getSectionByBatchRestUrl() {
+    return this.getBaseRestUrl() + '/cmssections-batchid/';
   }
 }

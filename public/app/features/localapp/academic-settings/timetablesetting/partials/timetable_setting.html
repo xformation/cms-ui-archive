@@ -8,25 +8,62 @@
     Academic Year 2018-2019
   </h4>
 
-  <div class="mdflex mt-8">
-    <div>
-        <label class="form-h5">College</label>
-        <select class="gf-form-input" required ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()">
-          <option value=0>Select College</option>
-          <option ng-repeat="college in ctrl.colleges" value="{{college.id}}">
-            {{college.shortName}}</option>
+  <table id="tblClgBrn" style="border: 0px;" cellspacing="1px;">
+    <tr style="border: 0px;">
+      <td style="border: 0px;">
+        <h4 class="ptl-06">College</h4>
+        <select ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()" required ng-disabled="!isReadOnly">
+          <option value="">Select College</option>
+          <option ng-repeat="college in ctrl.colleges" value="{{college.id}}">{{college.shortName}}</option>
         </select>
-    </div>
-  </div>
+        <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">Please select college</div>
+        <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
+      </td>
+      <td style="border: 0px;">
+          <h4 class="ptl-06">Branch</h4>
+          <select ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()" required ng-disabled="!isReadOnly">
+            <option value="">Select Branch</option>
+            <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}">{{branch.branchName}}</option>
+          </select>
+          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
+          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">Please select branch</div>
+      </td>
+      <td style="border: 0px;">
+        &nbsp;
+      </td>
+      <td style="border: 0px;">
+        &nbsp;
+      </td>
+      <td style="border: 0px;">
+        &nbsp;
+      </td>
+      <td style="border: 0px;">
+        <div>&nbsp;</div><div>&nbsp;</div>
+        <div ng-if="ctrl.isSectionSelected === 1" >
+          <input type="button" class="btn btn-primary" ng-click="ctrl.next()" value="Next"></input>
+        </div>
+        <div ng-if="ctrl.isNextSelected === 1" >
+            <input type="button" class="btn btn-primary"  value="Save"></input>
+          </div>
+      </td>
+      <td style="border: 0px;">
+          <div>&nbsp;</div><div>&nbsp;</div>
+          <div ng-if="ctrl.isNextSelected === 1" >
+            <input type="button" class="btn btn-primary" ng-click="ctrl.back()" value="Back"></input>
+          </div>
+        </td>
+    </tr>
+    
+  </table>
   
   <div >
     <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
     <table id="tts" class="fwidth b-0">
       <thead>
         <th>Department</th>
-        <th>Batch</th>
-        <th>Teacher</th>
-        <th>Branch</th>
+        <th>Year</th>
+        <th>Semester</th>
+        <th>Section</th>
         <th>No of Lectures</th>
         <th></th>
         <th></th>
@@ -34,61 +71,53 @@
       <tbody>
         <tr>
           <td>
-            <select class="gf-form-input"  ng-model="academicTimeTable.departmentId">
-              <option value="">
-                Select Department</option>
-              <option ng-repeat="department in ctrl.departments" value="{{department.id}}">
-                {{department.name}}</option>
+            <select class="gf-form-input"  ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()" ng-disabled="!isReadOnly">
+              <option value="">Select Department</option>
+              <option ng-repeat="department in ctrl.departments" value="{{department.id}}">{{department.name}}</option>
             </select>
           </td>
           <td>
-            <select class="gf-form-input"  ng-model="academicTimeTable.batchId">
-              <option value="">
-                Select Batch</option>
-              <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">
-                {{bth.batch}}</option>
+            <select class="gf-form-input"  ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()" ng-disabled="!isReadOnly">
+              <option value="">Select Year</option>
+              <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">{{bth.batch}}</option>
             </select>
           </td>
           <td>
-            <select class="gf-form-input"  ng-model="academicTimeTable.teacherId">
-              <option value="">
-                Select Teacher</option>
-              <option ng-repeat="th in ctrl.teachers" value="{{th.id}}">
-                {{th.teacherName}}</option>
+            <select class="gf-form-input"  ng-model="ctrl.semesterId" ng-disabled="!isReadOnly">
+              <option value="">Select Semester</option>
+              <option ng-repeat="sem in ctrl.semesters" value="{{sem.id}}">{{sem.description}}</option>
             </select>
           </td>
           <td>
-            <select class="gf-form-input"  ng-model="academicTimeTable.branchId">
-              <option value="">
-                Select Branch</option>
-              <option ng-repeat="branch in ctrl.clgObject.selectedBranches" value="{{branch.id}}">
-                {{branch.branchName}}</option>
+            <select class="gf-form-input"  ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()" ng-disabled="!isReadOnly">
+              <option value="">Select Section</option>
+              <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}">{{sec.section}}</option>
             </select>
           </td>
           <td>
-            <div class="t-students"><span class="btn btn-primary mr-1 btn-small" ng-click="ctrl.changeCounter('plus')"
-                ng-init="0">
-                <i class="fa fa-plus" aria-hidden="true"></i>
+            <div class="t-students" ng-disabled="!isReadOnly"><span class="btn btn-primary mr-1 btn-small" ng-click="ctrl.changeCounter('plus')"
+                ng-init="0" ng-disabled="!isReadOnly">
+                <i class="fa fa-plus" aria-hidden="true" ng-disabled="!isReadOnly"></i>
               </span> {{ctrl.counter}}
-              <span class="btn btn-primary ml-1 btn-small" ng-click="ctrl.changeCounter('minus')">
-                <i class="fa fa-minus" aria-hidden="true"></i>
+              <span class="btn btn-primary ml-1 btn-small" ng-click="ctrl.changeCounter('minus')" ng-disabled="!isReadOnly">
+                <i class="fa fa-minus" aria-hidden="true" ng-disabled="!isReadOnly"></i>
               </span>
             </div>
           </td>
           <td>
-              <div class="t-students">
+              <div class="t-students" ng-disabled="!isReadOnly">
                   Active
-                  <label class="switch" style="height:22px;"><input type="checkbox" checked /> <span class="slider m-0"></span> </label>
+                  <label ng-disabled="!isReadOnly" class="switch" style="height:22px;"><input ng-disabled="!isReadOnly" type="checkbox" checked /> <span ng-disabled="!isReadOnly" class="slider m-0"></span> </label>
               </div>
           </td>
           <td>
-              <input type="button" class="btn btn-primary" ng-click="ctrl.addRows()" value="Create"></input>
+              <input ng-if="ctrl.isNextSelected !== 1" type="button" class="btn btn-primary" ng-click="ctrl.addRows()" value="Create Lectures"></input>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="info-container" >    
+  <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex === 2}">    
     <table id="tttemplt" class="fwidth">
       <thead>
         <th>Sr. No</th>
@@ -102,17 +131,171 @@
         <tr ng-repeat="lec in ctrl.totalLectures track by $index">
           <td>{{$index + 1}}</td>
           <td>Lecture {{$index + 1}}</td>
-          <td><input type="time" name="" id=""></td>
-          <td><input type="time" name="" id=""></td>
-          <td> <label class="switch"> <input type="checkbox" /> <span class="slider m-0"></span> </label></td>
-          <td> <label class="switch"> <input type="checkbox" checked /> <span class="slider m-0"></span> </label></td>
+          <td><input type="time" ng-model="startTime[$index]" name="startTime_{{$index}}" id="startTime_{{$index}}"></td>
+          <td><input type="time" ng-model="endTime[$index]" name="endTime_{{$index}}" id="endTime_{{$index}}"></td>
+          <td> <label class="switch"> <input type="checkbox" id="satLec_{{$index}}"/> <span class="slider m-0"></span> </label></td>
+          <td> <label class="switch"> <input type="checkbox" id="brkAfter_{{$index}}" checked /> <span class="slider m-0"></span> </label></td>
         </tr>
       </tbody>
     </table>
   </div>
+  
+
+
+
   <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 2}">
-    <div ng-include
-      src="'public/app/features/localapp/academic-settings/timetabledetails/partials/timetable_details.html'"></div>
+    <div class="page-container page-body legal-entities-main-container plr">
+      <table id="tmtd" class="fwidth">
+        <thead>
+          <th></th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+        </thead>
+        <tbody>
+          
+          <tr ng-repeat="lec in ctrl.totalLectures track by $index">
+              <td>
+                  <div class="ttlect">
+                    <span>Lecture {{$index + 1}}</span> <br>
+                    <span>{{startTime[$index] | date: "hh:mm a"}}<br> {{endTime[$index] | date: "hh:mm a"}}</span>
+                  </div>
+              </td>
+   
+              <td>
+                <div class="ttdgrid">
+                  <div class="ttd">
+                    <span>Subject</span>
+                    <span ng-click="">E</span>
+                  </div>
+                  <div>
+                      <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                          <option value="">Select Subject</option>
+                          <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      </select>
+                  </div>
+                  <div>
+                      <span class="ttd">Teacher</span>
+                      <select class="gf-form-input"   >
+                          <option value="">Select Teacher</option>
+                          <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                      </select>
+                  </div>
+                </div>
+              </td>
+              <td>
+                  <div class="ttdgrid">
+                    <div class="ttd">
+                      <span>Subject</span>
+                      <span ng-click="">E</span>
+                    </div>
+                    <div>
+                        <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                            <option value="">Select Subject</option>
+                            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="ttd">Teacher</span>
+                        <select class="gf-form-input"   >
+                            <option value="">Select Teacher</option>
+                            <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                        </select>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                    <div class="ttdgrid">
+                      <div class="ttd">
+                        <span>Subject</span>
+                        <span ng-click="">E</span>
+                      </div>
+                      <div>
+                          <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                              <option value="">Select Subject</option>
+                              <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                          </select>
+                      </div>
+                      <div>
+                          <span class="ttd">Teacher</span>
+                          <select class="gf-form-input"   >
+                              <option value="">Select Teacher</option>
+                              <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                          </select>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                      <div class="ttdgrid">
+                        <div class="ttd">
+                          <span>Subject</span>
+                          <span ng-click="">E</span>
+                        </div>
+                        <div>
+                            <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                                <option value="">Select Subject</option>
+                                <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="ttd">Teacher</span>
+                            <select class="gf-form-input"   >
+                                <option value="">Select Teacher</option>
+                                <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                            </select>
+                        </div>
+                      </div>
+                  </td>
+                  <td>
+                      <div class="ttdgrid">
+                        <div class="ttd">
+                          <span>Subject</span>
+                          <span ng-click="">E</span>
+                        </div>
+                        <div>
+                            <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                                <option value="">Select Subject</option>
+                                <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span class="ttd">Teacher</span>
+                            <select class="gf-form-input"   >
+                                <option value="">Select Teacher</option>
+                                <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                            </select>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                        <div class="ttdgrid">
+                          <div class="ttd">
+                            <span>Subject</span>
+                            <span ng-click="">E</span>
+                          </div>
+                          <div>
+                              <select class="gf-form-input"  ng-model="subjectAry[$index]" >
+                                  <option value="">Select Subject</option>
+                                  <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                              </select>
+                          </div>
+                          <div>
+                              <span class="ttd">Teacher</span>
+                              <select class="gf-form-input"   >
+                                  <option value="">Select Teacher</option>
+                                  <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                              </select>
+                          </div>
+                        </div>
+                    </td>
+              </tr>
+        </tbody>
+      </table>
+     </div>
+     </div>
+   </div>
   </div>
-</div>
 </div>

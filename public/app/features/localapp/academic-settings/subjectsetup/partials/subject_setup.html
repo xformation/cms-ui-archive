@@ -3,13 +3,37 @@
 <h3 class="bg-heading p-5">
   <i class="fa fa-university stroke-transparent mr-1" aria-hidden="true"></i> Admin - Academic subject Setup
 </h3>
+
 <div class="page-container page-body legal-entities-main-container">
+    <table id="tblClgBrn" style="border: 0px;" cellspacing="1px;">
+      <tr style="border: 0px;">
+        <td style="border: 0px;">
+          <h4 class="ptl-06">College</h4>
+          <select ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()" required >
+            <option value="">Select College</option>
+            <option ng-repeat="college in ctrl.colleges" value="{{college.id}}">{{college.shortName}}</option>
+          </select>
+          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">Please select college</div>
+          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
+        </td>
+        <td style="border: 0px;">
+            <h4 class="ptl-06">Branch</h4>
+            <select ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()" required >
+              <option value="">Select Branch</option>
+              <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}">{{branch.branchName}}</option>
+            </select>
+            <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
+            <div ng-if="ctrl.isBranchSelected === 1" class="form-error">Please select branch</div>
+        </td>
+      </tr>
+      
+    </table>
+    
   <div class="authorized-signatory-container m-b-1">
     <div class="authorized-signatory-container m-b-1 dflex ht bg-heading">
       <h4 class="ptl-06">Subjects</h4>
       <div>
-        <a class="btn btn-primary" style="width: 150px;" ng-click="ctrl.showModal();"> Add
-          Subject</a>
+        <a class="btn btn-primary" style="width: 150px;" ng-click="ctrl.showModal();"> Add Subject</a>
       </div>
     </div>
     <table id="academic" class="fwidth">
@@ -32,10 +56,10 @@
             {{ subject.subjectCode }}
           </td>
           <td>
-            {{ subject.departmentId }}
+            {{ subject.department.name }}
           </td>
           <td>
-            {{ subject.batchId }}
+            {{ subject.batch.batch }}
           </td>
           <td>
             {{ subject.teacherId }}
