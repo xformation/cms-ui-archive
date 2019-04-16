@@ -219,7 +219,7 @@ export class UtilSrv {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
     scope.departments = payload.departments;
-    scope.batches = payload.batches;
+    scope.selectedBatches = payload.selectedBatches;
     scope.subject = payload.subject;
     scope.teachers = payload.teachers;
     scope.collegeId = payload.collegeId;
@@ -241,7 +241,7 @@ export class UtilSrv {
     };
 
     scope.onChangeDepartment = () => {
-      payload.onChange(scope.subjectForm, scope.subject);
+      scope.selectedBatches = payload.onChange(scope.subjectForm, scope.subject, scope.selectedBatches);
     };
 
     appEvents.emit('show-modal', {

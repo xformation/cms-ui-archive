@@ -5,7 +5,7 @@ export class SubjectSetupCtrl {
   subjects: any;
   teachers: any;
   departments: any;
-  batches: any;
+  // batches: any;
   navModel: any;
   query: any;
   activeTabIndex = 0;
@@ -17,6 +17,7 @@ export class SubjectSetupCtrl {
   branchId: any;
   isCollegeSelected: any;
   isBranchSelected: any;
+
   // departmentId: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
@@ -26,11 +27,12 @@ export class SubjectSetupCtrl {
     this.$scope = $scope;
     this.isCollegeSelected = 0;
     this.isBranchSelected = 0;
+
     this.getColleges();
     this.getSubjects();
     this.getDepartments();
     this.getTeachers();
-    this.getBatches();
+    // this.getBatches();
     $scope.create = cb => {
       if (!$scope.subjectForm.$valid) {
         return;
@@ -61,17 +63,10 @@ export class SubjectSetupCtrl {
 
     $scope.onChangeDepartment = () => {
       const { departmentId } = this.$scope.subject;
-      alert(departmentId);
-      // this.$scope.subject = {};
-      // this.$scope.subject.departmentId = departmentId;
-      // const selCities = [];
-      // for (const i in this.cities) {
-      //   const city = this.cities[i];
-      //   if (city.stateId === parseInt(stateId, 10)) {
-      //     selCities.push(city);
-      //   }
-      // }
-      // $scope.selectedCities = selCities;
+      this.backendSrv.get(this.RestUrl.getBatchByDepartmentIdRestUrl() + departmentId).then(result => {
+        this.$scope.selectedBatches = result;
+        console.log('First : selected batch list - ', $scope.selectedBatches);
+      });
     };
   }
 
@@ -97,12 +92,12 @@ export class SubjectSetupCtrl {
       console.log('teachers', this.teachers);
     });
   }
-  getBatches() {
-    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
-      this.batches = result;
-      console.log('Batches', this.batches);
-    });
-  }
+  // getBatches() {
+  //   this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+  //     this.batches = result;
+  //     console.log('Batches', this.batches);
+  //   });
+  // }
 
   deleteSubject(subject) {
     appEvents.emit('confirm-modal', {
@@ -148,7 +143,7 @@ export class SubjectSetupCtrl {
       text: 'update',
       subject: subject,
       departments: this.departments,
-      batches: this.batches,
+      // batches: this.batches,
       teachers: this.teachers,
       onUpdate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
@@ -171,21 +166,25 @@ export class SubjectSetupCtrl {
       text: 'create',
       icon: 'fa-trash',
       departments: this.departments,
-      batches: this.batches,
+      // batches: this.batches,
       teachers: this.teachers,
       collegeId: this.collegeId,
       branchId: this.branchId,
+      selectedBatches: this.$scope.selectedBatches,
       onCreate: (subjectForm, subject, collegeId, branchId, cb) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
         this.$scope.subject.collegeId = collegeId;
         this.$scope.subject.branchId = branchId;
+
         this.$scope.create(cb);
       },
-      onChange: (subjectForm, subject) => {
+      onChange: (subjectForm, subject, selectedBatches) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
+        this.$scope.selectedBatches = selectedBatches;
         this.$scope.onChangeDepartment();
+        return this.$scope.selectedBatches;
       },
     });
   }
