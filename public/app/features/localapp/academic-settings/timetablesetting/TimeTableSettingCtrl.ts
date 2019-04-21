@@ -27,19 +27,23 @@ export class TimeTableSettingCtrl {
   sectionId: any;
   subjects: any;
   subjectId: any;
+  lectureTimings: any;
+  isValid: any;
+  timeTableValidationMessage: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.isValid = true;
     this.RestUrl = new GlobalRestUrlConstants();
     this.counter = 0;
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.clgObject = {};
-    $scope.startTime = [];
-    $scope.endTime = [];
     $scope.satLec = [];
     $scope.brkAfter = [];
     $scope.timeAry = [];
     $scope.subjectAry = [];
+    this.lectureTimings = [];
+    this.timeTableValidationMessage = "";
     // $scope.objsInArr = [];
     this.getColleges();
     this.getSemester();
@@ -196,6 +200,10 @@ export class TimeTableSettingCtrl {
     if (this.counter <= 0) {
       alert('Please create lectures.');
     } else {
+      this.isValid = this.validateTimings();
+      if (!this.isValid) {
+        return;
+      }
       this.isSectionSelected = 0;
       this.isNextSelected = 1;
       this.$scope.isReadOnly = false;
@@ -203,6 +211,45 @@ export class TimeTableSettingCtrl {
       this.getTeachers();
       this.activateTab(2);
     }
+  }
+
+  validateTimings() {
+    const timings = this.lectureTimings;
+    let isValid = true;
+    if(timings.length === 0 && this.totalLectures > 0){
+      isValid = false;
+      this.timeTableValidationMessage = "Please enter start and end time.";
+      return isValid;
+    }
+    for (let i = 0; i < timings.length; i++) {
+      const time = timings[i];
+      if (!time.startTime || !time.endTime) {
+        isValid = false;
+        this.timeTableValidationMessage = "Please enter start and end time.";
+        break;
+      }
+      if (time.startTime && time.endTime && time.startTime.getTime() >= time.endTime.getTime()) {
+        isValid = false;
+        this.timeTableValidationMessage = "Please enter valid start and end time.";
+        break;
+      }
+      const nextTime = timings[i + 1];
+      if (nextTime && nextTime.startTime && time.endTime && nextTime.startTime.getTime() < time.endTime.getTime()) {
+        isValid = false;
+        this.timeTableValidationMessage = "Please enter valid start time of upcoming lecture.";
+        break;
+      }
+      if (time.isBreak) {
+        if (nextTime) {
+          if (nextTime.startTime && time.endTime && nextTime.startTime.getTime() < (time.endTime.getTime() + (30 * 60 * 1000))) {
+            isValid = false;
+            this.timeTableValidationMessage = "Please add atleast 30 mins to start time after break";
+            break;
+          }
+        }
+      }
+    }
+    return isValid;
   }
 
   back() {
