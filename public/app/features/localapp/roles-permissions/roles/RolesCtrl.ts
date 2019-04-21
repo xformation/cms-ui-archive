@@ -171,7 +171,11 @@ export class RolesCtrl {
     }
   }
 
-  onClickTreeRole(role) {
+  onClickPermittedRole(role) {
+    console.log(role);
+  }
+
+  onClickProhibitedRole(role) {
     console.log(role);
   }
 }

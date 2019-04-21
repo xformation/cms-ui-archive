@@ -5,7 +5,7 @@ export function treeView($timeout) {
     restrict: 'E',
     scope: {
       family: '=',
-      onClickRole: '&'
+      onClick: '&'
     },
     template: `<i class="fa fa-plus-square-o tree-sign" ng-click="onClickCollapse(family)"
     ng-class="{'hide': (!family.collapse && family.children.length > 0) || !family.children}"></i>
@@ -17,7 +17,7 @@ export function treeView($timeout) {
             </p>
             <ul ng-class="{'hide': family.collapse}">
                 <li ng-repeat="child in family.children">
-                    <tree-view family="child"></tree-view>
+                    <tree-view on-click="onClick(role)" family="child"></tree-view>
                 </li>
             </ul>`,
     link: (scope, element, attrs) => {
@@ -25,9 +25,11 @@ export function treeView($timeout) {
         family.collapse = !family.collapse;
       };
       scope.onChangeCheckbox = (family) => {
+        scope.onClick({
+          role: family
+        });
         if (family.children && family.children.length > 0) {
           const children = family.children;
-          scope.onClickRole(children);
           children.forEach(child => {
             child.checked = family.checked;
           });

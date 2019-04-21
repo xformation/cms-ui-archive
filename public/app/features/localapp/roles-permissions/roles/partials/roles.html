@@ -21,12 +21,12 @@
         <div class="border-container p-1">
             <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'permitted'}">
                 <div class="permitted-roles tree-view-container" ng-repeat="permittedPermission in ctrl.permittedPermissions">
-                    <tree-view family="permittedPermission"></tree-view>
+                    <tree-view on-click="ctrl.onClickPermittedRole(role)" family="permittedPermission"></tree-view>
                 </div>
             </div>
             <div class="tab-content" ng-class="{'hide':ctrl.preferenceId !== 'prohibited'}">
                 <div class="prohibitable-roles tree-view-container" ng-repeat="prohibitedPermission in ctrl.prohibitedPermissions">
-                    <tree-view on-click-role="ctrl.onClickTreeRole(role)" family="prohibitedPermission"></tree-view>
+                    <tree-view on-click="ctrl.onClickProhibitedRole(role)" family="prohibitedPermission"></tree-view>
                 </div>
             </div>
             <div class="preference-btn-container">
