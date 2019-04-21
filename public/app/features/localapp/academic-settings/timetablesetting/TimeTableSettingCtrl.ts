@@ -216,7 +216,7 @@ export class TimeTableSettingCtrl {
   validateTimings() {
     const timings = this.lectureTimings;
     let isValid = true;
-    if(timings.length === 0 && this.totalLectures > 0){
+    if (timings.length === 0 && this.totalLectures > 0) {
       isValid = false;
       this.timeTableValidationMessage = "Please enter start and end time.";
       return isValid;
