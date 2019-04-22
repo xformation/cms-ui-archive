@@ -3,6 +3,10 @@
     <div class="leftbar">
       <img src="/public/img/cubes.png" alt="" />
       <div class="form-justify">
+        <label htmlFor="">*Upload photo:</label>
+        <input ng-model="teacher.uploadPhoto" class="border-plugin input-width" type="text" />
+      </div>
+      <div class="form-justify">
         <label htmlFor="">*Employee Id:</label>
         <input ng-model="teacher.employeeId" class="border-plugin input-width" type="number" />
       </div>
@@ -19,14 +23,20 @@
       <div class="form-justify">
         <label htmlFor="">*Department:</label>
         <select class="gf-form-input border-plugin" ng-model="teacher.departmentId">
-          <option ng-repeat="department in ctrl.departments" value="{{ department.id }}"> {{ department.id }}</option>
+          <option ng-repeat="department in ctrl.departments" value="{{ department.id }}"> {{ department.name }}</option>
         </select>
       </div>
       <div class="form-justify">
         <label htmlFor="">*Branch:</label>
         <select class="gf-form-input border-plugin" ng-model="teacher.branchId">
-          <option ng-repeat="branch in ctrl.branches" value="{{ branch.id }}"> {{ branch.id }}</option>
+          <option ng-repeat="branch in ctrl.branches" value="{{ branch.id }}"> {{ branch.branchName }}</option>
         </select>
+      </div>
+      <div class="form-justify">
+        <span style="height: 45px;">*Status:</span>
+        <label class="switch"><input type="checkbox" ng-model="teacher.status" ng-true-value="'ACTIVE'"
+            ng-false-value="'DEACTIVE'" /> <span class="slider"></span>
+        </label>
       </div>
     </div>
     <div class="rightbar">

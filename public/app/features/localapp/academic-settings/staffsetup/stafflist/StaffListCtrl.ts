@@ -1,21 +1,24 @@
+import { GlobalRestUrlConstants } from '../../../GlobalRestUrlConstants';
+
 export class StaffListCtrl {
   navModel: any;
+  teachers: any;
   sections: any[];
   activeTabIndex = 0;
   IsAllChecked: any;
   $scope: any;
-  teachers: any;
+  RestUrl: any;
 
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.getTeachers();
   }
 
   getTeachers() {
-    this.backendSrv.get(`http://localhost:8080/api/teachers`).then(result => {
+    this.backendSrv.get(this.RestUrl.getTeacherRestUrl()).then(result => {
       this.teachers = result;
-      console.log('Teachers:', this.teachers);
     });
   }
   activateTab(tabIndex) {
