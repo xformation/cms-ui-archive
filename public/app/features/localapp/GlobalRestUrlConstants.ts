@@ -88,4 +88,8 @@ export class GlobalRestUrlConstants {
   getSectionByBatchRestUrl() {
     return this.getBaseRestUrl() + '/cmssections-batchid/';
   }
+
+  getCmsLecturesUrl() {
+    return this.getBaseRestUrl() + '/cmslectures?';
+  }
 }

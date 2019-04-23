@@ -38,19 +38,10 @@ export class TimeTableSettingCtrl {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.clgObject = {};
-    $scope.satLec = [];
-    $scope.brkAfter = [];
-    $scope.timeAry = [];
-    $scope.subjectAry = [];
     this.lectureTimings = [];
     this.timeTableValidationMessage = "";
-    // $scope.objsInArr = [];
     this.getColleges();
     this.getSemester();
-    // this.getDepartments();
-    // this.getBatches();
-
-    // this.getBranchesByCollegeId();
     this.isCollegeSelected = 0;
     this.isBranchSelected = 0;
     this.isSectionSelected = 0;
@@ -59,44 +50,6 @@ export class TimeTableSettingCtrl {
     $scope.choices = [];
     $scope.idx = {};
     this.totalLectures = [];
-    // const counter = 5;
-    // $scope.addNewChoice = () => {
-    //   const newItemNo = $scope.choices.length + 1;
-    //   for (let i = 0; i < counter; i++) {
-    //     $scope.choices.push({ id: 'choice' + newItemNo, name: 'choice' + newItemNo });
-    //   }
-    // };
-
-    // $scope.removeNewChoice = () => {
-    //   const newItemNo = $scope.choices.length - 1;
-    //   if (newItemNo !== 0) {
-    //     $scope.choices.pop();
-    //   }
-    // };
-
-    // $scope.showAddChoice = choice => {
-    //   return choice.id === $scope.choices[$scope.choices.length - 1].id;
-    // };
-
-    // $scope.choices = [];
-
-    // $scope.addNewChoice = () => {
-    //   const newItemNo = $scope.choices.length + 1;
-    //   for (let i = 0; i < 3; i++) {
-    //     $scope.choices.push({ newItemNo });
-    //   }
-    // };
-
-    // $scope.removeNewChoice = () => {
-    //   const newItemNo = $scope.choices.length - 1;
-    //   if (newItemNo !== 0) {
-    //     $scope.choices.pop();
-    //   }
-    // };
-
-    // $scope.showAddChoice = choice => {
-    //   return choice.id === $scope.choices[$scope.choices.length - 1].id;
-    // };
   }
 
   activateTab(tabIndex) {
@@ -120,19 +73,6 @@ export class TimeTableSettingCtrl {
       }
     }
   }
-
-  // getDepartments() {
-  //   this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
-  //     this.departments = result;
-  //     console.log('Departments ::::::: ', this.departments);
-  //   });
-  // }
-
-  // getBatches() {
-  //   this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
-  //     this.batches = result;
-  //   });
-  // }
 
   getSemester() {
     this.backendSrv.get(this.RestUrl.getSemesterRestUrl()).then(result => {
@@ -250,6 +190,37 @@ export class TimeTableSettingCtrl {
       }
     }
     return isValid;
+  }
+
+  saveLectures() {
+    const lectureTimings = this.lectureTimings;
+    const payLoad = [];
+    for (let i = 0; i < lectureTimings.length; i++) {
+      const timings = lectureTimings[i];
+      const data = payLoad[i] || [];
+      const subjects = timings.subjects;
+      const teachers = timings.teachers;
+      const startTime = timings.startTime.toLocaleTimeString('en-US');
+      const endTime = timings.endTime.toLocaleTimeString('en-US');
+      let counter = 0;
+      for (const j in subjects) {
+        data[counter] = {
+          weekDay: j,
+          startTime: startTime,
+          endTime: endTime,
+          subjectId: subjects[j],
+          teacherId: teachers[j]
+        };
+        counter++;
+      }
+      payLoad[i] = data;
+    }
+    this.backendSrv.post(
+      `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=${this.batchId}`,
+      JSON.stringify(payLoad)).then(result => {
+        // this.colleges = result;
+        console.log("ha ha");
+      });
   }
 
   back() {
