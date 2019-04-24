@@ -42,7 +42,7 @@ export class DepartmentSetupCtrl {
   }
 
   getDepartments() {
-    this.backendSrv.get(this.RestUrl.getCmsDepartmentRestUrl()).then(result => {
+    this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
       this.departments = result;
     });
   }

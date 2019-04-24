@@ -13,6 +13,7 @@ export class CollegeBranchesCtrl {
   RestUrl: any;
   selectedCities: any;
   deletionStatus: any;
+  isCollegeSelected: number;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
@@ -165,7 +166,10 @@ export class CollegeBranchesCtrl {
   }
 
   showModal() {
-    this.deletionStatus = 0;
+    if (!this.colleges) {
+      this.isCollegeSelected = 1;
+      return;
+    }
     appEvents.emit('branch-modal', {
       text: 'create',
       icon: 'fa-trash',

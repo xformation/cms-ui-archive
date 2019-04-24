@@ -34,6 +34,7 @@ export class GeneralInfoCtrl {
       backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
         this.getColleges();
         if (result === 200 || result === 201) {
+          console.log(this.colleges);
           alert('College data saved successfully.');
         } else {
           alert('Due to some error college data could not be saved!');
