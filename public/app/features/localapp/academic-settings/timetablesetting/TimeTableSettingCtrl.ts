@@ -1,4 +1,20 @@
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+// import { weekdays } from 'moment';
+
+class LectureSchedule {
+  weekDay: any;
+  startTime: any;
+  endTime: any;
+  subjectId: any;
+  teacherId: any;
+  constructor(weekDay, startTime, endTime, subjectId, teacherId) {
+    this.weekDay = weekDay;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.subjectId = subjectId;
+    this.teacherId = teacherId;
+  }
+}
 
 export class TimeTableSettingCtrl {
   navModel: any;
@@ -30,6 +46,7 @@ export class TimeTableSettingCtrl {
   lectureTimings: any;
   isValid: any;
   timeTableValidationMessage: any;
+  lec: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.isValid = true;
@@ -39,7 +56,7 @@ export class TimeTableSettingCtrl {
     this.$scope = $scope;
     this.clgObject = {};
     this.lectureTimings = [];
-    this.timeTableValidationMessage = "";
+    this.timeTableValidationMessage = '';
     this.getColleges();
     this.getSemester();
     this.isCollegeSelected = 0;
@@ -158,32 +175,36 @@ export class TimeTableSettingCtrl {
     let isValid = true;
     if (timings.length === 0 && this.totalLectures > 0) {
       isValid = false;
-      this.timeTableValidationMessage = "Please enter start and end time.";
+      this.timeTableValidationMessage = 'Please enter start and end time.';
       return isValid;
     }
     for (let i = 0; i < timings.length; i++) {
       const time = timings[i];
       if (!time.startTime || !time.endTime) {
         isValid = false;
-        this.timeTableValidationMessage = "Please enter start and end time.";
+        this.timeTableValidationMessage = 'Please enter start and end time.';
         break;
       }
       if (time.startTime && time.endTime && time.startTime.getTime() >= time.endTime.getTime()) {
         isValid = false;
-        this.timeTableValidationMessage = "Please enter valid start and end time.";
+        this.timeTableValidationMessage = 'Please enter valid start and end time.';
         break;
       }
       const nextTime = timings[i + 1];
       if (nextTime && nextTime.startTime && time.endTime && nextTime.startTime.getTime() < time.endTime.getTime()) {
         isValid = false;
-        this.timeTableValidationMessage = "Please enter valid start time of upcoming lecture.";
+        this.timeTableValidationMessage = 'Please enter valid start time of upcoming lecture.';
         break;
       }
       if (time.isBreak) {
         if (nextTime) {
-          if (nextTime.startTime && time.endTime && nextTime.startTime.getTime() < (time.endTime.getTime() + (30 * 60 * 1000))) {
+          if (
+            nextTime.startTime &&
+            time.endTime &&
+            nextTime.startTime.getTime() < time.endTime.getTime() + 30 * 60 * 1000
+          ) {
             isValid = false;
-            this.timeTableValidationMessage = "Please add atleast 30 mins to start time after break";
+            this.timeTableValidationMessage = 'Please add atleast 30 mins to start time after break';
             break;
           }
         }
@@ -195,31 +216,40 @@ export class TimeTableSettingCtrl {
   saveLectures() {
     const lectureTimings = this.lectureTimings;
     const payLoad = [];
+    let counter = 0;
     for (let i = 0; i < lectureTimings.length; i++) {
       const timings = lectureTimings[i];
-      const data = payLoad[i] || [];
+      // const data = payLoad[i] || [];
       const subjects = timings.subjects;
       const teachers = timings.teachers;
       const startTime = timings.startTime.toLocaleTimeString('en-US');
       const endTime = timings.endTime.toLocaleTimeString('en-US');
-      let counter = 0;
+
       for (const j in subjects) {
-        data[counter] = {
-          weekDay: j,
-          startTime: startTime,
-          endTime: endTime,
-          subjectId: subjects[j],
-          teacherId: teachers[j]
-        };
+        // data[counter] = {
+        //   weekDay: j,
+        //   startTime: startTime,
+        //   endTime: endTime,
+        //   subjectId: subjects[j],
+        //   teacherId: teachers[j]
+        // };
+        this.lec = new LectureSchedule(j, startTime, endTime, subjects[j], teachers[j]);
+        payLoad[counter] = this.lec;
         counter++;
       }
-      payLoad[i] = data;
+      // payLoad[i] = data;
+      // payLoad[i] = this.lec;
     }
-    this.backendSrv.post(
-      `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=${this.batchId}`,
-      JSON.stringify(payLoad)).then(result => {
+    this.backendSrv
+      .post(
+        `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=${
+          this.batchId
+        }`,
+        JSON.stringify(payLoad)
+      )
+      .then(result => {
         // this.colleges = result;
-        console.log("ha ha");
+        console.log('ha ha');
       });
   }
 
