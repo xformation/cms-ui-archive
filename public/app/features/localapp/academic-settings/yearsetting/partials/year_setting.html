@@ -73,7 +73,7 @@
             {{ holiday.holidayDesc }}
           </td>
           <td class="text-center link-td">
-            {{ holiday.holidayDate }}
+            {{ holiday.strHolidayDate }}
           </td>
           <td>
             <label class="switch"> <input disabled type="checkbox" ng-model="holiday.holidayStatus"
@@ -88,7 +88,7 @@
               <input type="text" required ng-model="holiday.holidayDesc" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date" required ng-model="holiday.holidayDate" class="gf-form-input" />
+              <input type="date"z required ng-model="holiday.holidayDate" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">
@@ -137,10 +137,10 @@
             {{ term.termsDesc }}
           </td>
           <td class="text-center link-td">
-            {{ term.startDate }}
+            {{ term.strStartDate }}
           </td>
           <td class="text-center link-td">
-            {{ term.endDate }}
+            {{ term.strEndDate }}
           </td>
           <td>
             <label class="switch">

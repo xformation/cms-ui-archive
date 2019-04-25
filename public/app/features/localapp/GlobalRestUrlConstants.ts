@@ -66,10 +66,10 @@ export class GlobalRestUrlConstants {
     return this.getBaseRestUrl() + '/cmsteachers-qryprms?';
   }
   getHolidayRestUrl() {
-    return this.getBaseRestUrl() + '/holidays/';
+    return this.getBaseRestUrl() + '/cmsholidays/';
   }
   getTermRestUrl() {
-    return this.getBaseRestUrl() + '/terms/';
+    return this.getBaseRestUrl() + '/cmsterms/';
   }
   getSubjectRestUrl() {
     return this.getBaseRestUrl() + '/cmssubjects/';

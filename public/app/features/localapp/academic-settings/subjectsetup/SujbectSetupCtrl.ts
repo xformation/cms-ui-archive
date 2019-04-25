@@ -5,7 +5,7 @@ export class SubjectSetupCtrl {
   subjects: any;
   teachers: any;
   departments: any;
-  // batches: any;
+  batches: any;
   navModel: any;
   query: any;
   activeTabIndex = 0;
@@ -32,7 +32,7 @@ export class SubjectSetupCtrl {
     this.getSubjects();
     this.getDepartments();
     this.getTeachers();
-    // this.getBatches();
+    this.getBatches();
     $scope.create = cb => {
       if (!$scope.subjectForm.$valid) {
         return;
@@ -92,12 +92,12 @@ export class SubjectSetupCtrl {
       console.log('teachers', this.teachers);
     });
   }
-  // getBatches() {
-  //   this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
-  //     this.batches = result;
-  //     console.log('Batches', this.batches);
-  //   });
-  // }
+  getBatches() {
+    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+      this.batches = result;
+      console.log('Batches', this.batches);
+    });
+  }
 
   deleteSubject(subject) {
     appEvents.emit('confirm-modal', {
