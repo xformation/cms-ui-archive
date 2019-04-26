@@ -92,4 +92,12 @@ export class GlobalRestUrlConstants {
   getCmsLecturesUrl() {
     return this.getBaseRestUrl() + '/cmslectures?';
   }
+
+  getAttendanceMasterUrl() {
+    return this.getBaseRestUrl() + '/cmsattendance-masters';
+  }
+
+  getAttendanceMasterByBatchAndSectioinUrl() {
+    return this.getBaseRestUrl() + '/cmsattendance-masters-bybatchsection';
+  }
 }

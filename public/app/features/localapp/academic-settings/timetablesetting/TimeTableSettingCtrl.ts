@@ -47,8 +47,11 @@ export class TimeTableSettingCtrl {
   isValid: any;
   timeTableValidationMessage: any;
   lec: any;
+  attendanceMasters: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.subjects = [];
+    this.teachers = [];
     this.isValid = true;
     this.RestUrl = new GlobalRestUrlConstants();
     this.counter = 0;
@@ -164,8 +167,9 @@ export class TimeTableSettingCtrl {
       this.isSectionSelected = 0;
       this.isNextSelected = 1;
       this.$scope.isReadOnly = false;
-      this.getSubjects();
-      this.getTeachers();
+      // this.getSubjects();
+      // this.getTeachers();
+      this.getAttendanceMasterByBatchAndSection();
       this.activateTab(2);
     }
   }
@@ -260,19 +264,81 @@ export class TimeTableSettingCtrl {
     this.activateTab(0);
   }
 
-  getSubjects() {
+  // getSubjects() {
+  //   this.backendSrv
+  //     .get(this.RestUrl.getSubjectByDeptBatchIdRestUrl() + 'deptId=' + this.departmentId + '&batchId=' + this.batchId)
+  //     .then(result => {
+  //       this.subjects = result;
+  //     });
+  // }
+
+  // getTeachers() {
+  //   this.backendSrv
+  //     .get(this.RestUrl.getTeacherByQueryParamsRestUrl() + 'deptId=' + this.departmentId + '&branchId=' + this.branchId)
+  //     .then(result => {
+  //       this.teachers = result;
+  //     });
+  // }
+
+  getAttendanceMasterByBatchAndSection() {
     this.backendSrv
-      .get(this.RestUrl.getSubjectByDeptBatchIdRestUrl() + 'deptId=' + this.departmentId + '&batchId=' + this.batchId)
+      .get(
+        this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
+          '?batchId=' +
+          this.batchId +
+          '&sectionId=' +
+          this.sectionId
+      )
       .then(result => {
-        this.subjects = result;
+        this.attendanceMasters = result;
+        this.subjects = [];
+        //  0 this.teachers = [];
+        for (const i in this.attendanceMasters) {
+          const sb = this.attendanceMasters[i].teach.subject;
+          // const thr = this.attendanceMasters[i].teach.teacher;
+          this.subjects[i] = sb;
+          // this.teachers[i] = thr;
+        }
       });
+    //this.subjects = {};
   }
 
-  getTeachers() {
-    this.backendSrv
-      .get(this.RestUrl.getTeacherByQueryParamsRestUrl() + 'deptId=' + this.departmentId + '&branchId=' + this.branchId)
-      .then(result => {
-        this.teachers = result;
-      });
+  onChangeSubject(weekDay) {
+    const selThrs = [];
+    // let cnt = 0;
+
+    for (const i in this.attendanceMasters) {
+      const s = this.attendanceMasters[i].teach.subject;
+
+      for (let x = 0; x < this.lectureTimings.length; x++) {
+        const timings = this.lectureTimings[x];
+        // if (this.lectureTimings[cnt] != null) {
+        const selSub = timings.subjects;
+        for (const j in selSub) {
+          if (j === weekDay) {
+            if (s.id === parseInt(selSub[j], 10)) {
+              selThrs.push(this.attendanceMasters[i].teach.teacher);
+            }
+          }
+        }
+        // }
+      }
+
+      // cnt++;
+    }
+    // this.teachers = selThrs;
+    if (weekDay === 'MONDAY') {
+      this.$scope.theacherMonday = selThrs;
+    } else if (weekDay === 'TUESDAY') {
+      this.$scope.theacherTuesday = selThrs;
+    } else if (weekDay === 'WEDNESDAY') {
+      this.$scope.theacherWednesday = selThrs;
+    } else if (weekDay === 'THURSDAY') {
+      this.$scope.theacherThursday = selThrs;
+    } else if (weekDay === 'FRIDAY') {
+      this.$scope.theacherFriday = selThrs;
+    } else if (weekDay === 'SATURDAY') {
+      this.$scope.theacherSaturday = selThrs;
+    }
   }
 }

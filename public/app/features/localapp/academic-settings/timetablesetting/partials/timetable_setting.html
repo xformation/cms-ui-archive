@@ -168,7 +168,7 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['MONDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['MONDAY']" ng-change="ctrl.onChangeSubject('MONDAY')">
                           <option value="">Select Subject</option>
                           <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                       </select>
@@ -177,7 +177,7 @@
                   <span class="ttd">Teacher</span>
                   <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['MONDAY']">
                           <option value="">Select Teacher</option>
-                          <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                          <option ng-repeat="tch in theacherMonday" value="{{tch.id}}">{{tch.teacherName}}</option>
                       </select>
                 </div>
               </div>
@@ -189,7 +189,7 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['TUESDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['TUESDAY']" ng-change="ctrl.onChangeSubject('TUESDAY')">
                             <option value="">Select Subject</option>
                             <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                         </select>
@@ -198,7 +198,7 @@
                   <span class="ttd">Teacher</span>
                   <select class="gf-form-input"  ng-model="ctrl.lectureTimings[$index].teachers['TUESDAY']">
                             <option value="">Select Teacher</option>
-                            <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                            <option ng-repeat="tch in theacherTuesday" value="{{tch.id}}">{{tch.teacherName}}</option>
                         </select>
                 </div>
               </div>
@@ -210,16 +210,16 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['WEDNESDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['WEDNESDAY']" ng-change="ctrl.onChangeSubject('WEDNESDAY')">
                               <option value="">Select Subject</option>
                               <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                           </select>
                 </div>
                 <div>
                   <span class="ttd">Teacher</span>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['WEDNESDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['WEDNESDAY']" >
                               <option value="">Select Teacher</option>
-                              <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                              <option ng-repeat="tch in theacherWednesday" value="{{tch.id}}">{{tch.teacherName}}</option>
                           </select>
                 </div>
               </div>
@@ -231,7 +231,7 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['THURSDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['THURSDAY']" ng-change="ctrl.onChangeSubject('THURSDAY')">
                                 <option value="">Select Subject</option>
                                 <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                             </select>
@@ -240,7 +240,7 @@
                   <span class="ttd">Teacher</span>
                   <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['THURSDAY']">
                                 <option value="">Select Teacher</option>
-                                <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                                <option ng-repeat="tch in theacherThursday" value="{{tch.id}}">{{tch.teacherName}}</option>
                             </select>
                 </div>
               </div>
@@ -252,7 +252,7 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['FRIDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['FRIDAY']" ng-change="ctrl.onChangeSubject('FRIDAY')">
                                 <option value="">Select Subject</option>
                                 <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                             </select>
@@ -261,7 +261,7 @@
                   <span class="ttd">Teacher</span>
                   <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['FRIDAY']">
                                 <option value="">Select Teacher</option>
-                                <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                                <option ng-repeat="tch in theacherFriday" value="{{tch.id}}">{{tch.teacherName}}</option>
                             </select>
                 </div>
               </div>
@@ -273,7 +273,7 @@
                   <span ng-click="">E</span>
                 </div>
                 <div>
-                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['SATURDAY']">
+                  <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['SATURDAY']" ng-change="ctrl.onChangeSubject('SATURDAY')">
                                   <option value="">Select Subject</option>
                                   <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                               </select>
@@ -282,7 +282,7 @@
                   <span class="ttd">Teacher</span>
                   <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['SATURDAY']">
                                   <option value="">Select Teacher</option>
-                                  <option ng-repeat="tch in ctrl.teachers" value="{{tch.id}}">{{tch.teacherName}}</option>
+                                  <option ng-repeat="tch in theacherSaturday" value="{{tch.id}}">{{tch.teacherName}}</option>
                               </select>
                 </div>
               </div>
