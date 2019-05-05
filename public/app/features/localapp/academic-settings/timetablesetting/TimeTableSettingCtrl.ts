@@ -170,7 +170,7 @@ export class TimeTableSettingCtrl {
       // this.getSubjects();
       // this.getTeachers();
       this.getAttendanceMasterByBatchAndSection();
-      this.activateTab(2);
+      this.activateTab(1);
     }
   }
 
@@ -253,7 +253,7 @@ export class TimeTableSettingCtrl {
       )
       .then(result => {
         // this.colleges = result;
-        console.log('ha ha');
+        this.activateTab(2);
       });
   }
 
