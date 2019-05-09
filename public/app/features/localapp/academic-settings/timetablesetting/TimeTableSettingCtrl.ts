@@ -246,9 +246,8 @@ export class TimeTableSettingCtrl {
     }
     this.backendSrv
       .post(
-        `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=${
-          this.batchId
-        }`,
+        `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=
+        ${this.batchId}&branchId=${this.branchId}&departmentId=${this.departmentId}`,
         JSON.stringify(payLoad)
       )
       .then(result => {
