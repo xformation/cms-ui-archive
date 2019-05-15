@@ -14,20 +14,14 @@
   <div class="staff-management">
     <div>
       <label htmlFor="">Department</label>
-      <select>
-        <option value="">Computer Science</option>
-        <option value="">Electric Engineering</option>
-        <option value="">Petroleum Engineering</option>
-        <option value="">Electronic Engineering</option>
+      <select class="gf-form-input border-plugin">
+        <option ng-repeat="department in ctrl.departments" value="{{ department.id }}"> {{ department.name }}</option>
       </select>
     </div>
     <div>
-      <label htmlFor="">Subject</label>
-      <select>
-        <option value="">First Year</option>
-        <option value="">Second Year</option>
-        <option value="">Third Year</option>
-        <option value="">Fourth Year</option>
+      <label htmlFor="">Year</label>
+      <select class="gf-form-input border-plugin">
+        <option ng-repeat="batch in ctrl.batches" value="{{ batch.id }}"> {{ batch.batchName }}</option>
       </select>
     </div>
     <div>
@@ -40,8 +34,8 @@
     <div>
       <label htmlFor="">Staff Type</label>
       <select>
-        <option value="">Scholarship</option>
-        <option value="">Management</option>
+        <option value="">REGULAR</option>
+        <option value="">STAFF_CONCESS</option>
       </select>
     </div>
     <div class="margin-bott">
@@ -66,7 +60,12 @@
       <th>status</th>
     </thead>
     <tbody>
-      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
+      <div class="gf-form">
+        <a class="gf-form-label btn-secondary" ng-click="showMoreOptions()">Show more</a>
+        <pagination page="currentPage" max-size="noOfPages" total-teachers="totalTeachers"
+          teachers-per-page="entryLimit"></pagination>
+      </div>
+      <tr ng-repeat="teacher in ctrl.teachers">
         <td>
           <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
             ng-change="ctrl.internalOnChange()" />

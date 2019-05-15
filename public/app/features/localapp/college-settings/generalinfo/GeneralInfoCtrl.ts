@@ -18,6 +18,7 @@ export class GeneralInfoCtrl {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.query = '';
+    this.logoSrc = '/public/img/college_logo.png';
     this.getColleges();
     $scope.getFile = this.getFile.bind(this);
     $scope.getbgFile = this.getbgFile.bind(this);
@@ -35,6 +36,7 @@ export class GeneralInfoCtrl {
         this.getColleges();
         if (result === 200 || result === 201) {
           console.log(this.colleges);
+          this.getColleges();
           alert('College data saved successfully.');
         } else {
           alert('Due to some error college data could not be saved!');

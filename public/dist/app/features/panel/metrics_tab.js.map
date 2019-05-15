@@ -1,0 +1,1 @@
+{"version":3,"file":"metrics_tab.js","sourceRoot":"","sources":["../../../../app/features/panel/metrics_tab.ts"],"names":[],"mappings":"AAGA,mBAAmB;AACnB,OAAO,UAAU,MAAM,sBAAsB,CAAC;AAmB9C,gBAAgB;AAChB,MAAM,UAAU,mBAAmB;IACjC,YAAY,CAAC;IACb,OAAO;QACL,QAAQ,EAAE,GAAG;QACb,KAAK,EAAE,IAAI;QACX,WAAW,EAAE,qDAAqD;KACnE,CAAC;AACJ,CAAC;AAED,UAAU,CAAC,SAAS,CAAC,YAAY,EAAE,mBAAmB,CAAC,CAAC"}

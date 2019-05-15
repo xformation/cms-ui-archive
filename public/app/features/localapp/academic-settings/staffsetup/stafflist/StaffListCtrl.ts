@@ -3,6 +3,8 @@ import { GlobalRestUrlConstants } from '../../../GlobalRestUrlConstants';
 export class StaffListCtrl {
   navModel: any;
   teachers: any;
+  departments: any;
+  batches: any;
   sections: any[];
   activeTabIndex = 0;
   IsAllChecked: any;
@@ -14,6 +16,21 @@ export class StaffListCtrl {
     this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.getTeachers();
+    this.getBatches();
+    this.getDepartments();
+    // $scope.optionsLimit = 5;
+  }
+
+  getDepartments() {
+    this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {
+      this.departments = result;
+    });
+  }
+
+  getBatches() {
+    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+      this.batches = result;
+    });
   }
 
   getTeachers() {
