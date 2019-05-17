@@ -19,6 +19,7 @@
         <th>End Date</th>
         <th>Holidays</th>
         <th>Terms</th>
+        <th>Status</th>
         <th>Actions</th>
       </thead>
       <tbody>
@@ -32,6 +33,11 @@
           </td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
           <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
+          <td>
+            <label class="switch"> <input disabled type="checkbox" ng-model="academicYear.status"
+                ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" /> <span class="slider disabledCursor"></span>
+            </label>
+          </td>
           <td>
             <a ng-click="ctrl.editYear(academicYear)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
                 aria-hidden="true"></i></a>
@@ -88,7 +94,7 @@
               <input type="text" required ng-model="holiday.holidayDesc" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date"z required ng-model="holiday.holidayDate" class="gf-form-input" />
+              <input type="date" z required ng-model="holiday.holidayDate" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">

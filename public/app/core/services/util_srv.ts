@@ -197,7 +197,9 @@ export class UtilSrv {
     scope.text = payload.text;
     scope.department = payload.department;
     scope.branches = payload.branches;
+    console.log('payload year:', payload.academicYears);
     scope.academicYears = payload.academicYears;
+    console.log('scope year:', payload.academicYears);
 
     scope.create = () => {
       payload.onCreate(scope.departmentForm, scope.department);
