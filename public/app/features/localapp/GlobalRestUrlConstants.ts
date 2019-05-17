@@ -71,6 +71,9 @@ export class GlobalRestUrlConstants {
   getTermRestUrl() {
     return this.getBaseRestUrl() + '/cmsterms/';
   }
+  getTermByAcademicYearIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsterms-by_academicyearid/';
+  }
   getSubjectRestUrl() {
     return this.getBaseRestUrl() + '/cmssubjects/';
   }

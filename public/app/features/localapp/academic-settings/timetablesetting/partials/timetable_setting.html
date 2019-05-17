@@ -18,6 +18,7 @@
           </select>
           <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">Please select college</div>
           <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
+          <div ng-if="ctrl.isTermSelected === 1" class="form-error">&nbsp;</div>
         </td>
         <td style="border: 0px;">
           <h4 class="ptl-06">Branch</h4>
@@ -27,9 +28,17 @@
             </select>
           <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
           <div ng-if="ctrl.isBranchSelected === 1" class="form-error">Please select branch</div>
+          <div ng-if="ctrl.isTermSelected === 1" class="form-error">&nbsp;</div>
         </td>
         <td style="border: 0px;">
-          &nbsp;
+          <h4 class="ptl-06">Terms</h4>
+          <select ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" required ng-disabled="!isReadOnly">
+              <option value="">Select Term</option>
+              <option ng-repeat="term in ctrl.terms" value="{{term.id}}">{{term.termsDesc}}</option>
+            </select>
+          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
+          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
+          <div ng-if="ctrl.isTermSelected === 1" class="form-error">Please select term</div>
         </td>
         <td style="border: 0px;">
           &nbsp;
