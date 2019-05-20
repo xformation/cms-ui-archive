@@ -14,28 +14,34 @@
   <div class="staff-management">
     <div>
       <label htmlFor="">Department</label>
-      <select class="gf-form-input border-plugin">
-        <option ng-repeat="department in ctrl.departments" value="{{ department.id }}"> {{ department.name }}</option>
+      <select class="gf-form-input" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()">
+        <option value="">Select Department</option>
+        <option ng-repeat="department in ctrl.departments" value="{{department.id}}">{{department.name}}</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Year</label>
-      <select class="gf-form-input border-plugin">
-        <option ng-repeat="batch in ctrl.batches" value="{{ batch.id }}"> {{ batch.batchName }}</option>
+      <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()">
+        <option value="">Select Year</option>
+        <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">{{bth.batch}}</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Gender</label>
-      <select>
-        <option value="">Male</option>
-        <option value="">Female</option>
+      <select class="gf-form-input">
+        <option value="">Select Gender</option>
+        <option value="">MALE</option>
+        <option value="">FEMALE</option>
+        <option value="">OTHER</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Staff Type</label>
-      <select>
-        <option value="">REGULAR</option>
-        <option value="">STAFF_CONCESS</option>
+      <select class="gf-form-input">
+        <option value="">Select Staff Type</option>
+        <option value="">TEACHING</option>
+        <option value="">NONTEACHING</option>
+        <option value="">GUEST</option>
       </select>
     </div>
     <div class="margin-bott">
@@ -60,12 +66,12 @@
       <th>status</th>
     </thead>
     <tbody>
-      <div class="gf-form">
+      <!-- <div class="gf-form">
         <a class="gf-form-label btn-secondary" ng-click="showMoreOptions()">Show more</a>
         <pagination page="currentPage" max-size="noOfPages" total-teachers="totalTeachers"
           teachers-per-page="entryLimit"></pagination>
-      </div>
-      <tr ng-repeat="teacher in ctrl.teachers">
+      </div> -->
+      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
         <td>
           <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
             ng-change="ctrl.internalOnChange()" />

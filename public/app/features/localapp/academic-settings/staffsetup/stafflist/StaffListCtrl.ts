@@ -6,6 +6,8 @@ export class StaffListCtrl {
   departments: any;
   batches: any;
   sections: any[];
+  batchId: any;
+  departmentId: any;
   activeTabIndex = 0;
   IsAllChecked: any;
   $scope: any;
@@ -16,7 +18,7 @@ export class StaffListCtrl {
     this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.getTeachers();
-    this.getBatches();
+    // this.getBatches();
     this.getDepartments();
     // $scope.optionsLimit = 5;
   }
@@ -27,17 +29,28 @@ export class StaffListCtrl {
     });
   }
 
-  getBatches() {
-    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
-      this.batches = result;
-    });
-  }
+  // getBatches() {
+  //   this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+  //     this.batches = result;
+  //   });
+  // }
 
   getTeachers() {
     this.backendSrv.get(this.RestUrl.getTeacherRestUrl()).then(result => {
       this.teachers = result;
     });
   }
+
+  onChangeDepartment() {
+    if (!this.departmentId) {
+      this.batches = {};
+      return;
+    }
+    this.backendSrv.get(this.RestUrl.getBatchByDepartmentIdRestUrl() + this.departmentId).then(result => {
+      this.batches = result;
+    });
+  }
+
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
   }
