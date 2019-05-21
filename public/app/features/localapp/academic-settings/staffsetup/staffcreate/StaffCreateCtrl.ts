@@ -1,3 +1,4 @@
+import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../../GlobalRestUrlConstants';
 
 export class StaffCreateCtrl {
@@ -31,7 +32,9 @@ export class StaffCreateCtrl {
       if (!$scope.teacherForm.$valid) {
         return;
       }
-      backendSrv.post(this.RestUrl.getTeacherRestUrl(), $scope.teacher).then(() => {});
+      backendSrv.post(this.RestUrl.getTeacherRestUrl(), $scope.teacher).then(() => {
+        appEvents.emit("change_staff_list",{});
+      });
     };
   }
 

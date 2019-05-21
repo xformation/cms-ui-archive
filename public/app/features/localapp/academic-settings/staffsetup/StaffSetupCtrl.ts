@@ -1,3 +1,5 @@
+import { appEvents } from 'app/core/core';
+
 export class StaffSetupCtrl {
   navModel: any;
   sections: any[];
@@ -6,10 +8,11 @@ export class StaffSetupCtrl {
   activeBtnIndex = 0;
   $scope: any;
   /** @ngInject */
-  constructor() {
+  constructor($scope) {
     this.activeTabIndex = 0;
     this.activeBtnIndex = 0;
     this.activeTabStaffId = 'staff_list';
+    appEvents.on("change_staff_list",this.activeTabStaffList.bind(this),$scope);
   }
 
   activeTabStaffCreate() {
