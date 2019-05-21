@@ -77,6 +77,8 @@ export class CollegeBranchesCtrl {
       }
       $scope.selectedCities = selCities;
     };
+
+    appEvents.on("get_colleges",this.getColleges.bind(this), $scope);
   }
 
   activateTab(tabIndex) {

@@ -1,7 +1,7 @@
+import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 
 export class GeneralInfoCtrl {
-  colleges: any;
   navModel: any;
   query: any;
   activeTabIndex = 0;
@@ -18,7 +18,6 @@ export class GeneralInfoCtrl {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.query = '';
-    this.getColleges();
     $scope.getFile = this.getFile.bind(this);
     $scope.getbgFile = this.getbgFile.bind(this);
     $scope.create = () => {
@@ -32,9 +31,8 @@ export class GeneralInfoCtrl {
         $scope.cmsCollegeVo.bgImage = this.bgSrc;
       }
       backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
-        this.getColleges();
+        appEvents.emit("get_colleges", {});
         if (result === 200 || result === 201) {
-          console.log(this.colleges);
           alert('College data saved successfully.');
         } else {
           alert('Due to some error college data could not be saved!');
@@ -72,12 +70,5 @@ export class GeneralInfoCtrl {
     };
     fileReader.readAsDataURL(file);
     this.isCollegeBgChanged = true;
-  }
-
-  getColleges() {
-    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
-      this.colleges = result;
-      console.log(this.colleges);
-    });
   }
 }
