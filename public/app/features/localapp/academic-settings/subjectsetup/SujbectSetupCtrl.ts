@@ -61,11 +61,13 @@ export class SubjectSetupCtrl {
       });
     };
 
-    $scope.onChangeDepartment = () => {
+    $scope.onChangeDepartment = (cb) => {
       const { departmentId } = this.$scope.subject;
       this.backendSrv.get(this.RestUrl.getBatchByDepartmentIdRestUrl() + departmentId).then(result => {
         this.$scope.selectedBatches = result;
-        console.log('First : selected batch list - ', $scope.selectedBatches);
+        if (cb) {
+          cb(result);
+        }
       });
     };
   }
@@ -179,12 +181,11 @@ export class SubjectSetupCtrl {
 
         this.$scope.create(cb);
       },
-      onChange: (subjectForm, subject, selectedBatches) => {
+      onChange: (subjectForm, subject, selectedBatches, cb) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;
         this.$scope.selectedBatches = selectedBatches;
-        this.$scope.onChangeDepartment();
-        return this.$scope.selectedBatches;
+        this.$scope.onChangeDepartment(cb);
       },
     });
   }

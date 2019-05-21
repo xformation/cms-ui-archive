@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) {}
+  constructor(private $rootScope, private $modal) { }
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -243,7 +243,9 @@ export class UtilSrv {
     };
 
     scope.onChangeDepartment = () => {
-      scope.selectedBatches = payload.onChange(scope.subjectForm, scope.subject, scope.selectedBatches);
+      payload.onChange(scope.subjectForm, scope.subject, scope.selectedBatches, data => {
+        scope.selectedBatches = data;
+      });
     };
 
     appEvents.emit('show-modal', {
