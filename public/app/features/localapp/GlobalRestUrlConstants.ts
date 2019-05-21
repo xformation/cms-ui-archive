@@ -68,8 +68,14 @@ export class GlobalRestUrlConstants {
   getHolidayRestUrl() {
     return this.getBaseRestUrl() + '/cmsholidays/';
   }
+  getHolidayByAcademicYearIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsholidays-by_academicyearid';
+  }
   getTermRestUrl() {
     return this.getBaseRestUrl() + '/cmsterms/';
+  }
+  getTermByAcademicYearIdRestUrl() {
+    return this.getBaseRestUrl() + '/cmsterms-by_academicyearid';
   }
   getSubjectRestUrl() {
     return this.getBaseRestUrl() + '/cmssubjects/';

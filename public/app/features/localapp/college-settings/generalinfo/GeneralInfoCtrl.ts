@@ -18,6 +18,7 @@ export class GeneralInfoCtrl {
     this.activeTabIndex = 0;
     this.$scope = $scope;
     this.query = '';
+    this.logoSrc = '/public/img/college_logo.png';
     $scope.getFile = this.getFile.bind(this);
     $scope.getbgFile = this.getbgFile.bind(this);
     $scope.create = () => {
@@ -33,6 +34,7 @@ export class GeneralInfoCtrl {
       backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
         appEvents.emit("get_colleges", {});
         if (result === 200 || result === 201) {
+          this.getColleges();
           alert('College data saved successfully.');
         } else {
           alert('Due to some error college data could not be saved!');

@@ -7,6 +7,8 @@ export class StaffCreateCtrl {
   activeTabContactIndex = 0;
   activeTabPrimaryIndex = 0;
   activeBtnIndex = 0;
+  profileSrc = '/public/img/cubes.png';
+  isTeacherProfileChanged = false;
   $scope: any;
   teachers: any;
   departments: any;
@@ -20,6 +22,7 @@ export class StaffCreateCtrl {
     this.activeTabPrimaryIndex = 0;
     this.activeBtnIndex = 0;
     this.$scope = $scope;
+    $scope.getFile = this.getFile.bind(this);
 
     this.getTeachers();
     this.getDepartments();
@@ -30,6 +33,20 @@ export class StaffCreateCtrl {
       }
       backendSrv.post(this.RestUrl.getTeacherRestUrl(), $scope.teacher).then(() => {});
     };
+  }
+
+  getFile(file) {
+    if (!file) {
+      return;
+    }
+    const fileReader = new FileReader();
+    const that = this;
+    fileReader.onloadend = e => {
+      that.profileSrc = e.target['result'];
+      this.$scope.$apply();
+    };
+    fileReader.readAsDataURL(file);
+    this.isTeacherProfileChanged = true;
   }
 
   getTeachers() {

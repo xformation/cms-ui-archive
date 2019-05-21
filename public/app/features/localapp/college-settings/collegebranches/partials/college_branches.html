@@ -52,13 +52,16 @@
   }
 </style>
 <div class="page-container page-body legal-entities-main-container">
-    <div ng-if="ctrl.deletionStatus === 424" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Due to some error branch could not be deleted!</div>
-    <div ng-if="ctrl.deletionStatus === 200" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Branch deleted successfully!</div>
+  <div ng-if="ctrl.deletionStatus === 424" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Due
+    to some error branch could not be deleted!</div>
+  <div ng-if="ctrl.deletionStatus === 200" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">
+    Branch deleted successfully!</div>
   <div class="authorized-signatory-container m-b-1">
     <h3>Colleges Branches</h3>
     <small> Create and manage college branches. </small>
   </div>
-  <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add new</button>
+  <button ng-click="ctrl.showModal()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Add
+    new</button>
   <table class="table m-b-3">
     <thead>
       <th>State</th>

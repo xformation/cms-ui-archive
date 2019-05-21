@@ -19,21 +19,22 @@
 					<div class="mdflex modal-fwidth">
 						<div class="fwidth-modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">STATE</label>
-								<select class="gf-form-input" required ng-model="branch.stateId" ng-change="onChangeState()">
-									<option value="">
-									  Select State</option>
-									<option ng-repeat="state in states" value="{{state.id}}">
-									  {{state.stateName}}</option>
-								</select>
-							</div>
+							<select class="gf-form-input" required ng-model="branch.stateId"
+								ng-change="onChangeState()">
+								<option value="">
+									Select State</option>
+								<option ng-repeat="state in states" value="{{state.id}}">
+									{{state.stateName}}</option>
+							</select>
+						</div>
 						<div class="fwidth-modal-text">
 							<label class="gf-form-label b-0 bg-transparent">CITY</label>
-								<select class="gf-form-input" required ng-model="branch.cityId" >
-									<option value="">
-									  Select City</option>
-									<option ng-repeat="city in selectedCities" value="{{city.id}}">
-									  {{city.cityName}}</option>
-								</select>
+							<select class="gf-form-input" required ng-model="branch.cityId">
+								<option value="">
+									Select City</option>
+								<option ng-repeat="city in selectedCities" value="{{city.id}}">
+									{{city.cityName}}</option>
+							</select>
 						</div>
 					</div>
 					<div class="fwidth-modal-text modal-fwidth">
@@ -65,12 +66,12 @@
 							<label class="gf-form-label b-0 bg-transparent">COLLEGE</label>
 							<!--<input type="number" required ng-model="branch.collegeId" class="gf-form-input "
 								placeholder="description" /> -->
-								<select class="gf-form-input" required ng-model="branch.collegeId" >
-									<option value="">
-									  Select College</option>
-									<option ng-repeat="college in colleges" value="{{college.id}}">
-									  {{college.shortName}}</option>
-								</select>
+							<select class="gf-form-input" required ng-model="branch.collegeId">
+								<option value="">
+									Select College</option>
+								<option ng-repeat="college in colleges" value="{{college.id}}">
+									{{college.shortName}}</option>
+							</select>
 						</div>
 					</div>
 					<div class="m-t-1 text-center">
@@ -80,8 +81,12 @@
 							class="btn btn-success border-bottom">Update</button>
 						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
 					</div>
-					<div ng-if="is_success_bar === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is someerror!</div>
-					<div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully!</div>
+					<div ng-if="is_success_bar === '0'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is someerror!
+					</div>
+					<div ng-if="is_success_bar === '1'"
+						style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved
+						Successfully!</div>
 				</div>
 			</form>
 		</div>

@@ -19,6 +19,7 @@
         <th>End Date</th>
         <th>Holidays</th>
         <th>Terms</th>
+        <th>Status</th>
         <th>Actions</th>
       </thead>
       <tbody>
@@ -30,8 +31,13 @@
           <td>
             {{academicYear.strEndDate}}
           </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(1)">Manage Holidays</a></td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.activateTab(2)">Manage Terms</a></td>
+          <td><a class="btn btn-primary wauto" ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(1);">Manage Holidays</a></td>
+          <td><a class="btn btn-primary wauto" ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(2);">Manage Terms</a></td>
+          <td>
+            <label class="switch"> <input disabled type="checkbox" ng-model="academicYear.status"
+                ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" /> <span class="slider disabledCursor"></span>
+            </label>
+          </td>
           <td>
             <a ng-click="ctrl.editYear(academicYear)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
                 aria-hidden="true"></i></a>
@@ -47,11 +53,11 @@
       <h4 class="ptl-06">Academic Year</h4>
       <div ng-class="{'hide':ctrl.activeBtnIndex === 1}">
         <a class="btn btn-primary" ng-click="ctrl.activateBtn(1)">Add Holiday</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
       <div ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
         <a class="btn btn-primary" ng-click="createHoliday(); ctrl.activateBtn(0)">Save</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
     </div>
 
@@ -88,7 +94,7 @@
               <input type="text" required ng-model="holiday.holidayDesc" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date"z required ng-model="holiday.holidayDate" class="gf-form-input" />
+              <input type="date" z required ng-model="holiday.holidayDate" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">
@@ -110,11 +116,11 @@
       <h4 class="ptl-06">Academic Year</h4>
       <div ng-class="{'hide':ctrl.activeBtnIndex === 2}">
         <a class="btn btn-primary" ng-click="ctrl.activateBtn(2)">Add Term</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
       <div ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
         <a class="btn btn-primary" ng-click="createTerm(); ctrl.activateBtn(0)">Save</a>
-        <a class="btn btn-primary" ng-click="ctrl.activateTab(0)">Back</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
     </div>
 
@@ -153,10 +159,7 @@
         <form name="termForm">
           <tr ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
             <td class="text-center link-td">
-              <select class="gf-form-input" ng-model="term.academicyearId">
-                <option ng-repeat="academicYear in ctrl.academicYears" value="{{academicYear.id}}" selected="selected">
-                  {{academicYear.id}}</option>
-              </select>
+              
             </td>
             <td class="text-center link-td">
               <input type="text" required ng-model="term.termsDesc" class="gf-form-input" />

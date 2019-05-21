@@ -48,6 +48,9 @@ export class TimeTableSettingCtrl {
   timeTableValidationMessage: any;
   lec: any;
   attendanceMasters: any;
+  terms: any;
+  termId: any;
+  academicYearId: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.subjects = [];
@@ -70,6 +73,8 @@ export class TimeTableSettingCtrl {
     $scope.choices = [];
     $scope.idx = {};
     this.totalLectures = [];
+    this.academicYearId = 1701;
+    this.getTerms();
   }
 
   activateTab(tabIndex) {
@@ -106,10 +111,19 @@ export class TimeTableSettingCtrl {
     });
   }
 
+  getTerms() {
+    this.backendSrv
+      .get(this.RestUrl.getTermByAcademicYearIdRestUrl() + '?academicYearId=' + this.academicYearId)
+      .then(result => {
+        this.terms = result;
+      });
+  }
+
   onChangeCollege() {
     this.isCollegeSelected = 0;
     if (!this.collegeId) {
       this.branches = {};
+
       return;
     }
     this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
@@ -121,11 +135,13 @@ export class TimeTableSettingCtrl {
     this.isBranchSelected = 0;
     if (!this.branchId) {
       this.departments = {};
+      this.terms = {};
       return;
     }
     this.backendSrv.get(this.RestUrl.getDepartmentByBranchIdRestUrl() + this.branchId).then(result => {
       this.departments = result;
     });
+    this.getTerms();
   }
 
   onChangeDepartment() {
@@ -156,8 +172,20 @@ export class TimeTableSettingCtrl {
     }
   }
 
+  onChangeTerm() {
+    if (!this.termId) {
+      this.sections = {};
+      return;
+    }
+    if (this.batchId) {
+      this.backendSrv.get(this.RestUrl.getSectionByBatchRestUrl() + this.batchId).then(result => {
+        this.sections = result;
+      });
+    }
+  }
+
   next() {
-    if (this.counter <= 0) {
+    if (this.counter <= 0 || this.totalLectures.length === 0) {
       alert('Please create lectures.');
     } else {
       this.isValid = this.validateTimings();
@@ -246,9 +274,10 @@ export class TimeTableSettingCtrl {
     }
     this.backendSrv
       .post(
-        `${this.RestUrl.getCmsLecturesUrl()}termId=19800&academicYear=2018&sectionId=${this.sectionId}&batchId=${
-          this.batchId
-        }`,
+        `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
+          this.sectionId
+        }
+        &batchId=${this.batchId}&branchId=${this.branchId}&departmentId=${this.departmentId}`,
         JSON.stringify(payLoad)
       )
       .then(result => {

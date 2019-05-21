@@ -10,22 +10,25 @@ export class YearSettingCtrl {
   activeBtnIndex = 0;
   $scope: any;
   RestUrl: any;
+  selectedAcademicYear: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.activeBtnIndex = 0;
     this.$scope = $scope;
-    this.getHolidays();
-    this.getTerms();
+    // this.getHolidays();
+    // this.getTerms();
     this.getYears();
     $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
     $scope.createHoliday = () => {
       if (!$scope.holidayForm.$valid) {
         return;
       }
+
+      $scope.holiday.academicyear = this.selectedAcademicYear;
       backendSrv.post(this.RestUrl.getHolidayRestUrl(), $scope.holiday).then(() => {
-        this.getHolidays();
+        this.getHolidays(this.selectedAcademicYear.id);
       });
     };
     $scope.terms = { termsDesc: '', startDate: '', endDate: '', termStatus: 'ACTIVE' };
@@ -33,8 +36,10 @@ export class YearSettingCtrl {
       if (!$scope.termForm.$valid) {
         return;
       }
+
+      $scope.term.academicyear = this.selectedAcademicYear;
       backendSrv.post(this.RestUrl.getTermRestUrl(), $scope.term).then(() => {
-        this.getTerms();
+        this.getTerms(this.selectedAcademicYear.id);
       });
     };
     $scope.createYear = cb => {
@@ -96,16 +101,20 @@ export class YearSettingCtrl {
     this.activeBtnIndex = tabIndex;
   }
 
-  getHolidays() {
-    this.backendSrv.get(this.RestUrl.getHolidayRestUrl()).then(result => {
-      this.holidays = result;
-    });
+  getHolidays(academicYearId) {
+    this.backendSrv
+      .get(this.RestUrl.getHolidayByAcademicYearIdRestUrl() + '?academicYearId=' + academicYearId)
+      .then(result => {
+        this.holidays = result;
+      });
   }
 
-  getTerms() {
-    this.backendSrv.get(this.RestUrl.getTermRestUrl()).then(result => {
-      this.terms = result;
-    });
+  getTerms(academicYearId) {
+    this.backendSrv
+      .get(this.RestUrl.getTermByAcademicYearIdRestUrl() + '?academicYearId=' + academicYearId)
+      .then(result => {
+        this.terms = result;
+      });
   }
 
   getYears() {
@@ -151,5 +160,17 @@ export class YearSettingCtrl {
         });
       },
     });
+  }
+
+  markAcademicYear(academicYear) {
+    this.selectedAcademicYear = academicYear;
+    this.getHolidays(academicYear.id);
+    this.getTerms(academicYear.id);
+  }
+
+  unMarkAcademicYear() {
+    this.selectedAcademicYear = {};
+    this.holidays = {};
+    this.terms = {};
   }
 }

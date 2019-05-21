@@ -1,7 +1,14 @@
 <form name="teacherForm">
   <div class="grid">
     <div class="leftbar">
-      <img src="/public/img/cubes.png" alt="" />
+      <!-- <img src="/public/img/cubes.png" alt="" /> -->
+      <img src="{{ ctrl.profileSrc }}" alt="" />
+      <div class="gf-form m-b-1">
+        <label class="upload-cursor">
+          <input id="d-none" type="file" file-select="ctrl.getFile(file)" class="gf-form-file-input" accept="image/*" />
+          Upload <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+        </label>
+      </div>
       <div class="form-justify">
         <label htmlFor="">*Upload photo:</label>
         <input ng-model="teacher.uploadPhoto" class="border-plugin input-width" type="text" />
@@ -246,5 +253,9 @@
     </div>
   </div>
   <!-- <input ng-model="teacher.uploadPhoto" class="border-plugin fwidth" type="number" /> -->
-  <button class="btn btn-primary" type="submit" ng-click="create();">save</button>
+  <div>
+    <a ng-click="ctrl.activeBtn(0); ctrl.activeTabStaffList();" class="btn btn-primary" style="width: 135px;">
+      Save</a>
+  </div>
+  <!-- <button class="btn btn-primary" type="submit" ng-click="create();">save</button> -->
 </form>
