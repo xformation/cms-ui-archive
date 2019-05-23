@@ -21,7 +21,18 @@ export class StaffListCtrl {
     // this.getBatches();
     this.getDepartments();
     // $scope.optionsLimit = 5;
+    // $scope.selectAll = function () {
+    //   this.forEach($scope.teachers, function (item) {
+    //     item.Selected = $scope.selectedAll;
+    //   });
+    // };
   }
+
+  // onClickCheckbox(index, e) {
+  //   const { id } = e.nativeEvent.target;
+  //   let chkBox: any = document.querySelector("#" + id);
+  //   chkBox.checked = e.nativeEvent.target.checked;
+  // }
 
   getDepartments() {
     this.backendSrv.get(this.RestUrl.getDepartmentRestUrl()).then(result => {

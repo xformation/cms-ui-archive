@@ -88,6 +88,12 @@ export class DepartmentSetupCtrl {
   }
 
   editDepartment(department) {
+    if (department.branch != null) {
+      department.branchId = department.branch.id.toString();
+    }
+    if (department.academicyear != null) {
+      department.academicyearId = department.academicyear.id.toString();
+    }
     appEvents.emit('department-modal', {
       icon: 'fa-trash',
       text: 'update',

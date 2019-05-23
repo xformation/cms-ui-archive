@@ -23,7 +23,7 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr ng-repeat="academicYear in ctrl.academicYears">
+        <tr ng-repeat="academicYear in ctrl.academicYears | orderBy:'year'">
           <td>{{academicYear.year}}</td>
           <td>
             {{academicYear.strStartDate}}
@@ -31,8 +31,10 @@
           <td>
             {{academicYear.strEndDate}}
           </td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(1);">Manage Holidays</a></td>
-          <td><a class="btn btn-primary wauto" ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(2);">Manage Terms</a></td>
+          <td><a class="btn btn-primary wauto"
+              ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(1);">Manage Holidays</a></td>
+          <td><a class="btn btn-primary wauto"
+              ng-click="ctrl.markAcademicYear(academicYear); ctrl.activateTab(2);">Manage Terms</a></td>
           <td>
             <label class="switch"> <input disabled type="checkbox" ng-model="academicYear.status"
                 ng-true-value="'ACTIVE'" ng-false-value="'DEACTIVE'" /> <span class="slider disabledCursor"></span>
@@ -159,7 +161,7 @@
         <form name="termForm">
           <tr ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
             <td class="text-center link-td">
-              
+
             </td>
             <td class="text-center link-td">
               <input type="text" required ng-model="term.termsDesc" class="gf-form-input" />

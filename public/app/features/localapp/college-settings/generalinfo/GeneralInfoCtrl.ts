@@ -11,6 +11,7 @@ export class GeneralInfoCtrl {
   isCollegeBgChanged = false;
   $scope: any;
   RestUrl: any;
+  colleges: any;
 
   /** @ngInject */
   constructor($scope, private backendSrv) {
@@ -32,7 +33,7 @@ export class GeneralInfoCtrl {
         $scope.cmsCollegeVo.bgImage = this.bgSrc;
       }
       backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
-        appEvents.emit("get_colleges", {});
+        appEvents.emit('get_colleges', {});
         if (result === 200 || result === 201) {
           this.getColleges();
           alert('College data saved successfully.');
@@ -45,6 +46,12 @@ export class GeneralInfoCtrl {
 
   activateTab(tabIndex) {
     this.activeTabIndex = tabIndex;
+  }
+
+  getColleges() {
+    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+      this.colleges = result;
+    });
   }
 
   getFile(file) {

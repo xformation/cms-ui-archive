@@ -72,7 +72,7 @@
       <th>Actions <i class="fa fa-bars mbt" aria-hidden="true"></i></th>
     </thead>
     <tbody>
-      <tr ng-repeat="branch in ctrl.branches">
+      <tr ng-repeat="branch in ctrl.branches | orderBy:'state.stateName'">
         <td class="width-4 text-center link-td">
           {{branch.state.stateName}}
         </td>

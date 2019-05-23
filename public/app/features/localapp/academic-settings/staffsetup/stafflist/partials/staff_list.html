@@ -53,8 +53,9 @@
   <table class="staff-management-table">
     <thead>
       <th>
-        <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
-          ng-change="ctrl.internalOnChange()" />
+        <!-- <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
+          ng-change="ctrl.onClickCheckbox()" /> -->
+        <input type="checkbox" style="width:18px; height: 18px;" ng-model="selectedAll" ng-click="ctrl.selectAll()" />
       </th>
       <th>Name</th>
       <th>Emp Id</th>
@@ -71,10 +72,11 @@
         <pagination page="currentPage" max-size="noOfPages" total-teachers="totalTeachers"
           teachers-per-page="entryLimit"></pagination>
       </div> -->
-      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict">
+      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict | orderBy:'teacherName'">
         <td>
-          <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
-            ng-change="ctrl.internalOnChange()" />
+          <!-- <input onClick={(e)=> this.onClickCheckbox(i, e)} checked={student.isChecked} type="checkbox" name=""
+          id={"chk"+student.id}/> -->
+          <input type="checkbox" style="width:18px; height: 18px;" />
         </td>
         <td ng-search="filter:search">
           {{ teacher.teacherName + ' ' + teacher.teacherLastName }}
