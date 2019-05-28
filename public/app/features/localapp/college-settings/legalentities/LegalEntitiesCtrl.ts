@@ -121,6 +121,7 @@ export class LegalEntitiesCtrl {
       }
       backendSrv.post(this.RestUrl.getLegalEntitiesRestUrl(), $scope.legalEntity).then(() => {
         console.log('Legal:', this.legalEntities);
+        alert('Data Saved Successfully!');
       });
     };
   }

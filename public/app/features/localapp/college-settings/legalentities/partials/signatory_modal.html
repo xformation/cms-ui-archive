@@ -13,9 +13,7 @@
 	</div>
 
 	<div class="modal-content">
-		<div ng-if="is_success_bar === '0'" style="background-color:red;width: 100%; height: 30px;margin:auto;"><label class="gf-form-label b-0 bg-transparent">Due to some error, data could not be saved successfully.</label></div>
-		<div ng-if="is_success_bar === '1'" style="background-color:green;width: 100%; height: 30px;margin:auto;"><label class="gf-form-label b-0 bg-transparent">Data saved successfully.</label></div>
-			
+
 		<div class="add-confirm-modal p-1">
 			<form name="signatoryForm" class="gf-form-group m-0">
 				<div class="bg-modal">
@@ -23,62 +21,62 @@
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY NAME</label>
 							<input type="text" required ng-model="authorizedSignatory.signatoryName"
-								class="gf-form-input" placeholder="name" maxlength="255"/>
+								class="gf-form-input" placeholder="name" maxlength="255" />
 						</div>
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY FATHER NAME</label>
 							<input type="text" required ng-model="authorizedSignatory.signatoryFatherName"
-								class="gf-form-input" placeholder="father name" maxlength="255"/>
+								class="gf-form-input" placeholder="father name" maxlength="255" />
 						</div>
 						<div class="modal-fwidth modal-text">
 							<label class="gf-form-label b-0 bg-transparent">SIGNATORY DESIGNATION</label>
 							<input type="text" required ng-model="authorizedSignatory.signatoryDesignation"
-								class="gf-form-input" placeholder="designation" maxlength="255"/>
+								class="gf-form-input" placeholder="designation" maxlength="255" />
 						</div>
 					</div>
 					<div class="fwidth-signatory-modal-text">
 						<label class="gf-form-label b-0 bg-transparent">ADDRESS</label>
 						<input type="text" required ng-model="authorizedSignatory.address1" class="gf-form-input m-b-1"
-							placeholder="" maxlength="255"/>
+							placeholder="" maxlength="255" />
 						<input type="text" ng-model="authorizedSignatory.address2" class="gf-form-input m-b-1"
-							placeholder="" maxlength="255"/>
+							placeholder="" maxlength="255" />
 					</div>
 					<div class="mdflex">
 						<div class="modal-fwidth modal-text m-r-1">
 							<input type="text" ng-model="authorizedSignatory.address3" class="gf-form-input"
-								placeholder="" maxlength="255"/>
+								placeholder="" maxlength="255" />
 						</div>
 						<div class="modal-fwidth modal-text m-r-1">
 							<input type="text" ng-model="authorizedSignatory.address4" class="gf-form-input"
-								placeholder="" maxlength="255"/>
+								placeholder="" maxlength="255" />
 						</div>
 						<div class="modal-fwidth modal-text m-r-1">
 							<input type="text" ng-model="authorizedSignatory.address5" class="gf-form-input"
-								placeholder="" maxlength="255"/>
+								placeholder="" maxlength="255" />
 						</div>
 					</div>
 					<div class="mdflex">
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">EMAIL</label>
 							<input type="text" required ng-model="authorizedSignatory.email" class="gf-form-input"
-								placeholder="email" maxlength="255"/>
+								placeholder="email" maxlength="255" />
 						</div>
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">PAN CARD NUMBER</label>
 							<input type="text" required ng-model="authorizedSignatory.panCardNumber"
-								class="gf-form-input" placeholder="pan number" maxlength="255"/>
+								class="gf-form-input" placeholder="pan number" maxlength="255" />
 						</div>
 					</div>
 
 					<div class="mdflex">
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">BRANCH</label>
-							<select class="gf-form-input" required ng-model="authorizedSignatory.branchId" >
+							<select class="gf-form-input" required ng-model="authorizedSignatory.branchId">
 								<option value="">
-								  Select Branch</option>
+									Select Branch</option>
 								<option ng-repeat="branch in cmsSelectedBranches.branches" value="{{branch.id}}">
-								  {{branch.branchName}}</option>
-							  </select>
+									{{branch.branchName}}</option>
+							</select>
 						</div>
 					</div>
 
@@ -100,6 +98,12 @@
 						<button ng-click="dismiss()" type="reset"
 							class="btn btn-danger border-bottom m-r-0">Cancel</button>
 					</div>
+					<div ng-if="is_success_bar === '0'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is someerror!
+					</div>
+					<div ng-if="is_success_bar === '1'"
+						style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved
+						Successfully!</div>
 				</div>
 			</form>
 		</div>

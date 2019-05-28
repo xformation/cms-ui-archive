@@ -61,7 +61,7 @@ export class SubjectSetupCtrl {
       });
     };
 
-    $scope.onChangeDepartment = (cb) => {
+    $scope.onChangeDepartment = cb => {
       const { departmentId } = this.$scope.subject;
       this.backendSrv.get(this.RestUrl.getBatchByDepartmentIdRestUrl() + departmentId).then(result => {
         this.$scope.selectedBatches = result;
@@ -140,6 +140,12 @@ export class SubjectSetupCtrl {
   // }
 
   editSubject(subject) {
+    if (subject.department != null) {
+      subject.departmentId = subject.department.id.toString();
+    }
+    if (subject.batch != null) {
+      subject.batchId = subject.batch.id.toString();
+    }
     appEvents.emit('subject-modal', {
       icon: 'fa-trash',
       text: 'update',
