@@ -51,8 +51,10 @@ export class TimeTableSettingCtrl {
   terms: any;
   termId: any;
   academicYearId: any;
+  lecturesCreated: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.lecturesCreated = [];
     this.subjects = [];
     this.teachers = [];
     this.isValid = true;
@@ -123,7 +125,6 @@ export class TimeTableSettingCtrl {
     this.isCollegeSelected = 0;
     if (!this.collegeId) {
       this.branches = {};
-
       return;
     }
     this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
@@ -197,7 +198,7 @@ export class TimeTableSettingCtrl {
       this.$scope.isReadOnly = false;
       // this.getSubjects();
       // this.getTeachers();
-      this.getAttendanceMasterByBatchAndSection();
+      this.getAttendanceMasterByBatchAndSection(null);
       this.activateTab(1);
     }
   }
@@ -274,14 +275,15 @@ export class TimeTableSettingCtrl {
     }
     this.backendSrv
       .post(
-        `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
-          this.sectionId
-        }
+      `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
+      this.sectionId
+      }
         &batchId=${this.batchId}&branchId=${this.branchId}&departmentId=${this.departmentId}`,
-        JSON.stringify(payLoad)
+      JSON.stringify(payLoad)
       )
       .then(result => {
         // this.colleges = result;
+        this.lecturesCreated = result;
         this.activateTab(2);
       });
   }
@@ -309,14 +311,14 @@ export class TimeTableSettingCtrl {
   //     });
   // }
 
-  getAttendanceMasterByBatchAndSection() {
+  getAttendanceMasterByBatchAndSection(cb) {
     this.backendSrv
       .get(
-        this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
-          '?batchId=' +
-          this.batchId +
-          '&sectionId=' +
-          this.sectionId
+      this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
+      '?batchId=' +
+      this.batchId +
+      '&sectionId=' +
+      this.sectionId
       )
       .then(result => {
         this.attendanceMasters = result;
@@ -327,6 +329,9 @@ export class TimeTableSettingCtrl {
           // const thr = this.attendanceMasters[i].teach.teacher;
           this.subjects[i] = sb;
           // this.teachers[i] = thr;
+        }
+        if (cb) {
+          cb();
         }
       });
     //this.subjects = {};
@@ -369,5 +374,88 @@ export class TimeTableSettingCtrl {
     } else if (weekDay === 'SATURDAY') {
       this.$scope.theacherSaturday = selThrs;
     }
+  }
+
+  onViewLectures() {
+    const lectures = this.lecturesCreated;
+    this.getLecturesData(lectures);
+    this.activateTab(0);
+  }
+
+  getLecturesData(lecture) {
+    this.backendSrv.get(this.RestUrl.getSelectedLectures() + `?branchId=${lecture.branchId}` +
+      `&departmentId=${lecture.departmentId}&termId=${lecture.termId}` +
+      `&academicYear=${lecture.academicYear}&sectionId=${lecture.sectionId}` +
+      `&batchId=${lecture.batchId}`).then(result => {
+        this.setDetailsOfLecture(result);
+      });
+
+    // this.backendSrv.get("http://18.234.66.133:8080/api/cmsmeta-lecture-selected?branchId=67101&" +
+    //   "departmentId=67151&termId=1751&academicYear=1701&sectionId=67251&batchId=67201").then(result => {
+    //     this.setDetailsOfLecture(result);
+    //   });
+  }
+
+  setDetailsOfLecture(data) {
+    this.counter = data.length;
+    const lecture = data[0];
+    this.collegeId = lecture.branch.college.id;
+    this.onChangeCollege();
+    this.branchId = lecture.branch.id + "";
+    this.onChangeBranch();
+    this.termId = lecture.term.id + "";
+    this.onChangeTerm();
+    this.departmentId = lecture.department.id + "";
+    this.onChangeDepartment();
+    this.batchId = lecture.batch.id + "";
+    this.onChangeBatch();
+    this.sectionId = lecture.section.id + "";
+    this.onChangeSection();
+    const lectureTimings = {};
+    for (let i = 0; i < data.length; i++) {
+      const lec = data[i];
+      const startTimeArr = this.convertTime12to24(lec.startTime);
+      const endTimeArr = this.convertTime12to24(lec.endTime);
+      const startTime = new Date(1970, 0, 1, startTimeArr[0], startTimeArr[1], 0);
+      const endTime = new Date(1970, 0, 1, endTimeArr[0], endTimeArr[1], 0);
+      const newData = lectureTimings[lec.startTime] || {
+        subjects: {},
+        startTime: startTime,
+        endTime: endTime,
+        isBreak: false,
+        isSatLecture: true,
+        teachers: {}
+      };
+      const subjects = newData.subjects;
+      const teachers = newData.teachers;
+      teachers[lec.weekDay] = lec.teacher.id + "";
+      subjects[lec.weekDay] = lec.subject.id + "";
+      lectureTimings[lec.startTime] = newData;
+    }
+    const keys = Object.keys(lectureTimings);
+    for (let i = 0; i < keys.length; i++) {
+      this.lectureTimings.push(lectureTimings[keys[i]]);
+    }
+    this.getAttendanceMasterByBatchAndSection(() => {
+      const weekDays = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+      for (let i = 0; i < weekDays.length; i++) {
+        this.onChangeSubject(weekDays[i]);
+      }
+    });
+    this.addRows();
+  }
+
+  convertTime12to24(time12h) {
+    const [time, modifier] = time12h.split(' ');
+    const splittedTime = time.split(':');
+    let hours = splittedTime[0];
+    const minutes = splittedTime[1];
+    if (hours === '12') {
+      hours = '00';
+    }
+    if (modifier === 'PM') {
+      hours = parseInt(hours, 10) + 12;
+    }
+    return [hours, minutes];
   }
 }

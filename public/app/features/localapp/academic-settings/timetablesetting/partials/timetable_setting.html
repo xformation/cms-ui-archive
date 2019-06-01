@@ -14,7 +14,7 @@
           <h4 class="ptl-06">College</h4>
           <select ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()" required ng-disabled="!isReadOnly">
             <option value="">Select College</option>
-            <option ng-repeat="college in ctrl.colleges" value="{{college.id}}">{{college.shortName}}</option>
+            <option ng-repeat="college in ctrl.colleges" value="{{college.id}}" ng-selected="college.id === ctrl.collegeId">{{college.shortName}}</option>
           </select>
           <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">Please select college</div>
           <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
@@ -24,7 +24,7 @@
           <h4 class="ptl-06">Branch</h4>
           <select ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()" required ng-disabled="!isReadOnly">
               <option value="">Select Branch</option>
-              <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}">{{branch.branchName}}</option>
+              <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}" ng-selected="branch.id == ctrl.branchId">{{branch.branchName}}</option>
             </select>
           <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
           <div ng-if="ctrl.isBranchSelected === 1" class="form-error">Please select branch</div>
@@ -34,7 +34,7 @@
           <h4 class="ptl-06">Terms</h4>
           <select ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" required ng-disabled="!isReadOnly">
               <option value="">Select Term</option>
-              <option ng-repeat="term in ctrl.terms" value="{{term.id}}">{{term.termsDesc}}</option>
+              <option ng-repeat="term in ctrl.terms" value="{{term.id}}" ng-selected="term.id === ctrl.termId">{{term.termsDesc}}</option>
             </select>
           <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
           <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
@@ -84,25 +84,25 @@
             <td>
               <select class="gf-form-input" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()" ng-disabled="!isReadOnly">
                 <option value="">Select Department</option>
-                <option ng-repeat="department in ctrl.departments" value="{{department.id}}">{{department.name}}</option>
+                <option ng-repeat="department in ctrl.departments" value="{{department.id}}" ng-selected="department.id === ctrl.departmentId">{{department.name}}</option>
               </select>
             </td>
             <td>
               <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()" ng-disabled="!isReadOnly">
                 <option value="">Select Year</option>
-                <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">{{bth.batch}}</option>
+                <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}" ng-selected="bth.id === ctrl.batchId">{{bth.batch}}</option>
               </select>
             </td>
             <td>
               <select class="gf-form-input" ng-model="ctrl.semesterId" ng-disabled="!isReadOnly">
                 <option value="">Select Semester</option>
-                <option ng-repeat="sem in ctrl.semesters" value="{{sem.id}}">{{sem.description}}</option>
+                <option ng-repeat="sem in ctrl.semesters" value="{{sem.id}}" ng-selected="sem.id === ctrl.semesterId">{{sem.description}}</option>
               </select>
             </td>
             <td>
               <select class="gf-form-input" ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()" ng-disabled="!isReadOnly">
                 <option value="">Select Section</option>
-                <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}">{{sec.section}}</option>
+                <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" ng-selected="sec.id === ctrl.sectionId">{{sec.section}}</option>
               </select>
             </td>
             <td>
@@ -179,14 +179,14 @@
                   <div>
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['MONDAY']" ng-change="ctrl.onChangeSubject('MONDAY')">
                             <option value="">Select Subject</option>
-                            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}" ng-selected="ctrl.lectureTimings[$index].subjects['MONDAY'] == sub.id">{{sub.subjectCode}}</option>
                         </select>
                   </div>
                   <div>
                     <span class="ttd">Teacher</span>
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['MONDAY']">
                             <option value="">Select Teacher</option>
-                            <option ng-repeat="tch in theacherMonday" value="{{tch.id}}">{{tch.teacherName}}</option>
+                            <option ng-repeat="tch in theacherMonday" value="{{tch.id}}" ng-selected="ctrl.lectureTimings[$index].teachers['MONDAY'] == tch.id">{{tch.teacherName}}</option>
                         </select>
                   </div>
                 </div>
@@ -319,17 +319,28 @@
         <th>Edit</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Computer Science Year 1</td>
-          <td>5</td>
+        <tr ng-repeat="lec in ctrl.lecturesCreated track by $index">
+          <td>{{$index + 1}}</td>
+          <td>{{lec.statusDesc}}</td>
+          <td>{{lec.numberOfPeriods}}</td>
           <td>
-            <input type="button" class="btn btn-primary" value="View">
+            <input type="button" ng-click="ctrl.onViewLectures()" class="btn btn-primary" value="View">
           </td>
           <td>
             <input type="button" class="btn btn-primary" value="Edit">
           </td>
         </tr>
+        <!-- <tr>
+            <td>1</td>
+            <td>ffdsfas</td>
+            <td></td>
+            <td>
+              <input type="button" ng-click="ctrl.onViewLectures()" class="btn btn-primary" value="View">
+            </td>
+            <td>
+              <input type="button" class="btn btn-primary" value="Edit">
+            </td>
+          </tr> -->
       </tbody>
     </table>
   </div>

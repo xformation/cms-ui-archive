@@ -106,4 +106,8 @@ export class GlobalRestUrlConstants {
   getAttendanceMasterByBatchAndSectioinUrl() {
     return this.getBaseRestUrl() + '/cmsattendance-masters-bybatchsection';
   }
+
+  getSelectedLectures() {
+    return this.getBaseRestUrl() + '/cmsmeta-lecture-selected';
+  }
 }
