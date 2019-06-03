@@ -24,6 +24,7 @@ export class DepartmentSetupCtrl {
         return;
       }
       backendSrv.post(this.RestUrl.getDepartmentRestUrl(), $scope.department).then(() => {
+        appEvents.emit('get_departments', {});
         this.getDepartments();
       });
     };
@@ -32,9 +33,11 @@ export class DepartmentSetupCtrl {
         return;
       }
       backendSrv.put(this.RestUrl.getDepartmentRestUrl(), $scope.department).then(() => {
+        appEvents.emit('get_departments', {});
         this.getDepartments();
       });
     };
+    appEvents.on('get_academicyears', this.getAcademicYears.bind(this), $scope);
   }
 
   activateTab(tabIndex) {
@@ -67,6 +70,7 @@ export class DepartmentSetupCtrl {
       yesText: 'Delete',
       onConfirm: () => {
         this.backendSrv.delete(this.RestUrl.getDepartmentRestUrl() + department.id).then(() => {
+          appEvents.emit('get_departments', {});
           this.getDepartments();
         });
       },

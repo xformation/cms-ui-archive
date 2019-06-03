@@ -1,4 +1,5 @@
 import { GlobalRestUrlConstants } from '../../../GlobalRestUrlConstants';
+import { appEvents } from 'app/core/core';
 
 export class StaffListCtrl {
   navModel: any;
@@ -26,6 +27,7 @@ export class StaffListCtrl {
     //     item.Selected = $scope.selectedAll;
     //   });
     // };
+    appEvents.on('get_departments', this.getDepartments.bind(this), $scope);
   }
 
   // onClickCheckbox(index, e) {

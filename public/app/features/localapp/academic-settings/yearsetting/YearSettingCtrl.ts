@@ -54,6 +54,7 @@ export class YearSettingCtrl {
       }
       backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
+          appEvents.emit('get_academicyears', {});
           this.getYears();
           if (cb) {
             cb('1');
@@ -79,6 +80,7 @@ export class YearSettingCtrl {
       }
       backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
+          appEvents.emit('get_academicyears', {});
           this.getYears();
           if (cb) {
             cb('1');
@@ -156,6 +158,7 @@ export class YearSettingCtrl {
       yesText: 'Delete',
       onConfirm: () => {
         this.backendSrv.delete(this.RestUrl.getAcademicYearRestUrl() + academicYear.id).then(() => {
+          appEvents.emit('get_academicyears', {});
           this.getYears();
         });
       },
