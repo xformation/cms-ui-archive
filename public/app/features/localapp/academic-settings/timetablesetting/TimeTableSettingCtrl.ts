@@ -275,11 +275,11 @@ export class TimeTableSettingCtrl {
     }
     this.backendSrv
       .post(
-      `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
-      this.sectionId
-      }
+        `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
+          this.sectionId
+        }
         &batchId=${this.batchId}&branchId=${this.branchId}&departmentId=${this.departmentId}`,
-      JSON.stringify(payLoad)
+        JSON.stringify(payLoad)
       )
       .then(result => {
         // this.colleges = result;
@@ -314,11 +314,11 @@ export class TimeTableSettingCtrl {
   getAttendanceMasterByBatchAndSection(cb) {
     this.backendSrv
       .get(
-      this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
-      '?batchId=' +
-      this.batchId +
-      '&sectionId=' +
-      this.sectionId
+        this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
+          '?batchId=' +
+          this.batchId +
+          '&sectionId=' +
+          this.sectionId
       )
       .then(result => {
         this.attendanceMasters = result;
@@ -376,17 +376,22 @@ export class TimeTableSettingCtrl {
     }
   }
 
-  onViewLectures() {
+  onViewLectures(index) {
     const lectures = this.lecturesCreated;
-    this.getLecturesData(lectures);
+    this.getLecturesData(lectures, index);
     this.activateTab(0);
   }
 
-  getLecturesData(lecture) {
-    this.backendSrv.get(this.RestUrl.getSelectedLectures() + `?branchId=${lecture.branchId}` +
-      `&departmentId=${lecture.departmentId}&termId=${lecture.termId}` +
-      `&academicYear=${lecture.academicYear}&sectionId=${lecture.sectionId}` +
-      `&batchId=${lecture.batchId}`).then(result => {
+  getLecturesData(lecture, i) {
+    this.backendSrv
+      .get(
+        this.RestUrl.getSelectedLectures() +
+          `?branchId=${lecture[i].branchId}` +
+          `&departmentId=${lecture[i].departmentId}&termId=${lecture[i].termId}` +
+          `&academicYear=${lecture[i].academicYear}&sectionId=${lecture[i].sectionId}` +
+          `&batchId=${lecture[i].batchId}`
+      )
+      .then(result => {
         this.setDetailsOfLecture(result);
       });
 
@@ -401,15 +406,15 @@ export class TimeTableSettingCtrl {
     const lecture = data[0];
     this.collegeId = lecture.branch.college.id;
     this.onChangeCollege();
-    this.branchId = lecture.branch.id + "";
+    this.branchId = lecture.branch.id + '';
     this.onChangeBranch();
-    this.termId = lecture.term.id + "";
+    this.termId = lecture.term.id + '';
     this.onChangeTerm();
-    this.departmentId = lecture.department.id + "";
+    this.departmentId = lecture.department.id + '';
     this.onChangeDepartment();
-    this.batchId = lecture.batch.id + "";
+    this.batchId = lecture.batch.id + '';
     this.onChangeBatch();
-    this.sectionId = lecture.section.id + "";
+    this.sectionId = lecture.section.id + '';
     this.onChangeSection();
     const lectureTimings = {};
     for (let i = 0; i < data.length; i++) {
@@ -424,12 +429,12 @@ export class TimeTableSettingCtrl {
         endTime: endTime,
         isBreak: false,
         isSatLecture: true,
-        teachers: {}
+        teachers: {},
       };
       const subjects = newData.subjects;
       const teachers = newData.teachers;
-      teachers[lec.weekDay] = lec.teacher.id + "";
-      subjects[lec.weekDay] = lec.subject.id + "";
+      teachers[lec.weekDay] = lec.teacher.id + '';
+      subjects[lec.weekDay] = lec.subject.id + '';
       lectureTimings[lec.startTime] = newData;
     }
     const keys = Object.keys(lectureTimings);
@@ -437,7 +442,7 @@ export class TimeTableSettingCtrl {
       this.lectureTimings.push(lectureTimings[keys[i]]);
     }
     this.getAttendanceMasterByBatchAndSection(() => {
-      const weekDays = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+      const weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
       for (let i = 0; i < weekDays.length; i++) {
         this.onChangeSubject(weekDays[i]);
       }
