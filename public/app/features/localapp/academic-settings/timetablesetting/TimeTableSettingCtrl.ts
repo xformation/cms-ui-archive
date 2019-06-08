@@ -17,14 +17,12 @@ class LectureSchedule {
 }
 
 export class TimeTableSettingCtrl {
-  navModel: any;
   activeTabIndex = 0;
   $scope: any;
   RestUrl: any;
   departments: any;
   batches: any;
   teachers: any;
-  clgObject: any;
   counter: any;
   totalLectures: any;
   colleges: any;
@@ -34,10 +32,6 @@ export class TimeTableSettingCtrl {
   sections: any;
   batchId: any;
   departmentId: any;
-  isCollegeSelected: any;
-  isBranchSelected: any;
-  isSectionSelected: any;
-  isNextSelected: any;
   semesters: any;
   semesterId: any;
   sectionId: any;
@@ -46,12 +40,13 @@ export class TimeTableSettingCtrl {
   lectureTimings: any;
   isValid: any;
   timeTableValidationMessage: any;
-  lec: any;
   attendanceMasters: any;
   terms: any;
   termId: any;
   academicYearId: any;
   lecturesCreated: any;
+  isReadOnly: any;
+  isRequestMade: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.lecturesCreated = [];
@@ -62,21 +57,17 @@ export class TimeTableSettingCtrl {
     this.counter = 0;
     this.activeTabIndex = 0;
     this.$scope = $scope;
-    this.clgObject = {};
     this.lectureTimings = [];
     this.timeTableValidationMessage = '';
     this.getColleges();
     this.getSemester();
-    this.isCollegeSelected = 0;
-    this.isBranchSelected = 0;
-    this.isSectionSelected = 0;
-    this.isNextSelected = 0;
-    $scope.isReadOnly = true;
+    this.isReadOnly = false;
     $scope.choices = [];
     $scope.idx = {};
     this.totalLectures = [];
     this.academicYearId = 1701;
     this.getTerms();
+    this.isRequestMade = false;
   }
 
   activateTab(tabIndex) {
@@ -84,15 +75,15 @@ export class TimeTableSettingCtrl {
   }
 
   changeCounter(opt) {
-    if (opt === 'plus') {
-      this.counter = this.counter + 1;
-    }
-    if (opt === 'minus' && this.counter > 0) {
-      this.counter = this.counter - 1;
+    if (this.activeTabIndex === 0) {
+      this.counter += opt;
+      if (this.counter < 0) {
+        this.counter = 0;
+      }
     }
   }
 
-  addRows() {
+  onClickCreateLectures() {
     if (this.totalLectures.length !== this.counter) {
       this.totalLectures.length = 0;
       for (let i = 0; i < this.counter; i++) {
@@ -122,7 +113,6 @@ export class TimeTableSettingCtrl {
   }
 
   onChangeCollege() {
-    this.isCollegeSelected = 0;
     if (!this.collegeId) {
       this.branches = {};
       return;
@@ -133,7 +123,6 @@ export class TimeTableSettingCtrl {
   }
 
   onChangeBranch() {
-    this.isBranchSelected = 0;
     if (!this.branchId) {
       this.departments = {};
       this.terms = {};
@@ -166,11 +155,6 @@ export class TimeTableSettingCtrl {
   }
 
   onChangeSection() {
-    if (!this.sectionId) {
-      this.isSectionSelected = 0;
-    } else {
-      this.isSectionSelected = 1;
-    }
   }
 
   onChangeTerm() {
@@ -193,9 +177,7 @@ export class TimeTableSettingCtrl {
       if (!this.isValid) {
         return;
       }
-      this.isSectionSelected = 0;
-      this.isNextSelected = 1;
-      this.$scope.isReadOnly = false;
+      this.isReadOnly = true;
       // this.getSubjects();
       // this.getTeachers();
       this.getAttendanceMasterByBatchAndSection(null);
@@ -206,7 +188,7 @@ export class TimeTableSettingCtrl {
   validateTimings() {
     const timings = this.lectureTimings;
     let isValid = true;
-    if (timings.length === 0 && this.totalLectures > 0) {
+    if (timings.length === 0 && this.totalLectures.length > 0) {
       isValid = false;
       this.timeTableValidationMessage = 'Please enter start and end time.';
       return isValid;
@@ -259,39 +241,29 @@ export class TimeTableSettingCtrl {
       const endTime = timings.endTime.toLocaleTimeString('en-US');
 
       for (const j in subjects) {
-        // data[counter] = {
-        //   weekDay: j,
-        //   startTime: startTime,
-        //   endTime: endTime,
-        //   subjectId: subjects[j],
-        //   teacherId: teachers[j]
-        // };
-        this.lec = new LectureSchedule(j, startTime, endTime, subjects[j], teachers[j]);
-        payLoad[counter] = this.lec;
+        payLoad[counter] = new LectureSchedule(j, startTime, endTime, subjects[j], teachers[j]);
         counter++;
       }
-      // payLoad[i] = data;
-      // payLoad[i] = this.lec;
     }
+    this.isRequestMade = true;
     this.backendSrv
       .post(
-        `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}&sectionId=${
-          this.sectionId
-        }
-        &batchId=${this.batchId}&branchId=${this.branchId}&departmentId=${this.departmentId}`,
-        JSON.stringify(payLoad)
+      `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}` +
+      `&sectionId=${this.sectionId}&batchId=${this.batchId}&branchId=${this.branchId}` +
+      `&departmentId=${this.departmentId}`,
+      JSON.stringify(payLoad)
       )
       .then(result => {
-        // this.colleges = result;
         this.lecturesCreated = result;
+        this.isRequestMade = false;
         this.activateTab(2);
+      }, error => {
+        this.isRequestMade = false;
       });
   }
 
   back() {
-    this.isSectionSelected = 1;
-    this.isNextSelected = 0;
-    this.$scope.isReadOnly = true;
+    this.isReadOnly = false;
     this.activateTab(0);
   }
 
@@ -314,11 +286,11 @@ export class TimeTableSettingCtrl {
   getAttendanceMasterByBatchAndSection(cb) {
     this.backendSrv
       .get(
-        this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
-          '?batchId=' +
-          this.batchId +
-          '&sectionId=' +
-          this.sectionId
+      this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
+      '?batchId=' +
+      this.batchId +
+      '&sectionId=' +
+      this.sectionId
       )
       .then(result => {
         this.attendanceMasters = result;
@@ -377,28 +349,29 @@ export class TimeTableSettingCtrl {
   }
 
   onViewLectures(index) {
-    const lectures = this.lecturesCreated;
-    this.getLecturesData(lectures, index);
+    // const lectures = this.lecturesCreated;
+    // this.getLecturesData(lectures, index);
+    this.getLecturesData();
     this.activateTab(0);
   }
 
-  getLecturesData(lecture, i) {
-    this.backendSrv
-      .get(
-        this.RestUrl.getSelectedLectures() +
-          `?branchId=${lecture[i].branchId}` +
-          `&departmentId=${lecture[i].departmentId}&termId=${lecture[i].termId}` +
-          `&academicYear=${lecture[i].academicYear}&sectionId=${lecture[i].sectionId}` +
-          `&batchId=${lecture[i].batchId}`
-      )
-      .then(result => {
-        this.setDetailsOfLecture(result);
-      });
-
-    // this.backendSrv.get("http://18.234.66.133:8080/api/cmsmeta-lecture-selected?branchId=67101&" +
-    //   "departmentId=67151&termId=1751&academicYear=1701&sectionId=67251&batchId=67201").then(result => {
+  getLecturesData() {
+    // this.backendSrv
+    //   .get(
+    //   this.RestUrl.getSelectedLectures() +
+    //   `?branchId=${lecture[i].branchId}` +
+    //   `&departmentId=${lecture[i].departmentId}&termId=${lecture[i].termId}` +
+    //   `&academicYear=${lecture[i].academicYear}&sectionId=${lecture[i].sectionId}` +
+    //   `&batchId=${lecture[i].batchId}`
+    //   )
+    //   .then(result => {
     //     this.setDetailsOfLecture(result);
     //   });
+
+    this.backendSrv.get("http://18.234.66.133:8080/api/cmsmeta-lecture-selected?branchId=67101&" +
+      "departmentId=67151&termId=1751&academicYear=1701&sectionId=67251&batchId=67201").then(result => {
+        this.setDetailsOfLecture(result);
+      });
   }
 
   setDetailsOfLecture(data) {
@@ -447,7 +420,7 @@ export class TimeTableSettingCtrl {
         this.onChangeSubject(weekDays[i]);
       }
     });
-    this.addRows();
+    this.onClickCreateLectures();
   }
 
   convertTime12to24(time12h) {

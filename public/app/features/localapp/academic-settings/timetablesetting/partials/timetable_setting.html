@@ -8,124 +8,97 @@
     Academic Year 2018-2019
   </h4>
   <div ng-class="{'hide': ctrl.activeTabIndex === 2}">
-    <table id="tblClgBrn" style="border: 0px;" cellspacing="1px;">
-      <tr style="border: 0px;">
-        <td style="border: 0px;">
-          <h4 class="ptl-06">College</h4>
-          <select ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()" required ng-disabled="!isReadOnly">
+    <div class="form-container">
+      <div class="gf-form-inline">
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">College</label>
+          <select class="gf-form-select-box" ng-model="ctrl.collegeId" ng-change="ctrl.onChangeCollege()" required ng-disabled="ctrl.isReadOnly">
             <option value="">Select College</option>
             <option ng-repeat="college in ctrl.colleges" value="{{college.id}}" ng-selected="college.id === ctrl.collegeId">{{college.shortName}}</option>
           </select>
-          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">Please select college</div>
-          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
-          <div ng-if="ctrl.isTermSelected === 1" class="form-error">&nbsp;</div>
-        </td>
-        <td style="border: 0px;">
-          <h4 class="ptl-06">Branch</h4>
-          <select ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()" required ng-disabled="!isReadOnly">
-              <option value="">Select Branch</option>
-              <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}" ng-selected="branch.id == ctrl.branchId">{{branch.branchName}}</option>
-            </select>
-          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
-          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">Please select branch</div>
-          <div ng-if="ctrl.isTermSelected === 1" class="form-error">&nbsp;</div>
-        </td>
-        <td style="border: 0px;">
-          <h4 class="ptl-06">Terms</h4>
-          <select ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" required ng-disabled="!isReadOnly">
-              <option value="">Select Term</option>
-              <option ng-repeat="term in ctrl.terms" value="{{term.id}}" ng-selected="term.id === ctrl.termId">{{term.termsDesc}}</option>
-            </select>
-          <div ng-if="ctrl.isCollegeSelected === 1" class="form-error">&nbsp;</div>
-          <div ng-if="ctrl.isBranchSelected === 1" class="form-error">&nbsp;</div>
-          <div ng-if="ctrl.isTermSelected === 1" class="form-error">Please select term</div>
-        </td>
-        <td style="border: 0px;">
-          &nbsp;
-        </td>
-        <td style="border: 0px;">
-          &nbsp;
-        </td>
-        <td style="border: 0px;">
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div ng-if="ctrl.isSectionSelected === 1">
-            <input type="button" class="btn btn-primary" ng-click="ctrl.next()" value="Next"></input>
-          </div>
-          <div ng-if="ctrl.isNextSelected === 1">
-            <input type="button" class="btn btn-primary" value="Save" ng-click="ctrl.saveLectures()"></input>
-          </div>
-        </td>
-        <td style="border: 0px;">
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div ng-if="ctrl.isNextSelected === 1">
-            <input type="button" class="btn btn-primary" ng-click="ctrl.back()" value="Back"></input>
-          </div>
-        </td>
-      </tr>
-
-    </table>
-
-    <div>
-      <!-- <div class="authorized-signatory-container m-b-1"><h4 class="bg-heading ht ptl-06">Academic Year</h4></div> -->
-      <table id="tts" class="fwidth b-0">
-        <thead>
-          <th>Department</th>
-          <th>Year</th>
-          <th>Semester</th>
-          <th>Section</th>
-          <th>No of Lectures</th>
-          <th></th>
-          <th></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <select class="gf-form-input" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()" ng-disabled="!isReadOnly">
-                <option value="">Select Department</option>
-                <option ng-repeat="department in ctrl.departments" value="{{department.id}}" ng-selected="department.id === ctrl.departmentId">{{department.name}}</option>
-              </select>
-            </td>
-            <td>
-              <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()" ng-disabled="!isReadOnly">
-                <option value="">Select Year</option>
-                <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}" ng-selected="bth.id === ctrl.batchId">{{bth.batch}}</option>
-              </select>
-            </td>
-            <td>
-              <select class="gf-form-input" ng-model="ctrl.semesterId" ng-disabled="!isReadOnly">
-                <option value="">Select Semester</option>
-                <option ng-repeat="sem in ctrl.semesters" value="{{sem.id}}" ng-selected="sem.id === ctrl.semesterId">{{sem.description}}</option>
-              </select>
-            </td>
-            <td>
-              <select class="gf-form-input" ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()" ng-disabled="!isReadOnly">
-                <option value="">Select Section</option>
-                <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" ng-selected="sec.id === ctrl.sectionId">{{sec.section}}</option>
-              </select>
-            </td>
-            <td>
-              <div class="t-students" ng-disabled="!isReadOnly"><span class="btn btn-primary mr-1 btn-small" ng-click="ctrl.changeCounter('plus')" ng-init="0" ng-disabled="!isReadOnly">
-                  <i class="fa fa-plus" aria-hidden="true" ng-disabled="!isReadOnly"></i>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Branch</label>
+          <select class="gf-form-select-box" ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()" required ng-disabled="ctrl.isReadOnly">
+            <option value="">Select Branch</option>
+            <option ng-repeat="branch in ctrl.branches" value="{{branch.id}}" ng-selected="branch.id == ctrl.branchId">{{branch.branchName}}</option>
+          </select>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Terms</label>
+          <select class="gf-form-select-box" ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" required ng-disabled="ctrl.isReadOnly">
+            <option value="">Select Term</option>
+            <option ng-repeat="term in ctrl.terms" value="{{term.id}}" ng-selected="term.id === ctrl.termId">{{term.termsDesc}}</option>
+          </select>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Department</label>
+          <select class="gf-form-select-box" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()" ng-disabled="ctrl.isReadOnly">
+                  <option value="">Select Department</option>
+                  <option ng-repeat="department in ctrl.departments" value="{{department.id}}" ng-selected="department.id === ctrl.departmentId">{{department.name}}</option>
+                </select>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Year</label>
+          <select class="gf-form-select-box" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()" ng-disabled="ctrl.isReadOnly">
+                    <option value="">Select Year</option>
+                    <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}" ng-selected="bth.id === ctrl.batchId">{{bth.batch}}</option>
+                  </select>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Semester</label>
+          <select class="gf-form-select-box" ng-model="ctrl.semesterId" ng-disabled="ctrl.isReadOnly">
+                    <option value="">Select Semester</option>
+                    <option ng-repeat="sem in ctrl.semesters" value="{{sem.id}}" ng-selected="sem.id === ctrl.semesterId">{{sem.description}}</option>
+                </select>
+        </div>
+        <div class="gf-form--grow form-control-container">
+          <label for="" class="gf-form-label bg-transparent b-0">Section</label>
+          <select class="gf-form-select-box" ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()" ng-disabled="ctrl.isReadOnly">
+                    <option value="">Select Section</option>
+                    <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" ng-selected="sec.id === ctrl.sectionId">{{sec.section}}</option>
+                </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-container m-t-2">
+      <div class="gf-form-inline">
+        <div class="gf-form form-control-container m-r-2">
+          <label for="" class="gf-form-label bg-transparent b-0">No of Lectures</label>
+          <div class="t-students" ng-disabled="ctrl.isReadOnly"><span class="btn btn-primary mr-1 btn-small" ng-click="ctrl.changeCounter(1)" ng-init="0" ng-disabled="ctrl.isReadOnly">
+                  <i class="fa fa-plus" aria-hidden="true" ng-disabled="ctrl.isReadOnly"></i>
                 </span> {{ctrl.counter}}
-                <span class="btn btn-primary ml-1 btn-small" ng-click="ctrl.changeCounter('minus')" ng-disabled="!isReadOnly">
-                  <i class="fa fa-minus" aria-hidden="true" ng-disabled="!isReadOnly"></i>
+            <span class="btn btn-primary ml-1 btn-small" ng-click="ctrl.changeCounter(-1)" ng-disabled="ctrl.isReadOnly">
+                  <i class="fa fa-minus" aria-hidden="true" ng-disabled="ctrl.isReadOnly"></i>
                 </span>
-              </div>
-            </td>
-            <td>
-              <div class="t-students" ng-disabled="!isReadOnly">
-                Active
-                <label ng-disabled="!isReadOnly" class="switch" style="height:22px;"><input ng-disabled="!isReadOnly" type="checkbox" checked /> <span ng-disabled="!isReadOnly" class="slider m-0"></span> </label>
-              </div>
-            </td>
-            <td>
-              <input ng-if="ctrl.isNextSelected !== 1" type="button" class="btn btn-primary" ng-click="ctrl.addRows()" value="Create Lectures"></input>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </div>
+        </div>
+        <div class="gf-form form-control-container">
+          <div class="t-students" ng-disabled="ctrl.isReadOnly">
+            Active
+            <label ng-disabled="ctrl.isReadOnly" class="switch" style="height:22px;"><input ng-disabled="ctrl.isReadOnly" type="checkbox" checked /> <span ng-disabled="ctrl.isReadOnly" class="slider m-0"></span> </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-container m-t-2">
+      <div class="gf-form-inline">
+        <div class="gf-form form-control-container">
+          <input ng-if="ctrl.activeTabIndex === 0" type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.onClickCreateLectures()"
+            value="Create Lectures"></input>
+        </div>
+        <div class="gf-form form-control-container">
+          <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.next()" value="Next" ng-if="ctrl.sectionId && ctrl.activeTabIndex === 0"
+          />
+        </div>
+        <div class="gf-form form-control-container">
+          <input type="button" class="btn btn-primary gf-form-control" value="Save" ng-click="ctrl.saveLectures()" ng-if="ctrl.activeTabIndex === 1" ng-disabled="ctrl.isRequestMade"/>
+        </div>
+        <div class="gf-form form-control-container">
+          <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.back()" value="Back" ng-if="ctrl.activeTabIndex === 1"
+          />
+        </div>
+      </div>
     </div>
     <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
       <table id="tttemplt" class="fwidth">
@@ -319,7 +292,7 @@
         <th>Edit</th>
       </thead>
       <tbody>
-        <tr ng-repeat="lec in ctrl.lecturesCreated track by $index">
+        <!-- <tr ng-repeat="lec in ctrl.lecturesCreated track by $index">
           <td>{{$index + 1}}</td>
           <td>{{lec.statusDesc}}</td>
           <td>{{lec.numberOfPeriods}}</td>
@@ -329,18 +302,18 @@
           <td>
             <input type="button" class="btn btn-primary" value="Edit">
           </td>
+        </tr> -->
+        <tr>
+          <td>1</td>
+          <td>ffdsfas</td>
+          <td></td>
+          <td>
+            <input type="button" ng-click="ctrl.onViewLectures()" class="btn btn-primary" value="View">
+          </td>
+          <td>
+            <input type="button" class="btn btn-primary" value="Edit">
+          </td>
         </tr>
-        <!-- <tr>
-            <td>1</td>
-            <td>ffdsfas</td>
-            <td></td>
-            <td>
-              <input type="button" ng-click="ctrl.onViewLectures()" class="btn btn-primary" value="View">
-            </td>
-            <td>
-              <input type="button" class="btn btn-primary" value="Edit">
-            </td>
-          </tr> -->
       </tbody>
     </table>
   </div>
