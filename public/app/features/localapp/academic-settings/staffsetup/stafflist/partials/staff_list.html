@@ -14,34 +14,34 @@
   <div class="staff-management">
     <div>
       <label htmlFor="">Department</label>
-      <select class="gf-form-input" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeDepartment()">
+      <select class="gf-form-input" ng-model="ctrl.departmentId" ng-change="ctrl.onChangeFilter()">
         <option value="">Select Department</option>
         <option ng-repeat="department in ctrl.departments" value="{{department.id}}">{{department.name}}</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Year</label>
-      <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()">
+      <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeFilter()">
         <option value="">Select Year</option>
         <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">{{bth.batch}}</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Gender</label>
-      <select class="gf-form-input">
+      <select class="gf-form-input" ng-model="ctrl.sex" ng-change="ctrl.onChangeFilter()">
         <option value="">Select Gender</option>
-        <option value="">MALE</option>
-        <option value="">FEMALE</option>
-        <option value="">OTHER</option>
+        <option value="MALE">MALE</option>
+        <option value="FEMALE">FEMALE</option>
+        <option value="OTHER">OTHER</option>
       </select>
     </div>
     <div>
       <label htmlFor="">Staff Type</label>
-      <select class="gf-form-input">
+      <select class="gf-form-input" ng-model="ctrl.staffType" ng-change="ctrl.onChangeFilter()">
         <option value="">Select Staff Type</option>
-        <option value="">TEACHING</option>
-        <option value="">NONTEACHING</option>
-        <option value="">GUEST</option>
+        <option value="TEACHING">TEACHING</option>
+        <option value="NONTEACHING">NONTEACHING</option>
+        <option value="GUEST">GUEST</option>
       </select>
     </div>
     <div class="margin-bott">
@@ -72,7 +72,7 @@
         <pagination page="currentPage" max-size="noOfPages" total-teachers="totalTeachers"
           teachers-per-page="entryLimit"></pagination>
       </div> -->
-      <tr ng-repeat="teacher in ctrl.teachers | filter:search:strict | orderBy:'teacherName'">
+      <tr ng-repeat="teacher in ctrl.filteredTeachers | filter:search:strict | orderBy:'teacherName'">
         <td>
           <!-- <input onClick={(e)=> this.onClickCheckbox(i, e)} checked={student.isChecked} type="checkbox" name=""
           id={"chk"+student.id}/> -->
