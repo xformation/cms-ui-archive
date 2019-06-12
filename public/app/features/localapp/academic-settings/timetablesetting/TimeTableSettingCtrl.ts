@@ -46,6 +46,7 @@ export class TimeTableSettingCtrl {
   academicYearId: any;
   lecturesCreated: any;
   isReadOnly: any;
+  isViewOnly: any;
   isRequestMade: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
@@ -62,6 +63,7 @@ export class TimeTableSettingCtrl {
     this.getColleges();
     this.getSemester();
     this.isReadOnly = false;
+    this.isViewOnly = false;
     $scope.choices = [];
     $scope.idx = {};
     this.totalLectures = [];
@@ -75,7 +77,7 @@ export class TimeTableSettingCtrl {
   }
 
   changeCounter(opt) {
-    if (this.activeTabIndex === 0) {
+    if (!(this.isReadOnly || this.isViewOnly)) {
       this.counter += opt;
       if (this.counter < 0) {
         this.counter = 0;
@@ -309,42 +311,16 @@ export class TimeTableSettingCtrl {
     //this.subjects = {};
   }
 
-  onChangeSubject(weekDay) {
-    const selThrs = [];
-    // let cnt = 0;
-
+  onChangeSubject(weekDay, index) {
+    const subjectId = this.lectureTimings[index].subjects[weekDay];
+    this.$scope.subjectWiseTeachers = this.$scope.subjectWiseTeachers || {};
+    this.$scope.subjectWiseTeachers[weekDay] = this.$scope.subjectWiseTeachers[weekDay] || {};
+    this.$scope.subjectWiseTeachers[weekDay][index] = [];
     for (const i in this.attendanceMasters) {
       const s = this.attendanceMasters[i].teach.subject;
-
-      for (let x = 0; x < this.lectureTimings.length; x++) {
-        const timings = this.lectureTimings[x];
-        // if (this.lectureTimings[cnt] != null) {
-        const selSub = timings.subjects;
-        for (const j in selSub) {
-          if (j === weekDay) {
-            if (s.id === parseInt(selSub[j], 10)) {
-              selThrs.push(this.attendanceMasters[i].teach.teacher);
-            }
-          }
-        }
-        // }
+      if (s.id === parseInt(subjectId, 10)) {
+        this.$scope.subjectWiseTeachers[weekDay][index].push(this.attendanceMasters[i].teach.teacher);
       }
-
-      // cnt++;
-    }
-    // this.teachers = selThrs;
-    if (weekDay === 'MONDAY') {
-      this.$scope.theacherMonday = selThrs;
-    } else if (weekDay === 'TUESDAY') {
-      this.$scope.theacherTuesday = selThrs;
-    } else if (weekDay === 'WEDNESDAY') {
-      this.$scope.theacherWednesday = selThrs;
-    } else if (weekDay === 'THURSDAY') {
-      this.$scope.theacherThursday = selThrs;
-    } else if (weekDay === 'FRIDAY') {
-      this.$scope.theacherFriday = selThrs;
-    } else if (weekDay === 'SATURDAY') {
-      this.$scope.theacherSaturday = selThrs;
     }
   }
 
@@ -353,6 +329,7 @@ export class TimeTableSettingCtrl {
     // this.getLecturesData(lectures, index);
     this.getLecturesData();
     this.activateTab(0);
+    this.isViewOnly = true;
   }
 
   getLecturesData() {
