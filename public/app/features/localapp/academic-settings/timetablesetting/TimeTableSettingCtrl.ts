@@ -325,30 +325,35 @@ export class TimeTableSettingCtrl {
   }
 
   onViewLectures(index) {
-    // const lectures = this.lecturesCreated;
-    // this.getLecturesData(lectures, index);
-    this.getLecturesData();
+    const lectures = this.lecturesCreated;
+    this.getLecturesData(lectures, index);
     this.activateTab(0);
     this.isViewOnly = true;
   }
 
-  getLecturesData() {
-    // this.backendSrv
-    //   .get(
-    //   this.RestUrl.getSelectedLectures() +
-    //   `?branchId=${lecture[i].branchId}` +
-    //   `&departmentId=${lecture[i].departmentId}&termId=${lecture[i].termId}` +
-    //   `&academicYear=${lecture[i].academicYear}&sectionId=${lecture[i].sectionId}` +
-    //   `&batchId=${lecture[i].batchId}`
-    //   )
-    //   .then(result => {
-    //     this.setDetailsOfLecture(result);
-    //   });
+  onEditLectures(index) {
+    const lectures = this.lecturesCreated;
+    this.getLecturesData(lectures, index);
+    this.activateTab(0);
+  }
 
-    this.backendSrv.get("http://18.234.66.133:8080/api/cmsmeta-lecture-selected?branchId=67101&" +
-      "departmentId=67151&termId=1751&academicYear=1701&sectionId=67251&batchId=67201").then(result => {
+  getLecturesData(lectures, i) {
+    this.backendSrv
+      .get(
+      this.RestUrl.getSelectedLectures() +
+      `?branchId=${lectures[i].branchId}` +
+      `&departmentId=${lectures[i].departmentId}&termId=${lectures[i].termId}` +
+      `&academicYear=${lectures[i].academicYear}&sectionId=${lectures[i].sectionId}` +
+      `&batchId=${lectures[i].batchId}`
+      )
+      .then(result => {
         this.setDetailsOfLecture(result);
       });
+
+    // this.backendSrv.get("http://18.234.66.133:8080/api/cmsmeta-lecture-selected?branchId=1851&" +
+    //   "departmentId=1901&termId=1751&academicYear=1701&sectionId=2001&batchId=1951").then(result => {
+    //     this.setDetailsOfLecture(result);
+    //   });
   }
 
   setDetailsOfLecture(data) {
@@ -391,10 +396,13 @@ export class TimeTableSettingCtrl {
     for (let i = 0; i < keys.length; i++) {
       this.lectureTimings.push(lectureTimings[keys[i]]);
     }
+    this.counter = this.lectureTimings.length;
     this.getAttendanceMasterByBatchAndSection(() => {
       const weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
       for (let i = 0; i < weekDays.length; i++) {
-        this.onChangeSubject(weekDays[i]);
+        for (let j = 0; j < this.counter; j++) {
+          this.onChangeSubject(weekDays[i], j);
+        }
       }
     });
     this.onClickCreateLectures();

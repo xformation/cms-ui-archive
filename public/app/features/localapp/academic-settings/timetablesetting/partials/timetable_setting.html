@@ -92,7 +92,7 @@
           />
         </div>
         <div class="gf-form form-control-container">
-          <input type="button" class="btn btn-primary gf-form-control" value="Save" ng-click="ctrl.saveLectures()" ng-if="ctrl.activeTabIndex === 1" ng-disabled="ctrl.isRequestMade" ng-disabled="ctrl.isViewOnly"/>
+          <input type="button" class="btn btn-primary gf-form-control" value="Save" ng-click="ctrl.saveLectures()" ng-if="ctrl.activeTabIndex === 1" ng-disabled="ctrl.isRequestMade || ctrl.isViewOnly"/>
         </div>
         <div class="gf-form form-control-container">
           <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.back()" value="Back" ng-if="ctrl.activeTabIndex === 1"
@@ -152,14 +152,14 @@
                   <div>
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['MONDAY']" ng-change="ctrl.onChangeSubject('MONDAY', $index)" ng-disabled="ctrl.isViewOnly">
                             <option value="">Select Subject</option>
-                            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}" ng-selected="ctrl.lectureTimings[$index].subjects['MONDAY'] == sub.id">{{sub.subjectCode}}</option>
+                            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
                         </select>
                   </div>
                   <div>
                     <span class="ttd">Teacher</span>
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].teachers['MONDAY']" ng-disabled="ctrl.isViewOnly">
                             <option value="">Select Teacher</option>
-                            <option ng-repeat="tch in subjectWiseTeachers['MONDAY'][$index]" value="{{tch.id}}" ng-selected="ctrl.lectureTimings[$index].teachers['MONDAY'] == tch.id">{{tch.teacherName}}</option>
+                            <option ng-repeat="tch in subjectWiseTeachers['MONDAY'][$index]" value="{{tch.id}}">{{tch.teacherName}}</option>
                         </select>
                   </div>
                 </div>
@@ -292,7 +292,7 @@
         <th>Edit</th>
       </thead>
       <tbody>
-        <!-- <tr ng-repeat="lec in ctrl.lecturesCreated track by $index">
+        <tr ng-repeat="lec in ctrl.lecturesCreated track by $index">
           <td>{{$index + 1}}</td>
           <td>{{lec.statusDesc}}</td>
           <td>{{lec.numberOfPeriods}}</td>
@@ -300,10 +300,10 @@
             <input type="button" ng-click="ctrl.onViewLectures($index)" class="btn btn-primary" value="View">
           </td>
           <td>
-            <input type="button" class="btn btn-primary" value="Edit">
+            <input type="button" class="btn btn-primary" ng-click="ctrl.onEditLectures($index)" value="Edit">
           </td>
-        </tr> -->
-        <tr>
+        </tr>
+        <!-- <tr>
           <td>1</td>
           <td>ffdsfas</td>
           <td></td>
@@ -311,9 +311,9 @@
             <input type="button" ng-click="ctrl.onViewLectures()" class="btn btn-primary" value="View">
           </td>
           <td>
-            <input type="button" class="btn btn-primary" value="Edit">
+            <input type="button" class="btn btn-primary" ng-click="ctrl.onEditLectures()" value="Edit">
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
