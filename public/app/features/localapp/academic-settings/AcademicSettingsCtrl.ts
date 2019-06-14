@@ -1,8 +1,12 @@
+import { appEvents } from 'app/core/core';
+
 export class AcademicSettingsCtrl {
   sections: any[];
   activeTabId: string;
+  options: any;
   constructor() {
     this.activeTabId = 'year_setting';
+    this.options = {};
     this.buildSectionList();
   }
 
@@ -36,5 +40,6 @@ export class AcademicSettingsCtrl {
 
   setActiveTab(id) {
     this.activeTabId = id;
+    appEvents.emit("change_academic_settings_tab", {});
   }
 }

@@ -13,6 +13,7 @@ export class StaffSetupCtrl {
     this.activeBtnIndex = 0;
     this.activeTabStaffId = 'staff_list';
     appEvents.on('change_staff_list', this.activeTabStaffList.bind(this), $scope);
+    appEvents.on('change_academic_settings_tab', this.activeTabStaffList.bind(this), $scope);
   }
 
   activeTabStaffCreate() {
