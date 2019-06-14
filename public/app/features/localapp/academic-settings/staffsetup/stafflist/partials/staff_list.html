@@ -55,7 +55,7 @@
       <th>
         <!-- <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
           ng-change="ctrl.onClickCheckbox()" /> -->
-        <input type="checkbox" style="width:18px; height: 18px;" ng-model="selectedAll" ng-click="ctrl.selectAll()" />
+        <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.isCheckAll" ng-change="ctrl.checkAllTeachers()" />
       </th>
       <th>Name</th>
       <th>Emp Id</th>
@@ -76,7 +76,7 @@
         <td>
           <!-- <input onClick={(e)=> this.onClickCheckbox(i, e)} checked={student.isChecked} type="checkbox" name=""
           id={"chk"+student.id}/> -->
-          <input type="checkbox" style="width:18px; height: 18px;" />
+          <input type="checkbox" style="width:18px; height: 18px;" ng-model="teacher.isChecked" ng-change="ctrl.onTeacherCheckedChange($index)" />
         </td>
         <td ng-search="filter:search">
           {{ teacher.teacherName + ' ' + teacher.teacherLastName }}

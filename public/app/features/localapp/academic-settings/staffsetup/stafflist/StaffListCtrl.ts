@@ -11,10 +11,12 @@ export class StaffListCtrl {
   staffType: any;
   RestUrl: any;
   filteredTeachers: any;
+  isCheckAll: any;
 
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
+    this.isCheckAll = false;
     this.filteredTeachers = [];
     this.getTeachers();
     this.getDepartments();
@@ -76,6 +78,22 @@ export class StaffListCtrl {
       }
       if (filterNumber > 0) {
         this.filteredTeachers.push(teacher);
+      }
+    }
+  }
+
+  checkAllTeachers() {
+    const length = this.filteredTeachers.length;
+    for (let i = 0; i < length; i++) {
+      const teacher = this.filteredTeachers[i];
+      teacher.isChecked = this.isCheckAll;
+    }
+  }
+
+  onTeacherCheckedChange(index) {
+    if (this.filteredTeachers[index]) {
+      if (!this.filteredTeachers[index].isCheckAll) {
+        this.isCheckAll = false;
       }
     }
   }
