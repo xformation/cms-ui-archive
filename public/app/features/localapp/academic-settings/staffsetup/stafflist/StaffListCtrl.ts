@@ -18,7 +18,14 @@ export class StaffListCtrl {
     this.filteredTeachers = [];
     this.getTeachers();
     this.getDepartments();
+    this.getBatches();
     appEvents.on('get_departments', this.getDepartments.bind(this), $scope);
+  }
+
+  getBatches() {
+    this.backendSrv.get(this.RestUrl.getBatchRestUrl()).then(result => {
+      this.batches = result;
+    });
   }
 
   getDepartments() {
@@ -47,7 +54,7 @@ export class StaffListCtrl {
         }
       }
       if (this.batchId) {
-        if (teacher.batch.id === parseInt(this.batchId, 10)) {
+        if (teacher.department.academicyear.id === parseInt(this.batchId, 10)) {
           filterNumber++;
         } else {
           continue;
