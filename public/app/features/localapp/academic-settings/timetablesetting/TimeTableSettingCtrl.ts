@@ -208,11 +208,11 @@ export class TimeTableSettingCtrl {
         break;
       }
       const nextTime = timings[i + 1];
-      if (nextTime && nextTime.startTime && time.endTime && nextTime.startTime.getTime() < time.endTime.getTime()) {
-        isValid = false;
-        this.timeTableValidationMessage = 'Please enter valid start time of upcoming lecture.';
-        break;
-      }
+      // if (nextTime && nextTime.startTime && time.endTime && nextTime.startTime.getTime() < time.endTime.getTime()) {
+      //   isValid = false;
+      //   this.timeTableValidationMessage = 'Please enter valid start time of upcoming lecture.';
+      //   break;
+      // }
       if (time.isBreak) {
         if (nextTime) {
           if (
@@ -324,6 +324,13 @@ export class TimeTableSettingCtrl {
     }
   }
 
+  resetDataOnEditLectures() {
+    this.lectureTimings = [];
+    this.totalLectures = [];
+    this.counter = 0;
+    this.isReadOnly = false;
+  }
+
   onViewLectures(index) {
     const lectures = this.lecturesCreated;
     this.getLecturesData(lectures, index);
@@ -335,6 +342,7 @@ export class TimeTableSettingCtrl {
     const lectures = this.lecturesCreated;
     this.getLecturesData(lectures, index);
     this.activateTab(0);
+    this.isViewOnly = false;
   }
 
   getLecturesData(lectures, i) {
@@ -347,6 +355,7 @@ export class TimeTableSettingCtrl {
       `&batchId=${lectures[i].batchId}`
       )
       .then(result => {
+        this.resetDataOnEditLectures();
         this.setDetailsOfLecture(result);
       });
 
@@ -357,7 +366,6 @@ export class TimeTableSettingCtrl {
   }
 
   setDetailsOfLecture(data) {
-    this.counter = data.length;
     const lecture = data[0];
     this.collegeId = lecture.branch.college.id;
     this.onChangeCollege();
@@ -420,5 +428,16 @@ export class TimeTableSettingCtrl {
       hours = parseInt(hours, 10) + 12;
     }
     return [hours, minutes];
+  }
+
+  onClickAddTimeTable() {
+    this.resetDataOnEditLectures();
+    this.activeTabIndex = 0;
+    this.collegeId = "";
+    this.branchId = "";
+    this.termId = "";
+    this.departmentId = "";
+    this.batchId = "";
+    this.sectionId = "";
   }
 }
