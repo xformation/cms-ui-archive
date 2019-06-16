@@ -18,6 +18,7 @@ class LectureSchedule {
 
 export class TimeTableSettingCtrl {
   activeTabIndex = 0;
+  showLectureReport = 0;
   $scope: any;
   RestUrl: any;
   departments: any;
@@ -48,6 +49,7 @@ export class TimeTableSettingCtrl {
   isReadOnly: any;
   isViewOnly: any;
   isRequestMade: any;
+  lectureReport: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
     this.lecturesCreated = [];
@@ -57,6 +59,7 @@ export class TimeTableSettingCtrl {
     this.RestUrl = new GlobalRestUrlConstants();
     this.counter = 0;
     this.activeTabIndex = 0;
+    this.showLectureReport = 0;
     this.$scope = $scope;
     this.lectureTimings = [];
     this.timeTableValidationMessage = '';
@@ -92,6 +95,12 @@ export class TimeTableSettingCtrl {
         this.totalLectures.push({ i });
       }
     }
+    const elm = document.getElementById('createLectureDiv');
+    elm.className = 'info-container';
+
+    const lcRptDv = document.getElementById('createLectureReportDiv');
+    lcRptDv.className = 'hide';
+    this.showLectureReport = 1;
   }
 
   getSemester() {
@@ -156,8 +165,7 @@ export class TimeTableSettingCtrl {
     });
   }
 
-  onChangeSection() {
-  }
+  onChangeSection() {}
 
   onChangeTerm() {
     if (!this.termId) {
@@ -184,6 +192,9 @@ export class TimeTableSettingCtrl {
       // this.getTeachers();
       this.getAttendanceMasterByBatchAndSection(null);
       this.activateTab(1);
+      this.showLectureReport = 1;
+      const lcRptDv = document.getElementById('createLectureReportDiv');
+      lcRptDv.className = 'hide';
     }
   }
 
@@ -250,23 +261,31 @@ export class TimeTableSettingCtrl {
     this.isRequestMade = true;
     this.backendSrv
       .post(
-      `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}` +
-      `&sectionId=${this.sectionId}&batchId=${this.batchId}&branchId=${this.branchId}` +
-      `&departmentId=${this.departmentId}`,
-      JSON.stringify(payLoad)
+        `${this.RestUrl.getCmsLecturesUrl()}termId=${this.termId}&academicYearId=${this.academicYearId}` +
+          `&sectionId=${this.sectionId}&batchId=${this.batchId}&branchId=${this.branchId}` +
+          `&departmentId=${this.departmentId}`,
+        JSON.stringify(payLoad)
       )
-      .then(result => {
-        this.lecturesCreated = result;
-        this.isRequestMade = false;
-        this.activateTab(2);
-      }, error => {
-        this.isRequestMade = false;
-      });
+      .then(
+        result => {
+          this.lecturesCreated = result;
+          this.isRequestMade = false;
+          this.activateTab(2);
+        },
+        error => {
+          this.isRequestMade = false;
+        }
+      );
   }
 
   back() {
     this.isReadOnly = false;
     this.activateTab(0);
+    this.showLectureReport = 1;
+    // const elm = document.getElementById('createLectureDiv');
+    // elm.className = "info-container";
+    const lcRptDv = document.getElementById('createLectureReportDiv');
+    lcRptDv.className = 'hide';
   }
 
   // getSubjects() {
@@ -288,11 +307,11 @@ export class TimeTableSettingCtrl {
   getAttendanceMasterByBatchAndSection(cb) {
     this.backendSrv
       .get(
-      this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
-      '?batchId=' +
-      this.batchId +
-      '&sectionId=' +
-      this.sectionId
+        this.RestUrl.getAttendanceMasterByBatchAndSectioinUrl() +
+          '?batchId=' +
+          this.batchId +
+          '&sectionId=' +
+          this.sectionId
       )
       .then(result => {
         this.attendanceMasters = result;
@@ -348,11 +367,11 @@ export class TimeTableSettingCtrl {
   getLecturesData(lectures, i) {
     this.backendSrv
       .get(
-      this.RestUrl.getSelectedLectures() +
-      `?branchId=${lectures[i].branchId}` +
-      `&departmentId=${lectures[i].departmentId}&termId=${lectures[i].termId}` +
-      `&academicYear=${lectures[i].academicYear}&sectionId=${lectures[i].sectionId}` +
-      `&batchId=${lectures[i].batchId}`
+        this.RestUrl.getSelectedLectures() +
+          `?branchId=${lectures[i].branchId}` +
+          `&departmentId=${lectures[i].departmentId}&termId=${lectures[i].termId}` +
+          `&academicYear=${lectures[i].academicYear}&sectionId=${lectures[i].sectionId}` +
+          `&batchId=${lectures[i].batchId}`
       )
       .then(result => {
         this.resetDataOnEditLectures();
@@ -433,11 +452,42 @@ export class TimeTableSettingCtrl {
   onClickAddTimeTable() {
     this.resetDataOnEditLectures();
     this.activeTabIndex = 0;
-    this.collegeId = "";
-    this.branchId = "";
-    this.termId = "";
-    this.departmentId = "";
-    this.batchId = "";
-    this.sectionId = "";
+    this.collegeId = '';
+    this.branchId = '';
+    this.termId = '';
+    this.departmentId = '';
+    this.batchId = '';
+    this.sectionId = '';
+    this.showLectureReport = 1;
+  }
+
+  viewAllLectures() {
+    if (!this.branchId) {
+      alert('Please select a branch');
+      return;
+    } else if (!this.termId) {
+      alert('Please select a term');
+      return;
+    }
+    let url = `?branchId=${this.branchId}&termId=${this.termId}&academicYearId=${this.academicYearId}`;
+    if (this.departmentId) {
+      url = url + `&departmentId=${this.departmentId}`;
+    }
+    if (this.batchId) {
+      url = url + `&batchId=${this.batchId}`;
+    }
+    if (this.sectionId) {
+      url = url + `&sectionId=${this.sectionId}`;
+    }
+    this.backendSrv.get(this.RestUrl.getAllLecturesReport() + url).then(result => {
+      this.lectureReport = result;
+      console.log('Lecture report : ', result);
+    });
+
+    const elm = document.getElementById('createLectureDiv');
+    elm.className = 'hide';
+    const lcRptDv = document.getElementById('createLectureReportDiv');
+    lcRptDv.className = 'info-container';
+    this.showLectureReport = 0;
   }
 }

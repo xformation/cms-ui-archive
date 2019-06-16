@@ -88,6 +88,10 @@
             value="Create Lectures" ng-disabled="ctrl.isViewOnly"></input>
         </div>
         <div class="gf-form form-control-container">
+          <input ng-if="ctrl.activeTabIndex === 0" type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.viewAllLectures()"
+            value="View All Lectures" ng-disabled="ctrl.isViewOnly"></input>
+        </div>
+        <div class="gf-form form-control-container">
           <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.next()" value="Next" ng-if="ctrl.sectionId && ctrl.activeTabIndex === 0"
           />
         </div>
@@ -100,7 +104,7 @@
         </div>
       </div>
     </div>
-    <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
+    <div class="hide" id="createLectureDiv" ng-class="{'hide':ctrl.activeTabIndex !== 0}">
       <table id="tttemplt" class="fwidth">
         <thead>
           <th>Sr. No</th>
@@ -123,6 +127,35 @@
       </table>
       <div ng-if="!ctrl.isValid">{{ctrl.timeTableValidationMessage}}</div>
     </div>
+
+    <div class="hide" id="createLectureReportDiv" ng-class="{'hide':ctrl.showLectureReport !== 0}">
+      <table id="tttemplt" class="fwidth">
+        <thead>
+          <th>Sr. No</th>
+          <th>Department</th>
+          <th>Teacher</th>
+          <th>Subject</th>
+          <th>Year</th>
+          <th>Section</th>
+          <th>Total Lectures</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="lecRep in ctrl.lectureReport track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{lecRep.departmentName}}</td>
+            <td>{{lecRep.teacherName}}</td>
+            <td>{{lecRep.subjectDesc}}</td>
+            <td>{{lecRep.year}}</td>
+            <td>{{lecRep.section}}</td>
+            <td>{{lecRep.totalLectures}}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+
+
+
     <div class="info-container" ng-class="{'hide':ctrl.activeTabIndex !== 1}">
       <div class="page-container page-body legal-entities-main-container plr">
         <table id="tmtd" class="fwidth">

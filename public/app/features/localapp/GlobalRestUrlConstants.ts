@@ -110,4 +110,8 @@ export class GlobalRestUrlConstants {
   getSelectedLectures() {
     return this.getBaseRestUrl() + '/cmsmeta-lecture-selected';
   }
+
+  getAllLecturesReport() {
+    return this.getBaseRestUrl() + '/cmsmeta-lecture-viewalllectures';
+  }
 }
