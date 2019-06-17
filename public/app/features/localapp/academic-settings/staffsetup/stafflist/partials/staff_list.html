@@ -20,11 +20,11 @@
       </select>
     </div>
     <div>
-      <label htmlFor="">Year</label>
+      <!-- <label htmlFor="">Year</label>
       <select class="gf-form-input" ng-model="ctrl.batchId" ng-change="ctrl.onChangeFilter()">
         <option value="">Select Year</option>
         <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">{{bth.batch}}</option>
-      </select>
+      </select> -->
     </div>
     <div>
       <label htmlFor="">Gender</label>
@@ -55,7 +55,8 @@
       <th>
         <!-- <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.checked"
           ng-change="ctrl.onClickCheckbox()" /> -->
-        <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.isCheckAll" ng-change="ctrl.checkAllTeachers()" />
+        <input type="checkbox" style="width:18px; height: 18px;" ng-model="ctrl.isCheckAll"
+          ng-change="ctrl.checkAllTeachers()" />
       </th>
       <th>Name</th>
       <th>Emp Id</th>
@@ -76,7 +77,8 @@
         <td>
           <!-- <input onClick={(e)=> this.onClickCheckbox(i, e)} checked={student.isChecked} type="checkbox" name=""
           id={"chk"+student.id}/> -->
-          <input type="checkbox" style="width:18px; height: 18px;" ng-model="teacher.isChecked" ng-change="ctrl.onTeacherCheckedChange($index)" />
+          <input type="checkbox" style="width:18px; height: 18px;" ng-model="teacher.isChecked"
+            ng-change="ctrl.onTeacherCheckedChange($index)" />
         </td>
         <td ng-search="filter:search">
           {{ teacher.teacherName + ' ' + teacher.teacherLastName }}
