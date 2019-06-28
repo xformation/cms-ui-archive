@@ -20,10 +20,10 @@ export class CollegeSettingsCtrl {
       title: 'LEGAL ENTITIES',
       id: 'legal_entities',
     });
-    // this.sections.push({
-    //   title: 'LOCATIONS',
-    //   id: 'locations',
-    // });
+    this.sections.push({
+      title: 'FILE IMPORT',
+      id: 'import',
+    });
     // this.sections.push({
     //   title: 'DEPARTMENTS',
     //   id: 'department_settings',

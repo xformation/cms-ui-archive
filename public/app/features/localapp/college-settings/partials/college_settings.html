@@ -14,7 +14,9 @@
     <div ng-class="{'hide':ctrl.activeTabId !== 'legal_entities'}" class="p-b-2">
       <legal-entities></legal-entities>
     </div>
-    <!-- <div ng-class="{'hide':ctrl.activeTabId !== 'locations'}"><locations></locations></div> -->
+    <div ng-class="{'hide':ctrl.activeTabId !== 'import'}">
+      <import></import>
+    </div>
     <div ng-class="{'hide':ctrl.activeTabId !== 'college_branches'}">
       <college></college>
     </div>
