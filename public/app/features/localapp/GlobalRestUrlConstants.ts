@@ -114,4 +114,8 @@ export class GlobalRestUrlConstants {
   getAllLecturesReport() {
     return this.getBaseRestUrl() + '/cmsmeta-lecture-viewalllectures';
   }
+
+  getUploadCmsDataUrl() {
+    return this.getBaseRestUrl() + '/cmsdataimport';
+  }
 }

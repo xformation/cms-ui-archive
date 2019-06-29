@@ -1,14 +1,29 @@
 <div class="page-container page-body legal-entities-main-container">
   <div class="authorized-signatory-container m-b-1">
-    <h3>File Import</h3>
-    <small>
-      Text Box area.
-    </small>
+    <h3>Import existing data into CMS.</h3>
+    <!-- <div class="gf-form m-b-1">
+      <label class="upload-cursor">
+        <input id="d-none" type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input"
+          accept="image/*" />
+        Upload  <i class="fa fa-info-circle l-grey" aria-hidden="true"></i>
+      </label>
+    </div>
     <div class="m-t-1">
       <button ng-click=""><i class="fa fa-plus-circle " aria-hidden="true"></i> Import file</button>
-    </div>
+    </div> -->
   </div>
-  <button type="submit" ng-click="" class="btn btn-success border-bottom">Submit</button>
+
+  <div class="gf-form m-b-1">
+    <label class="upload-cursor">
+      <input type="file" file-model="file" file-select="ctrl.getFile($event)" />
+      <!-- <input id="d-none" type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input"
+        accept="image/*" /> -->
+        <div class="m-t-1">
+          <button ng-click="uploadFile()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Upload</button>
+        </div>
+    </label>
+  </div>
+  <!-- <button type="submit" ng-click="" class="btn btn-success border-bottom">Submit</button> -->
 
 
   <!-- <i class="fa fa-phone orange"></i> -->
