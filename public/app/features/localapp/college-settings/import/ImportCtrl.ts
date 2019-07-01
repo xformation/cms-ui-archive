@@ -11,7 +11,7 @@ export class ImportCtrl {
   exlFile: any;
 
   /** @ngInject */
-  constructor($scope, private backendSrv) {
+  constructor($scope, private backendSrv, private $http) {
     this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.query = '';
@@ -21,22 +21,15 @@ export class ImportCtrl {
     $scope.getFile = this.getFile.bind(this);
 
     $scope.uploadFile = () => {
-      // const file = $scope.file;
       const data = new FormData();
       data.append('file', $scope.file, $scope.file.name);
-      const config = {
+      this.$http.post(this.RestUrl.getUploadCmsDataUrl() + '/college', data, {
         transformRequest: angular.identity,
-        // transformResponse: angular.identity,
-        headers: {
-          'Content-Type': undefined,
-        },
-      };
-      this.backendSrv.post(this.RestUrl.getUploadCmsDataUrl() + '/college', data, config).then(result => {
-        if (result === 200 || result === 201) {
-          alert('Cms data data uploaded successfully.');
-        } else {
-          alert('Due to some error cms data could not be uploaded.');
-        }
+        headers: { 'Content-Type': undefined }
+      }).then(response => {
+        alert("success");
+      }, error => {
+        alert("failure");
       });
     };
   }
