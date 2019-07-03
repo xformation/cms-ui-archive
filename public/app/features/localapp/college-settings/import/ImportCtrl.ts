@@ -35,22 +35,28 @@ export class ImportCtrl {
         alert('Please upload an excel file.');
         return;
       }
-      const data = new FormData();
-      data.append('file', $scope.file, $scope.file.name);
-      this.$http
-        .post(this.RestUrl.getUploadCmsDataUrl() + '/' + this.entityId, data, {
-          transformRequest: angular.identity,
-          headers: { 'Content-Type': undefined },
-        })
-        .then(
-          response => {
-            alert('Data import successful.');
-          },
-          error => {
-            alert('Data import failed due to some error.');
-          }
-        );
+      this.postData();
     };
+  }
+
+  async postData() {
+    const data = new FormData();
+    data.append('file', this.$scope.file, this.$scope.file.name);
+
+    const resp = await this.$http.post(this.RestUrl.getUploadCmsDataUrl() + '/' + this.entityId, data, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined },
+    });
+    console.log('Post response : ', resp);
+    alert(resp.data.statusDesc);
+    // .then(
+    //   response => {
+    //     alert('Data import successful.');
+    //   },
+    //   error => {
+    //     alert('Data import failed due to some error.');
+    //   }
+    // );
   }
 
   getFile(file) {
