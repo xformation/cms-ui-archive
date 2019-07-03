@@ -14,14 +14,25 @@
   </div>
 
   <div class="gf-form m-b-1">
-    <label class="upload-cursor">
-      <input type="file" file-model="file" file-select="ctrl.getFile($event)" />
-      <!-- <input id="d-none" type="file" bgfile-select="ctrl.getbgFile(file)" class="gf-form-file-input"
-        accept="image/*" /> -->
-        <div class="m-t-1">
-          <button ng-click="uploadFile()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Upload</button>
-        </div>
-    </label>
+    <div>
+          <div>
+              <label class="upload-cursor">
+                  <input type="file" file-model="file" file-select="ctrl.getFile($event)" />
+                    <div class="m-t-1">
+                      <button ng-click="uploadFile()"><i class="fa fa-plus-circle " aria-hidden="true"></i> Upload</button>
+                    </div>
+                </label>
+          </div>
+          <div class="form-h5"> 
+              <label class="form-h5">Entity</label>
+              <select required ng-model="ctrl.entityId"  required>
+                <option value="">Select Entity</option>
+                <option ng-repeat="entity in ctrl.entities" value="{{entity}}">{{entity}}</option>
+              </select>
+          </div>
+          
+    </div>
+    
   </div>
   <!-- <button type="submit" ng-click="" class="btn btn-success border-bottom">Submit</button> -->
 

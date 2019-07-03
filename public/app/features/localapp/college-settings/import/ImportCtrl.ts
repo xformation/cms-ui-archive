@@ -9,9 +9,11 @@ export class ImportCtrl {
   $scope: any;
   RestUrl: any;
   exlFile: any;
-
+  clgObject: any;
+  entityId: any;
+  entities: any;
   /** @ngInject */
-  constructor($scope, private backendSrv, private $http) {
+  constructor($scope, private $http, private backendSrv) {
     this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.query = '';
@@ -19,18 +21,35 @@ export class ImportCtrl {
     $scope.file = '';
     this.exlFile = {};
     $scope.getFile = this.getFile.bind(this);
+    this.clgObject = {};
+    this.entities = {};
+    this.entityId = '';
+    this.getEntities();
 
     $scope.uploadFile = () => {
+      if (this.entityId === '') {
+        alert('Please select an entity from entity dropdown.');
+        return;
+      }
+      if ($scope.file.name === undefined || $scope.file.name === '' || $scope.file.name === null) {
+        alert('Please upload an excel file.');
+        return;
+      }
       const data = new FormData();
       data.append('file', $scope.file, $scope.file.name);
-      this.$http.post(this.RestUrl.getUploadCmsDataUrl() + '/college', data, {
-        transformRequest: angular.identity,
-        headers: { 'Content-Type': undefined }
-      }).then(response => {
-        alert("success");
-      }, error => {
-        alert("failure");
-      });
+      this.$http
+        .post(this.RestUrl.getUploadCmsDataUrl() + '/' + this.entityId, data, {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined },
+        })
+        .then(
+          response => {
+            alert('Data import successful.');
+          },
+          error => {
+            alert('Data import failed due to some error.');
+          }
+        );
     };
   }
 
@@ -48,5 +67,11 @@ export class ImportCtrl {
 
   navigateToPage(page) {
     // this.getLocations();
+  }
+  getEntities() {
+    this.backendSrv.get(this.RestUrl.getUploadCmsDataUrl()).then(result => {
+      this.entities = result;
+      console.log('table names: ', result);
+    });
   }
 }
