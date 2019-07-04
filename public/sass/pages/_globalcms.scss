@@ -1,3 +1,61 @@
+.imclod{
+  font-size: 20px;
+  margin-right: 10px;
+}
+.uploadbtn span{
+  font-size: 16px;
+}
+.rtMargin{
+  margin-right: 4rem;
+}
+.importDflex{
+display: flex;
+justify-content: flex-start;
+align-items: flex-end;
+}
+.button-file-upload {
+  display: block;
+  overflow: hidden;
+  border: 1px solid #3697EF;
+  width: 30rem;
+  border-radius: 3px;
+}
+.button-file-upload::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.button-file-upload input[type="file"] {
+  left: -1000px;
+  position: fixed;
+}
+.button-file-upload .fake-upload-button {
+  float: left;
+  margin-right: 12px;
+  background-color: #3697EF;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 3;
+  overflow: hidden;
+  padding: 0 30px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+}
+.button-file-upload .button-file-upload-text {
+  color: grey;
+  float: left;
+  font-size: 12px;
+  line-height: 3;
+}
+
+
+.uploadbtn{
+width:9rem;
+border-color: #3697EF;
+}
 .college-settings-container .tab-content {
   padding: 0px 0px !important;
   margin: 26px 0 !important;
