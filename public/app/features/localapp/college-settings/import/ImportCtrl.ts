@@ -1,6 +1,7 @@
 // import { appEvents } from 'app/core/core';
 import * as angular from 'angular';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import $ from 'jquery';
 
 export class ImportCtrl {
   navModel: any;
@@ -37,7 +38,29 @@ export class ImportCtrl {
       }
       this.postData();
     };
-  }
+    $(function () {
+
+      function customUploadButton() {
+        $('.js-button-file-upload-input').on('change', function () {
+          const val = $(this).val().split(/(\\|\/)/g).pop();
+          if (val !== "") {
+            $(".js-button-file-upload-text")
+              .text(val)
+              .parent()
+              .removeClass("not-selected");
+          } else {
+            $(".js-button-file-upload-text")
+              .text('')
+              .parent()
+              .addClass("not-selected");
+          }
+        });
+      }
+
+      customUploadButton();
+
+    });
+  };
 
   async postData() {
     const data = new FormData();
