@@ -38,29 +38,31 @@ export class ImportCtrl {
       }
       this.postData();
     };
-    $(function () {
 
+    $(() => {
+      //  customUploadButton = () => {
       function customUploadButton() {
-        $('.js-button-file-upload-input').on('change', function () {
-          const val = $(this).val().split(/(\\|\/)/g).pop();
-          if (val !== "") {
-            $(".js-button-file-upload-text")
+        $('.js-button-file-upload-input').on('change', function(this: HTMLElement) {
+          const val = $(this)
+            .val()
+            .split(/(\\|\/)/g)
+            .pop();
+          if (val !== '') {
+            $('.js-button-file-upload-text')
               .text(val)
               .parent()
-              .removeClass("not-selected");
+              .removeClass('not-selected');
           } else {
-            $(".js-button-file-upload-text")
+            $('.js-button-file-upload-text')
               .text('')
               .parent()
-              .addClass("not-selected");
+              .addClass('not-selected');
           }
         });
       }
-
       customUploadButton();
-
     });
-  };
+  }
 
   async postData() {
     const data = new FormData();
