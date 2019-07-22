@@ -1,0 +1,123 @@
+<div class="page-container page-body legal-entities-main-container">
+  <div class="authorized-signatory-container m-b-1">
+    <h3>Make a Secure Payment</h3>
+
+  </div>
+  <div class="p-flex">
+    <ul class="pay-width">
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(0)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 0}">Debit Card</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(1)">
+        <a class="legal-gf-tabs-link" disabled ng-class="{'active': ctrl.activeTabIndex === 1}">Credit Card</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(2)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 2}">Netbanking</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(3)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 3}">UIP ID</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(4)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 4}">Wallet Payment</a>
+      </li>
+      <li class="legal-gf-tabs-item" ng-click="ctrl.activateTab(5)">
+        <a class="legal-gf-tabs-link " ng-class="{'active': ctrl.activeTabIndex === 5}">Debit Card + ATM PIN</a>
+      </li>
+    </ul>
+    <!-- <div class="clearfix"></div> -->
+    <div class="tab-content"
+      style="height:350px !important; width: 600px !important; margin: 0px 0px 0px 0px !important; padding: 2rem  !important;">
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 0}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              <div class="m-b-1 ">
+                <label class="gf-form-label b-0 bg-white p2x">Card Number</label>
+                <input type="text" ng-model="legalEntity.registeredOfficeAddress1" class="gf-form-input "
+                  placeholder="Enter Card Number" required maxlength="255" />
+                <div ng-if="legalForm.$submitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please
+                  enter
+                  registerred address</div>
+              </div>
+              <div class="m-b-1 ">
+                <label class="gf-form-label b-0 bg-white p2x">Expiration Date</label>
+                <div class="flex">
+                  <input type="text" class="gf-form-input width-12" placeholder="Month" maxlength="255" />
+                  <input type="text" class="gf-form-input width-12 mx" placeholder="Year" maxlength="255" />
+                  <input type="text" class="gf-form-input width-12" placeholder="" maxlength="255" />
+                </div>
+
+                <div ng-if="legalForm.$submitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please
+                  enter
+                  registerred address</div>
+              </div>
+              <div class="m-b-1 ">
+                <label class="gf-form-label b-0 bg-white p2x">Card Holder Name</label>
+                <input type="text" class="gf-form-input " placeholder="Card Holder Name" required maxlength="255" />
+                <div ng-if="legalForm.$submitted && !legalEntity.registeredOfficeAddress1" class="form-error">Please
+                  enter
+                  registerred address</div>
+              </div>
+
+
+              <div class="gf-form-button-row p-r-0">
+                <button type="submit" ng-click="ctrl.activateTab(1)"
+                  class="btn btn-success border-bottom">Continue</button>
+                <button type="reset" class="btn btn-danger border-bottom">Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 1}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              Credit Card content.
+            </div>
+          </form>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 2}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              Netbanking content.
+            </div>
+          </form>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 3}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              UIP ID content.
+            </div>
+          </form>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 4}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              Wallet Payment content.
+            </div>
+          </form>
+        </div>
+      </div>
+      <div ng-class="{'hide':ctrl.activeTabIndex !== 5}">
+        <div class="contnet">
+          <form name="legalForm" class="gf-form-group section m-0 dflex">
+            <div>
+              Debit Card + ATM Pin content.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <button type="submit" ng-click="" class="btn btn-success border-bottom">Submit</button> -->
+
+
+  <!-- <i class="fa fa-phone orange"></i> -->
+</div>

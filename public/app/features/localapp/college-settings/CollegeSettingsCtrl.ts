@@ -24,6 +24,10 @@ export class CollegeSettingsCtrl {
       title: 'FILE IMPORT',
       id: 'import',
     });
+    this.sections.push({
+      title: 'PAYMENT',
+      id: 'payment',
+    });
     // this.sections.push({
     //   title: 'DEPARTMENTS',
     //   id: 'department_settings',

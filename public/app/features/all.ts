@@ -26,6 +26,7 @@ import './localapp/academic-settings/yearsetting';
 import './localapp/college-settings/generalinfo';
 import './localapp/college-settings/legalentities';
 import './localapp/college-settings/import';
+import './localapp/college-settings/payment';
 import './localapp/college-settings/collegebranches';
 import './localapp/college-settings/departmentsettings';
 import './localapp/roles-permissions/permissions';
