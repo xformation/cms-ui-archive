@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/xformation/cms-ui/pkg/services/alerting"
 	"github.com/xformation/cms-ui/pkg/services/dashboards"
@@ -48,7 +49,95 @@ func dashboardGuardianResponse(err error) Response {
 	return Error(403, "Access denied to this dashboard", nil)
 }
 
+func GetRoleBasedDashboardForRbacUser(c *m.ReqContext, slug string) Response {
+	dash, errResp := getDashboardHelper(0, slug, 0, "")
+
+	if errResp != nil {
+		return nil
+	}
+
+	//guardian := guardian.New(dash.Id, c.OrgId, c.SignedInUser)
+	//if canView, err := guardian.CanView(); err != nil || !canView {
+	//	return dashboardGuardianResponse(err)
+	//}
+
+	var canEdit = false
+	var canSave = false
+	var canAdmin = false
+
+	//isStarred, err := isDashboardStarredByUser(c, dash.Id)
+	//if err != nil {
+	//	return Error(500, "Error while checking if dashboard was starred by user", err)
+	//}
+
+	// Finding creator and last updater of the dashboard
+	//updater, creator := anonString, anonString
+	//if dash.UpdatedBy > 0 {
+	//	updater = getUserLogin(dash.UpdatedBy)
+	//}
+	//if dash.CreatedBy > 0 {
+	//	creator = getUserLogin(dash.CreatedBy)
+	//}
+
+	meta := dtos.DashboardMeta{
+		IsStarred:   false,
+		Slug:        dash.Slug,
+		Type:        m.DashTypeDB,
+		CanStar:     false,
+		CanSave:     canSave,
+		CanEdit:     canEdit,
+		CanAdmin:    canAdmin,
+		Created:     dash.Created,
+		Updated:     dash.Updated,
+		UpdatedBy:   "Admin",
+		CreatedBy:   "Admin",
+		Version:     dash.Version,
+		HasAcl:      dash.HasAcl,
+		IsFolder:    dash.IsFolder,
+		FolderId:    dash.FolderId,
+		Url:         dash.GetUrl(),
+		FolderTitle: "General",
+	}
+
+	// lookup folder title
+	if dash.FolderId > 0 {
+		query := m.GetDashboardQuery{Id: dash.FolderId, OrgId: c.OrgId}
+		if err := bus.Dispatch(&query); err != nil {
+			return Error(500, "Dashboard folder could not be read", err)
+		}
+		meta.FolderTitle = query.Result.Title
+		meta.FolderUrl = query.Result.GetUrl()
+	}
+
+	//isDashboardProvisioned := &m.IsDashboardProvisionedQuery{DashboardId: dash.Id}
+	//err = bus.Dispatch(isDashboardProvisioned)
+	//if err != nil {
+	//	return Error(500, "Error while checking if dashboard is provisioned", err)
+	//}
+
+	//if isDashboardProvisioned.Result {
+	//	meta.Provisioned = true
+	//}
+
+	// make sure db version is in sync with json model version
+	dash.Data.Set("version", dash.Version)
+
+	dto := dtos.DashboardFullWithMeta{
+		Dashboard: dash.Data,
+		Meta:      meta,
+	}
+
+	c.TimeRequest(metrics.M_Api_Dashboard_Get)
+	return JSON(200, dto)
+}
+
 func GetDashboard(c *m.ReqContext) Response {
+	//externalUserId, ok := c.Session.Get("myuserid").(string)
+	//if ok && externalUserId != "admin" {
+	//	log.Info("Getting role specific dashboard for rbac user")
+	//	return GetRoleBasedDashboardForRbacUser(c, "teacher-dashboard")
+	//} else {
+
 	dash, rsp := getDashboardHelper(c.OrgId, c.Params(":slug"), 0, c.Params(":uid"))
 	if rsp != nil {
 		return rsp
@@ -127,6 +216,7 @@ func GetDashboard(c *m.ReqContext) Response {
 
 	c.TimeRequest(metrics.M_Api_Dashboard_Get)
 	return JSON(200, dto)
+	//}
 }
 
 func getUserLogin(userID int64) string {
@@ -288,7 +378,94 @@ func PostDashboard(c *m.ReqContext, cmd m.SaveDashboardCommand) Response {
 	})
 }
 
+func GetDashboardForRbacUser(c *m.ReqContext) Response {
+	//log.Info("Get dashboard for rbac user")
+	//prefsQuery := m.GetPreferencesWithDefaultsQuery{User: c.SignedInUser}
+	//if err := bus.Dispatch(&prefsQuery); err != nil {
+	//	return Error(500, "Failed to get preferences", err)
+	//}
+
+	//if prefsQuery.Result.HomeDashboardId != 0 {
+	//	slugQuery := m.GetDashboardRefByIdQuery{Id: prefsQuery.Result.HomeDashboardId}
+	//	err := bus.Dispatch(&slugQuery)
+	//	if err == nil {
+	//		url := m.GetDashboardUrl(slugQuery.Result.Uid, slugQuery.Result.Slug)
+	//		dashRedirect := dtos.DashboardRedirect{RedirectUri: url}
+	//		return JSON(200, &dashRedirect)
+	//	}
+	//	log.Warn("Failed to get slug from database, %s", err.Error())
+	//}
+	var roles = c.Session.Get("myuserrole")
+	fmt.Println(roles)
+	var roleTeacher = ""
+	var roleStudent = ""
+	for _, val := range roles.([]interface{}) {
+		var entry = fmt.Sprint(val)
+		if strings.ToLower(entry) == "teacher" {
+			roleTeacher = strings.ToLower(entry)
+			break
+		}
+	}
+	for _, val := range roles.([]interface{}) {
+		var entry = fmt.Sprint(val)
+		if strings.ToLower(entry) == "student" {
+			roleStudent = strings.ToLower(entry)
+			break
+		}
+	}
+	var filePath = ""
+	if roleTeacher == "teacher" {
+		resp := GetRoleBasedDashboardForRbacUser(c, "teacher-dashboard")
+		if resp == nil {
+			filePath = path.Join(setting.StaticRootPath, "dashboards/teacher_home.json")
+		} else {
+			return resp
+		}
+	} else if roleStudent == "student" {
+		resp := GetRoleBasedDashboardForRbacUser(c, "student-dashboard")
+		if resp == nil {
+			filePath = path.Join(setting.StaticRootPath, "dashboards/student_home.json")
+		} else {
+			return resp
+		}
+	} else {
+		resp := GetRoleBasedDashboardForRbacUser(c, "common-dashboard")
+		if resp == nil {
+			filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
+		} else {
+			return resp
+		}
+		//filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		return Error(500, "Failed to load home dashboard", err)
+	}
+
+	dash := dtos.DashboardFullWithMeta{}
+	dash.Meta.IsHome = true
+	dash.Meta.CanEdit = false //c.SignedInUser.HasRole(m.ROLE_EDITOR)
+	dash.Meta.FolderTitle = "General"
+
+	jsonParser := json.NewDecoder(file)
+	if err := jsonParser.Decode(&dash.Dashboard); err != nil {
+		return Error(500, "Failed to load home dashboard", err)
+	}
+
+	//if c.HasUserRole(m.ROLE_ADMIN) && !c.HasHelpFlag(m.HelpFlagGettingStartedPanelDismissed) {
+	//	addGettingStartedPanelToHomeDashboard(dash.Dashboard)
+	//}
+
+	return JSON(200, &dash)
+}
+
 func GetHomeDashboard(c *m.ReqContext) Response {
+	externalUserId, ok := c.Session.Get("myuserid").(string)
+	if ok && externalUserId != "admin" {
+		log.Info("Returning empty dashboard for rbac user")
+		return GetDashboardForRbacUser(c)
+	}
 	prefsQuery := m.GetPreferencesWithDefaultsQuery{User: c.SignedInUser}
 	if err := bus.Dispatch(&prefsQuery); err != nil {
 		return Error(500, "Failed to get preferences", err)

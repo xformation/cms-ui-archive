@@ -91,6 +91,11 @@ var (
 	DataProxyWhiteList               map[string]bool
 	DisableBruteForceLoginProtection bool
 
+	// externalsecurity
+	ExternalSecurityUrl string
+	// cms
+	CmsUrl string
+
 	// Snapshots
 	ExternalSnapshotUrl   string
 	ExternalSnapshotName  string
@@ -592,6 +597,14 @@ func (cfg *Cfg) Load(args *CommandLineArgs) error {
 	DisableGravatar = security.Key("disable_gravatar").MustBool(true)
 	cfg.DisableBruteForceLoginProtection = security.Key("disable_brute_force_login_protection").MustBool(false)
 	DisableBruteForceLoginProtection = cfg.DisableBruteForceLoginProtection
+
+	// read externalsecurity settings
+	externalsecurity := iniFile.Section("externalsecurity")
+	ExternalSecurityUrl = externalsecurity.Key("external_security_url").String()
+
+	// read cms url
+	cms := iniFile.Section("cms")
+	CmsUrl = cms.Key("cms_url").String()
 
 	// read snapshots settings
 	snapshots := iniFile.Section("snapshots")

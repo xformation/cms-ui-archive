@@ -5,7 +5,7 @@ export class UtilSrv {
   modalScope: any;
 
   /** @ngInject */
-  constructor(private $rootScope, private $modal) { }
+  constructor(private $rootScope, private $modal) {}
 
   init() {
     appEvents.on('show-modal', this.showModal.bind(this), this.$rootScope);
@@ -26,6 +26,7 @@ export class UtilSrv {
     appEvents.on('assign-group-modal', this.assignGroupModal.bind(this), this.$rootScope);
     appEvents.on('add-user-modal', this.addUserModal.bind(this), this.$rootScope);
     appEvents.on('edit-user-modal', this.editUserModal.bind(this), this.$rootScope);
+    appEvents.on('import-user-modal', this.importUserModal.bind(this), this.$rootScope);
     appEvents.on('year-modal', this.yearModal.bind(this), this.$rootScope);
   }
 
@@ -360,12 +361,21 @@ export class UtilSrv {
     const scope = payload.scope || this.$rootScope.$new();
     console.log('Again event call: show-model');
     scope.permission = payload.permission;
-
+    scope.uimodules = payload.uimodules;
+    scope.parentUiModules = payload.parentUiModules;
+    scope.selectedSubModules = payload.selectedSubModules;
     scope.savePermission = () => {
       payload.onCreate(scope.permissionForm, scope.permission);
       scope.dismiss();
     };
-
+    scope.onChangeName = () => {
+      scope.selectedSubModules = payload.onChange(
+        scope.permissionForm,
+        scope.permission,
+        scope.uimodules,
+        scope.selectedSubModules
+      );
+    };
     appEvents.emit('show-modal', {
       src: 'public/app/features/localapp/roles-permissions/permissions/partials/create_permission.html',
       scope: scope,
@@ -485,6 +495,28 @@ export class UtilSrv {
       src: 'public/app/features/localapp/roles-permissions/users/partials/assign_group.html',
       scope: scope,
       modalClass: 'assign-group',
+    });
+  }
+
+  importUserModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.isRequestMade = false;
+    scope.importUser = () => {
+      scope.isRequestMade = true;
+      const user = scope.user;
+      // user.roles = [];
+      payload.onAdd(scope.userForm, user, isSuccess => {
+        scope.isRequestMade = false;
+        scope.is_success_bar = isSuccess;
+        setTimeout(() => {
+          scope.dismiss();
+        }, 4000);
+      });
+    };
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/roles-permissions/users/partials/import_user.html',
+      scope: scope,
+      modalClass: 'add-user',
     });
   }
 

@@ -1,0 +1,38 @@
+<div class="add-modal-body" ng-cloak>
+	<div class="add-modal-header">
+		<h2 class="add-modal-header-title">
+			<!-- <i class="fa {{icon}}"></i> -->
+			<span class="p-l-1">
+				Import Users
+			</span>
+		</h2>
+		<a class="add-modal-header-close" ng-click="dismiss();">
+			<i class="fa fa-remove"></i>
+		</a>
+	</div>
+	<div class="modal-content">
+		<div class="add-confirm-modal p-1">
+			<form name="userForm" class="gf-form-group section m-0 dflex">
+				<div class="bg-modal">
+					<div class="fwidth-modal-text">
+						<label class="gf-form-label b-0 bg-transparent">Import from CMS</label>
+						<input type="checkbox" id="chkTeacher" ng-model="user.teacherStatus" >&nbsp;&nbsp;Teacher</input>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" id="chkStudent" ng-model="user.studentStatus" >Student</input>&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" id="chkEmployee" ng-model="user.employeeStatus" >Employee</input>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button ng-disabled="isRequestMade" type="submit" ng-click="importUser()" class="btn btn-success border-bottom">Import</button>
+					</div>
+				
+					<div class="fwidth-modal-text">
+					</div>
+					<div ng-if="is_success_bar === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is someerror!</div>
+					<div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully!</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-content-confirm-text" ng-if="confirmText">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;"
+				placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+				ng-change="updateConfirmText(confirmInput)">
+		</div>
+	</div>
+</div>

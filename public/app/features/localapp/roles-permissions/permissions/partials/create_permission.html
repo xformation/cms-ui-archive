@@ -14,18 +14,23 @@
         <div class="add-confirm-modal p-1">
             <form name="permissionForm" class="gf-form-group section m-0 dflex">
                 <div class="bg-modal">
-                    <div class="fwidth-modal-text">
+                    <!-- <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">VERSION</label>
                         <input ng-model="permission.version" type="text" class="gf-form-input " placeholder="" />
-                    </div>
+                    </div> -->
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">NAME</label>
-                        <input required ng-model="permission.name" type="text" class="gf-form-input " placeholder="" />
+                        <select class="gf-form-input" required ng-model="permission.name" ng-change="onChangeName()">
+							<option value="">Select</option>
+							<option ng-repeat="pm in parentUiModules" value="{{pm}}">{{pm}}</option>
+						</select>
                     </div>
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">PERMISSION</label>
-                        <input required ng-model="permission.permission" type="text" class="gf-form-input "
-                            placeholder="" />
+                            <select class="gf-form-input" required ng-model="permission.permission">
+                                <option value="">Select</option>
+                                <option ng-repeat="sbm in selectedSubModules" value="{{sbm}}">{{sbm}}</option>
+                            </select>
                     </div>
                     <div class="fwidth-modal-text">
                         <label class="gf-form-label b-0 bg-transparent">DESCRIPTION</label>

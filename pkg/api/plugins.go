@@ -1,6 +1,10 @@
 package api
 
 import (
+	"bytes"
+	"github.com/xformation/cms-ui/pkg/components/simplejson"
+	"github.com/xformation/cms-ui/pkg/log"
+	"net/http"
 	"sort"
 
 	"github.com/xformation/cms-ui/pkg/api/dtos"
@@ -9,6 +13,10 @@ import (
 	"github.com/xformation/cms-ui/pkg/plugins"
 	"github.com/xformation/cms-ui/pkg/setting"
 )
+
+var moduleRestClient = &http.Client{
+	Transport: &http.Transport{Proxy: http.ProxyFromEnvironment},
+}
 
 func (hs *HTTPServer) GetPluginList(c *m.ReqContext) Response {
 	typeFilter := c.Query("type")
@@ -128,12 +136,40 @@ func UpdatePluginSetting(c *m.ReqContext, cmd m.UpdatePluginSettingCmd) Response
 	if _, ok := plugins.Apps[cmd.PluginId]; !ok {
 		return Error(404, "Plugin not installed.", nil)
 	}
-
-	if err := bus.Dispatch(&cmd); err != nil {
+	var plg = plugins.Apps[cmd.PluginId]
+	var status = "DEACTIVE"
+	if cmd.Enabled {
+		status = "ACTIVE"
+	}
+	// call rhe rest service to changes the plugin status in cms
+	message := map[string]interface{}{
+		"moduleName": plg.Name,
+		"status":     status,
+	}
+	messageBytes, err := simplejson.NewFromAny(message).Encode()
+	if err != nil {
+		log.Error(500, "Failed to encode message in bytes", err)
 		return Error(500, "Failed to update plugin setting", err)
 	}
+	httpClient := &http.Client{}
+	req, err := http.NewRequest(http.MethodPut, setting.CmsUrl+"/api/cmsmodules", bytes.NewBuffer(messageBytes))
+	//req.Header.Set("Accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+	response, err := httpClient.Do(req)
+	if err != nil {
+		log.Error(500, "Failed to return rest response", err)
+		return Error(500, "Failed to update plugin setting", err)
+	}
+	if response.StatusCode == 200 || response.StatusCode == 201 {
+		log.Info("Plugin settings updated in cms")
+		if err := bus.Dispatch(&cmd); err != nil {
+			log.Error(500, "Failed to update plugin setting", err)
+			return Error(500, "Failed to update plugin setting", err)
+		}
+		return Success("Plugin settings updated")
+	}
+	return Error(500, "Failed to update plugin setting", err)
 
-	return Success("Plugin settings updated")
 }
 
 func GetPluginDashboards(c *m.ReqContext) Response {

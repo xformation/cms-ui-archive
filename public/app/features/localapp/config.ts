@@ -1,7 +1,7 @@
-const secSrvUrl = 'http://localhost:8094';
-
+const secSrvUrl = 'http://18.209.4.2:8094';
+const apiUrl = 'http://18.209.4.2:8080';
+// 18.234.66.133
 export const config = {
-  api_url: 'http://18.234.66.133:8080',
   PERMS_LIST_ALL: secSrvUrl + '/security/permissions/listAll',
   PERMS_CREATE: secSrvUrl + '/security/permissions/create',
   PERMS_UPDATE: secSrvUrl + '/security/permissions/update',
@@ -14,4 +14,6 @@ export const config = {
   USERS_CREATE: secSrvUrl + '/security/users/create',
   USERS_UPDATE: secSrvUrl + '/security/users/update',
   USERS_GET: secSrvUrl + '/security/users/',
+  UI_MODULES_GET: apiUrl + '/api/cmsmodules',
+  EXPORT_USER_PORT: apiUrl + '/api/cmsuserexport',
 };

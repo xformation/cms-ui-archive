@@ -177,6 +177,8 @@ func loginUserWithUser(user *m.User, c *m.ReqContext) {
 
 	c.Session.RegenerateId(c.Context)
 	c.Session.Set(session.SESS_KEY_USERID, user.Id)
+	c.Session.Set("myuserid", user.Name)
+	c.Session.Set("myuserpw", user.Password)
 }
 
 func Logout(c *m.ReqContext) {
