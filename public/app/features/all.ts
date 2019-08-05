@@ -10,6 +10,7 @@ import './alerting/NotificationsEditCtrl';
 import './alerting/NotificationsListCtrl';
 import './manage-dashboards';
 import './localapp';
+import './payment-response';
 import './localapp/college-settings';
 import './localapp/academic-settings';
 import './localapp/academic-settings/timetabledetails';

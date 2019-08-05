@@ -310,6 +310,11 @@ export function setupAngularRoutes($routeProvider, $locationProvider) {
       controller: 'AlertNotificationEditCtrl',
       controllerAs: 'ctrl',
     })
+    .when('/payment-response', {
+      templateUrl: 'public/app/features/payment-response/partials/payment_app.html',
+      controller: 'PaymentResponseAppCtrl',
+      controllerAs: 'ctrl',
+    })
     .when('/localapp', {
       templateUrl: 'public/app/features/localapp/partials/local_app.html',
       controller: 'LocalAppCtrl',
