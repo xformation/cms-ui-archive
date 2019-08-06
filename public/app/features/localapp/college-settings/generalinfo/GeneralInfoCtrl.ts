@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import { config } from '../../config';
 
 export class GeneralInfoCtrl {
   navModel: any;
@@ -32,11 +33,14 @@ export class GeneralInfoCtrl {
       if (this.isCollegeBgChanged) {
         $scope.cmsCollegeVo.bgImage = this.bgSrc;
       }
-      backendSrv.post(this.RestUrl.getCollegeRestUrl(), $scope.cmsCollegeVo).then(result => {
+      backendSrv.post(config.COLLEGE_URL, $scope.cmsCollegeVo).then(result => {
         appEvents.emit('get_colleges', {});
         if (result === 200 || result === 201) {
           this.getColleges();
           alert('College data saved successfully.');
+        } else if (result === 500) {
+          this.getColleges();
+          alert('College already exists.');
         } else {
           alert('Due to some error college data could not be saved!');
         }
@@ -49,7 +53,7 @@ export class GeneralInfoCtrl {
   }
 
   getColleges() {
-    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+    this.backendSrv.get(config.COLLEGE_URL).then(result => {
       this.colleges = result;
     });
   }

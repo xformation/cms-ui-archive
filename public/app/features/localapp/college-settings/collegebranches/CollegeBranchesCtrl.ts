@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import { config } from '../../config';
 
 export class CollegeBranchesCtrl {
   branches: any;
@@ -78,7 +79,7 @@ export class CollegeBranchesCtrl {
       $scope.selectedCities = selCities;
     };
 
-    appEvents.on("get_colleges",this.getColleges.bind(this), $scope);
+    appEvents.on('get_colleges', this.getColleges.bind(this), $scope);
   }
 
   activateTab(tabIndex) {
@@ -104,7 +105,7 @@ export class CollegeBranchesCtrl {
   }
 
   getColleges() {
-    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+    this.backendSrv.get(config.COLLEGE_URL).then(result => {
       this.colleges = result;
     });
   }

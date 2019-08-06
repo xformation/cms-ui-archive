@@ -1,5 +1,5 @@
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
-// import { weekdays } from 'moment';
+import { config } from '../../config';
 
 class LectureSchedule {
   weekDay: any;
@@ -110,7 +110,7 @@ export class TimeTableSettingCtrl {
   }
 
   getColleges() {
-    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+    this.backendSrv.get(config.COLLEGE_URL).then(result => {
       this.colleges = result;
     });
   }

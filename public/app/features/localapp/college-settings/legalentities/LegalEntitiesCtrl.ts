@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import { config } from '../../config';
 
 export class LegalEntitiesCtrl {
   bankAccounts: any;
@@ -203,7 +204,7 @@ export class LegalEntitiesCtrl {
   }*/
 
   getColleges() {
-    this.backendSrv.get(this.RestUrl.getCollegeRestUrl()).then(result => {
+    this.backendSrv.get(config.COLLEGE_URL).then(result => {
       this.colleges = result;
       this.clgObject.colleges = result;
     });
