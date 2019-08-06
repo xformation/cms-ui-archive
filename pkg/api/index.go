@@ -545,7 +545,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 	if ok {
 		log.Debug("rbac user id " + externalUserId)
 		externalUserPw := c.Session.Get("myuserpw").(string)
-		//fmt.Println("external user pw " + externalUserPw)
+		fmt.Println("external user id " + externalUserId)
 		if externalUserId != "admin" {
 			return hs.setIndexViewDataForRbacUser(externalUserId, externalUserPw, c)
 		}
