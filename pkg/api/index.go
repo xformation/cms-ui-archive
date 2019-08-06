@@ -56,7 +56,11 @@ func (hs *HTTPServer) setIndexViewDataForRbacUser(externalUserId string, externa
 	//	return nil, errw
 	//}
 
+	log.Info("Signed in user : " + c.SignedInUser.Name)
 	var userInfo = c.Session.Get(c.SignedInUser.Name).(map[string]interface{})
+	if userInfo == nil {
+		return nil, nil
+	}
 	fmt.Println(userInfo)
 
 	settings, err := hs.getFrontendSettingsMap(c)
@@ -541,6 +545,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 		isUiModulesExported = true
 	}
 
+	log.Info("Signed in user name : " + c.SignedInUser.Name)
 	if c.SignedInUser.Name != "admin" {
 		externalUserId, ok := c.Session.Get("myuserid").(string)
 		if ok && externalUserId != "<nil>" {
