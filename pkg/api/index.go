@@ -541,15 +541,24 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 		isUiModulesExported = true
 	}
 
-	externalUserId, ok := c.Session.Get("myuserid").(string)
-	if ok {
-		log.Debug("rbac user id " + externalUserId)
-		externalUserPw := c.Session.Get("myuserpw").(string)
-		fmt.Println("external user id " + externalUserId)
-		if externalUserId != "admin" {
+	if c.SignedInUser.Name != "admin" {
+		externalUserId, ok := c.Session.Get("myuserid").(string)
+		if ok && externalUserId != "<nil>" {
+			log.Debug("rbac user id " + externalUserId)
+			externalUserPw := c.Session.Get("myuserpw").(string)
+			fmt.Println("external user id " + externalUserId)
 			return hs.setIndexViewDataForRbacUser(externalUserId, externalUserPw, c)
 		}
 	}
+	//externalUserId, ok := c.Session.Get("myuserid").(string)
+	//if ok {
+	//	log.Debug("rbac user id " + externalUserId)
+	//	externalUserPw := c.Session.Get("myuserpw").(string)
+	//	fmt.Println("external user id " + externalUserId)
+	//	if externalUserId != "admin" {
+	//		return hs.setIndexViewDataForRbacUser(externalUserId, externalUserPw, c)
+	//	}
+	//}
 	settings, err := hs.getFrontendSettingsMap(c)
 	if err != nil {
 		return nil, err
