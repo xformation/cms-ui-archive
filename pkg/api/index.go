@@ -2,7 +2,6 @@ package api
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"github.com/xformation/cms-ui/pkg/components/simplejson"
 	"github.com/xformation/cms-ui/pkg/log"
@@ -33,28 +32,32 @@ var externalSecurityServiceClient = &http.Client{
 }
 
 func (hs *HTTPServer) setIndexViewDataForRbacUser(externalUserId string, externalUserPw string, c *m.ReqContext) (*dtos.IndexViewData, error) {
-	response, err := externalSecurityServiceClient.Get(setting.ExternalSecurityUrl + "/security/public/login?username=" + externalUserId + "&password=" + externalUserPw)
+	//response, err := externalSecurityServiceClient.Get(setting.ExternalSecurityUrl + "/security/public/login?username=" + externalUserId + "&password=" + externalUserPw)
 
-	if err != nil {
-		return nil, err
-	}
-	defer response.Body.Close()
-	bodyBytes, err := ioutil.ReadAll(response.Body)
-
-	if err != nil {
-		return nil, err
-	}
-	if response.StatusCode == 417 {
-		return nil, err
-	}
-	bodyString := string(bodyBytes)
+	//response, err := externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogin?username=" + externalUserId + "&password=" + externalUserPw)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//defer response.Body.Close()
+	//bodyBytes, err := ioutil.ReadAll(response.Body)
+	//
+	//if err != nil {
+	//	return nil, err
+	//}
+	//if response.StatusCode == 417 {
+	//	return nil, err
+	//}
+	//bodyString := string(bodyBytes)
 	//fmt.Println(bodyString)
 
-	var userInfo map[string]interface{}
-	errw := json.Unmarshal([]byte(bodyString), &userInfo)
-	if errw != nil {
-		return nil, errw
-	}
+	//var userInfo map[string]interface{}
+	//errw := json.Unmarshal([]byte(bodyString), &userInfo)
+	//if errw != nil {
+	//	return nil, errw
+	//}
+
+	var userInfo = c.Session.Get(c.SignedInUser.Name).(map[string]interface{})
+	fmt.Println(userInfo)
 
 	settings, err := hs.getFrontendSettingsMap(c)
 
@@ -104,7 +107,7 @@ func (hs *HTTPServer) setIndexViewDataForRbacUser(externalUserId string, externa
 			OrgRole:                    c.OrgRole,
 			GravatarUrl:                dtos.GetGravatarUrl(c.Email),
 			IsGrafanaAdmin:             c.IsGrafanaAdmin,
-			LightTheme:                 prefs.Theme == lightName,
+			LightTheme:                 true,
 			Timezone:                   prefs.Timezone,
 			Locale:                     locale,
 			HelpFlags1:                 c.HelpFlags1,

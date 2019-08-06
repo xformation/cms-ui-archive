@@ -100,13 +100,27 @@ func initContextWithUserSessionCookie(ctx *m.ReqContext, orgId int64) bool {
 		return false
 	}
 
-	query := m.GetSignedInUserQuery{UserId: userId, OrgId: orgId}
-	if err := bus.Dispatch(&query); err != nil {
-		ctx.Logger.Error("Failed to get user with id", "userId", userId, "error", err)
-		return false
+	var userName = ""
+	if userId >= 100 {
+		userName = ctx.Session.Get("myuserid").(string)
+		var signedInUser = &m.SignedInUser{
+			Name:   userName,
+			Login:  userName,
+			OrgId:  userId,
+			UserId: userId,
+			Email:  userName,
+		}
+		ctx.SignedInUser = signedInUser
+	} else {
+		query := m.GetSignedInUserQuery{UserId: userId, OrgId: orgId}
+		if err := bus.Dispatch(&query); err != nil {
+			ctx.Logger.Error("Failed to get user with id", "userId", userId, "error", err)
+			return false
+		}
+
+		ctx.SignedInUser = query.Result
 	}
 
-	ctx.SignedInUser = query.Result
 	ctx.IsSignedIn = true
 	return true
 }

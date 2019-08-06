@@ -99,15 +99,15 @@ func GetRoleBasedDashboardForRbacUser(c *m.ReqContext, slug string) Response {
 		FolderTitle: "General",
 	}
 
-	// lookup folder title
-	if dash.FolderId > 0 {
-		query := m.GetDashboardQuery{Id: dash.FolderId, OrgId: c.OrgId}
-		if err := bus.Dispatch(&query); err != nil {
-			return Error(500, "Dashboard folder could not be read", err)
-		}
-		meta.FolderTitle = query.Result.Title
-		meta.FolderUrl = query.Result.GetUrl()
-	}
+	// lookup folder title. For now it has been disabled. Later uncomment the code
+	//if dash.FolderId > 0 {
+	//	query := m.GetDashboardQuery{Id: dash.FolderId, OrgId: c.OrgId}
+	//	if err := bus.Dispatch(&query); err != nil {
+	//		return Error(500, "Dashboard folder could not be read", err)
+	//	}
+	//	meta.FolderTitle = query.Result.Title
+	//	meta.FolderUrl = query.Result.GetUrl()
+	//}
 
 	//isDashboardProvisioned := &m.IsDashboardProvisionedQuery{DashboardId: dash.Id}
 	//err = bus.Dispatch(isDashboardProvisioned)

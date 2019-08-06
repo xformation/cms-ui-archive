@@ -2,9 +2,6 @@ package login
 
 import (
 	"errors"
-	"github.com/xformation/cms-ui/pkg/log"
-	"github.com/xformation/cms-ui/pkg/setting"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/xformation/cms-ui/pkg/bus"
@@ -36,15 +33,16 @@ var externalSecurityServiceClient = &http.Client{
 func AuthenticateUser(query *m.LoginUserQuery) error {
 
 	if query.Username != "admin" {
-		log.Info("Login authentication endpoint hit")
-		response, err := externalSecurityServiceClient.Get(setting.ExternalSecurityUrl + "/security/public/login?username=" + query.Username + "&password=" + query.Password)
-		defer response.Body.Close()
-		bodyBytes, err := ioutil.ReadAll(response.Body)
-		bodyString := string(bodyBytes)
-		if err != nil || response.StatusCode == 417 {
-			log.Error(1, "User authentication failed. Please check the login credentials", bodyString)
-			return ErrInvalidCredentials
-		}
+		//log.Info("Login authentication endpoint hit")
+		//response, err := externalSecurityServiceClient.Get(setting.ExternalSecurityUrl + "/security/public/login?username=" + query.Username + "&password=" + query.Password)
+		//response, err := externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogin?username=" + query.Username + "&password=" + query.Password)
+		//defer response.Body.Close()
+		//bodyBytes, err := ioutil.ReadAll(response.Body)
+		//bodyString := string(bodyBytes)
+		//if err != nil || response.StatusCode == 417 {
+		//	log.Error(1, "User authentication failed. Please check the login credentials", bodyString)
+		//	return ErrInvalidCredentials
+		//}
 
 		//if response.StatusCode == 200 ||  response.StatusCode == 201 {
 		//	fmt.Println(bodyString)
@@ -53,11 +51,12 @@ func AuthenticateUser(query *m.LoginUserQuery) error {
 		usr.Name = query.Username
 		usr.Password = query.Password
 		usr.Login = query.Username
-		usr.OrgId = 1
+		usr.OrgId = 100
 		usr.IsAdmin = false
-		usr.Id = 1
+		usr.Id = 100
 		query.User = &usr
-		return err
+
+		return nil
 
 	} else {
 		if err := validateLoginAttempts(query.Username); err != nil {

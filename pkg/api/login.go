@@ -1,12 +1,14 @@
 package api
 
 import (
+	"encoding/json"
+	"github.com/xformation/cms-ui/pkg/login"
+	"io/ioutil"
 	"net/url"
 
 	"github.com/xformation/cms-ui/pkg/api/dtos"
 	"github.com/xformation/cms-ui/pkg/bus"
 	"github.com/xformation/cms-ui/pkg/log"
-	"github.com/xformation/cms-ui/pkg/login"
 	"github.com/xformation/cms-ui/pkg/metrics"
 	m "github.com/xformation/cms-ui/pkg/models"
 	"github.com/xformation/cms-ui/pkg/services/session"
@@ -125,41 +127,135 @@ func LoginAPIPing(c *m.ReqContext) {
 }
 
 func LoginPost(c *m.ReqContext, cmd dtos.LoginCommand) Response {
-	if setting.DisableLoginForm {
-		return Error(401, "Login is disabled", nil)
-	}
-
-	authQuery := &m.LoginUserQuery{
-		ReqContext: c,
-		Username:   cmd.User,
-		Password:   cmd.Password,
-		IpAddress:  c.Req.RemoteAddr,
-	}
-
-	if err := bus.Dispatch(authQuery); err != nil {
-		if err == login.ErrInvalidCredentials || err == login.ErrTooManyLoginAttempts {
-			return Error(401, "Invalid username or password", err)
-		}
-
-		return Error(500, "Error while trying to authenticate user", err)
-	}
-
-	user := authQuery.User
-
-	loginUserWithUser(user, c)
 
 	result := map[string]interface{}{
 		"message": "Logged in",
 	}
 
-	if redirectTo, _ := url.QueryUnescape(c.GetCookie("redirect_to")); len(redirectTo) > 0 {
-		result["redirectUrl"] = redirectTo
-		c.SetCookie("redirect_to", "", -1, setting.AppSubUrl+"/")
+	if cmd.User != "admin" {
+		log.Info("Login authentication endpoint hit")
+		//response, err := externalSecurityServiceClient.Get(setting.ExternalSecurityUrl + "/security/public/login?username=" + query.Username + "&password=" + query.Password)
+		response, err := externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogin?username=" + cmd.User + "&password=" + cmd.Password)
+		if err != nil || response.StatusCode == 417 {
+			log.Error(1, "User authentication failed. Please check the login credentials", err)
+			return Error(401, "Invalid username or password", err)
+		}
+		defer response.Body.Close()
+		bodyBytes, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Error(1, "Invalid response", err)
+			return Error(401, "Invalid response", err)
+		}
+		bodyString := string(bodyBytes)
+		var userInfo = make(map[string]interface{})
+		errw := json.Unmarshal([]byte(bodyString), &userInfo)
+		if errw != nil {
+			log.Error(1, "Response unmarshalling to JSON failed", errw)
+			return Error(401, "Response unmarshalling to JSON failed", errw)
+		}
+		//c.Session.Set(cmd.User, userInfo)
+		//fmt.Println("User Info : ",userInfo)
+		authQuery := &m.LoginUserQuery{
+			ReqContext: c,
+			Username:   cmd.User,
+			Password:   cmd.Password,
+			IpAddress:  c.Req.RemoteAddr,
+		}
+		var usr = &m.User{
+			Password: cmd.Password,
+			Login:    cmd.User,
+			Name:     cmd.User,
+			OrgId:    100,
+			IsAdmin:  false,
+			Id:       100,
+		}
+		//usr.Name = cmd.User
+		//usr.Password = cmd.Password
+		//usr.Login = cmd.User
+		//usr.OrgId = 100
+		//usr.IsAdmin = false
+		//usr.Id = 100
+		authQuery.User = usr
+
+		c.SignedInUser = &m.SignedInUser{
+			Name:   cmd.User,
+			Login:  cmd.User,
+			OrgId:  usr.OrgId,
+			UserId: usr.Id,
+			Email:  cmd.User,
+		}
+
+		loginUserWithRbacUser(authQuery.User, c, userInfo)
+
+		if redirectTo, _ := url.QueryUnescape(c.GetCookie("redirect_to")); len(redirectTo) > 0 {
+			result["redirectUrl"] = redirectTo
+			c.SetCookie("redirect_to", "", -1, setting.AppSubUrl+"/")
+		}
+
+		metrics.M_Api_Login_Post.Inc()
+
+		//authQuery.ReqContext.IsSignedIn = true
+		//authQuery.ReqContext.SignedInUser = &m.SignedInUser{
+		//	Name: cmd.User,
+		//	Login: cmd.User,
+		//	OrgId: usr.OrgId,
+		//	UserId: usr.Id,
+		//	Email: cmd.User,
+		//}
+	} else {
+		if setting.DisableLoginForm {
+			return Error(401, "Login is disabled", nil)
+		}
+
+		authQuery := &m.LoginUserQuery{
+			ReqContext: c,
+			Username:   cmd.User,
+			Password:   cmd.Password,
+			IpAddress:  c.Req.RemoteAddr,
+		}
+
+		if err := bus.Dispatch(authQuery); err != nil {
+			if err == login.ErrInvalidCredentials || err == login.ErrTooManyLoginAttempts {
+				return Error(401, "Invalid username or password", err)
+			}
+
+			return Error(500, "Error while trying to authenticate user", err)
+		}
+
+		user := authQuery.User
+
+		loginUserWithUser(user, c)
+
+		if redirectTo, _ := url.QueryUnescape(c.GetCookie("redirect_to")); len(redirectTo) > 0 {
+			result["redirectUrl"] = redirectTo
+			c.SetCookie("redirect_to", "", -1, setting.AppSubUrl+"/")
+		}
+
+		metrics.M_Api_Login_Post.Inc()
+
+	}
+	return JSON(200, result)
+}
+
+func loginUserWithRbacUser(user *m.User, c *m.ReqContext, userInfo map[string]interface{}) {
+	if user == nil {
+		log.Error(3, "User login with nil user")
 	}
 
-	metrics.M_Api_Login_Post.Inc()
+	c.Resp.Header().Del("Set-Cookie")
 
-	return JSON(200, result)
+	days := 86400 * setting.LogInRememberDays
+	if days > 0 {
+		c.SetCookie(setting.CookieUserName, user.Login, days, setting.AppSubUrl+"/")
+		c.SetSuperSecureCookie(user.Rands+user.Password, setting.CookieRememberName, user.Login, days, setting.AppSubUrl+"/")
+	}
+
+	c.Session.RegenerateId(c.Context)
+	c.Session.Set(session.SESS_KEY_USERID, user.Id)
+	c.Session.Set("myuserid", user.Name)
+	c.Session.Set("myuserpw", user.Password)
+	c.Session.Set(user.Name, userInfo)
+
 }
 
 func loginUserWithUser(user *m.User, c *m.ReqContext) {
@@ -182,6 +278,7 @@ func loginUserWithUser(user *m.User, c *m.ReqContext) {
 }
 
 func Logout(c *m.ReqContext) {
+	externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogout?username=" + c.SignedInUser.Name)
 	c.SetCookie(setting.CookieUserName, "", -1, setting.AppSubUrl+"/")
 	c.SetCookie(setting.CookieRememberName, "", -1, setting.AppSubUrl+"/")
 	c.Session.Destory(c.Context)
