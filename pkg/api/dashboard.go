@@ -461,8 +461,8 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 }
 
 func GetHomeDashboard(c *m.ReqContext) Response {
-	externalUserId, ok := c.Session.Get("myuserid").(string)
-	if ok && externalUserId != "admin" {
+	//externalUserId, ok := c.Session.Get("myuserid").(string)
+	if c.SignedInUser.Login != "admin" {
 		log.Info("Returning empty dashboard for rbac user")
 		return GetDashboardForRbacUser(c)
 	}

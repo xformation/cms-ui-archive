@@ -545,8 +545,8 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 		isUiModulesExported = true
 	}
 
-	log.Info("Signed in user name : " + c.SignedInUser.Name)
-	if c.SignedInUser.Name != "admin" {
+	log.Info("Signed in user name : " + c.SignedInUser.Login)
+	if c.SignedInUser.Login != "admin" {
 		externalUserId, ok := c.Session.Get("myuserid").(string)
 		if ok && externalUserId != "<nil>" {
 			log.Debug("rbac user id " + externalUserId)
