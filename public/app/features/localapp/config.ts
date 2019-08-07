@@ -18,4 +18,5 @@ export const config = {
   EXPORT_USER_PORT: apiUrl + '/api/cmsuserexport',
   CMS_GLOBAL_CONFIG_URL: apiUrl + '/api/cmssettings',
   COLLEGE_URL: apiUrl + '/api/cmscollege',
+  PAYMENT_MSG_URL: apiUrl + '/api/cmspayment',
 };
