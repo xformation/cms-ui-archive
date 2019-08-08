@@ -136,8 +136,8 @@
           </div>
           <div>
             <label htmlFor="">Adhar No*</label>
-            <input ng-model="teacher.aadharNo" class="border-plugin fwidth" type="number" name="adhar"
-              ng-pattern="/^\d{4}\s\d{4}\s\d{4}$/" />
+            <input ng-model="teacher.aadharNo" class="border-plugin fwidth" type="text" name="adhar" required maxlength="12"
+              ng-pattern="/^[0-9]{12}$/" />
             <span class="form-error" ng-show="teacherForm.adhar.$error.pattern">Write Aadhar No</span>
           </div>
           <div>
@@ -289,7 +289,7 @@
           <div>
             <label htmlFor="">Name*</label>
             <input ng-model="teacher.emergencyContactName" class="border-plugin fwidth" type="text" name="stfpname"
-              ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" />
+              ng-pattern="/^[a-zA-Z ]+$/" />
             <span class="form-error" ng-show="teacherForm.stfpname.$error.pattern">Write Correct Name</span>
           </div>
           <div>
@@ -307,8 +307,8 @@
           </div>
           <div>
             <label htmlFor="">Contact Number*</label>
-            <input ng-model="teacher.emergencyContactNo" class="border-plugin fwidth" type="number" name="stfpcn"
-              ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" />
+            <input ng-model="teacher.emergencyContactNo" class="border-plugin fwidth" type="text" name="stfpcn" maxlength="10"
+            ng-pattern="/^[0-9]{10}$/" />
             <span class="form-error" ng-show="teacherForm.stfpcn.$error.pattern">Write Correct Contact Number</span>
           </div>
           <div>
