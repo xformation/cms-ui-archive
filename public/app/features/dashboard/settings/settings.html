@@ -1,16 +1,17 @@
-<aside class="dashboard-settings__aside">
+<aside class="dashboard-settings__aside p-1">
 	<h2 class="dashboard-settings__aside-header">
 		<i class="fa fa-cog"></i>
 		Settings
 	</h2>
 
-	<a href="{{::section.url}}" class="dashboard-settings__nav-item" ng-class="{active: ctrl.viewId === section.id}" ng-repeat="section in ctrl.sections">
-    <i class="{{::section.icon}}"></i>
+	<a href="{{::section.url}}" class="dashboard-settings__nav-item" ng-class="{active: ctrl.viewId === section.id}"
+		ng-repeat="section in ctrl.sections">
+		<i class="{{::section.icon}}"></i>
 		{{::section.title}}
 	</a>
 
 	<div class="dashboard-settings__aside-actions">
-    <button class="btn btn-success" ng-click="ctrl.saveDashboard()" ng-show="ctrl.canSave">
+		<button class="btn btn-success" ng-click="ctrl.saveDashboard()" ng-show="ctrl.canSave">
 			<i class="fa fa-save"></i> Save
 		</button>
 		<button class="btn btn-inverse" ng-click="ctrl.openSaveAsModal()" ng-show="ctrl.canSaveAs">
@@ -24,7 +25,7 @@
 	</div>
 </aside>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'settings'">
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'settings'">
 	<h3 class="dashboard-settings__header">
 		General
 	</h3>
@@ -46,14 +47,13 @@
 			<bootstrap-tagsinput ng-model="ctrl.dashboard.tags" tagclass="label label-tag" placeholder="add tags">
 			</bootstrap-tagsinput>
 		</div>
-		<folder-picker initial-title="ctrl.dashboard.meta.folderTitle"
-									 initial-folder-id="ctrl.dashboard.meta.folderId"
-									 on-change="ctrl.onFolderChange($folder)"
-									 enable-create-new="true"
-									 is-valid-selection="true"
-									 label-class="width-7">
+		<folder-picker initial-title="ctrl.dashboard.meta.folderTitle" initial-folder-id="ctrl.dashboard.meta.folderId"
+			on-change="ctrl.onFolderChange($folder)" enable-create-new="true" is-valid-selection="true"
+			label-class="width-7">
 		</folder-picker>
-		<gf-form-switch class="gf-form" label="Editable" tooltip="Uncheck, then save and reload to disable all dashboard editing" checked="ctrl.dashboard.editable" label-class="width-7">
+		<gf-form-switch class="gf-form" label="Editable"
+			tooltip="Uncheck, then save and reload to disable all dashboard editing" checked="ctrl.dashboard.editable"
+			label-class="width-7">
 		</gf-form-switch>
 	</div>
 
@@ -68,67 +68,66 @@
 			</info-popover>
 		</label>
 		<div class="gf-form-select-wrapper">
-			<select ng-model="ctrl.dashboard.graphTooltip" class='gf-form-input' ng-options="f.value as f.text for f in [{value: 0, text: 'Default'}, {value: 1, text: 'Shared crosshair'},{value: 2, text: 'Shared Tooltip'}]"></select>
+			<select ng-model="ctrl.dashboard.graphTooltip" class='gf-form-input'
+				ng-options="f.value as f.text for f in [{value: 0, text: 'Default'}, {value: 1, text: 'Shared crosshair'},{value: 2, text: 'Shared Tooltip'}]"></select>
 		</div>
 	</div>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'annotations'" ng-include="'public/app/features/annotations/partials/editor.html'">
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'annotations'"
+	ng-include="'public/app/features/annotations/partials/editor.html'">
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'templating'"  ng-include="'public/app/features/templating/partials/editor.html'">
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'templating'"
+	ng-include="'public/app/features/templating/partials/editor.html'">
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'links'" >
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'links'">
 	<dash-links-editor dashboard="ctrl.dashboard"></dash-links-editor>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'versions'" >
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'versions'">
 	<gf-dashboard-history dashboard="dashboard"></gf-dashboard-history>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'dashboard_json'" >
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'dashboard_json'">
 	<h3 class="dashboard-settings__header">JSON Model</h3>
-  <div class="dashboard-settings__subheader">
-    The JSON Model below is data structure that defines the dashboard. Including settings, panel settings & layout,
-    queries etc.
-  </div>
-
-	<div class="gf-form">
-		<code-editor content="ctrl.json" data-mode="json" data-max-lines=30 ></code-editor>
+	<div class="dashboard-settings__subheader">
+		The JSON Model below is data structure that defines the dashboard. Including settings, panel settings & layout,
+		queries etc.
 	</div>
 
-  <div class="gf-form-button-row">
-    <button class="btn btn-success" ng-click="ctrl.saveDashboardJson()" ng-show="ctrl.canSave">
-      <i class="fa fa-save"></i> Save Changes
-    </button>
-  </div>
+	<div class="gf-form">
+		<code-editor content="ctrl.json" data-mode="json" data-max-lines=30></code-editor>
+	</div>
+
+	<div class="gf-form-button-row">
+		<button class="btn btn-success" ng-click="ctrl.saveDashboardJson()" ng-show="ctrl.canSave">
+			<i class="fa fa-save"></i> Save Changes
+		</button>
+	</div>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'permissions'" >
-  <dashboard-permissions ng-if="ctrl.dashboard && !ctrl.hasUnsavedFolderChange"
-    dashboardId="ctrl.dashboard.id"
-    backendSrv="ctrl.backendSrv"
-    folder="ctrl.getFolder()"
-  />
-  <div ng-if="ctrl.hasUnsavedFolderChange">
-    <h5>You have changed folder, please save to view permissions.</h5>
-  </div>
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'permissions'">
+	<dashboard-permissions ng-if="ctrl.dashboard && !ctrl.hasUnsavedFolderChange" dashboardId="ctrl.dashboard.id"
+		backendSrv="ctrl.backendSrv" folder="ctrl.getFolder()" />
+	<div ng-if="ctrl.hasUnsavedFolderChange">
+		<h5>You have changed folder, please save to view permissions.</h5>
+	</div>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === '404'">
-  <h3 class="dashboard-settings__header">Settings view not found</h3>
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === '404'">
+	<h3 class="dashboard-settings__header">Settings view not found</h3>
 
-  <div>
-    <h5>The settings page could not be found or you do not have permission to access it</h5>
-  </div>
+	<div>
+		<h5>The settings page could not be found or you do not have permission to access it</h5>
+	</div>
 </div>
 
-<div class="dashboard-settings__content" ng-if="ctrl.viewId === 'make_editable'">
-  <h3 class="dashboard-settings__header">Make Editable</h3>
+<div class="dashboard-settings__content p-1" ng-if="ctrl.viewId === 'make_editable'">
+	<h3 class="dashboard-settings__header">Make Editable</h3>
 
-  <button class="btn btn-success" ng-click="ctrl.makeEditable()">
-    Make Editable
-  </button>
+	<button class="btn btn-success" ng-click="ctrl.makeEditable()">
+		Make Editable
+	</button>
 </div>
-

@@ -401,6 +401,7 @@ func (hs *HTTPServer) setIndexViewDataForRbacUser(externalUserId string, externa
 						Icon:         "gicon gicon-user",
 						Url:          setting.AppSubUrl + "/org/users",
 						HideFromMenu: true,
+						HideFromTabs: true,
 					},
 					{
 						Text:         "Teams",
@@ -409,6 +410,7 @@ func (hs *HTTPServer) setIndexViewDataForRbacUser(externalUserId string, externa
 						Icon:         "gicon gicon-team",
 						Url:          setting.AppSubUrl + "/org/teams",
 						HideFromMenu: true,
+						HideFromTabs: true,
 					},
 					{
 						Text:         "Plugins",
@@ -885,6 +887,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 					Icon:         "gicon gicon-user",
 					Url:          setting.AppSubUrl + "/org/users",
 					HideFromMenu: true,
+					HideFromTabs: true,
 				},
 				{
 					Text:         "Teams",
@@ -893,6 +896,7 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 					Icon:         "gicon gicon-team",
 					Url:          setting.AppSubUrl + "/org/teams",
 					HideFromMenu: true,
+					HideFromTabs: true,
 				},
 				{
 					Text:         "Plugins",
