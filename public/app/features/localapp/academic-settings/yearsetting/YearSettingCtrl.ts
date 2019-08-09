@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import * as moment from 'moment';
 
 export class YearSettingCtrl {
   academicYears: any;
@@ -43,13 +44,19 @@ export class YearSettingCtrl {
       });
     };
     $scope.createYear = cb => {
-      if ($scope.academicYear.startDate === $scope.academicYear.endDate) {
+      const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
+      const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
+
+      console.log('start date : ', stDt);
+      console.log('end date : ', enDt);
+
+      if (stDt.isSame(enDt)) {
         if (cb) {
           cb('3');
         }
         return;
       }
-      if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
+      if (enDt.isBefore(stDt)) {
         if (cb) {
           cb('2');
         }
@@ -61,6 +68,13 @@ export class YearSettingCtrl {
       if ($scope.academicYear.status === undefined || $scope.academicYear.status === null) {
         $scope.academicYear.status = 'DEACTIVE';
       }
+
+      $scope.academicYear.strStartDate = new Date($scope.academicYear.startDate).toLocaleDateString();
+      $scope.academicYear.strEndDate = new Date($scope.academicYear.endDate).toLocaleDateString();
+      //new Date($scope.academicYear.endDate).toLocaleDateString();
+      console.log('start String date : ', $scope.academicYear.strStartDate);
+      console.log('end String date : ', $scope.academicYear.strEndDate);
+
       backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
           appEvents.emit('get_academicyears', {});
@@ -78,13 +92,19 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
-      if ($scope.academicYear.startDate === $scope.academicYear.endDate) {
+      const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
+      const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
+
+      console.log('update - start date : ', stDt);
+      console.log('update - end date : ', enDt);
+
+      if (stDt.isSame(enDt)) {
         if (cb) {
           cb('3');
         }
         return;
       }
-      if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
+      if (enDt.isBefore(stDt)) {
         if (cb) {
           cb('2');
         }
@@ -96,6 +116,9 @@ export class YearSettingCtrl {
       if ($scope.academicYear.status === undefined || $scope.academicYear.status === null) {
         $scope.academicYear.status = 'DEACTIVE';
       }
+
+      $scope.academicYear.strStartDate = new Date($scope.academicYear.startDate).toLocaleDateString();
+      $scope.academicYear.strEndDate = new Date($scope.academicYear.endDate).toLocaleDateString();
       backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
           appEvents.emit('get_academicyears', {});
@@ -156,11 +179,13 @@ export class YearSettingCtrl {
   }
 
   editYear(academicYear) {
-    academicYear.startDate = academicYear.startDate.toString();
-    academicYear.endDate = academicYear.endDate.toString();
+    const stDt = moment.utc(academicYear.strStartDate, 'DD-MM-YYYY');
+    const ndDt = moment.utc(academicYear.strEndDate, 'DD-MM-YYYY');
     appEvents.emit('year-modal', {
       icon: 'fa-trash',
       text: 'update',
+      startDateVal: moment.utc(stDt).format('YYYY-MM-DD'),
+      endDateVal: moment.utc(ndDt).format('YYYY-MM-DD'),
       academicYear: academicYear,
       onUpdate: (yearForm, academicYear, cb) => {
         this.$scope.yearForm = yearForm;

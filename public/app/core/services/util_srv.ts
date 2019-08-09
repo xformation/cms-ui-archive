@@ -166,6 +166,8 @@ export class UtilSrv {
   yearModal(payload) {
     const scope = this.$rootScope.$new();
     scope.text = payload.text;
+    scope.startDateVal = payload.startDateVal;
+    scope.endDateVal = payload.endDateVal;
     scope.academicYear = payload.academicYear;
     scope.is_success_bar = '';
     scope.createYear = () => {
