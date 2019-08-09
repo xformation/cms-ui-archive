@@ -43,6 +43,12 @@ export class YearSettingCtrl {
       });
     };
     $scope.createYear = cb => {
+      if ($scope.academicYear.startDate === $scope.academicYear.endDate) {
+        if (cb) {
+          cb('3');
+        }
+        return;
+      }
       if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
         if (cb) {
           cb('2');
@@ -51,6 +57,9 @@ export class YearSettingCtrl {
       }
       if (!$scope.yearForm.$valid) {
         return;
+      }
+      if ($scope.academicYear.status === undefined || $scope.academicYear.status === null) {
+        $scope.academicYear.status = 'DEACTIVE';
       }
       backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
@@ -69,6 +78,12 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
+      if ($scope.academicYear.startDate === $scope.academicYear.endDate) {
+        if (cb) {
+          cb('3');
+        }
+        return;
+      }
       if ($scope.academicYear.startDate > $scope.academicYear.endDate) {
         if (cb) {
           cb('2');
@@ -77,6 +92,9 @@ export class YearSettingCtrl {
       }
       if (!$scope.yearForm.$valid) {
         return;
+      }
+      if ($scope.academicYear.status === undefined || $scope.academicYear.status === null) {
+        $scope.academicYear.status = 'DEACTIVE';
       }
       backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
         () => {
@@ -138,6 +156,8 @@ export class YearSettingCtrl {
   }
 
   editYear(academicYear) {
+    academicYear.startDate = academicYear.startDate.toString();
+    academicYear.endDate = academicYear.endDate.toString();
     appEvents.emit('year-modal', {
       icon: 'fa-trash',
       text: 'update',
