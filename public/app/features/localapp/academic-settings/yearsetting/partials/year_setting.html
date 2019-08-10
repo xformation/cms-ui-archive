@@ -54,11 +54,11 @@
     <div class="authorized-signatory-container m-b-1 dflex bg-heading ">
       <h4 class="ptl-06">Academic Year</h4>
       <div ng-class="{'hide':ctrl.activeBtnIndex === 1}">
-        <a class="btn btn-primary" ng-click="ctrl.activateBtn(1)">Add Holiday</a>
+        <a class="btn btn-primary" ng-click="ctrl.activateBtn(1);">Add Holiday</a>
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
       <div ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
-        <a class="btn btn-primary" ng-click="createHoliday(); ctrl.activateBtn(0)">Save</a>
+        <a class="btn btn-primary" ng-click="createHoliday(); ">Save</a>
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
     </div>
@@ -93,10 +93,10 @@
           <tr ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
             <td class="text-center link-td"></td>
             <td class="text-center link-td">
-              <input type="text" required ng-model="holiday.holidayDesc" class="gf-form-input" />
+              <input type="text" required id="txtHolidayDesc" ng-model="holiday.holidayDesc" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date" z required ng-model="holiday.holidayDate" class="gf-form-input" />
+              <input type="date"  required id="dtHolidayDate" ng-model="holiday.holidayDate" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">

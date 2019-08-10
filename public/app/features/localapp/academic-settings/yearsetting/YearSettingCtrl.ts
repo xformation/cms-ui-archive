@@ -21,17 +21,37 @@ export class YearSettingCtrl {
     // this.getHolidays();
     // this.getTerms();
     this.getYears();
-    $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
+    // $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
     $scope.createHoliday = () => {
-      if (!$scope.holidayForm.$valid) {
+      if ($scope.holiday === undefined) {
+        alert('Please provice holiday description and holiday date');
         return;
       }
+      if (
+        $scope.holiday.holidayDesc === undefined ||
+        $scope.holiday.holidayDesc === null ||
+        $scope.holiday.holidayDesc === ''
+      ) {
+        alert('Please provice holiday description');
+        return;
+      }
+      if (
+        $scope.holiday.holidayDate === undefined ||
+        $scope.holiday.holidayDate === null ||
+        $scope.holiday.holidayDate === ''
+      ) {
+        alert('Please provice holiday date');
+        return;
+      }
+      $scope.holiday.strHolidayDate = new Date($scope.holiday.holidayDate).toLocaleDateString();
 
       $scope.holiday.academicyear = this.selectedAcademicYear;
       backendSrv.post(this.RestUrl.getHolidayRestUrl(), $scope.holiday).then(() => {
         this.getHolidays(this.selectedAcademicYear.id);
       });
+      $scope.holiday = {};
     };
+
     $scope.terms = { termsDesc: '', startDate: '', endDate: '', termStatus: 'ACTIVE' };
     $scope.createTerm = () => {
       if (!$scope.termForm.$valid) {
@@ -43,6 +63,7 @@ export class YearSettingCtrl {
         this.getTerms(this.selectedAcademicYear.id);
       });
     };
+
     $scope.createYear = cb => {
       const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
       const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
