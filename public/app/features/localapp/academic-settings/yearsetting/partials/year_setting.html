@@ -93,10 +93,10 @@
           <tr ng-class="{'hide':ctrl.activeBtnIndex !== 1}">
             <td class="text-center link-td"></td>
             <td class="text-center link-td">
-              <input type="text" required id="txtHolidayDesc" ng-model="holiday.holidayDesc" class="gf-form-input" />
+              <input type="text" required id="txtHolidayDesc" ng-model="holiday.holidayDesc" maxlength="255" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date"  required id="dtHolidayDate" ng-model="holiday.holidayDate" class="gf-form-input" />
+              <input type="date"  required id="dtHolidayDate" ng-model="holiday.holidayDate" maxlength="10" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">
