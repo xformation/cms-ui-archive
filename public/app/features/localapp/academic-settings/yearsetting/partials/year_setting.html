@@ -121,7 +121,7 @@
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
       <div ng-class="{'hide':ctrl.activeBtnIndex !== 2}">
-        <a class="btn btn-primary" ng-click="createTerm(); ctrl.activateBtn(0)">Save</a>
+        <a class="btn btn-primary" ng-click="createTerm(); ">Save</a>
         <a class="btn btn-primary" ng-click="ctrl.activateTab(0); unMarkAcademicYear(); ctrl.activateBtn(0);">Back</a>
       </div>
     </div>
@@ -164,13 +164,13 @@
 
             </td>
             <td class="text-center link-td">
-              <input type="text" required ng-model="term.termsDesc" class="gf-form-input" />
+              <input type="text" required ng-model="term.termsDesc" maxlength="255" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date" required ng-model="term.startDate" class="gf-form-input" />
+              <input type="date" required ng-model="term.startDate" maxlength="10" class="gf-form-input" />
             </td>
             <td class="text-center link-td">
-              <input type="date" required ng-model="term.endDate" class="gf-form-input" />
+              <input type="date" required ng-model="term.endDate" maxlength="10" class="gf-form-input" />
             </td>
             <td>
               <label class="switch">

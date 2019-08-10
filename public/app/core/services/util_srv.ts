@@ -183,6 +183,7 @@ export class UtilSrv {
       payload.onUpdate(scope.yearForm, scope.academicYear, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
+          scope.academicYear = {};
           scope.dismiss();
         }, 3000);
       });

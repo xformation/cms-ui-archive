@@ -24,7 +24,7 @@ export class YearSettingCtrl {
     // $scope.holidays = { holidaysDesc: '', holidayDate: '', holidayStatus: 'ACTIVE' };
     $scope.createHoliday = () => {
       if ($scope.holiday === undefined) {
-        alert('Please provice holiday description and holiday date');
+        alert('Please provide holiday details');
         return;
       }
       if (
@@ -32,7 +32,7 @@ export class YearSettingCtrl {
         $scope.holiday.holidayDesc === null ||
         $scope.holiday.holidayDesc === ''
       ) {
-        alert('Please provice holiday description');
+        alert('Please provide holiday description');
         return;
       }
       if (
@@ -40,7 +40,7 @@ export class YearSettingCtrl {
         $scope.holiday.holidayDate === null ||
         $scope.holiday.holidayDate === ''
       ) {
-        alert('Please provice holiday date');
+        alert('Please provide holiday date');
         return;
       }
       $scope.holiday.strHolidayDate = new Date($scope.holiday.holidayDate).toLocaleDateString();
@@ -52,16 +52,45 @@ export class YearSettingCtrl {
       $scope.holiday = {};
     };
 
-    $scope.terms = { termsDesc: '', startDate: '', endDate: '', termStatus: 'ACTIVE' };
+    // $scope.terms = { termsDesc: '', startDate: '', endDate: '', termStatus: 'ACTIVE' };
     $scope.createTerm = () => {
-      if (!$scope.termForm.$valid) {
+      if ($scope.term === undefined) {
+        alert('Please provide term details');
         return;
       }
+      if ($scope.term.termsDesc === undefined || $scope.term.termsDesc === null || $scope.term.termsDesc === '') {
+        alert('Please provide term description');
+        return;
+      }
+      if ($scope.term.startDate === undefined || $scope.term.startDate === null || $scope.term.startDate === '') {
+        alert('Please provide term start date');
+        return;
+      }
+      if ($scope.term.endDate === undefined || $scope.term.endDate === null || $scope.term.endDate === '') {
+        alert('Please provide term end date');
+        return;
+      }
+      const stDt = moment.utc($scope.term.startDate, 'MM/DD/YYYY');
+      const enDt = moment.utc($scope.term.endDate, 'MM/DD/YYYY');
+      if (stDt.isSame(enDt)) {
+        alert('Start and end date cannot be same');
+        return;
+      }
+      if (enDt.isBefore(stDt)) {
+        alert('Start and end date cannot overlap');
+        return;
+      }
+      $scope.term.strStartDate = new Date($scope.term.startDate).toLocaleDateString();
+      $scope.term.strEndDate = new Date($scope.term.endDate).toLocaleDateString();
+      // if (!$scope.termForm.$valid) {
+      //   return;
+      // }
 
       $scope.term.academicyear = this.selectedAcademicYear;
       backendSrv.post(this.RestUrl.getTermRestUrl(), $scope.term).then(() => {
         this.getTerms(this.selectedAcademicYear.id);
       });
+      $scope.term = {};
     };
 
     $scope.createYear = cb => {
@@ -77,7 +106,7 @@ export class YearSettingCtrl {
         }
         return;
       }
-      if (enDt.isBefore(stDt)) {
+      if (enDt.isBefore(stDt) || stDt.isAfter(enDt)) {
         if (cb) {
           cb('2');
         }
@@ -113,11 +142,19 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
-      const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
-      const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
+      let stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
+      let enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
+      if (!stDt.isValid() && $scope.academicYear.startDate === undefined) {
+        stDt = moment.utc($scope.academicYear.strStartDate, 'DD-MM-YYYY');
+      } else if (!stDt.isValid() && $scope.academicYear.startDate !== undefined) {
+        stDt = moment.utc($scope.academicYear.startDate, 'YYYY-MM-DD');
+      }
 
-      console.log('update - start date : ', stDt);
-      console.log('update - end date : ', enDt);
+      if (!enDt.isValid() && $scope.academicYear.endDate === undefined) {
+        enDt = moment.utc($scope.academicYear.strEndDate, 'DD-MM-YYYY');
+      } else if (!enDt.isValid() && $scope.academicYear.endDate !== undefined) {
+        enDt = moment.utc($scope.academicYear.endDate, 'YYYY-MM-DD');
+      }
 
       if (stDt.isSame(enDt)) {
         if (cb) {
@@ -202,6 +239,8 @@ export class YearSettingCtrl {
   editYear(academicYear) {
     const stDt = moment.utc(academicYear.strStartDate, 'DD-MM-YYYY');
     const ndDt = moment.utc(academicYear.strEndDate, 'DD-MM-YYYY');
+    academicYear.startDate = stDt;
+    academicYear.endDate = ndDt;
     appEvents.emit('year-modal', {
       icon: 'fa-trash',
       text: 'update',
