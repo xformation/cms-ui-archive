@@ -34,5 +34,6 @@ import './localapp/roles-permissions/permissions';
 import './localapp/roles-permissions/roles';
 import './localapp/roles-permissions/groups';
 import './localapp/roles-permissions/users';
+import './search-filter/searchFilterCtrl';
 import './teams/CreateTeamCtrl';
 import './profile/all';

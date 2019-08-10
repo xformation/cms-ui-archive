@@ -82,6 +82,10 @@ export class DashNavCtrl {
     appEvents.emit('show-dash-search');
   }
 
+  openSearchFilter() {
+    appEvents.emit('show-search-filter');
+  }
+
   addPanel() {
     appEvents.emit('dash-scroll', { animate: true, evt: 0 });
 
