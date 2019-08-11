@@ -36,13 +36,23 @@
       <a href="/" style="width: 18%; ">
         <img src="public/img/synectiks-white-logo.png" alt="" style="width: 100%;" />
       </a>
-      <h4 class="white-color">St. Joseph College</h4>
+      <!-- <h4 class="white-color">St. Joseph College -------</h4> -->
+      <h4 class="white-color">{{ctrl.globalSettings.college.shortName}}</h4>
       <!-- <a class="white-color" href="/localapp"> <i class="fa fa-cog" aria-hidden="true"></i> </a> -->
+      <h4 ng-if="user !== 'admin'" class="white-color">Branch - {{ctrl.globalSettings.branch.branchName}}</h4>
+			<h4 ng-if="user === 'admin'" class="white-color">Branch - 
+				<select class="" >
+					<option value="">Select Branch</option>
+					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{city.branchName}}</option>
+				</select>
+			</h4>
     </div>
     <div class="search-name">
-      <input type="search" name="" id="" placeholder="Search" />
-      <a href="/profile">Admin <i class="fa fa-angle-down" aria-hidden="true"> </i></a> <a href="/profile"
-        class="rnd">A</a>
+        <h6 class="white-color">Academic Year | {{ctrl.globalSettings.cmsAcademicYearVo.strStartDate}} - {{ctrl.globalSettings.cmsAcademicYearVo.strEndDate}}</h6>
+        <div>&nbsp;</div>
+        <input type="search" name="" id="" placeholder="Search" />
+      <!-- <a href="/profile">Admin <i class="fa fa-angle-down" aria-hidden="true"> </i></a> <a href="/profile"
+        class="rnd">A</a> -->
     </div>
   </div>
 </div>
