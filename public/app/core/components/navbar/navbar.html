@@ -50,9 +50,10 @@
     <div class="search-name">
         <h6 class="white-color">Academic Year | {{ctrl.globalSettings.cmsAcademicYearVo.strStartDate}} - {{ctrl.globalSettings.cmsAcademicYearVo.strEndDate}}</h6>
         <div>&nbsp;</div>
-        <input type="search" name="" id="" placeholder="Search" />
+        <input type="search" name="" id="" placeholder="Search" ng-click="ctrl.openSearchFilter()"/>
       <!-- <a href="/profile">Admin <i class="fa fa-angle-down" aria-hidden="true"> </i></a> <a href="/profile"
         class="rnd">A</a> -->
     </div>
   </div>
 </div>
+<dashboard-search-filter></dashboard-search-filter>

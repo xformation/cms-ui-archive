@@ -48,6 +48,10 @@ export class NavbarCtrl {
       this.selectedBranches = this.globalSettings.branchList;
     });
   }
+
+  openSearchFilter() {
+    appEvents.emit('show-search-filter');
+  }
 }
 
 export function navbarDirective() {
@@ -60,7 +64,7 @@ export function navbarDirective() {
     scope: {
       model: '=',
     },
-    link: (scope, elem) => {},
+    link: (scope, elem) => { },
   };
 }
 
