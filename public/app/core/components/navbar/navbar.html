@@ -39,8 +39,8 @@
       <!-- <h4 class="white-color">St. Joseph College -------</h4> -->
       <h4 class="white-color">{{ctrl.globalSettings.college.shortName}}</h4>
       <!-- <a class="white-color" href="/localapp"> <i class="fa fa-cog" aria-hidden="true"></i> </a> -->
-      <h4 ng-if="user !== 'admin'" class="white-color">Branch - {{ctrl.globalSettings.branch.branchName}}</h4>
-			<h4 ng-if="user === 'admin'" class="white-color">Branch - 
+      <h4 ng-if="ctrl.user !== 'admin'" class="white-color">Branch - {{ctrl.globalSettings.branch.branchName}}</h4>
+			<h4 ng-if="ctrl.user === 'admin'" class="white-color">Branch - 
 				<select class="" >
 					<option value="">Select Branch</option>
 					<option ng-repeat="branch in ctrl.selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>

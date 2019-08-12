@@ -7,9 +7,12 @@ export class NavbarCtrl {
   model: NavModel;
   globalSettings: any;
   selectedBranches: any;
+  user: any;
   /** @ngInject */
   constructor(private $rootScope, private contextSrv, private $timeout, private backendSrv) {
-    console.log('logged in user in navbar : ', contextSrv.user.login);
+    this.user = contextSrv.user.login;
+    console.log('logged in user in navbar : ', this.user);
+
     this.selectedBranches = {};
     this.getGlobalConfigurations(contextSrv.user.login);
   }
@@ -41,7 +44,7 @@ export class NavbarCtrl {
   getGlobalConfigurations(userName) {
     this.backendSrv.get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName).then(result => {
       this.globalSettings = result;
-      console.log('global settings in dashnav : ', this.globalSettings);
+      console.log('global settings in navbar : ', this.globalSettings);
       this.selectedBranches = this.globalSettings.branchList;
     });
   }
