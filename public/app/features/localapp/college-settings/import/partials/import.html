@@ -15,6 +15,7 @@
         <label class="form-h5">Entity</label>
         <select required ng-model="ctrl.entityId" required>
           <option value="">Select Entity</option>
+          <option value="all">All</option>
           <option ng-repeat="entity in ctrl.entities" value="{{entity}}">{{entity}}</option>
         </select>
       </div>

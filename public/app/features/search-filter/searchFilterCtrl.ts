@@ -3,6 +3,7 @@ import appEvents from 'app/core/app_events';
 
 export class SearchFilterCtrl {
     isOpen: boolean;
+    top: any;
     giveSearchFocus: number;
     /** @ngInject */
     constructor($scope, private $timeout) {
@@ -12,6 +13,8 @@ export class SearchFilterCtrl {
 
     hideSearch() {
         this.isOpen = false;
+        const overflowComponent: any = document.querySelector(".scroll-canvas");
+        overflowComponent.style.overflow = "auto";
     }
 
     showSearch() {
@@ -19,6 +22,10 @@ export class SearchFilterCtrl {
         this.giveSearchFocus = 0;
         this.$timeout(() => {
             this.giveSearchFocus = this.giveSearchFocus + 1;
+            const overflowComponent: any = document.querySelector(".scroll-canvas");
+            overflowComponent.style.overflow = "hidden";
+            const navBar = document.querySelector(".page-nav");
+            this.top = navBar.clientHeight;
         }, 100);
     }
 

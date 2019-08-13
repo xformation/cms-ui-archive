@@ -1,12 +1,12 @@
-<div class="search-backdrop" ng-if="ctrl.isOpen" ng-click="ctrl.hideSearch()">
+<div class="search-backdrop" ng-if="ctrl.isOpen" ng-click="ctrl.hideSearch()" ng-style="{'top':ctrl.top}">
 </div>
-<div class="search-filter-field-wrapper" ng-if="ctrl.isOpen">
+<!-- <div class="search-filter-field-wrapper" ng-if="ctrl.isOpen">
     <div class="search-field-icon pointer" ng-click="ctrl.hideSearch()"><i class="fa fa-close"></i></div>
     <input type="text" placeholder="Find" give-focus="ctrl.giveSearchFocus" tabindex="1" give-focus="ctrl.giveSearchFocus" ng-keydown="ctrl.onKeyDownOnSearch($event)"
     />
     <div class="search-field-spacer"></div>
-</div>
-<div class="search-filter-container" ng-if="ctrl.isOpen">
+</div> -->
+<div class="search-filter-container" ng-if="ctrl.isOpen" ng-style="{'top':ctrl.top}">
     <div class="search-dropdown">
         <div class="search-dropdown__col_1">
             <div class="search-results-scroller">
