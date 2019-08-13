@@ -662,9 +662,37 @@ table#tmtd {
   h4 {
     border-right: 1px solid #cecece;
     padding-right: 1rem;
-    margin-right: 1rem;
+    margin-right: 0.8rem;
     margin-bottom: 0;
     margin-left: 1rem;
+  }
+}
+
+.search-width {
+  width: 100px;
+  height: 30px;
+  background-color: #447aae;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.mt-half {
+  margin-top: 5px;
+}
+
+.cust-style {
+  font-size: 16px;
+  color: white;
+  select {
+    width: 100%;
+    border: 0px solid #dde4ed;
+    background: none !important;
+    font-size: 16px;
+    color: white;
+    option {
+      background: white;
+      color: black;
+    }
   }
 }
 
