@@ -12,6 +12,8 @@ export class SearchFilterCtrl {
 
     hideSearch() {
         this.isOpen = false;
+        let overflowComponent: any = document.querySelector(".scroll-canvas");
+        overflowComponent.style.overflow = "auto";
     }
 
     showSearch() {
@@ -19,6 +21,8 @@ export class SearchFilterCtrl {
         this.giveSearchFocus = 0;
         this.$timeout(() => {
             this.giveSearchFocus = this.giveSearchFocus + 1;
+            let overflowComponent: any = document.querySelector(".scroll-canvas");
+            overflowComponent.style.overflow = "hidden";
         }, 100);
     }
 
