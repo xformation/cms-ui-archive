@@ -12,7 +12,8 @@ export class PaymentCtrl {
     this.activeTabIndex = 0;
     this.query = '';
     this.$scope = $scope;
-    this.providerURl = 'https://uat.billdesk.com/pgidsk/PGIMerchantRequestHandler';
+    this.providerURl = 'https://uat.billdesk.com/pgidsk/PGIMerchantPayment';
+    //'https://uat.billdesk.com/pgidsk/PGIMerchantRequestHandler';
     $scope.doPayment = () => {
       if (!$scope.paymentForm.$valid) {
         alert('Please enter amount to pay');
