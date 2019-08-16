@@ -684,7 +684,7 @@ table#tmtd {
   font-size: 16px;
   color: white;
   select {
-    width: 100%;
+    width: 150px;
     border: 0px solid #dde4ed;
     background: none !important;
     font-size: 16px;
@@ -694,6 +694,10 @@ table#tmtd {
       color: black;
     }
   }
+}
+
+.dark-blue {
+  background: #1486c7;
 }
 
 .search-name {
