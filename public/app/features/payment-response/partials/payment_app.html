@@ -1,4 +1,11 @@
 <navbar model="ctrl.navModel"></navbar>
-<div>
-  <h1>Payment Response </h1>
-</div>
+<form name="pmtRsp" method="POST">
+  <div>
+    <h1>Payment Status</h1>
+    <label class="gf-form-label b-0 bg-transparent">Transaction Status: {{ctrl.txnStatus}}</label>
+    <label class="gf-form-label b-0 bg-transparent">Transaction Reference No: {{ctrl.txnRefNo}}</label>
+    <label class="gf-form-label b-0 bg-transparent">Transaction Date: {{ctrl.txnDate}}</label>
+    <label class="gf-form-label b-0 bg-transparent">Transaction Amount: {{ctrl.txnAmt}}</label>
+  </div>
+</form>
+

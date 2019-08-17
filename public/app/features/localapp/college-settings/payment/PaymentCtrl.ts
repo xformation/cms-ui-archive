@@ -21,6 +21,13 @@ export class PaymentCtrl {
       }
       this.getMessage($scope.pmt.amount);
     };
+    $scope.create = () => {
+      if (!$scope.paymentForm.$valid) {
+        alert('Please enter amount to pay');
+        return;
+      }
+      this.getMessage($scope.pmt.amount);
+    };
   }
 
   activateTab(tabIndex) {
@@ -34,5 +41,6 @@ export class PaymentCtrl {
       window.location.href = this.providerURl + '?msg=' + result.statusDesc;
     });
   }
+
   navigateToPage(page) {}
 }
