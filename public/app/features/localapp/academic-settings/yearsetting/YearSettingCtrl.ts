@@ -1,5 +1,7 @@
 import { appEvents } from 'app/core/core';
-import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+// import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import { config } from '../../config';
+
 import * as moment from 'moment';
 
 export class YearSettingCtrl {
@@ -10,11 +12,11 @@ export class YearSettingCtrl {
   activeTabIndex = 0;
   activeBtnIndex = 0;
   $scope: any;
-  RestUrl: any;
+  // RestUrl: any;
   selectedAcademicYear: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
-    this.RestUrl = new GlobalRestUrlConstants();
+    // this.RestUrl = new GlobalRestUrlConstants();
     this.activeTabIndex = 0;
     this.activeBtnIndex = 0;
     this.$scope = $scope;
@@ -46,7 +48,7 @@ export class YearSettingCtrl {
       $scope.holiday.strHolidayDate = new Date($scope.holiday.holidayDate).toLocaleDateString();
 
       $scope.holiday.academicyear = this.selectedAcademicYear;
-      backendSrv.post(this.RestUrl.getHolidayRestUrl(), $scope.holiday).then(() => {
+      backendSrv.post(config.CMS_HOLIDAY_URL, $scope.holiday).then(() => {
         this.getHolidays(this.selectedAcademicYear.id);
       });
       $scope.holiday = {};
@@ -87,13 +89,21 @@ export class YearSettingCtrl {
       // }
 
       $scope.term.academicyear = this.selectedAcademicYear;
-      backendSrv.post(this.RestUrl.getTermRestUrl(), $scope.term).then(() => {
+      backendSrv.post(config.CMS_TERM_URL, $scope.term).then(() => {
         this.getTerms(this.selectedAcademicYear.id);
       });
       $scope.term = {};
     };
 
     $scope.createYear = cb => {
+      for (let i = 0; i < this.academicYears.length; i++) {
+        if (this.academicYears[i].status === 'ACTIVE' && $scope.academicYear.status === 'ACTIVE') {
+          if (cb) {
+            cb('4');
+          }
+          return;
+        }
+      }
       const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
       const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
 
@@ -125,7 +135,7 @@ export class YearSettingCtrl {
       console.log('start String date : ', $scope.academicYear.strStartDate);
       console.log('end String date : ', $scope.academicYear.strEndDate);
 
-      backendSrv.post(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
+      backendSrv.post(config.CMS_ACADEMICYEAR_URL, $scope.academicYear).then(
         () => {
           appEvents.emit('get_academicyears', {});
           this.getYears();
@@ -142,6 +152,14 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
+      for (let i = 0; i < this.academicYears.length; i++) {
+        if (this.academicYears[i].status === 'ACTIVE' && $scope.academicYear.status === 'ACTIVE') {
+          if (cb) {
+            cb('4');
+          }
+          return;
+        }
+      }
       let stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
       let enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
       if (!stDt.isValid() && $scope.academicYear.startDate === undefined) {
@@ -177,7 +195,7 @@ export class YearSettingCtrl {
 
       $scope.academicYear.strStartDate = new Date($scope.academicYear.startDate).toLocaleDateString();
       $scope.academicYear.strEndDate = new Date($scope.academicYear.endDate).toLocaleDateString();
-      backendSrv.put(this.RestUrl.getAcademicYearRestUrl(), $scope.academicYear).then(
+      backendSrv.put(config.CMS_ACADEMICYEAR_URL, $scope.academicYear).then(
         () => {
           appEvents.emit('get_academicyears', {});
           this.getYears();
@@ -203,23 +221,19 @@ export class YearSettingCtrl {
   }
 
   getHolidays(academicYearId) {
-    this.backendSrv
-      .get(this.RestUrl.getHolidayByAcademicYearIdRestUrl() + '?academicYearId=' + academicYearId)
-      .then(result => {
-        this.holidays = result;
-      });
+    this.backendSrv.get(config.CMS_HOLIDAY_BY_ACYEAR_URL + '?academicYearId=' + academicYearId).then(result => {
+      this.holidays = result;
+    });
   }
 
   getTerms(academicYearId) {
-    this.backendSrv
-      .get(this.RestUrl.getTermByAcademicYearIdRestUrl() + '?academicYearId=' + academicYearId)
-      .then(result => {
-        this.terms = result;
-      });
+    this.backendSrv.get(config.CMS_TERM_BY_ACYEAR_URL + '?academicYearId=' + academicYearId).then(result => {
+      this.terms = result;
+    });
   }
 
   getYears() {
-    this.backendSrv.get(this.RestUrl.getAcademicYearRestUrl()).then(result => {
+    this.backendSrv.get(config.CMS_ACADEMICYEAR_URL).then(result => {
       this.academicYears = result;
     });
   }
@@ -262,7 +276,7 @@ export class YearSettingCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete(this.RestUrl.getAcademicYearRestUrl() + academicYear.id).then(() => {
+        this.backendSrv.delete(config.CMS_ACADEMICYEAR_URL + academicYear.id).then(() => {
           appEvents.emit('get_academicyears', {});
           this.getYears();
         });

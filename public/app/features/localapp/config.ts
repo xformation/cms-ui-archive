@@ -19,4 +19,18 @@ export const config = {
   CMS_GLOBAL_CONFIG_URL: apiUrl + '/api/cmssettings',
   COLLEGE_URL: apiUrl + '/api/cmscollege',
   PAYMENT_MSG_URL: apiUrl + '/api/cmspayment',
+
+  CMS_SEMESTER_URL: apiUrl + '/api/cmssemesters/',
+  CMS_TERM_BY_ACYEAR_URL: apiUrl + '/api/cmsterms-by_academicyearid',
+  CMS_DEPARTMENT_BY_BRANCH_URL: apiUrl + '/api/cmsdepartments-branchid/',
+  CMS_BATCH_BY_DEPARTMENT_URL: apiUrl + '/api/cmsbatches-departmentid/',
+  CMS_SECTION_BY_BATCH_URL: apiUrl + '/api/cmssections-batchid/',
+  CMS_LECTURE_URL: apiUrl + '/api/cmslectures',
+  CMS_AM_BY_BATCH_SECTION_URL: apiUrl + '/api/cmsattendance-masters-bybatchsection',
+  CMS_META_LECTURE_URL: apiUrl + '/api/cmsmeta-lecture-selected',
+  CMS_META_LECTURE_VIEW_ALL_URL: apiUrl + '/api/cmsmeta-lecture-viewalllectures',
+  CMS_HOLIDAY_URL: apiUrl + '/api/cmsholidays/',
+  CMS_TERM_URL: apiUrl + '/api/cmsterms/',
+  CMS_ACADEMICYEAR_URL: apiUrl + '/api/cmsacademic-years/',
+  CMS_HOLIDAY_BY_ACYEAR_URL: apiUrl + '/api/cmsholidays-by_academicyearid',
 };
