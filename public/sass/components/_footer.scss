@@ -1,19 +1,22 @@
 .page-dashboard .footer {
-  display: none;
+  // display: none;
 }
 
 .footer {
-  color: $footer-link-color;
+  color: $gray-1;
+  background: #ccd7e4;
   padding: 1rem 0 1rem 0;
   font-size: $font-size-sm;
-  position: relative;
-  width: 98%; /* was causing horiz scrollbars - need to examine */
+  position: fixed;
+  bottom: 0px;
+  width: 100%; /* was causing horiz scrollbars - need to examine */
 
   a {
-    color: $footer-link-color;
+    color: $gray-1;
 
     &:hover {
       color: $footer-link-hover;
+      border-bottom: 1px $footer-link-hover solid;
     }
   }
 
