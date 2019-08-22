@@ -1095,3 +1095,29 @@ table.staff-management-table {
   font-size: 1.2rem;
   color: #3697ef;
 }
+
+// payment
+
+.cust-h-w {
+  height: 27px;
+  width: 100px !important;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: -2px;
+}
+
+.label-color {
+  color: rgb(78, 144, 203) !important;
+  padding-right: 4px;
+}
+
+.payment-container {
+  width: 500px;
+  background: #dbe0e7;
+  margin: 1rem auto 1rem auto;
+  padding: 1rem;
+}
+
+#paymt-border {
+  background-color: white !important;
+}

@@ -1,14 +1,52 @@
 <div class="page-container page-body legal-entities-main-container">
   <div class="authorized-signatory-container m-b-1">
+    <h3>Summary </h3>
+    <div class="authorized-signatory-container m-t-1 m-b-1">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Student Name: </span>
+          <span>Rahul</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Student Id: </span>
+          <span>1122</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Department: </span>
+          <span>CSE</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Year: </span>
+          <span>1st Year</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Section: </span>
+          <span>A</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Total Fee: </span>
+          <span>125000</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-2 m-b-1">
+          <span class="label-color">Fees Due: </span>
+          <span>50000</span>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 m-b-1">
+          <span class="label-color">Due Date: </span>
+          <span>01/09/2019</span>
+        </div>
+      </div>
+    </div>
     <h3>Make a Secure Payment</h3>
+  </div>
+  <div class="p-flex">
+    <form name="paymentForm" class="gf-form-group section m-b-1">
+      <input type="number" placeholder="Enter amount" id="pmt" required ng-model="pmt.amount" />
+      <input class="btn btn-primary cust-h-w" type="button" id="btnPay" value="Pay" ng-click="doPayment()" />
+    </form>
 
   </div>
-  <div class="p-flex"> 
-      <form name="paymentForm" class="gf-form-group section m-b-1">
-          <input type="number" id="pmt" required ng-model="pmt.amount"/>
-          <input type="button" id="btnPay" value="Pay" ng-click="doPayment()"/>
-      </form>
-    
-  </div>
-  
+
 </div>

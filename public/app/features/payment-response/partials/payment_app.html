@@ -1,11 +1,24 @@
 <navbar model="ctrl.navModel"></navbar>
-<form name="pmtRsp" method="POST">
-  <div>
+<div class="fwidth">
+  <form name="pmtRsp" class="payment-container" method="POST">
     <h1>Payment Status</h1>
-    <label class="gf-form-label b-0 bg-transparent">Transaction Status: {{ctrl.txnStatus}}</label>
-    <label class="gf-form-label b-0 bg-transparent">Transaction Reference No: {{ctrl.txnRefNo}}</label>
-    <label class="gf-form-label b-0 bg-transparent">Transaction Date: {{ctrl.txnDate}}</label>
-    <label class="gf-form-label b-0 bg-transparent">Transaction Amount: {{ctrl.txnAmt}}</label>
-  </div>
-</form>
-
+    <table class="fwidth" id="paymt-border">
+      <tr>
+        <td><label class="gf-form-label b-0 bg-transparent">Transaction Status:</label></td>
+        <td><label class="gf-form-label b-0 bg-transparent">{{ctrl.txnStatus}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="gf-form-label b-0 bg-transparent">Transaction Reference No:</label></td>
+        <td><label class="gf-form-label b-0 bg-transparent">{{ctrl.txnRefNo}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="gf-form-label b-0 bg-transparent">Transaction Date:</label></td>
+        <td><label class="gf-form-label b-0 bg-transparent">{{ctrl.txnDate}}</label></td>
+      </tr>
+      <tr>
+        <td><label class="gf-form-label b-0 bg-transparent">Transaction Amount:</label></td>
+        <td><label class="gf-form-label b-0 bg-transparent">{{ctrl.txnAmt}}</label></td>
+      </tr>
+    </table>
+  </form>
+</div>
