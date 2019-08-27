@@ -1,7 +1,10 @@
 <navbar model="ctrl.navModel"></navbar>
-<div class="fwidth">
+<div class="fwidth section-to-print">
   <form name="pmtRsp" class="payment-container" method="POST">
-    <h1>Payment Status</h1>
+    <div class="dflex">
+      <h1>Payment Status</h1>
+      <button class="btn btn-primary dont-print" onclick="print()">Print</button>
+    </div>
     <table class="fwidth" id="paymt-border">
       <tr>
         <td><label class="gf-form-label b-0 bg-transparent">Transaction Status:</label></td>
