@@ -106,7 +106,7 @@ func initContextWithUserSessionCookie(ctx *m.ReqContext, orgId int64) bool {
 		var signedInUser = &m.SignedInUser{
 			Name:   userName,
 			Login:  userName,
-			OrgId:  orgId,
+			OrgId:  1,
 			UserId: userId,
 			Email:  userName,
 		}
