@@ -259,7 +259,7 @@ func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid
 	keyMap["type"] = "constant"
 
 	var templateWithUser []interface{}
-	templateWithUser = append(templateWithUser, keyMap)
+	//templateWithUser = append(templateWithUser, keyMap)
 
 	var rs, err = query.Result.Data.Map()
 	if err != nil {
@@ -268,9 +268,18 @@ func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid
 	tmp := rs["templating"]
 	var ls = tmp.(map[string]interface{})["list"]
 	var obj = ls.([]interface{})
+	var isCurrntUserExists = false
 	for _, vv := range obj {
 		templateWithUser = append(templateWithUser, vv)
+		var tmpMap = vv.(map[string]interface{})
+		if tmpMap["name"] == "CurrentUser" {
+			isCurrntUserExists = true
+		}
 	}
+	if !isCurrntUserExists {
+		templateWithUser = append(templateWithUser, keyMap)
+	}
+
 	obj = templateWithUser
 	tmp.(map[string]interface{})["list"] = obj
 	query.Result.Data.Set("templating", tmp)

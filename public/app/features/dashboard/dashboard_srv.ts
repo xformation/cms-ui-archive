@@ -119,6 +119,14 @@ export class DashboardSrv {
     }
 
     if (this.dash.version > 0) {
+      const newDash: any = [];
+      this.dash.originalTemplating.forEach(element => {
+        if (element.name !== 'CurrentUser') {
+          newDash.push(element);
+        }
+      });
+      this.dash.originalTemplating = newDash;
+      console.log('Dashboard variables after removing CurrentUser variable ::::::::::: ', this.dash.originalTemplating);
       return this.showSaveModal();
     }
 
