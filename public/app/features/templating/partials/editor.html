@@ -48,17 +48,23 @@
 				<tbody>
 					<tr ng-repeat="variable in variables">
 						<td style="width: 1%">
-							<span ng-click="edit(variable)" class="pointer template-variable">
+							<span ng-if="variable.name === 'CurrentUser'" class="pointer template-variable">
+								${{variable.name}}
+							</span>
+							<span ng-if="variable.name !== 'CurrentUser'" ng-click="edit(variable)" class="pointer template-variable">
 								${{variable.name}}
 							</span>
 						</td>
-						<td style="max-width: 200px;" ng-click="edit(variable)" class="pointer max-width">
+						<td style="max-width: 200px;" ng-if="variable.name === 'CurrentUser'" class="pointer max-width">
+							{{variable.definition ? variable.definition : variable.query}}
+						</td>
+						<td style="max-width: 200px;" ng-if="variable.name !== 'CurrentUser'" ng-click="edit(variable)" class="pointer max-width">
 							{{variable.definition ? variable.definition : variable.query}}
 						</td>
 						<td style="width: 1%"><i ng-click="_.move(variables,$index,$index-1)" ng-hide="$first" class="pointer fa fa-arrow-up"></i></td>
 						<td style="width: 1%"><i ng-click="_.move(variables,$index,$index+1)" ng-hide="$last" class="pointer fa fa-arrow-down"></i></td>
 						<td style="width: 1%">
-							<a ng-click="duplicate(variable)" class="btn btn-inverse btn-mini">
+							<a ng-if="variable.name !== 'CurrentUser'" ng-click="duplicate(variable)" class="btn btn-inverse btn-mini">
 								Duplicate
 							</a>
 						</td>

@@ -12,7 +12,7 @@ import (
 func GetDashboardPermissionList(c *m.ReqContext) Response {
 	dashID := c.ParamsInt64(":dashboardId")
 
-	_, rsp := getDashboardHelper(c.OrgId, "", dashID, "")
+	_, rsp := getDashboardHelper(c, c.OrgId, "", dashID, "")
 	if rsp != nil {
 		return rsp
 	}
@@ -45,7 +45,7 @@ func GetDashboardPermissionList(c *m.ReqContext) Response {
 func UpdateDashboardPermissions(c *m.ReqContext, apiCmd dtos.UpdateDashboardAclCommand) Response {
 	dashID := c.ParamsInt64(":dashboardId")
 
-	_, rsp := getDashboardHelper(c.OrgId, "", dashID, "")
+	_, rsp := getDashboardHelper(c, c.OrgId, "", dashID, "")
 	if rsp != nil {
 		return rsp
 	}

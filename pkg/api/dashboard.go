@@ -50,7 +50,7 @@ func dashboardGuardianResponse(err error) Response {
 }
 
 func GetRoleBasedDashboardForRbacUser(c *m.ReqContext, slug string) Response {
-	dash, errResp := getDashboardHelper(0, slug, 0, "")
+	dash, errResp := getDashboardHelper(c, 0, slug, 0, "")
 
 	if errResp != nil {
 		return nil
@@ -138,7 +138,7 @@ func GetDashboard(c *m.ReqContext) Response {
 	//	return GetRoleBasedDashboardForRbacUser(c, "teacher-dashboard")
 	//} else {
 
-	dash, rsp := getDashboardHelper(c.OrgId, c.Params(":slug"), 0, c.Params(":uid"))
+	dash, rsp := getDashboardHelper(c, c.OrgId, c.Params(":slug"), 0, c.Params(":uid"))
 	if rsp != nil {
 		return rsp
 	}
@@ -228,7 +228,7 @@ func getUserLogin(userID int64) string {
 	return query.Result.Login
 }
 
-func getDashboardHelper(orgID int64, slug string, id int64, uid string) (*m.Dashboard, Response) {
+func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid string) (*m.Dashboard, Response) {
 	var query m.GetDashboardQuery
 
 	if len(uid) > 0 {
@@ -239,6 +239,55 @@ func getDashboardHelper(orgID int64, slug string, id int64, uid string) (*m.Dash
 
 	if err := bus.Dispatch(&query); err != nil {
 		return nil, Error(404, "Dashboard not found", err)
+	}
+
+	keyMap := make(map[string]interface{})
+	keyMap["current"] = map[string]interface{}{
+		"text":  c.SignedInUser.Login,
+		"value": c.SignedInUser.Login,
+	}
+	keyMap["hide"] = 2
+	keyMap["label"] = nil
+	keyMap["name"] = "CurrentUser"
+	keyMap["options"] = map[string]interface{}{
+		"selected": true,
+		"text":     c.SignedInUser.Login,
+		"value":    c.SignedInUser.Login,
+	}
+	keyMap["query"] = c.SignedInUser.Login
+	keyMap["skipUrlSync"] = false
+	keyMap["type"] = "constant"
+
+	var templateWithUser []interface{}
+	templateWithUser = append(templateWithUser, keyMap)
+
+	var rs, err = query.Result.Data.Map()
+	if err != nil {
+		return nil, Error(404, "Dashboard could not be loaded due to some error in adding current logged in user variable", err)
+	}
+	tmp := rs["templating"]
+	var ls = tmp.(map[string]interface{})["list"]
+	var obj = ls.([]interface{})
+	for _, vv := range obj {
+		templateWithUser = append(templateWithUser, vv)
+	}
+	obj = templateWithUser
+	tmp.(map[string]interface{})["list"] = obj
+	query.Result.Data.Set("templating", tmp)
+
+	for ke, val := range rs {
+		if ke == "templating" {
+			//fmt.Println(ke)
+			//fmt.Println(reflect.TypeOf(val))
+			for k, v := range val.(map[string]interface{}) {
+				fmt.Println(k) //list
+				//fmt.Println(v)
+				for kv, vv := range v.([]interface{}) {
+					fmt.Println(kv)
+					fmt.Println(vv)
+				}
+			}
+		}
 	}
 
 	return query.Result, nil
@@ -255,7 +304,7 @@ func DeleteDashboard(c *m.ReqContext) Response {
 		return JSON(412, util.DynMap{"status": "multiple-slugs-exists", "message": m.ErrDashboardsWithSameSlugExists.Error()})
 	}
 
-	dash, rsp := getDashboardHelper(c.OrgId, c.Params(":slug"), 0, "")
+	dash, rsp := getDashboardHelper(c, c.OrgId, c.Params(":slug"), 0, "")
 	if rsp != nil {
 		return rsp
 	}
@@ -277,7 +326,7 @@ func DeleteDashboard(c *m.ReqContext) Response {
 }
 
 func DeleteDashboardByUID(c *m.ReqContext) Response {
-	dash, rsp := getDashboardHelper(c.OrgId, "", 0, c.Params(":uid"))
+	dash, rsp := getDashboardHelper(c, c.OrgId, "", 0, c.Params(":uid"))
 	if rsp != nil {
 		return rsp
 	}
@@ -641,7 +690,7 @@ func CalculateDashboardDiff(c *m.ReqContext, apiOptions dtos.CalculateDiffOption
 
 // RestoreDashboardVersion restores a dashboard to the given version.
 func RestoreDashboardVersion(c *m.ReqContext, apiCmd dtos.RestoreDashboardVersionCommand) Response {
-	dash, rsp := getDashboardHelper(c.OrgId, "", c.ParamsInt64(":dashboardId"), "")
+	dash, rsp := getDashboardHelper(c, c.OrgId, "", c.ParamsInt64(":dashboardId"), "")
 	if rsp != nil {
 		return rsp
 	}

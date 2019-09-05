@@ -142,6 +142,22 @@ export class SettingsCtrl {
   }
 
   saveDashboard() {
+    console.log(
+      'Dashboard variables after removing CurrentUser variable : :::::: ',
+      this.$scope.dashboard.originalTemplating
+    );
+    const newDash: any = [];
+    this.$scope.dashboard.originalTemplating.forEach(element => {
+      if (element.name !== 'CurrentUser') {
+        newDash.push(element);
+      }
+    });
+    this.$scope.dashboard.originalTemplating = newDash;
+    console.log(
+      'Dashboard variables after removing CurrentUser variable ::::::::::: ',
+      this.$scope.dashboard.originalTemplating
+    );
+
     this.dashboardSrv.saveDashboard();
   }
 
