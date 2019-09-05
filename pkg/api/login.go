@@ -165,7 +165,7 @@ func LoginPost(c *m.ReqContext, cmd dtos.LoginCommand) Response {
 			Password: cmd.Password,
 			Login:    cmd.User,
 			Name:     cmd.User,
-			OrgId:    100,
+			OrgId:    1,
 			IsAdmin:  false,
 			Id:       100,
 		}

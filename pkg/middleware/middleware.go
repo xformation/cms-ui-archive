@@ -1,9 +1,8 @@
 package middleware
 
 import (
+	"fmt"
 	"strconv"
-
-	"gopkg.in/macaron.v1"
 
 	"github.com/xformation/cms-ui/pkg/bus"
 	"github.com/xformation/cms-ui/pkg/components/apikeygen"
@@ -12,6 +11,7 @@ import (
 	"github.com/xformation/cms-ui/pkg/services/session"
 	"github.com/xformation/cms-ui/pkg/setting"
 	"github.com/xformation/cms-ui/pkg/util"
+	"gopkg.in/macaron.v1"
 )
 
 var (
@@ -99,14 +99,14 @@ func initContextWithUserSessionCookie(ctx *m.ReqContext, orgId int64) bool {
 	if userId = getRequestUserId(ctx); userId == 0 {
 		return false
 	}
-
+	fmt.Println(ctx.Context.Req.RequestURI)
 	var userName = ""
 	if userId >= 100 {
 		userName = ctx.Session.Get("myuserid").(string)
 		var signedInUser = &m.SignedInUser{
 			Name:   userName,
 			Login:  userName,
-			OrgId:  userId,
+			OrgId:  orgId,
 			UserId: userId,
 			Email:  userName,
 		}
