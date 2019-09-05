@@ -1,5 +1,5 @@
-const secSrvUrl = 'http://18.209.4.2:8094';
-const apiUrl = 'http://18.209.4.2:8080';
+const secSrvUrl = 'http://100.81.3.25:8094';
+const apiUrl = 'http://100.81.3.25:8080';
 // 18.234.66.133
 export const config = {
   PERMS_LIST_ALL: secSrvUrl + '/security/permissions/listAll',
