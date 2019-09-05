@@ -272,7 +272,7 @@ func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid
 	for _, vv := range obj {
 		templateWithUser = append(templateWithUser, vv)
 		var tmpMap = vv.(map[string]interface{})
-		if tmpMap["name"] == "CurrentUser" {
+		if tmpMap["name"] == "CurrentUser" && tmpMap["query"] == c.SignedInUser.Login {
 			isCurrntUserExists = true
 		}
 	}
