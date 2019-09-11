@@ -95,6 +95,8 @@ var (
 	ExternalSecurityUrl string
 	// cms
 	CmsUrl string
+	// cms admin user
+	ApplicationAdminUser string
 
 	// Snapshots
 	ExternalSnapshotUrl   string
@@ -605,6 +607,10 @@ func (cfg *Cfg) Load(args *CommandLineArgs) error {
 	// read cms url
 	cms := iniFile.Section("cms")
 	CmsUrl = cms.Key("cms_url").String()
+
+	// read cms admin user
+	appadminuser := iniFile.Section("appadminuser")
+	ApplicationAdminUser = appadminuser.Key("app_admin_user").String()
 
 	// read snapshots settings
 	snapshots := iniFile.Section("snapshots")

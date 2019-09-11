@@ -3,12 +3,11 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/xformation/cms-ui/pkg/services/alerting"
+	"github.com/xformation/cms-ui/pkg/services/dashboards"
 	"os"
 	"path"
 	"strings"
-
-	"github.com/xformation/cms-ui/pkg/services/alerting"
-	"github.com/xformation/cms-ui/pkg/services/dashboards"
 
 	"github.com/xformation/cms-ui/pkg/api/dtos"
 	"github.com/xformation/cms-ui/pkg/bus"
@@ -267,37 +266,45 @@ func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid
 	}
 	tmp := rs["templating"]
 	var ls = tmp.(map[string]interface{})["list"]
-	var obj = ls.([]interface{})
-	var isCurrntUserExists = false
+	var obj = templateWithUser
+	//= ls.([]interface{})
+	if ls != nil {
+		obj = ls.([]interface{})
+	}
+	//var isCurrntUserExists = false
 	for _, vv := range obj {
-		templateWithUser = append(templateWithUser, vv)
 		var tmpMap = vv.(map[string]interface{})
-		if tmpMap["name"] == "CurrentUser" && tmpMap["query"] == c.SignedInUser.Login {
-			isCurrntUserExists = true
+		if tmpMap["name"] != "CurrentUser" {
+			templateWithUser = append(templateWithUser, vv)
 		}
+		//var tmpMap = vv.(map[string]interface{})
+		//if tmpMap["name"] == "CurrentUser" && tmpMap["query"] == c.SignedInUser.Login {
+		//	isCurrntUserExists = true
+		//}
 	}
-	if !isCurrntUserExists {
-		templateWithUser = append(templateWithUser, keyMap)
-	}
+	templateWithUser = append(templateWithUser, keyMap)
+	//if !isCurrntUserExists {
+	//	templateWithUser = append(templateWithUser, keyMap)
+	//}
 
 	obj = templateWithUser
 	tmp.(map[string]interface{})["list"] = obj
 	query.Result.Data.Set("templating", tmp)
 
-	for ke, val := range rs {
-		if ke == "templating" {
-			//fmt.Println(ke)
-			//fmt.Println(reflect.TypeOf(val))
-			for k, v := range val.(map[string]interface{}) {
-				fmt.Println(k) //list
-				//fmt.Println(v)
-				for kv, vv := range v.([]interface{}) {
-					fmt.Println(kv)
-					fmt.Println(vv)
-				}
-			}
-		}
-	}
+	//for ke, val := range rs {
+	//	if ke == "templating" {
+	//		//fmt.Println(ke)
+	//		//fmt.Println(reflect.TypeOf(val))
+	//		for k, v := range val.(map[string]interface{}) {
+	//			fmt.Println(k) //list
+	//			//fmt.Println(v)
+	//			for kv, vv := range v.([]interface{}) {
+	//				fmt.Println(kv)
+	//				fmt.Println(vv)
+	//			}
+	//		}
+	//	}
+	//}
 
 	return query.Result, nil
 }
@@ -361,6 +368,21 @@ func PostDashboard(c *m.ReqContext, cmd m.SaveDashboardCommand) Response {
 	cmd.UserId = c.UserId
 
 	dash := cmd.GetDashboardModel()
+
+	var templateWithUser []interface{}
+	var rs, err = dash.Data.Map()
+	tmp := rs["templating"]
+	var ls = tmp.(map[string]interface{})["list"]
+	var obj = ls.([]interface{})
+	for _, vv := range obj {
+		var tmpMap = vv.(map[string]interface{})
+		if tmpMap["name"] != "CurrentUser" {
+			templateWithUser = append(templateWithUser, vv)
+		}
+	}
+	obj = templateWithUser
+	tmp.(map[string]interface{})["list"] = obj
+	dash.Data.Set("templating", tmp)
 
 	if dash.Id == 0 && dash.Uid == "" {
 		limitReached, err := quota.QuotaReached(c, "dashboard")
@@ -457,21 +479,32 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 	fmt.Println(roles)
 	var roleTeacher = ""
 	var roleStudent = ""
-	for _, val := range roles.([]interface{}) {
-		var entry = fmt.Sprint(val)
-		if strings.ToLower(entry) == "teacher" {
-			roleTeacher = strings.ToLower(entry)
-			break
-		}
-	}
-	for _, val := range roles.([]interface{}) {
-		var entry = fmt.Sprint(val)
-		if strings.ToLower(entry) == "student" {
-			roleStudent = strings.ToLower(entry)
-			break
-		}
-	}
 	var filePath = ""
+
+	if c.SignedInUser.Login == setting.ApplicationAdminUser {
+		resp := GetRoleBasedDashboardForRbacUser(c, "admin-dashboard")
+		if resp == nil {
+			filePath = path.Join(setting.StaticRootPath, "dashboards/applicationadmin_home.json")
+		} else {
+			return resp
+		}
+	} else {
+		for _, val := range roles.([]interface{}) {
+			var entry = fmt.Sprint(val)
+			if strings.ToLower(entry) == "teacher" {
+				roleTeacher = strings.ToLower(entry)
+				break
+			}
+		}
+		for _, val := range roles.([]interface{}) {
+			var entry = fmt.Sprint(val)
+			if strings.ToLower(entry) == "student" {
+				roleStudent = strings.ToLower(entry)
+				break
+			}
+		}
+	}
+
 	if roleTeacher == "teacher" {
 		resp := GetRoleBasedDashboardForRbacUser(c, "teacher-dashboard")
 		if resp == nil {
@@ -487,13 +520,15 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 			return resp
 		}
 	} else {
-		resp := GetRoleBasedDashboardForRbacUser(c, "common-dashboard")
-		if resp == nil {
-			filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
-		} else {
-			return resp
+		if c.SignedInUser.Login != setting.ApplicationAdminUser {
+			resp := GetRoleBasedDashboardForRbacUser(c, "common-dashboard")
+			if resp == nil {
+				filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
+			} else {
+				return resp
+			}
+			//filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
 		}
-		//filePath = path.Join(setting.StaticRootPath, "dashboards/rbac_home.json")
 	}
 
 	file, err := os.Open(filePath)
@@ -503,7 +538,11 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 
 	dash := dtos.DashboardFullWithMeta{}
 	dash.Meta.IsHome = true
-	dash.Meta.CanEdit = false //c.SignedInUser.HasRole(m.ROLE_EDITOR)
+	if c.SignedInUser.Login == setting.ApplicationAdminUser {
+		dash.Meta.CanEdit = true
+	} else {
+		dash.Meta.CanEdit = false //c.SignedInUser.HasRole(m.ROLE_EDITOR)
+	}
 	dash.Meta.FolderTitle = "General"
 
 	jsonParser := json.NewDecoder(file)

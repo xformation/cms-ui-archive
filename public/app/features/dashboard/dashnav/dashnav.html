@@ -13,7 +13,12 @@
 					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
 				</select>
 			</div>
-
+			<div ng-if="user === 'cmsadmin'" class="cust-style">
+				<select class="">
+					<option value="">Select Branch</option>
+					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
+				</select>
+			</div>
 		</div>
 		<div class="search-name p-1">
 			<h6 class="white-color p-r-1 mt-half">AY {{ctrl.globalSettings.cmsAcademicYearVo.year}} -
