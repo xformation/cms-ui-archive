@@ -7,7 +7,7 @@ export interface Props {
 const PluginItem: SFC<Props> = props => {
   const { link } = props;
   return (
-    <div className="plugin-item">
+    <div className="plugin-item" title={link.text}>
       <a className="sidemenu-link" href={link.url} target={link.target}>
         <span className="icon-circle sidemenu-icon">
           <i className={link.icon} />

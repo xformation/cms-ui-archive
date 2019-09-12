@@ -297,21 +297,19 @@ li.sidemenu-org-switcher {
   width: 450px;
   height: 300px;
   padding: 20px;
-  background-color: white !important;
   .search-box-container{
     margin-bottom: 20px;
     .search-box{
       border: 0px;
       border-bottom: 2px solid #3697ef;
-      background-color: #efefef;
-    }
-    .search-box::placeholder{
-      color: black !important;
+      background-color: white;
     }
   }
   .plugin-item{
     width: 25%;
     display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px;
     img{
       width: 40px;
       height: 40px;
@@ -331,6 +329,6 @@ li.sidemenu-org-switcher {
     }
   }
   .plugin-item:hover{
-    background-color: #efefef;
+    background-color: white;
   }
 }
