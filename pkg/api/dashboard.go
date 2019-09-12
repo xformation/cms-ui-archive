@@ -245,7 +245,7 @@ func getDashboardHelper(c *m.ReqContext, orgID int64, slug string, id int64, uid
 		"text":  c.SignedInUser.Login,
 		"value": c.SignedInUser.Login,
 	}
-	keyMap["hide"] = 0
+	keyMap["hide"] = 2
 	keyMap["label"] = nil
 	keyMap["name"] = "CurrentUser"
 	keyMap["options"] = map[string]interface{}{
