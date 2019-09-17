@@ -18,6 +18,7 @@ import './localapp/roles-permissions';
 import './localapp/academic-settings/timetablesetting';
 import './localapp/academic-settings/classetup';
 import './localapp/academic-settings/departmentsetup';
+import './localapp/academic-settings/courses';
 import './localapp/academic-settings/staffsetup';
 import './localapp/academic-settings/staffsetup/stafflist';
 import './localapp/academic-settings/staffsetup/staffcreate';
