@@ -21,6 +21,10 @@ export class AcademicSettingsCtrl {
       id: 'department_setup',
     });
     this.sections.push({
+      title: 'COURSES',
+      id: 'courses',
+    });
+    this.sections.push({
       title: 'STAFF SETUP',
       id: 'staff_setup',
     });
@@ -40,6 +44,6 @@ export class AcademicSettingsCtrl {
 
   setActiveTab(id) {
     this.activeTabId = id;
-    appEvents.emit("change_academic_settings_tab", {});
+    appEvents.emit('change_academic_settings_tab', {});
   }
 }
