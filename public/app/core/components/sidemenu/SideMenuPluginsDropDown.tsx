@@ -1,11 +1,7 @@
-import React, { SFC } from 'react';
+import React from 'react';
 import PluginItem from './PluginItem';
 
-interface Props {
-    links: any;
-}
-
-class SideMenuPluginsDropDown extends React.Component {
+class SideMenuPluginsDropDown extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -14,7 +10,7 @@ class SideMenuPluginsDropDown extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
+    handleChange(e: any) {
         const { name, value } = e.target;
         this.setState({
             [name]: value
