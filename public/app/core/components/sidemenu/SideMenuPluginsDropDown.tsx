@@ -23,7 +23,7 @@ class SideMenuPluginsDropDown extends React.Component<any, any> {
         return (
             <div className="dropdown-menu dropdown-menu--sidemenu sidemenu-plugin-container" role="menu">
                 <div className="search-box-container">
-                    <input type="text" className="gf-form-input search-box" placeHolder="Search Plugins" name="searchItem"
+                    <input type="text" className="gf-form-input search-box" name="searchItem"
                      value={searchItem} onChange={this.handleChange} />
                 </div>
                 <div className="plugins-wrapper">
