@@ -52,6 +52,10 @@ export class NavbarCtrl {
   openSearchFilter() {
     appEvents.emit('show-search-filter');
   }
+
+  openDropDown() {
+    appEvents.emit('show-navbar-popup');
+  }
 }
 
 export function navbarDirective() {

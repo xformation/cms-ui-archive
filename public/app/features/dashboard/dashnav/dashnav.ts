@@ -118,6 +118,10 @@ export class DashNavCtrl {
       this.$scope.selectedBranches = this.globalSettings.branchList;
     });
   }
+
+  openDropDown() {
+    appEvents.emit('show-navbar-popup');
+  }
 }
 
 export function dashNavDirective() {
