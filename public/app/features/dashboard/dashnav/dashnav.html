@@ -6,7 +6,7 @@
 			</a>
 			<h4 class="white-color">{{ctrl.globalSettings.college.shortName}}</h4>
 			<!-- <a class="white-color" href="/localapp"><i class="fa fa-cog" aria-hidden="true"></i> </a> -->
-			<div ng-if="user !== 'admin'" class="cust-style">{{ctrl.globalSettings.branch.branchName}}</div>
+			<!-- <div ng-if="user !== 'admin'" class="cust-style">{{ctrl.globalSettings.branch.branchName}}</div>
 			<div ng-if="user === 'admin'" class="cust-style">
 				<select class="">
 					<option value="">Select Branch</option>
@@ -18,13 +18,13 @@
 					<option value="">Select Branch</option>
 					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
 				</select>
-			</div>
+			</div> -->
 		</div>
 		<div class="search-name p-1">
-			<h6 class="white-color p-r-1 mt-half">AY {{ctrl.globalSettings.cmsAcademicYearVo.year}} -
-				<!-- {{ctrl.globalSettings.cmsAcademicYearVo.strEndDate}} -->
-				2020
-			</h6>
+			<!-- <h6 class="white-color p-r-1 mt-half">AY {{ctrl.globalSettings.cmsAcademicYearVo.year}} -
+				 {{ctrl.globalSettings.cmsAcademicYearVo.strEndDate}} -->
+				
+			<!-- </h6> --> 
 			<div>&nbsp;</div>
 			<div class="white-color p-r-1" ng-click="ctrl.openDropDown()">
 				<i class="gf-form-input-icon fa fa-caret-down"></i>

@@ -315,7 +315,7 @@ func loginUserWithUser(user *m.User, c *m.ReqContext) {
 }
 
 func Logout(c *m.ReqContext) {
-	externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogout?username=" + c.SignedInUser.Name)
+	externalSecurityServiceClient.Get(setting.CmsUrl + "/api/cmslogout?username=" + c.SignedInUser.Login)
 	c.SetCookie(setting.CookieUserName, "", -1, setting.AppSubUrl+"/")
 	c.SetCookie(setting.CookieRememberName, "", -1, setting.AppSubUrl+"/")
 	c.Session.Destory(c.Context)
