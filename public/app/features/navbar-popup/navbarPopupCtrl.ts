@@ -63,7 +63,9 @@ export class NavbarPopupCtrl {
       }
       this.branchId = this.globalSettings.selectedBranchId;
       if (this.branchId === null || this.branchId === undefined || this.branchId === 0) {
-        this.branchId = this.globalSettings.branch.id;
+        if (this.globalSettings.branch) {
+          this.branchId = this.globalSettings.branch.id;
+        }
       }
       this.departmentId = this.globalSettings.selectedDepartmentId;
 
