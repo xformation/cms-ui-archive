@@ -1,40 +1,23 @@
 <div class="page-nav">
 	<div class="dash-nav">
 		<div class="clg-name">
-			<a href="/" class="dark-blue p-1">
-				<img src="public/img/synectiks-white-logo.png" alt="" style="height: 29px;" />
-			</a>
-			<h4 class="white-color">{{ctrl.globalSettings.college.shortName}}</h4>
-			<!-- <a class="white-color" href="/localapp"><i class="fa fa-cog" aria-hidden="true"></i> </a> -->
-			<!-- <div ng-if="user !== 'admin'" class="cust-style">{{ctrl.globalSettings.branch.branchName}}</div>
-			<div ng-if="user === 'admin'" class="cust-style">
-				<select class="">
-					<option value="">Select Branch</option>
-					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
-				</select>
-			</div>
-			<div ng-if="user === 'cmsadmin'" class="cust-style">
-				<select class="">
-					<option value="">Select Branch</option>
-					<option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
-				</select>
-			</div> -->
+			<div ng-if="ctrl.user !== 'admin'" class="cust-style">{{ctrl.globalSettings.branch.branchName}}</div>
+
 		</div>
 		<div class="search-name p-1">
-			<!-- <h6 class="white-color p-r-1 mt-half">AY {{ctrl.globalSettings.cmsAcademicYearVo.year}} -
-				 {{ctrl.globalSettings.cmsAcademicYearVo.strEndDate}} -->
-				
-			<!-- </h6> --> 
-			<div>&nbsp;</div>
-			<div class="white-color p-r-1" ng-click="ctrl.openDropDown()">
-				<i class="gf-form-input-icon fa fa-caret-down"></i>
-			</div>
-			<label class="gf-form--has-input-icon"><input type="text" class="gf-form-input search-width"
+			<label class="gf-form--has-input-icon mr-auto"><input type="text" class="gf-form-input search-width"
 					placeholder="Search" ng-click="ctrl.openSearchFilter()"><i
 					class="gf-form-input-icon fa fa-search"></i></label>
-			<!-- <input type="search" name="" class="search-width" id="" placeholder="Search" ng-click="ctrl.openSearchFilter()" /> -->
+
+			<div class="white-color p-r-1" style="display: flex;align-items: center;" ng-click="ctrl.openDropDown()">
+				<i class="gf-form-input-icon fa fa-cog" style="font-size: 20px; margin-right: 10px;"></i>
+				<img src="public/img/User.png" style="height:30px;" alt="">
+			</div>
+
+			<!-- <input type=" search" name="" class="search-width" id="" placeholder="Search"
+				ng-click="ctrl.openSearchFilter()" /> -->
 			<!-- <a href="/profile">Admin <i class="fa fa-angle-down" aria-hidden="true"> </i></a> <a href="/profile"
-				  class="rnd">A</a> -->
+			  class="rnd">A</a> -->
 		</div>
 	</div>
 </div>

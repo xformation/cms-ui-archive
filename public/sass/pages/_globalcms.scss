@@ -689,9 +689,9 @@ table#tmtd {
 }
 
 .search-width {
-  width: 100px;
+  width: 30vw !important;
   height: 30px;
-  background-color: #447aae;
+  background-color: #edebe9;
   border-radius: 5px;
   padding: 5px;
 }
@@ -727,8 +727,9 @@ table#tmtd {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 65vw;
   input[type='search'] {
-    background-color: #447aae;
+    background-color: #edebe9;
     border-radius: 5px;
     padding: 5px;
   }
@@ -1140,4 +1141,7 @@ table.staff-management-table {
 
 #paymt-border {
   background-color: white !important;
+}
+.wid-navpop {
+  width: 300px !important;
 }

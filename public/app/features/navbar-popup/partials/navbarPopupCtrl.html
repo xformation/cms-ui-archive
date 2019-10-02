@@ -1,52 +1,76 @@
 <div class="search-backdrop" ng-if="ctrl.isOpen" ng-click="ctrl.hidePopup()" ng-style="{'top':ctrl.top}">
 </div>
-<div class="search-filter-container" ng-if="ctrl.isOpen" ng-style="{'top':ctrl.top}">
+<div class="search-filter-container wid-navpop" ng-if="ctrl.isOpen" ng-style="{'top':ctrl.top}">
     <div class="search-dropdown">
         <div class="search-dropdown__col_1">
             <div class="search-results-scroller">
                 <div class="search-results-container" grafana-scrollbar>
-                        <div ng-if="user !== 'admin' && user !== 'cmsadmin' " style="color:black;" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
-                            <div id="dvAyId">AcademicYear - {{cmsAcademicYearVo.year}}</div>
-                            <div id="dvBranchId">Branch - {{branch.branchName}}</div>
-                            <div id="dvBranchId">Department - {{department.name}}</div>
-                            <input id="hdnAyId" type="hidden" value="{{cmsAcademicYearVo.id}}"/>
-                            <input id="hdnBranchId" type="hidden" value="{{branch.id}}"/>
-                            <input id="hdnDeptId" type="hidden" value="{{department.id}}"/>
+                    <div ng-if="user !== 'admin' && user !== 'cmsadmin' " style="color:black;"
+                        class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
+                        <div id="dvAyId">AcademicYear - {{cmsAcademicYearVo.year}}</div>
+                        <div id="dvBranchId">Branch - {{branch.branchName}}</div>
+                        <div id="dvBranchId">Department - {{department.name}}</div>
+                        <input id="hdnAyId" type="hidden" value="{{cmsAcademicYearVo.id}}" />
+                        <input id="hdnBranchId" type="hidden" value="{{branch.id}}" />
+                        <input id="hdnDeptId" type="hidden" value="{{department.id}}" />
+                    </div>
+                    <div style="display: flex;justify-content: flex-start;align-items:center">
+                        <div style="    border-radius: 50px;
+    background: gray;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding-top: 15px;
+    margin-right: 20px;">
+                            <h4 class="rounded-circle">MM</h4>
                         </div>
-                        <div ng-if="user === 'admin' || user === 'cmsadmin'" >
-                            <div style="color:black;" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">Academic Year
-                                    <select id="selAy" style="color:black;width:200px;" ng-model="ctrl.ayId">
-                                    <!-- <option value="" >Select</option> -->
-                                    <option ng-repeat="ay in selectedAcademicYears" value="{{ay.id}}">{{ay.year}} - {{ay.status}}</option>
-                                </select>
-                            </div>
+                        <div>
+                            <h2 style="margin-bottom: 0px">User Name</h2>
+                            <small>Profile Picture</small>
                         </div>
-                        <div ng-if="user === 'admin' || user === 'cmsadmin'" >
-                            <div style="color:black;">Branch
-                                <select id="selBranch" style="color:black; width:200px;"  ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()">
-                                    <!-- <option value="">Select</option> -->
-                                    <option ng-repeat="branch in selectedBranches" value="{{branch.id}}">{{branch.branchName}}</option>
-                                </select>
-                            </div>
-                            
+                    </div>
+                    <div ng-if="user === 'admin' || user === 'cmsadmin'">
+                        <div style="color:black;"
+                            class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
+                            <select id="selAy" style="color:black;border:none; background:none;  margin-top: 10px;"
+                                ng-model="ctrl.ayId">
+                                <option value="">Select Academic Year</option>
+                                <option ng-repeat="ay in selectedAcademicYears" value="{{ay.id}}">{{ay.year}} -
+                                    {{ay.status}}</option>
+                            </select>
                         </div>
-                        
-                        <div ng-if="user === 'admin' || user === 'cmsadmin'" >
-                            <div style="color:black;">Department
-                                <select id="selDept" style="color:black;width:200px;"  ng-model="ctrl.departmentId"> 
-                                    <!-- <option value="">Select</option> -->
-                                    <option ng-repeat="department in selectedDepartments" value="{{department.id}}">{{department.name}}</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div ng-if="user === 'admin' || user === 'cmsadmin'">
+                        <div style="color:black;">
+                            <select id="selBranch" style="color:black; border:none; background:none;"
+                                ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()">
+                                <option value="">Select Branch</option>
+                                <option ng-repeat="branch in selectedBranches" value="{{branch.id}}">
+                                    {{branch.branchName}}</option>
+                            </select>
                         </div>
-                        <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style">
-                            <input  id="btnApply" type="button" class="btn bs" value="Apply" ng-click="ctrl.validateAndPostChanges()"/>
+
+                    </div>
+
+                    <div ng-if="user === 'admin' || user === 'cmsadmin'">
+                        <div style="color:black;">
+                            <select id="selDept" style="color:black;border:none; background:none; margin-bottom:10px;"
+                                ng-model="ctrl.departmentId">
+                                <option value="">Select Department</option>
+                                <option ng-repeat="department in selectedDepartments" value="{{department.id}}">
+                                    {{department.name}}</option>
+                            </select>
                         </div>
-                        <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style"></div>
-                            <div id="msgDiv" style="color: green;"></div>
-                        </div>
+                    </div>
+                    <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style">
+                        <input id="btnApply" type="button" class="btn bs" value="Apply"
+                            ng-click="ctrl.validateAndPostChanges()" />
+                    </div>
+                    <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style"></div>
+                    <div id="msgDiv" style="color: green;"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

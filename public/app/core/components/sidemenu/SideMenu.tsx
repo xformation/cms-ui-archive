@@ -18,7 +18,12 @@ export class SideMenu extends PureComponent {
     return [
       // <div className="sidemenu__logo" onClick={this.toggleSideMenu} key="logo">
       <div className="sidemenu__logo" key="logo">
-        <i className="fa fa-university s-univ" aria-hidden="true" />
+        {/* <i className="fa fa-university s-univ" aria-hidden="true" /> */}
+        <img
+          src="public/img/synectiks-white-logo.png"
+          alt=""
+          style={{ height: '50px', background: '#1486C7', padding: '5px' }}
+        />
       </div>,
       <div className="sidemenu__logo_small_breakpoint" onClick={this.toggleSideMenuSmallBreakpoint} key="hamburger">
         <i className="fa fa-bars" />

@@ -186,7 +186,7 @@ li.sidemenu-org-switcher {
 
 .sidemenu__logo {
   display: block;
-  padding: 0.4rem 1rem 0.4rem 0.65rem;
+  // padding: 0.4rem 1rem 0.4rem 0.65rem;
   min-height: $navbarHeight;
   position: relative;
   height: $navbarHeight - 1px;
@@ -196,10 +196,10 @@ li.sidemenu-org-switcher {
   }
 
   img {
-    width: 30px;
+    // width: 30px;
     position: relative;
-    top: 5px;
-    left: 4px;
+    // top: 5px;
+    // left: 4px;
   }
 }
 
@@ -290,35 +290,34 @@ li.sidemenu-org-switcher {
   }
 }
 
-
 /********************* Plugin container *****************************/
 
-.sidemenu-plugin-container{
+.sidemenu-plugin-container {
   width: 450px;
   height: 300px;
   padding: 20px;
-  .search-box-container{
+  .search-box-container {
     margin-bottom: 20px;
-    .search-box{
+    .search-box {
       border: 0px;
       border-bottom: 2px solid #3697ef;
       background-color: white;
     }
   }
-  .plugin-item{
+  .plugin-item {
     width: 25%;
     display: inline-block;
     margin-bottom: 10px;
     padding: 5px;
-    img{
+    img {
       width: 40px;
       height: 40px;
     }
-    .icon-circle{
+    .icon-circle {
       width: initial !important;
       height: initial !important;
     }
-    .plugin-name{
+    .plugin-name {
       font-size: 13px;
       line-height: initial !important;
       white-space: nowrap;
@@ -328,7 +327,7 @@ li.sidemenu-org-switcher {
       margin-top: 5px;
     }
   }
-  .plugin-item:hover{
+  .plugin-item:hover {
     background-color: white;
   }
 }
