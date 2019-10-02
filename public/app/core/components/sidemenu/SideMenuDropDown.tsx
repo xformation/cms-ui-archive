@@ -3,10 +3,14 @@ import DropDownChild from './DropDownChild';
 
 interface Props {
   link: any;
+  user: any;
+  ayid: any;
+  bid: any;
+  dptid: any;
 }
 
 const SideMenuDropDown: SFC<Props> = props => {
-  const { link } = props;
+  const { link, user, ayid, bid, dptid } = props;
   return (
     <ul className="dropdown-menu dropdown-menu--sidemenu" role="menu">
       <li className="side-menu-header">
@@ -15,7 +19,16 @@ const SideMenuDropDown: SFC<Props> = props => {
       {link.children &&
         link.children.map((child, index) => {
           if (!child.hideFromMenu) {
-            return <DropDownChild child={child} key={`${child.url}-${index}`} />;
+            return (
+              <DropDownChild
+                user={user}
+                ayid={ayid}
+                bid={bid}
+                dptid={dptid}
+                child={child}
+                key={`${child.url}-${index}`}
+              />
+            );
           } else {
             return null;
           }

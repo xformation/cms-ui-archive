@@ -8,6 +8,10 @@ const setup = (propOverrides?: object) => {
       link: {
         text: 'link',
       },
+      user: {},
+      ayid: {},
+      bid: {},
+      dptid: {},
     },
     propOverrides
   );

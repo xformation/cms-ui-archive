@@ -2,6 +2,7 @@ import coreModule from '../../core/core_module';
 import appEvents from 'app/core/app_events';
 // import { appEvents, NavModel } from 'app/core/core';
 import { config } from '../localapp/config';
+import store from '../../core/store';
 
 export class NavbarPopupCtrl {
   isOpen: boolean;
@@ -41,6 +42,7 @@ export class NavbarPopupCtrl {
       const objMsgDiv = document.getElementById('msgDiv');
       objMsgDiv.innerText = '';
     }, 100);
+    store.set('', '');
   }
 
   onKeyDownOnSearch(event) {
@@ -72,6 +74,9 @@ export class NavbarPopupCtrl {
       this.$scope.cmsAcademicYearVo = this.globalSettings.cmsAcademicYearVo;
       this.$scope.branch = this.globalSettings.branch;
       this.$scope.department = this.globalSettings.department;
+      store.set('ayId', this.ayId);
+      store.set('bId', this.branchId);
+      store.set('deptId', this.departmentId);
     });
   }
 
@@ -82,6 +87,9 @@ export class NavbarPopupCtrl {
     this.setSelectedValue(objBranch, this.branchId);
     const objDept = document.getElementById('selDept');
     this.setSelectedValue(objDept, this.departmentId);
+    store.set('ayId', this.ayId);
+    store.set('bId', this.branchId);
+    store.set('deptId', this.departmentId);
   }
 
   setSelectedValue(selectObj, valueToSet) {
@@ -141,6 +149,9 @@ export class NavbarPopupCtrl {
           this.departmentId
       )
       .then(result => {});
+    store.set('ayId', this.ayId);
+    store.set('bId', this.branchId);
+    store.set('deptId', this.departmentId);
   }
 }
 

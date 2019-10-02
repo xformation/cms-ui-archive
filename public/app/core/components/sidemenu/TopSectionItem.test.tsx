@@ -6,6 +6,10 @@ const setup = (propOverrides?: object) => {
   const props = Object.assign(
     {
       link: {},
+      user: {},
+      ayid: {},
+      bid: {},
+      dptid: {},
     },
     propOverrides
   );

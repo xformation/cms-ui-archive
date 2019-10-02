@@ -8,6 +8,10 @@ const setup = (propOverrides?: object) => {
       child: {
         divider: true,
       },
+      user: {},
+      ayid: {},
+      bid: {},
+      dptid: {},
     },
     propOverrides
   );
