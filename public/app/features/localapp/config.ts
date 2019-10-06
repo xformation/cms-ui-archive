@@ -24,7 +24,6 @@ export const config = {
   CMS_TERM_BY_ACYEAR_URL: apiUrl + '/api/cmsterms-by_academicyearid',
   CMS_DEPARTMENT_BY_BRANCH_URL: apiUrl + '/api/cmsdepartments-branchid/',
   CMS_BATCH_BY_DEPARTMENT_URL: apiUrl + '/api/cmsbatches-departmentid/',
-  CMS_SECTION_BY_BATCH_URL: apiUrl + '/api/cmssections-batchid/',
   CMS_LECTURE_URL: apiUrl + '/api/cmslectures',
   CMS_AM_BY_BATCH_SECTION_URL: apiUrl + '/api/cmsattendance-masters-bybatchsection',
   CMS_META_LECTURE_URL: apiUrl + '/api/cmsmeta-lecture-selected',
@@ -33,4 +32,10 @@ export const config = {
   CMS_TERM_URL: apiUrl + '/api/cmsterms/',
   CMS_ACADEMICYEAR_URL: apiUrl + '/api/cmsacademic-years/',
   CMS_HOLIDAY_BY_ACYEAR_URL: apiUrl + '/api/cmsholidays-by_academicyearid',
+  CMS_BRANCH_URL: apiUrl + '/api/cmsbranches',
+  CMS_BRANCH_BY_COLLEGE_URL: apiUrl + '/api/cmsbranches-collegeid',
+  CMS_BATCH_URL: apiUrl + '/api/cmsbatchenums',
+  CMS_SECTION_URL: apiUrl + '/api/cmssectionenums',
+  CMS_SECTION_BY_BATCH_URL: apiUrl + '/api/cmssections-batchid/',
+  CMS_CHECK_USER_SELECTION_URL: apiUrl + '/api/cmscheckuserselection',
 };

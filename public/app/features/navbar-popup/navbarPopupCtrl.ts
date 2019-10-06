@@ -20,6 +20,10 @@ export class NavbarPopupCtrl {
     appEvents.on('hide-navbar-popup', this.hidePopup.bind(this), $scope);
     $scope.user = $scope.ctrl.backendSrv.contextSrv.user.login;
     // this.getGlobalConfigurations($scope.ctrl.backendSrv.contextSrv.user.login);
+    this.ayId = 0;
+    this.branchId = 0;
+    this.departmentId = 0;
+
     this.getGlobalConfigurations($scope.ctrl.backendSrv.contextSrv.user.login);
   }
 
