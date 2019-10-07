@@ -541,7 +541,7 @@ export class TimeTableSettingCtrl {
   showSearchLectureDiv() {
     this.activateTab(2);
     const elm = document.getElementById('viewSectionFilterDiv');
-    elm.className = 'info-container';
+    elm.className = 'info-container m-b-3';
   }
   viewAllLectures() {
     if (!this.branchId) {
