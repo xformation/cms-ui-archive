@@ -442,29 +442,29 @@
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Year</label>
-          <select class="gf-form-select-box" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()"
+          <select class="gf-form-select-box" ng-model="ctrl.batchId" ng-change="ctrl.onChangeFilterBatch()"
             ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
             <option value="">Select Year</option>
-            <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}" ng-selected="bth.id === ctrl.batchId">
+            <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">
               {{bth.batch}}
             </option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Section</label>
-          <select class="gf-form-select-box" ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()"
+          <select class="gf-form-select-box" ng-model="ctrl.sectionId" 
             ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
             <option value="">Select Section</option>
-            <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" ng-selected="sec.id === ctrl.sectionId">
+            <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" >
               {{sec.section}}</option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Subject</label>
-          <select class="gf-form-select-box" ng-model="ctrl.subjectId" ng-change="ctrl.onChangeSubject()"
+          <select class="gf-form-select-box" ng-model="ctrl.subjectId" ng-change="ctrl.onChangeFilterSubject()"
             ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
             <option value="">Select Subject</option>
-            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}" ng-selected="sub.id === ctrl.subjectId">
+            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">
               {{sub.subjectDesc}}</option>
           </select>
         </div>
@@ -472,20 +472,19 @@
       <div class="ttflex">
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Teacher</label>
-          <select class="gf-form-select-box" ng-model="ctrl.teacherId" ng-change="ctrl.onChangeTeacher()"
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.teacherId"  ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
             <option value="">Select Teacher</option>
-            <option ng-repeat="teach in ctrl.teachers" value="{{teach.id}}" ng-selected="teach.id === ctrl.teacherId">
+            <option ng-repeat="teach in ctrl.teachers" value="{{teach.id}}" >
               {{teach.teacherName}}</option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">From Date</label>
-          <input type="date" id="formDate" ng-model="" maxlength="10" class="gf-form-input cust-width-220" />
+          <input type="date" id="formDate" ng-model="ctrl.fromLecDate" (ngModelChange)="ctrl.fromLecDate = $event" maxlength="10" class="gf-form-input cust-width-220"/>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">To Date</label>
-          <input type="date" id="toDate" ng-model="" maxlength="10" class="gf-form-input cust-width-220" />
+          <input type="date" id="toDate" ng-model="ctrl.toLecDate" (ngModelChange)="ctrl.toLecDate = $event" maxlength="10" class="gf-form-input cust-width-220" />
         </div>
         <div class="gf-form--grow form-control-container cust-width-220">
           <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.viewAllLectures()" value="Search"
@@ -493,7 +492,7 @@
         </div>
       </div>
     </div>
-    <div id="lectureListDiv" style="height:250px; overflow: auto;">
+    <div id="lectureListDiv" style="height:250px; overflow: auto;" ng-class="{'hide':ctrl.isLecFound === 0}">
       <table style="width: 100%;">
         <thead>
           <th>Sr. No</th>
@@ -502,11 +501,10 @@
           <th>Section</th>
           <th>Subject</th>
           <th>Teacher</th>
-          <th>Date</th>
+          <th>Lecture Date</th>
           <th>Start Time</th>
           <th>End Time</th>
-          <th>Update</th>
-          <th>Delete</th>
+          <th>Actions</th>
         </thead>
         <tbody>
           <tr ng-repeat="lecObj in ctrl.lecturesCreated track by $index">
@@ -520,15 +518,16 @@
             <td>{{lecObj.startTime}}</td>
             <td>{{lecObj.endTime}}</td>
             <td>
-              <input type="button" class="btn btn-primary" ng-click="ctrl.onEditLectures($index)" value="Edit">
-            </td>
-            <td>
-              <input type="button" class="btn btn-primary" ng-click="ctrl.onDeleteLectures($index)" value="Delete">
+              <a ng-click="ctrl.editTimeTable(lecObj)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
+                aria-hidden="true"></i></a>
+              <a ng-click="ctrl.deleteTimeTable(lecObj)"><i class="fa fa-trash-o fa-2x"
+                aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div ng-class="{'hide':ctrl.isLecFound === 1}">No record found</div>
   </div>
 </div>
 </div>

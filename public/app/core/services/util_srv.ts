@@ -28,6 +28,7 @@ export class UtilSrv {
     appEvents.on('edit-user-modal', this.editUserModal.bind(this), this.$rootScope);
     appEvents.on('import-user-modal', this.importUserModal.bind(this), this.$rootScope);
     appEvents.on('year-modal', this.yearModal.bind(this), this.$rootScope);
+    appEvents.on('edit-timetable-modal', this.editTimeTableModal.bind(this), this.$rootScope);
   }
 
   hideModal() {
@@ -565,6 +566,54 @@ export class UtilSrv {
       src: 'public/app/features/localapp/roles-permissions/users/partials/edit_user.html',
       scope: scope,
       modalClass: 'edit-user',
+    });
+  }
+
+  editTimeTableModal(payload) {
+    const scope = this.$rootScope.$new();
+    scope.text = payload.text;
+    // scope.startDateVal = payload.startDateVal;
+    // scope.endDateVal = payload.endDateVal;
+    scope.lecDateVal = payload.lecDateVal;
+    scope.startTimeVal = payload.startTimeVal;
+    scope.endTimeVal = payload.endTimeVal;
+    scope.selectedSubjects = payload.selectedSubjects;
+    scope.academicYear = payload.academicYear;
+    // scope.batches = payload.batches;
+    // scope.sections = payload.sections;
+    // scope.subjects = payload.subjects;
+    // scope.editBatchId = payload.editBatchId;
+    scope.lectureObject = payload.lectureObject;
+    scope.is_success_bar = '';
+    // scope.onChangeBatchForEdit = () => {
+    //   scope.selectedSections = payload.onChange(scope.lecForm, scope.lecture, scope.selectedSections);
+    // };
+    // scope.getSubjectOnBatchChangeForEdit = () => {
+    //   scope.selectedSubjects = payload.getSubjectOnBatchChange(scope.lecForm, scope.lecture, scope.selectedSubjects);
+    // };
+    scope.getTeacherOnSubjectChangeForEdit = () => {
+      scope.selectedTeachers = payload.getTeacherOnSubjectChange(scope.lecForm, scope.lecture, scope.selectedTeachers);
+    };
+    scope.updateTimeTable = () => {
+      payload.onEdit(
+        scope.lecForm,
+        scope.lecture,
+        scope.lectureObject,
+        scope.selectedSubjects,
+        scope.academicYear,
+        isSuccess => {
+          scope.is_success_bar = isSuccess;
+          setTimeout(() => {
+            scope.lectureObject = {};
+            scope.dismiss();
+          }, 4000);
+        }
+      );
+    };
+    appEvents.emit('show-modal', {
+      src: 'public/app/features/localapp/academic-settings/timetablesetting/partials/timetable_modal.html',
+      scope: scope,
+      modalClass: 'timetable_modal',
     });
   }
 }

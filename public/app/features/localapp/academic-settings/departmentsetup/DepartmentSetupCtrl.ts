@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
+import { config } from '../../config';
 
 export class DepartmentSetupCtrl {
   departments: any;
@@ -51,13 +52,13 @@ export class DepartmentSetupCtrl {
   }
 
   getBranches() {
-    this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
+    this.backendSrv.get(config.CMS_BRANCH_URL).then(result => {
       this.branches = result;
     });
   }
 
   getAcademicYears() {
-    this.backendSrv.get(this.RestUrl.getAcademicYearRestUrl()).then(result => {
+    this.backendSrv.get(config.CMS_ACADEMICYEAR_URL).then(result => {
       this.academicYears = result;
     });
   }
