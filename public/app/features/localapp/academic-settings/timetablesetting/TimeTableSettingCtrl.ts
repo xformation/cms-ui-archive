@@ -30,6 +30,7 @@ export class TimeTableSettingCtrl {
   // departments: any;
   batches: any;
   teachers: any;
+  filterTeachers: any;
   counter: any;
   totalLectures: any;
   // colleges: any;
@@ -43,11 +44,13 @@ export class TimeTableSettingCtrl {
   semesterId: any;
   sectionId: any;
   subjects: any;
+  filterSubjects: any;
   subjectId: any;
   lectureTimings: any;
   isValid: any;
   timeTableValidationMessage: any;
   attendanceMasters: any;
+  filterAttendanceMasters: any;
   terms: any;
   termId: any;
   academicYearId: any;
@@ -66,12 +69,15 @@ export class TimeTableSettingCtrl {
   selectedAyYear: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
-    (this.fromLecDate = new Date()), (this.isLecFound = 0);
+    this.fromLecDate = new Date();
+    this.isLecFound = 0;
     this.academicYearId = 0;
     this.departmentId = 0;
     this.lecturesCreated = [];
     this.subjects = [];
+    this.filterSubjects = [];
     this.teachers = [];
+    this.filterTeachers = [];
     this.isValid = true;
     // this.RestUrl = new GlobalRestUrlConstants();
     this.counter = 0;
@@ -391,9 +397,20 @@ export class TimeTableSettingCtrl {
   // }
 
   onChangeFilterBatch() {
-    this.getAttendanceMasterByBatchAndSection(null);
-    this.onChangeBatch();
+    const sb = [];
+    if (this.batchId !== null && this.batchId !== undefined && this.batchId !== '') {
+      for (const i in this.subjects) {
+        const b = this.subjects[i].batch;
+        if (b.id === parseInt(this.batchId, 10)) {
+          sb.push(this.subjects[i]);
+        }
+      }
+      this.filterSubjects = sb;
+    } else {
+      this.filterSubjects = this.subjects;
+    }
   }
+
   onChangeBatch() {
     if (!this.batchId) {
       this.sections = {};
@@ -513,6 +530,15 @@ export class TimeTableSettingCtrl {
       .then(
         result => {
           this.lecturesCreated = result;
+          const statusMsgDiv = document.getElementById('statusMsgDiv');
+          if (result.length > 0) {
+            this.isLecFound = 1;
+            statusMsgDiv.className = 'hide';
+          } else {
+            this.isLecFound = 0;
+            statusMsgDiv.className = '';
+            statusMsgDiv.innerText = 'No lecture created. Duplicate lectures are discarded.';
+          }
           this.isRequestMade = false;
           this.activateTab(2);
         },
@@ -562,27 +588,49 @@ export class TimeTableSettingCtrl {
       .then(result => {
         this.attendanceMasters = result;
         this.subjects = [];
-        //  0 this.teachers = [];
         for (const i in this.attendanceMasters) {
           const sb = this.attendanceMasters[i].teach.subject;
-          // const thr = this.attendanceMasters[i].teach.teacher;
-          this.subjects[i] = sb;
-          // this.teachers[i] = thr;
+          let isFound = false;
+          for (const j in this.subjects) {
+            const tempSb = this.subjects[j];
+            if (sb.id === tempSb.id) {
+              isFound = true;
+              break;
+            }
+          }
+          if (!isFound) {
+            this.subjects[i] = sb;
+          }
         }
         if (cb) {
           cb();
         }
       });
-    //this.subjects = {};
   }
+
   onChangeFilterSubject() {
-    this.teachers = [];
-    for (const i in this.attendanceMasters) {
-      const s = this.attendanceMasters[i].teach.subject;
-      if (s.id === parseInt(this.subjectId, 10)) {
-        this.teachers.push(this.attendanceMasters[i].teach.teacher);
+    const sb = [];
+    let tId = 0;
+    if (this.subjectId !== null && this.subjectId !== undefined && this.subjectId !== '') {
+      for (const i in this.filterAttendanceMasters) {
+        const b = this.filterAttendanceMasters[i].teach.subject;
+        if (b.id === parseInt(this.subjectId, 10)) {
+          if (tId !== this.filterAttendanceMasters[i].teach.teacher.id) {
+            sb.push(this.filterAttendanceMasters[i].teach.teacher);
+            tId = this.filterAttendanceMasters[i].teach.teacher.id;
+          }
+        }
       }
+      this.filterTeachers = sb;
+    } else {
+      this.filterTeachers = this.teachers;
     }
+  }
+
+  getFilterAttendanceMasterByDepartment() {
+    this.backendSrv.get(config.CMS_AM_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
+      this.filterAttendanceMasters = result;
+    });
   }
 
   onChangeSubject(weekDay, index) {
@@ -590,11 +638,28 @@ export class TimeTableSettingCtrl {
     this.$scope.subjectWiseTeachers = this.$scope.subjectWiseTeachers || {};
     this.$scope.subjectWiseTeachers[weekDay] = this.$scope.subjectWiseTeachers[weekDay] || {};
     this.$scope.subjectWiseTeachers[weekDay][index] = [];
+    const tempThAry = [];
     for (const i in this.attendanceMasters) {
+      let isFound = false;
       const s = this.attendanceMasters[i].teach.subject;
+      const t = this.attendanceMasters[i].teach.teacher;
       if (s.id === parseInt(subjectId, 10)) {
-        this.$scope.subjectWiseTeachers[weekDay][index].push(this.attendanceMasters[i].teach.teacher);
+        for (const j in tempThAry) {
+          const tempTh = tempThAry[j];
+          if (t.id === tempTh.id) {
+            isFound = true;
+            break;
+          }
+        }
+        if (!isFound) {
+          tempThAry[i] = t;
+        }
+
+        // this.$scope.subjectWiseTeachers[weekDay][index].push(this.attendanceMasters[i].teach.teacher);
       }
+    }
+    for (const j in tempThAry) {
+      this.$scope.subjectWiseTeachers[weekDay][index].push(tempThAry[j]);
     }
   }
 
@@ -720,10 +785,16 @@ export class TimeTableSettingCtrl {
   showSearchLectureDiv() {
     this.activateTab(2);
     if (this.departmentId) {
-      this.getAttendanceMasterByBatchAndSection(null);
+      // this.getAttendanceMasterByBatchAndSection(null);
+      this.getSubjects();
+      this.getTeachers();
+      this.getFilterAttendanceMasterByDepartment();
     }
     const elm = document.getElementById('viewSectionFilterDiv');
     elm.className = 'info-container m-b-3';
+
+    const statusMsgDiv = document.getElementById('statusMsgDiv');
+    statusMsgDiv.className = 'hide';
   }
   viewAllLectures() {
     if (!this.branchId) {
@@ -771,10 +842,14 @@ export class TimeTableSettingCtrl {
       .then(
         result => {
           this.lecturesCreated = result;
+          const statusMsgDiv = document.getElementById('statusMsgDiv');
           if (result.length > 0) {
             this.isLecFound = 1;
+            statusMsgDiv.className = 'hide';
           } else {
             this.isLecFound = 0;
+            statusMsgDiv.className = '';
+            statusMsgDiv.innerText = 'No lecture found.';
           }
           this.isRequestMade = false;
           this.activateTab(2);
@@ -809,6 +884,26 @@ export class TimeTableSettingCtrl {
     });
   }
 
+  getSubjects() {
+    if (this.departmentId === null || this.departmentId === undefined || this.departmentId === '') {
+      return;
+    }
+    this.backendSrv.get(config.CMS_SUBJECT_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
+      this.subjects = result;
+      this.filterSubjects = result;
+    });
+  }
+
+  getTeachers() {
+    if (this.departmentId === null || this.departmentId === undefined || this.departmentId === '') {
+      return;
+    }
+    this.backendSrv.get(config.CMS_TEACHER_BY_FILTER_PARAM_URL + '?deptId=' + this.departmentId).then(result => {
+      this.teachers = result;
+      this.filterTeachers = result;
+    });
+  }
+
   getCmsSections() {
     if (this.batchId === null || this.batchId === undefined || this.batchId === '') {
       return;
@@ -835,9 +930,13 @@ export class TimeTableSettingCtrl {
           this.departmentId
       )
       .then(result => {
+        let sId = 0;
         for (const i in result) {
           const sb = result[i].teach.subject;
-          selSubjects.push(sb);
+          if (sb.id !== sId) {
+            selSubjects.push(sb);
+            sId = sb.id;
+          }
         }
       });
 
@@ -919,7 +1018,13 @@ export class TimeTableSettingCtrl {
       icon: 'fa-trash',
       yesText: 'Delete',
       onConfirm: () => {
-        this.backendSrv.delete(config.CMS_LECTURE_URL + '/' + lectureObject.id).then(() => {
+        // this.backendSrv.delete(config.CMS_LECTURE_URL + '/' + lectureObject.id).then(() => {
+        //   this.viewAllLectures();
+        // });
+        this.backendSrv.delete(config.CMS_LECTURE_URL + '/' + lectureObject.id).then(result => {
+          if (result.statusCode === 1) {
+            alert(result.statusDesc);
+          }
           this.viewAllLectures();
         });
       },
