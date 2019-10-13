@@ -801,6 +801,9 @@ export class TimeTableSettingCtrl {
       alert('Please select a branch');
       return;
     }
+    this.lecturesCreated = [];
+    const statusMsgDiv = document.getElementById('statusMsgDiv');
+    statusMsgDiv.className = 'hide';
 
     const stDt =
       this.fromLecDate !== undefined && this.fromLecDate !== null && this.fromLecDate !== ''
