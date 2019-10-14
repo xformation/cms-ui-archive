@@ -1,5 +1,6 @@
 import { appEvents } from 'app/core/core';
 import { GlobalRestUrlConstants } from '../../../GlobalRestUrlConstants';
+import { config } from '../../../config';
 
 export class StaffCreateCtrl {
   navModel: any;
@@ -33,7 +34,7 @@ export class StaffCreateCtrl {
         return;
       }
       backendSrv.post(this.RestUrl.getTeacherRestUrl(), $scope.teacher).then(() => {
-        appEvents.emit("change_staff_list",{});
+        appEvents.emit('change_staff_list', {});
       });
     };
   }
@@ -64,7 +65,7 @@ export class StaffCreateCtrl {
     });
   }
   getBranches() {
-    this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
+    this.backendSrv.get(config.CMS_BRANCH_URL).then(result => {
       this.branches = result;
     });
   }

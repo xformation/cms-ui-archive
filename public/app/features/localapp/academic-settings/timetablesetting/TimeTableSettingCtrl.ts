@@ -1,5 +1,7 @@
 // import { GlobalRestUrlConstants } from '../../GlobalRestUrlConstants';
 import { config } from '../../config';
+import * as moment from 'moment';
+import { appEvents } from 'app/core/core';
 // import * as $ from 'jquery';
 // import { coreModule } from 'app/core/core';
 // import angular from 'angular';
@@ -28,6 +30,7 @@ export class TimeTableSettingCtrl {
   // departments: any;
   batches: any;
   teachers: any;
+  filterTeachers: any;
   counter: any;
   totalLectures: any;
   // colleges: any;
@@ -41,11 +44,13 @@ export class TimeTableSettingCtrl {
   semesterId: any;
   sectionId: any;
   subjects: any;
+  filterSubjects: any;
   subjectId: any;
   lectureTimings: any;
   isValid: any;
   timeTableValidationMessage: any;
   attendanceMasters: any;
+  filterAttendanceMasters: any;
   terms: any;
   termId: any;
   academicYearId: any;
@@ -55,14 +60,24 @@ export class TimeTableSettingCtrl {
   isRequestMade: any;
   lectureReport: any;
   globalSettings: any;
-
+  isLecFound: any;
+  teacherId: any;
+  fromLecDate: any;
+  toLecDate: any;
+  editBatchId: any;
+  editSectionId: any;
+  selectedAyYear: any;
   /** @ngInject */
   constructor($scope, private backendSrv) {
+    this.fromLecDate = new Date();
+    this.isLecFound = 0;
     this.academicYearId = 0;
     this.departmentId = 0;
     this.lecturesCreated = [];
     this.subjects = [];
+    this.filterSubjects = [];
     this.teachers = [];
+    this.filterTeachers = [];
     this.isValid = true;
     // this.RestUrl = new GlobalRestUrlConstants();
     this.counter = 0;
@@ -86,6 +101,161 @@ export class TimeTableSettingCtrl {
     $scope.idx = {};
     this.totalLectures = [];
     this.isRequestMade = false;
+
+    $scope.updateTimeTable = cb => {
+      console.log('$scope.lecture:::: ', $scope.lecture);
+      console.log('$scope.lectureObject ::: ', $scope.lectureObject);
+      if ($scope.lecture !== null && $scope.lecture !== undefined) {
+        $scope.lecture.id = $scope.lectureObject.id;
+      }
+      if ($scope.lecture.lecDate === null || $scope.lecture.lecDate === undefined) {
+        $scope.lecture.strLecDate = new Date($scope.lectureObject.lecDate).toLocaleDateString();
+      } else {
+        $scope.lecture.strLecDate = new Date($scope.lecture.lecDate).toLocaleDateString();
+      }
+      if ($scope.lecture.startTime === null || $scope.lecture.startTime === undefined) {
+        $scope.lecture.startTime = $scope.lectureObject.startTime;
+      } else {
+        $scope.lecture.startTime = new Date($scope.lecture.startTime).toLocaleTimeString('en-US');
+      }
+      if ($scope.lecture.endTime === null || $scope.lecture.endTime === undefined) {
+        $scope.lecture.endTime = $scope.lectureObject.endTime;
+      } else {
+        $scope.lecture.endTime = new Date($scope.lecture.endTime).toLocaleTimeString('en-US');
+      }
+
+      const lcDt = moment.utc($scope.lecture.strLecDate, 'MM/DD/YYYY');
+      console.log('Lecture Date : ', lcDt.toDate());
+
+      const c = new Date().toLocaleDateString();
+      const curDt = moment.utc(c, 'MM/DD/YYYY');
+      console.log('Current Date : ', curDt.toDate());
+
+      if (lcDt.isBefore(curDt)) {
+        if (cb) {
+          cb('4');
+        }
+        return;
+      }
+
+      const lastDate = moment.utc($scope.academicYear.strEndDate, 'DD-MM-YYYY');
+      console.log('academic year end date : ', lastDate);
+      if (lcDt.isAfter(lastDate)) {
+        if (cb) {
+          cb('5');
+        }
+        return;
+      }
+
+      const stTime = moment.utc($scope.lecture.startTime, 'hh:mm:ss');
+      const ndTime = moment.utc($scope.lecture.endTime, 'hh:mm:ss');
+
+      if (stTime.isAfter(ndTime)) {
+        if (cb) {
+          cb('2');
+        }
+        return;
+      }
+      if (stTime.isSame(ndTime)) {
+        if (cb) {
+          cb('3');
+        }
+        return;
+      }
+      let sId = '0';
+      if (
+        $scope.lectureObject.attendancemaster.section !== null &&
+        $scope.lectureObject.attendancemaster.section !== undefined
+      ) {
+        sId = $scope.lectureObject.attendancemaster.section.id;
+      }
+      backendSrv
+        .put(
+          `${config.CMS_LECTURE_URL}?sectionId=${sId}` +
+            `&batchId=${$scope.lectureObject.attendancemaster.batch.id}` +
+            `&subjectId=${$scope.lecture.subjectId}&teacherId=${$scope.lecture.teacherId}`,
+          $scope.lecture
+        )
+        .then(
+          result => {
+            if (result.statusCode === 1) {
+              if (confirm(result.statusDesc)) {
+                backendSrv
+                  .put(
+                    `${config.CMS_LECTURE_URL}?sectionId=${sId}` +
+                      `&batchId=${$scope.lectureObject.attendancemaster.batch.id}` +
+                      `&subjectId=${$scope.lecture.subjectId}&teacherId=${$scope.lecture.teacherId}` +
+                      `&confirm=confirm`,
+                    $scope.lecture
+                  )
+                  .then(
+                    result => {
+                      if (cb) {
+                        cb('1');
+                      }
+                    },
+                    error => {
+                      this.isRequestMade = false;
+                    }
+                  );
+              } else {
+                return;
+              }
+            } else {
+              if (cb) {
+                cb('1');
+              }
+            }
+          },
+          error => {
+            this.isRequestMade = false;
+          }
+        );
+    };
+
+    $scope.getTeacherOnSubjectChangeForEdit = () => {
+      const { batchId, sectionId, subjectId } = this.$scope.lecture;
+      this.$scope.lecture = {};
+      this.$scope.lecture.batchId = batchId;
+      this.$scope.lecture.sectionId = sectionId;
+      this.$scope.lecture.subjectId = subjectId;
+      const selTeachers = [];
+      this.backendSrv
+        .get(
+          config.CMS_AM_BY_BATCH_SECTION_URL +
+            '?batchId=' +
+            batchId +
+            '&sectionId=' +
+            sectionId +
+            '&departmentId=' +
+            this.departmentId
+        )
+        .then(result => {
+          for (const i in result) {
+            const sb = result[i].teach.subject;
+            if (sb.id === parseInt(subjectId, 10)) {
+              selTeachers.push(result[i].teach.teacher);
+            }
+          }
+        });
+      $scope.selectedTeachers = selTeachers;
+    };
+
+    // $scope.onChangeBatchForEdit = () => {
+    //   const { batchId } = this.$scope.lecture;
+    //   this.$scope.lecture = {};
+    //   this.$scope.lecture.batchId = batchId;
+    //   const selSections = [];
+    //   if (batchId !== undefined) {
+    //     this.backendSrv.get(config.CMS_SECTION_BY_BATCH_URL + batchId).then(result => {
+    //       for (const i in result) {
+    //         const section = result[i];
+    //         selSections.push(section);
+    //       }
+    //     });
+    //   }
+    //   $scope.selectedSections = selSections;
+    // };
   }
 
   getGlobalConfigurations(userName) {
@@ -97,10 +267,12 @@ export class TimeTableSettingCtrl {
       }
       this.departmentId = result.selectedDepartmentId;
       this.branchId = result.selectedBranchId;
-      console.log('AYID :::: ', this.academicYearId);
-      console.log('BRANCHID :::: ', this.branchId);
-      console.log('DEPT ID :::: ', this.departmentId);
+      // console.log('AYID :::: ', this.academicYearId);
+      // console.log('BRANCHID :::: ', this.branchId);
+      // console.log('DEPT ID :::: ', this.departmentId);
       this.getTerms(this.academicYearId);
+      this.getCmsBatches();
+      this.getAcademicYears();
       // this.selectedBranches = this.globalSettings.branchList;
     });
   }
@@ -224,6 +396,21 @@ export class TimeTableSettingCtrl {
   //   this.getCmsSections();
   // }
 
+  onChangeFilterBatch() {
+    const sb = [];
+    if (this.batchId !== null && this.batchId !== undefined && this.batchId !== '') {
+      for (const i in this.subjects) {
+        const b = this.subjects[i].batch;
+        if (b.id === parseInt(this.batchId, 10)) {
+          sb.push(this.subjects[i]);
+        }
+      }
+      this.filterSubjects = sb;
+    } else {
+      this.filterSubjects = this.subjects;
+    }
+  }
+
   onChangeBatch() {
     if (!this.batchId) {
       this.sections = {};
@@ -330,7 +517,7 @@ export class TimeTableSettingCtrl {
       }
     }
     this.isRequestMade = true;
-    if (this.sectionId === null || this.sectionId === undefined) {
+    if (this.sectionId === null || this.sectionId === undefined || this.sectionId === '') {
       this.sectionId = 0;
     }
     this.backendSrv
@@ -343,6 +530,15 @@ export class TimeTableSettingCtrl {
       .then(
         result => {
           this.lecturesCreated = result;
+          const statusMsgDiv = document.getElementById('statusMsgDiv');
+          if (result.length > 0) {
+            this.isLecFound = 1;
+            statusMsgDiv.className = 'hide';
+          } else {
+            this.isLecFound = 0;
+            statusMsgDiv.className = '';
+            statusMsgDiv.innerText = 'No lecture created. Duplicate lectures are discarded.';
+          }
           this.isRequestMade = false;
           this.activateTab(2);
         },
@@ -392,18 +588,49 @@ export class TimeTableSettingCtrl {
       .then(result => {
         this.attendanceMasters = result;
         this.subjects = [];
-        //  0 this.teachers = [];
         for (const i in this.attendanceMasters) {
           const sb = this.attendanceMasters[i].teach.subject;
-          // const thr = this.attendanceMasters[i].teach.teacher;
-          this.subjects[i] = sb;
-          // this.teachers[i] = thr;
+          let isFound = false;
+          for (const j in this.subjects) {
+            const tempSb = this.subjects[j];
+            if (sb.id === tempSb.id) {
+              isFound = true;
+              break;
+            }
+          }
+          if (!isFound) {
+            this.subjects[i] = sb;
+          }
         }
         if (cb) {
           cb();
         }
       });
-    //this.subjects = {};
+  }
+
+  onChangeFilterSubject() {
+    const sb = [];
+    let tId = 0;
+    if (this.subjectId !== null && this.subjectId !== undefined && this.subjectId !== '') {
+      for (const i in this.filterAttendanceMasters) {
+        const b = this.filterAttendanceMasters[i].teach.subject;
+        if (b.id === parseInt(this.subjectId, 10)) {
+          if (tId !== this.filterAttendanceMasters[i].teach.teacher.id) {
+            sb.push(this.filterAttendanceMasters[i].teach.teacher);
+            tId = this.filterAttendanceMasters[i].teach.teacher.id;
+          }
+        }
+      }
+      this.filterTeachers = sb;
+    } else {
+      this.filterTeachers = this.teachers;
+    }
+  }
+
+  getFilterAttendanceMasterByDepartment() {
+    this.backendSrv.get(config.CMS_AM_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
+      this.filterAttendanceMasters = result;
+    });
   }
 
   onChangeSubject(weekDay, index) {
@@ -411,11 +638,28 @@ export class TimeTableSettingCtrl {
     this.$scope.subjectWiseTeachers = this.$scope.subjectWiseTeachers || {};
     this.$scope.subjectWiseTeachers[weekDay] = this.$scope.subjectWiseTeachers[weekDay] || {};
     this.$scope.subjectWiseTeachers[weekDay][index] = [];
+    const tempThAry = [];
     for (const i in this.attendanceMasters) {
+      let isFound = false;
       const s = this.attendanceMasters[i].teach.subject;
+      const t = this.attendanceMasters[i].teach.teacher;
       if (s.id === parseInt(subjectId, 10)) {
-        this.$scope.subjectWiseTeachers[weekDay][index].push(this.attendanceMasters[i].teach.teacher);
+        for (const j in tempThAry) {
+          const tempTh = tempThAry[j];
+          if (t.id === tempTh.id) {
+            isFound = true;
+            break;
+          }
+        }
+        if (!isFound) {
+          tempThAry[i] = t;
+        }
+
+        // this.$scope.subjectWiseTeachers[weekDay][index].push(this.attendanceMasters[i].teach.teacher);
       }
+    }
+    for (const j in tempThAry) {
+      this.$scope.subjectWiseTeachers[weekDay][index].push(tempThAry[j]);
     }
   }
 
@@ -540,24 +784,76 @@ export class TimeTableSettingCtrl {
 
   showSearchLectureDiv() {
     this.activateTab(2);
+    if (this.departmentId) {
+      // this.getAttendanceMasterByBatchAndSection(null);
+      this.getSubjects();
+      this.getTeachers();
+      this.getFilterAttendanceMasterByDepartment();
+    }
     const elm = document.getElementById('viewSectionFilterDiv');
     elm.className = 'info-container m-b-3';
+
+    const statusMsgDiv = document.getElementById('statusMsgDiv');
+    statusMsgDiv.className = 'hide';
   }
   viewAllLectures() {
     if (!this.branchId) {
       alert('Please select a branch');
       return;
     }
+    this.lecturesCreated = [];
+    const statusMsgDiv = document.getElementById('statusMsgDiv');
+    statusMsgDiv.className = 'hide';
+
+    const stDt =
+      this.fromLecDate !== undefined && this.fromLecDate !== null && this.fromLecDate !== ''
+        ? moment.utc(this.fromLecDate).format('DD-MM-YYYY')
+        : undefined;
+    const ndDt = new Date(this.toLecDate);
+    let ndt = undefined;
+    if (this.toLecDate !== undefined && this.toLecDate !== null && this.toLecDate !== '') {
+      ndt =
+        (ndDt.getDate() < 10 ? '0' + ndDt.getDate() : ndDt.getDate()) +
+        '-' +
+        (ndDt.getMonth() + 1) +
+        '-' +
+        ndDt.getFullYear();
+    }
+
+    if (
+      this.fromLecDate !== undefined &&
+      this.fromLecDate !== null &&
+      this.fromLecDate !== '' &&
+      this.toLecDate !== undefined &&
+      this.toLecDate !== null &&
+      this.toLecDate !== ''
+    ) {
+      const enDt = moment.utc(ndt, 'MM/DD/YYYY');
+      if (enDt.isBefore(stDt)) {
+        alert('To date cannot be a date prior to from date');
+        return;
+      }
+    }
     this.isRequestMade = true;
     this.backendSrv
       .get(
         `${config.CMS_LECTURE_URL}?termId=${this.termId}&academicYearId=${this.academicYearId}` +
           `&sectionId=${this.sectionId}&batchId=${this.batchId}&branchId=${this.branchId}` +
-          `&departmentId=${this.departmentId}`
+          `&departmentId=${this.departmentId}&subjectId=${this.subjectId}` +
+          `&teacherId=${this.teacherId}&fromDate=${stDt}&toDate=${ndt}`
       )
       .then(
         result => {
           this.lecturesCreated = result;
+          const statusMsgDiv = document.getElementById('statusMsgDiv');
+          if (result.length > 0) {
+            this.isLecFound = 1;
+            statusMsgDiv.className = 'hide';
+          } else {
+            this.isLecFound = 0;
+            statusMsgDiv.className = '';
+            statusMsgDiv.innerText = 'No lecture found.';
+          }
           this.isRequestMade = false;
           this.activateTab(2);
         },
@@ -591,12 +887,150 @@ export class TimeTableSettingCtrl {
     });
   }
 
+  getSubjects() {
+    if (this.departmentId === null || this.departmentId === undefined || this.departmentId === '') {
+      return;
+    }
+    this.backendSrv.get(config.CMS_SUBJECT_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
+      this.subjects = result;
+      this.filterSubjects = result;
+    });
+  }
+
+  getTeachers() {
+    if (this.departmentId === null || this.departmentId === undefined || this.departmentId === '') {
+      return;
+    }
+    this.backendSrv.get(config.CMS_TEACHER_BY_FILTER_PARAM_URL + '?deptId=' + this.departmentId).then(result => {
+      this.teachers = result;
+      this.filterTeachers = result;
+    });
+  }
+
   getCmsSections() {
     if (this.batchId === null || this.batchId === undefined || this.batchId === '') {
       return;
     }
     this.backendSrv.get(config.CMS_SECTION_BY_BATCH_URL + this.batchId).then(result => {
       this.sections = result;
+    });
+  }
+
+  getSubjectOnBatchChangeForEdit(lectureObject) {
+    const selSubjects = [];
+    let sectionId = 0;
+    if (lectureObject.attendancemaster.section !== null && lectureObject.attendancemaster.section !== undefined) {
+      sectionId = lectureObject.attendancemaster.section.id;
+    }
+    this.backendSrv
+      .get(
+        config.CMS_AM_BY_BATCH_SECTION_URL +
+          '?batchId=' +
+          lectureObject.attendancemaster.batch.id +
+          '&sectionId=' +
+          sectionId +
+          '&departmentId=' +
+          this.departmentId
+      )
+      .then(result => {
+        let sId = 0;
+        for (const i in result) {
+          const sb = result[i].teach.subject;
+          if (sb.id !== sId) {
+            selSubjects.push(sb);
+            sId = sb.id;
+          }
+        }
+      });
+
+    return selSubjects;
+    // $scope.selectedSubjects = selSubjects;
+    // console.log("$scope.selectedSubjects from lecture model ::::::: ", $scope.selectedSubjects);
+  }
+
+  getAcademicYears() {
+    this.backendSrv.get(config.CMS_ACADEMICYEAR_URL + this.academicYearId).then(result => {
+      this.selectedAyYear = result;
+      console.log('1. this.selectedAyYear:::: ', this.selectedAyYear);
+    });
+    return this.selectedAyYear;
+  }
+  editTimeTable(lectureObject) {
+    const stDt = moment.utc(lectureObject.strLecDate, 'DD-MM-YYYY');
+    const stTime = moment.utc(lectureObject.startTime, 'hh:mm:ss');
+    const ndTime = moment.utc(lectureObject.endTime, 'hh:mm:ss');
+    lectureObject.lecDate = stDt;
+    const selectedSubjects = this.getSubjectOnBatchChangeForEdit(lectureObject);
+
+    appEvents.emit('edit-timetable-modal', {
+      icon: 'fa-trash',
+      text: 'update',
+      lecDateVal: moment.utc(stDt).format('YYYY-MM-DD'),
+      startTimeVal: moment.utc(stTime).format('hh:mm:ss'),
+      endTimeVal: moment.utc(ndTime).format('hh:mm:ss'),
+      selectedSubjects: selectedSubjects,
+      academicYear: this.selectedAyYear,
+      // batches: this.batches,
+      // sections: this.sections,
+      // subjects: this.subjects,
+      // teachers: this.teachers,
+      // editBatchId: this.editBatchId,
+      lectureObject: lectureObject,
+      // selectedSections: this.$scope.selectedSections,
+      // selectedSubjects: this.$scope.selectedSubjects,
+      onEdit: (lecForm, lecture, lectureObject, selectedSubjects, academicYear, cb) => {
+        this.$scope.lecForm = lecForm;
+        this.$scope.lecture = lecture;
+        this.$scope.selectedSubjects = selectedSubjects;
+        // this.$scope.batches = batches;
+        // this.$scope.sections = sections;
+        // this.$scope.subjects = subjects;
+        // this.$scope.editBatchId = editBatchId;
+        this.$scope.lectureObject = lectureObject;
+        this.$scope.academicYear = academicYear;
+        this.$scope.updateTimeTable(cb);
+      },
+      // onChange: (lecForm, lecture, selectedSections) => {
+      //   this.$scope.lecForm = lecForm;
+      //   this.$scope.lecture = lecture;
+      //   this.$scope.selectedSections = selectedSections;
+      //   this.$scope.onChangeBatchForEdit();
+      //   return this.$scope.selectedSections;
+      // },
+      // getSubjectOnBatchChange: (lecForm, lecture, selectedSubjects) => {
+      //   this.$scope.lecForm = lecForm;
+      //   this.$scope.lecture = lecture;
+      //   this.$scope.selectedSubjects = selectedSubjects;
+      //   this.$scope.getSubjectOnBatchChangeForEdit();
+      //   return this.$scope.selectedSubjects;
+      // },
+      getTeacherOnSubjectChange: (lecForm, lecture, selectedTeachers) => {
+        this.$scope.lecForm = lecForm;
+        this.$scope.lecture = lecture;
+        this.$scope.selectedTeachers = selectedTeachers;
+        this.$scope.getTeacherOnSubjectChangeForEdit();
+        return this.$scope.selectedTeachers;
+      },
+    });
+  }
+
+  deleteTimeTable(lectureObject) {
+    appEvents.emit('confirm-modal', {
+      title: 'Delete',
+      text: 'Do you want to delete the lecture id ' + lectureObject.id + ' ?',
+      icon: 'fa-trash',
+      yesText: 'Delete',
+      onConfirm: () => {
+        // this.backendSrv.delete(config.CMS_LECTURE_URL + '/' + lectureObject.id).then(() => {
+        //   this.viewAllLectures();
+        // });
+        this.backendSrv.delete(config.CMS_LECTURE_URL + '/' + lectureObject.id).then(result => {
+          if (result.statusCode === 1) {
+            alert(result.statusDesc);
+          }
+          this.viewAllLectures();
+        });
+      },
     });
   }
 }

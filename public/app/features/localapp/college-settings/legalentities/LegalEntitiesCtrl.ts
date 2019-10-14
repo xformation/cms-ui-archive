@@ -43,6 +43,10 @@ export class LegalEntitiesCtrl {
       if (!$scope.bankForm.$valid) {
         return;
       }
+      if (!$scope.bankAccount.corporateId.match('/^[0-9]$/')) {
+        alert('Please provide numbers in corporate id.');
+        return;
+      }
       backendSrv.post(this.RestUrl.getBankAccountRestUrl(), $scope.bankAccount).then(
         () => {
           //this.getBank();

@@ -149,7 +149,7 @@
       </div>
       <div id="preCreateLectureNextDiv" class="hide">
         <input ng-if="ctrl.activeTabIndex === 0" type="button" class="btn btn-primary gf-form-control"
-          ng-click="ctrl.onClickCreateLectures()" value="Say Next" ng-disabled="ctrl.isViewOnly"></input>
+          ng-click="ctrl.onClickCreateLectures()" value="Next" ng-disabled="ctrl.isViewOnly"></input>
       </div>
     </div>
 
@@ -280,7 +280,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['MONDAY']"
                       ng-change="ctrl.onChangeSubject('MONDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -304,7 +304,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['TUESDAY']"
                       ng-change="ctrl.onChangeSubject('TUESDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -328,7 +328,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['WEDNESDAY']"
                       ng-change="ctrl.onChangeSubject('WEDNESDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -352,7 +352,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['THURSDAY']"
                       ng-change="ctrl.onChangeSubject('THURSDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -376,7 +376,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['FRIDAY']"
                       ng-change="ctrl.onChangeSubject('FRIDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -400,7 +400,7 @@
                     <select class="gf-form-input" ng-model="ctrl.lectureTimings[$index].subjects['SATURDAY']"
                       ng-change="ctrl.onChangeSubject('SATURDAY', $index)" ng-disabled="ctrl.isViewOnly">
                       <option value="">Select Subject</option>
-                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectCode}}</option>
+                      <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}">{{sub.subjectDesc}}</option>
                     </select>
                   </div>
                   <div>
@@ -433,8 +433,7 @@
       <div class="ttflex m-b-1">
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Term/Semester</label>
-          <select class="gf-form-select-box" ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" required
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" >
             <option value="">Select Term</option>
             <option ng-repeat="term in ctrl.terms" value="{{term.id}}" ng-selected="term.id === ctrl.termId">
               {{term.termsDesc}}</option>
@@ -442,29 +441,26 @@
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Year</label>
-          <select class="gf-form-select-box" ng-model="ctrl.batchId" ng-change="ctrl.onChangeBatch()"
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.batchId" ng-change="ctrl.onChangeFilterBatch()">
             <option value="">Select Year</option>
-            <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}" ng-selected="bth.id === ctrl.batchId">
+            <option ng-repeat="bth in ctrl.batches" value="{{bth.id}}">
               {{bth.batch}}
             </option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Section</label>
-          <select class="gf-form-select-box" ng-model="ctrl.sectionId" ng-change="ctrl.onChangeSection()"
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.sectionId" >
             <option value="">Select Section</option>
-            <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" ng-selected="sec.id === ctrl.sectionId">
+            <option ng-repeat="sec in ctrl.sections" value="{{sec.id}}" >
               {{sec.section}}</option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Subject</label>
-          <select class="gf-form-select-box" ng-model="ctrl.subjectId" ng-change="ctrl.onChangeSubject()"
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.subjectId" >
             <option value="">Select Subject</option>
-            <option ng-repeat="sub in ctrl.subjects" value="{{sub.id}}" ng-selected="sub.id === ctrl.subjectId">
+            <option ng-repeat="sub in ctrl.filterSubjects" value="{{sub.id}}">
               {{sub.subjectDesc}}</option>
           </select>
         </div>
@@ -472,20 +468,19 @@
       <div class="ttflex">
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Teacher</label>
-          <select class="gf-form-select-box" ng-model="ctrl.teacherId" ng-change="ctrl.onChangeTeacher()"
-            ng-disabled="ctrl.isReadOnly || ctrl.isViewOnly">
+          <select class="gf-form-select-box" ng-model="ctrl.teacherId" >
             <option value="">Select Teacher</option>
-            <option ng-repeat="teach in ctrl.teachers" value="{{teach.id}}" ng-selected="teach.id === ctrl.teacherId">
-              {{teach.teacherName}}</option>
+            <option ng-repeat="teach in ctrl.filterTeachers" value="{{teach.id}}" >
+              {{teach.teacherName + ' '+ teach.teacherMiddleName + ' '+ teacherLastName}} </option>
           </select>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">From Date</label>
-          <input type="date" id="formDate" ng-model="" maxlength="10" class="gf-form-input cust-width-220" />
+          <input type="date" id="formDate" ng-model="ctrl.fromLecDate" (ngModelChange)="ctrl.fromLecDate = $event" maxlength="10" class="gf-form-input cust-width-220"/>
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">To Date</label>
-          <input type="date" id="toDate" ng-model="" maxlength="10" class="gf-form-input cust-width-220" />
+          <input type="date" id="toDate" ng-model="ctrl.toLecDate" (ngModelChange)="ctrl.toLecDate = $event" maxlength="10" class="gf-form-input cust-width-220" />
         </div>
         <div class="gf-form--grow form-control-container cust-width-220">
           <input type="button" class="btn btn-primary gf-form-control" ng-click="ctrl.viewAllLectures()" value="Search"
@@ -493,7 +488,7 @@
         </div>
       </div>
     </div>
-    <div id="lectureListDiv" style="height:250px; overflow: auto;">
+    <div id="lectureListDiv" style="height:250px; overflow: auto;" ng-class="{'hide':ctrl.isLecFound === 0}">
       <table style="width: 100%;">
         <thead>
           <th>Sr. No</th>
@@ -502,11 +497,10 @@
           <th>Section</th>
           <th>Subject</th>
           <th>Teacher</th>
-          <th>Date</th>
+          <th>Lecture Date</th>
           <th>Start Time</th>
           <th>End Time</th>
-          <th>Update</th>
-          <th>Delete</th>
+          <th>Actions</th>
         </thead>
         <tbody>
           <tr ng-repeat="lecObj in ctrl.lecturesCreated track by $index">
@@ -520,15 +514,17 @@
             <td>{{lecObj.startTime}}</td>
             <td>{{lecObj.endTime}}</td>
             <td>
-              <input type="button" class="btn btn-primary" ng-click="ctrl.onEditLectures($index)" value="Edit">
-            </td>
-            <td>
-              <input type="button" class="btn btn-primary" ng-click="ctrl.onDeleteLectures($index)" value="Delete">
+              <a ng-click="ctrl.editTimeTable(lecObj)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
+                aria-hidden="true"></i></a>
+              <a ng-click="ctrl.deleteTimeTable(lecObj)"><i class="fa fa-trash-o fa-2x"
+                aria-hidden="true"></i></a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <!-- <div id="statusMsgDiv" ng-class="{'hide':ctrl.isLecFound === 1}">No record found</div> -->
+    <div id="statusMsgDiv" ng-class="{'hide'}"></div>
   </div>
 </div>
 </div>

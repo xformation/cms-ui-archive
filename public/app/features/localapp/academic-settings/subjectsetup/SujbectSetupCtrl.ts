@@ -127,7 +127,7 @@ export class SubjectSetupCtrl {
       this.branches = {};
       return;
     }
-    this.backendSrv.get(this.RestUrl.getBranchesByCollegeIdRestUrl() + this.collegeId).then(result => {
+    this.backendSrv.get(config.CMS_BRANCH_BY_COLLEGE_URL + '/' + this.collegeId).then(result => {
       this.branches = result;
     });
   }

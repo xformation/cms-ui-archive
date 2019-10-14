@@ -87,7 +87,7 @@ export class CollegeBranchesCtrl {
   }
 
   getBranches() {
-    this.backendSrv.get(this.RestUrl.getBranchRestUrl()).then(result => {
+    this.backendSrv.get(config.CMS_BRANCH_URL).then(result => {
       this.branches = result;
     });
   }

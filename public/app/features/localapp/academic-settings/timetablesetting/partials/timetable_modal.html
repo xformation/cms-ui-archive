@@ -1,0 +1,136 @@
+<div class="add-modal-body" ng-cloak>
+	<div class="add-modal-header">
+		<h2 class="add-modal-header-title">
+			<!-- <i class="fa {{icon}}"></i> -->
+			<span class="p-l-1">
+				Edit Lecture Schedule
+			</span>
+		</h2>
+
+		<a class="add-modal-header-close" ng-click="dismiss();">
+			<i class="fa fa-remove"></i>
+		</a>
+	</div>
+
+	<div class="modal-content">
+
+		<div class="add-confirm-modal p-1">
+			<form name="lecForm" class="gf-form-group section m-0 dflex">
+				<div class="bg-modal modal-fwidth">
+					<div class="mdflex modal-fwidth">
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Lecture Id : {{lectureObject.id}}</label>
+						</div>
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Department : {{lectureObject.attendancemaster.batch.department.name}}</label>
+						</div>
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Year : {{lectureObject.attendancemaster.batch.batch}}</label>
+						</div>
+					</div>
+					<div class="mdflex modal-fwidth">
+						
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Section : {{lectureObject.attendancemaster.section.section}}</label>
+						</div>
+					<!-- </div>
+					<div class="mdflex modal-fwidth"> -->
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Subject : {{lectureObject.attendancemaster.teach.subject.subjectDesc}}</label>
+						</div>
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Teacher : {{lectureObject.attendancemaster.teach.teacher.teacherName}}</label>
+						</div>
+					</div>
+					<div class="mdflex modal-fwidth">
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Lecture Date : {{lectureObject.strLecDate}}</label>
+						</div>
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">Start Time : {{lectureObject.startTime}}</label>
+						</div>
+						<div class="fwidth-modal-text modal-fwidth m-r-1">
+							<label class="gf-form-label b-0 bg-transparent">End Time : {{lectureObject.endTime}}</label>
+						</div>
+					</div>
+					<hr>
+					<div class="mdflex modal-fwidth">
+						<!-- <div>
+							<label class="gf-form-label b-0 bg-transparent">Year</label>
+							<select class="gf-form-input" required ng-model="lecture.batchId"
+								ng-change="onChangeBatchForEdit();getSubjectOnBatchChangeForEdit()">
+								<option value="">Select Year</option>
+								<option ng-repeat="batch in batches" value="{{batch.id}}" ng-selected="batch.id === lectureObject.attendancemaster.batch.id">{{batch.batch}}</option>
+							</select>
+						</div>
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">Section</label>
+							<select class="gf-form-input" ng-model="lecture.sectionId">
+								<option value="">Select Section</option>
+								<option ng-repeat="sec in selectedSections" value="{{sec.id}}" ng-selected="sec.id === lectureObject.attendancemaster.section.id">{{sec.section}}</option>
+							</select>
+						</div> -->
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">Subject</label>
+							<select class="gf-form-input" required ng-model="lecture.subjectId" ng-change="getTeacherOnSubjectChangeForEdit()">
+								<option value="">Select Subject</option>
+								<option ng-repeat="sub in selectedSubjects" value="{{sub.id}}" >{{sub.subjectDesc}}</option>
+							</select>
+						</div>
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">Teacher</label>
+							<select class="gf-form-input" required ng-model="lecture.teacherId">
+								<option value="">Select Teacher</option>
+								<option ng-repeat="teacher in selectedTeachers" value="{{teacher.id}}">{{teacher.teacherName}}</option>
+							</select>
+						</div>
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">Lecture Date</label>
+							<input type="date" required ng-model="lecture.lecDate" class="gf-form-input "
+								placeholder=""  (ngModelChange)="lecture.lecDate = $event" maxlength="10" value="{{lecDateVal}}"/>
+						</div>
+					</div>
+
+					<div class="mdflex modal-fwidth">
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">Start Time</label>
+							<input type="time" id="stTime" required ng-model="lecture.startTime" value="{{startTimeVal}}"/>
+						</div>
+						<div>
+							<label class="gf-form-label b-0 bg-transparent">End Time</label>
+							<input type="time" id="ndTime" required ng-model="lecture.endTime" value="{{endTimeVal}}"/>
+						</div>
+						
+					</div>
+
+					<div class="m-t-1 text-center">
+						<button type="submit" ng-click="updateTimeTable();" class="btn btn-success border-bottom">Update</button>
+						<button ng-click="dismiss()" type="reset" class="btn btn-danger border-bottom">Cancel</button>
+					</div>
+					<div ng-if="is_success_bar === '0'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">There is some error!
+					</div>
+					<div ng-if="is_success_bar === '1'"
+						style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data saved
+						successfully!</div>
+					<div ng-if="is_success_bar === '2'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Start and End time cannot overlap each other!</div>
+					<div ng-if="is_success_bar === '3'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Start and End time cannot be same!</div>
+					<div ng-if="is_success_bar === '4'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Lecture date cannot be a past date!</div>	
+					<div ng-if="is_success_bar === '5'"
+						style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Lecture date cannot go beyond the academic year last date!</div>		
+				</div>
+			</form>
+		</div>
+
+		<!-- <div class="modal-content-confirm-text" ng-if="confirmText">
+			<input type="text" class="gf-form-input width-16" style="display: inline-block;"
+				placeholder="Type {{confirmText}} to confirm" ng-model="confirmInput"
+				ng-change="updateConfirmText(confirmInput)">
+		</div> -->
+
+	</div>
+
+</div>

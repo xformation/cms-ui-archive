@@ -26,6 +26,7 @@ export const config = {
   CMS_BATCH_BY_DEPARTMENT_URL: apiUrl + '/api/cmsbatches-departmentid/',
   CMS_LECTURE_URL: apiUrl + '/api/cmslectures',
   CMS_AM_BY_BATCH_SECTION_URL: apiUrl + '/api/cmsattendance-masters-bybatchsection',
+  CMS_AM_BY_DEPARTMENT_URL: apiUrl + '/api/cmsattendance-masters-bydepartmentid',
   CMS_META_LECTURE_URL: apiUrl + '/api/cmsmeta-lecture-selected',
   CMS_META_LECTURE_VIEW_ALL_URL: apiUrl + '/api/cmsmeta-lecture-viewalllectures',
   CMS_HOLIDAY_URL: apiUrl + '/api/cmsholidays/',
@@ -38,4 +39,6 @@ export const config = {
   CMS_SECTION_URL: apiUrl + '/api/cmssectionenums',
   CMS_SECTION_BY_BATCH_URL: apiUrl + '/api/cmssections-batchid/',
   CMS_CHECK_USER_SELECTION_URL: apiUrl + '/api/cmscheckuserselection',
+  CMS_SUBJECT_BY_DEPARTMENT_URL: apiUrl + '/api/cmssubjects-bydepartmentid',
+  CMS_TEACHER_BY_FILTER_PARAM_URL: apiUrl + '/api/cmsteachers-qryprms',
 };

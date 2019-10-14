@@ -24,20 +24,25 @@
 						</div>
 						<div class="modal-fwidth modal-text">
 							<label class="gf-form-label b-0 bg-transparent">ACCOUNT NUMBER</label>
-							<input type="number" required ng-model="bankAccount.accountNumber" class="gf-form-input"
-								placeholder="" />
+							<input type="text" required ng-model="bankAccount.accountNumber" class="gf-form-input"
+								placeholder="" maxlength="20" />
 						</div>
 					</div>
 					<div class="mdflex modal-fwidth">
 						<div class="modal-fwidth modal-text m-r-1">
 							<label class="gf-form-label b-0 bg-transparent">TYPE OF ACCOUNT</label>
-							<input type="text" required ng-model="bankAccount.typeOfAccount" class="gf-form-input"
-								placeholder="" maxlength="255" />
+							<!-- <input type="text" required ng-model="bankAccount.typeOfAccount" class="gf-form-input"
+								placeholder="" maxlength="255" /> -->
+							<select class="gf-form-input" required ng-model="bankAccount.typeOfAccount">
+								<option value="">Select Account Type</option>
+								<option value="CURRENT_ACCOUNT">Current Account</option>
+								<option value="SAVING_ACCOUNT">Saving Account</option>
+							</select>
 						</div>
 						<div class="modal-fwidth modal-text">
 							<label class="gf-form-label b-0 bg-transparent">IFSC CODE</label>
 							<input type="text" required ng-model="bankAccount.ifscCode" class="gf-form-input "
-								placeholder="" maxlength="255" />
+								placeholder="" maxlength="15" />
 						</div>
 					</div>
 					<div class="mdflex modal-fwidth">
@@ -48,8 +53,8 @@
 						</div>
 						<div class="modal-fwidth modal-text">
 							<label class="gf-form-label b-0 bg-transparent">CORPORATE ID</label>
-							<input type="number" ng-model="bankAccount.corporateId" class="gf-form-input "
-								placeholder="" />
+							<input type="text" ng-model="bankAccount.corporateId" class="gf-form-input "
+								placeholder="" maxlength="20" />
 						</div>
 					</div>
 					<div class="mdflex">
