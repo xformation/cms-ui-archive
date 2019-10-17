@@ -22,6 +22,7 @@ export const config = {
 
   CMS_SEMESTER_URL: apiUrl + '/api/cmssemesters/',
   CMS_TERM_BY_ACYEAR_URL: apiUrl + '/api/cmsterms-by_academicyearid',
+  CMS_DEPARTMENT_URL: apiUrl + '/api/cmsdepartments/',
   CMS_DEPARTMENT_BY_BRANCH_URL: apiUrl + '/api/cmsdepartments-branchid/',
   CMS_BATCH_BY_DEPARTMENT_URL: apiUrl + '/api/cmsbatches-departmentid/',
   CMS_LECTURE_URL: apiUrl + '/api/cmslectures',
@@ -39,6 +40,7 @@ export const config = {
   CMS_SECTION_URL: apiUrl + '/api/cmssectionenums',
   CMS_SECTION_BY_BATCH_URL: apiUrl + '/api/cmssections-batchid/',
   CMS_CHECK_USER_SELECTION_URL: apiUrl + '/api/cmscheckuserselection',
+  CMS_SUBJECT_URL: apiUrl + '/api/cmssubjects',
   CMS_SUBJECT_BY_DEPARTMENT_URL: apiUrl + '/api/cmssubjects-bydepartmentid',
   CMS_TEACHER_BY_FILTER_PARAM_URL: apiUrl + '/api/cmsteachers-qryprms',
 };

@@ -409,6 +409,7 @@ export class TimeTableSettingCtrl {
     } else {
       this.filterSubjects = this.subjects;
     }
+    this.onChangeBatch();
   }
 
   onChangeBatch() {

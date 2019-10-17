@@ -39,7 +39,7 @@
             </div>
             <div class="fwidth-modal-text">
               <label class="gf-form-label b-0 bg-transparent">Year</label>
-              <select class="gf-form-select-wrapper" ng-model="subject.batchId">
+              <select class="gf-form-select-wrapper" ng-model="subject.batchId" required>
                 <option value="">Select Year</option>
                 <option ng-repeat="batch in selectedBatches" value="{{batch.id}}">{{batch.batch}}</option>
               </select>
@@ -48,7 +48,7 @@
           <div class="mdflex modal-fwidth">
             <div class="fwidth-modal-text m-r-1">
               <label class="gf-form-label b-0 bg-transparent">Assign Teacher</label>
-              <select class="gf-form-select-wrapper" ng-model="subject.teacherId">
+              <select class="gf-form-select-wrapper" ng-model="subject.teacherId" required>
                 <option value="">Select Teacher</option>
                 <option ng-repeat="teacher in teachers" value="{{teacher.id}}">{{teacher.teacherName}}</option>
               </select>
@@ -72,6 +72,49 @@
               </div>
             </div>
           </div>
+
+
+          <div class="mdflex modal-fwidth">
+            
+            <div class="fwidth-modal-text m-r-1 switch-flex">
+              <label class="gf-form-label b-0 bg-transparent">Sections</label>
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">A</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.sectionA" ng-true-value="'A'"
+                    ng-false-value="" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">B</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.sectionB" ng-true-value="'B'"
+                    ng-false-value="" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">C</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.sectionC" ng-true-value="'C'"
+                    ng-false-value="" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div>
+                <label class="gf-form-label b-0 bg-transparent">D</label>
+                <label class="switch">
+                  <input type="checkbox" ng-model="subject.sectionD" ng-true-value="'D'"
+                    ng-false-value="" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
           <div class="m-t-1 text-center">
             <button ng-hide="text=='update'" type="submit" ng-click="create();"
               class="btn btn-success border-bottom">Save</button>
@@ -80,7 +123,8 @@
             <button ng-click="dismiss();" type="reset" class="btn btn-danger border-bottom">Cancel</button>
           </div>
           <div ng-if="is_success_bar === '0'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Due to some error, data could not be saved successfully.</div>
-			    <div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully.</div>
+          <div ng-if="is_success_bar === '1'" style="color:green;width: 50%; height: 10px;margin:auto;text-align:center;">Data Saved Successfully.</div>
+          <div ng-if="is_success_bar === '2'" style="color:red;width: 50%; height: 10px;margin:auto;text-align:center;">Section is mandatory. Please select at least one section.</div>
         </div>
       </form>
     </div>

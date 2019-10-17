@@ -14,21 +14,15 @@
                         <input id="hdnBranchId" type="hidden" value="{{branch.id}}" />
                         <input id="hdnDeptId" type="hidden" value="{{department.id}}" />
                     </div>
-                    <div style="display: flex;justify-content: flex-start;align-items:center">
-                        <div style="    border-radius: 50px;
-    background: gray;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    padding-top: 15px;
-    margin-right: 20px;">
+                    <!-- <div style="display: flex;justify-content: flex-start;align-items:center">
+                        <div style="border-radius: 50px;background: gray; width: 50px; height: 50px; text-align: center; padding-top: 15px; margin-right: 20px;">
                             <h4 class="rounded-circle">MM</h4>
                         </div>
                         <div>
                             <h2 style="margin-bottom: 0px">User Name</h2>
                             <small>Profile Picture</small>
                         </div>
-                    </div>
+                    </div> -->
                     <div ng-if="user === 'admin' || user === 'cmsadmin'">
                         <div style="color:black;"
                             class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">

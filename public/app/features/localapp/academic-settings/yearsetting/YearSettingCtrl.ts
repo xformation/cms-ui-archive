@@ -96,13 +96,19 @@ export class YearSettingCtrl {
     };
 
     $scope.createYear = cb => {
-      for (let i = 0; i < this.academicYears.length; i++) {
-        if (this.academicYears[i].status === 'ACTIVE' && $scope.academicYear.status === 'ACTIVE') {
-          if (cb) {
-            cb('4');
-          }
-          return;
+      let count = 0;
+      for (const i in $scope.ays) {
+        const ays = $scope.ays[i];
+        if (ays.status === 'ACTIVE') {
+          count++;
         }
+      }
+
+      if (count > 0) {
+        if (cb) {
+          cb('4');
+        }
+        return;
       }
       const stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
       const enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
@@ -152,14 +158,22 @@ export class YearSettingCtrl {
     };
 
     $scope.updateYear = cb => {
-      for (let i = 0; i < this.academicYears.length; i++) {
-        if (this.academicYears[i].status === 'ACTIVE' && $scope.academicYear.status === 'ACTIVE') {
-          if (cb) {
-            cb('4');
-          }
-          return;
+      let count = 0;
+      for (const i in $scope.ays) {
+        const ays = $scope.ays[i];
+        if (ays.status === 'ACTIVE') {
+          count++;
         }
       }
+
+      if (count > 1) {
+        if (cb) {
+          cb('4');
+        }
+        $scope.academicYear.status = 'DEACTIVE';
+        return;
+      }
+
       let stDt = moment.utc($scope.academicYear.startDate, 'MM/DD/YYYY');
       let enDt = moment.utc($scope.academicYear.endDate, 'MM/DD/YYYY');
       if (!stDt.isValid() && $scope.academicYear.startDate === undefined) {
@@ -242,9 +256,11 @@ export class YearSettingCtrl {
     appEvents.emit('year-modal', {
       text: 'create',
       icon: 'fa-trash',
-      onCreate: (yearForm, academicYear, cb) => {
+      ays: this.academicYears,
+      onCreate: (yearForm, academicYear, ays, cb) => {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
+        this.$scope.ays = ays;
         this.$scope.createYear(cb);
       },
     });
@@ -261,9 +277,11 @@ export class YearSettingCtrl {
       startDateVal: moment.utc(stDt).format('YYYY-MM-DD'),
       endDateVal: moment.utc(ndDt).format('YYYY-MM-DD'),
       academicYear: academicYear,
-      onUpdate: (yearForm, academicYear, cb) => {
+      ays: this.academicYears,
+      onUpdate: (yearForm, academicYear, ays, cb) => {
         this.$scope.yearForm = yearForm;
         this.$scope.academicYear = academicYear;
+        this.$scope.ays = ays;
         this.$scope.updateYear(cb);
       },
     });

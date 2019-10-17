@@ -170,9 +170,10 @@ export class UtilSrv {
     scope.startDateVal = payload.startDateVal;
     scope.endDateVal = payload.endDateVal;
     scope.academicYear = payload.academicYear;
+    scope.ays = payload.ays;
     scope.is_success_bar = '';
     scope.createYear = () => {
-      payload.onCreate(scope.yearForm, scope.academicYear, isSuccess => {
+      payload.onCreate(scope.yearForm, scope.academicYear, scope.ays, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
           scope.dismiss();
@@ -181,7 +182,7 @@ export class UtilSrv {
     };
 
     scope.updateYear = () => {
-      payload.onUpdate(scope.yearForm, scope.academicYear, isSuccess => {
+      payload.onUpdate(scope.yearForm, scope.academicYear, scope.ays, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
           scope.academicYear = {};
@@ -229,12 +230,12 @@ export class UtilSrv {
     scope.selectedBatches = payload.selectedBatches;
     scope.subject = payload.subject;
     scope.teachers = payload.teachers;
-    scope.collegeId = payload.collegeId;
+    scope.departmentId = payload.departmentId;
     scope.branchId = payload.branchId;
     scope.is_success_bar = '';
 
     scope.create = () => {
-      payload.onCreate(scope.subjectForm, scope.subject, scope.collegeId, scope.branchId, isSuccess => {
+      payload.onCreate(scope.subjectForm, scope.subject, scope.departmentId, scope.branchId, isSuccess => {
         scope.is_success_bar = isSuccess;
         setTimeout(() => {
           scope.dismiss();

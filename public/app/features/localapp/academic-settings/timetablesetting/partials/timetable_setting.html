@@ -433,7 +433,7 @@
       <div class="ttflex m-b-1">
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Term/Semester</label>
-          <select class="gf-form-select-box" ng-model="ctrl.termId" ng-change="ctrl.onChangeTerm()" >
+          <select class="gf-form-select-box" ng-model="ctrl.termId" >
             <option value="">Select Term</option>
             <option ng-repeat="term in ctrl.terms" value="{{term.id}}" ng-selected="term.id === ctrl.termId">
               {{term.termsDesc}}</option>
@@ -458,7 +458,7 @@
         </div>
         <div class="gf-form--grow form-control-container">
           <label for="" class="gf-form-label bg-transparent b-0">Subject</label>
-          <select class="gf-form-select-box" ng-model="ctrl.subjectId" >
+          <select class="gf-form-select-box" ng-model="ctrl.subjectId" ng-change="ctrl.onChangeFilterSubject()">
             <option value="">Select Subject</option>
             <option ng-repeat="sub in ctrl.filterSubjects" value="{{sub.id}}">
               {{sub.subjectDesc}}</option>
