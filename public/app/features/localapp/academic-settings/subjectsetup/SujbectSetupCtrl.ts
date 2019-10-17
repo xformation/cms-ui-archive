@@ -4,6 +4,7 @@ import { config } from '../../config';
 
 export class SubjectSetupCtrl {
   subjects: any;
+  subjectsTeachers: any;
   teachers: any;
   departments: any;
   batches: any;
@@ -37,7 +38,8 @@ export class SubjectSetupCtrl {
     this.departmentId = params.get('dptid');
     // this.getColleges();
     this.departments = [];
-    this.getSubjects();
+    // this.getSubjects();
+    this.getSubjectsAndTeachers();
     this.getDepartments();
     this.getTeachers();
     this.getBatches();
@@ -67,7 +69,7 @@ export class SubjectSetupCtrl {
         $scope.subject.sectionD;
       backendSrv.post(config.CMS_SUBJECT_URL + urlParam, $scope.subject).then(
         () => {
-          this.getSubjects();
+          this.getSubjectsAndTeachers();
           if (cb) {
             cb('1');
           }
@@ -80,13 +82,43 @@ export class SubjectSetupCtrl {
       );
     };
 
-    $scope.update = () => {
+    $scope.update = cb => {
       if (!$scope.subjectForm.$valid) {
         return;
       }
-      backendSrv.put(this.RestUrl.getSubjectRestUrl(), $scope.subject).then(() => {
-        this.getSubjects();
-      });
+      if (
+        ($scope.subject.sectionA === undefined || $scope.subject.sectionA === null || $scope.subject.sectionA === '') &&
+        ($scope.subject.sectionB === undefined || $scope.subject.sectionB === null || $scope.subject.sectionB === '') &&
+        ($scope.subject.sectionC === undefined || $scope.subject.sectionC === null || $scope.subject.sectionC === '') &&
+        ($scope.subject.sectionD === undefined || $scope.subject.sectionD === null || $scope.subject.sectionD === '')
+      ) {
+        if (cb) {
+          cb('2');
+        }
+        return;
+      }
+      const urlParam =
+        '?sectionA=' +
+        $scope.subject.sectionA +
+        '&sectionB=' +
+        $scope.subject.sectionB +
+        '&sectionC=' +
+        $scope.subject.sectionC +
+        '&sectionD=' +
+        $scope.subject.sectionD;
+      backendSrv.put(config.CMS_SUBJECT_URL + urlParam, $scope.subject).then(
+        () => {
+          this.getSubjectsAndTeachers();
+          if (cb) {
+            cb('1');
+          }
+        },
+        () => {
+          if (cb) {
+            cb('0');
+          }
+        }
+      );
     };
 
     $scope.onChangeDepartment = cb => {
@@ -107,15 +139,27 @@ export class SubjectSetupCtrl {
     this.activeTabIndex = tabIndex;
   }
 
-  getSubjects() {
+  // getSubjects() {
+  //   if (this.departmentId === null || this.departmentId === undefined || this.departmentId === 0) {
+  //     console.log('getSubjects()- Department Id - null/undefined/zero : ', this.departmentId);
+  //     return;
+  //   }
+  //   this.backendSrv.get(config.CMS_SUBJECT_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
+  //     this.subjects = result;
+  //     console.log('Subjects', this.subjects);
+  //   });
+  // }
+  getSubjectsAndTeachers() {
     if (this.departmentId === null || this.departmentId === undefined || this.departmentId === 0) {
-      console.log('getSubjects()- Department Id - null/undefined/zero : ', this.departmentId);
+      console.log('getSubjectsAndTeachers()- Department Id - null/undefined/zero : ', this.departmentId);
       return;
     }
-    this.backendSrv.get(config.CMS_SUBJECT_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId).then(result => {
-      this.subjects = result;
-      console.log('Subjects', this.subjects);
-    });
+    this.backendSrv
+      .get(config.CMS_SUBJECT_TEACHER_BY_DEPARTMENT_URL + '?departmentId=' + this.departmentId)
+      .then(result => {
+        this.subjectsTeachers = result;
+        console.log('Subjects and teacher list : ', this.subjects);
+      });
   }
   getDepartments() {
     if (this.departmentId === null || this.departmentId === undefined || this.departmentId === 0) {
@@ -153,7 +197,7 @@ export class SubjectSetupCtrl {
       yesText: 'Delete',
       onConfirm: () => {
         this.backendSrv.delete(this.RestUrl.getSubjectRestUrl() + subject.id).then(() => {
-          this.getSubjects();
+          this.getSubjectsAndTeachers();
         });
       },
     });
@@ -197,6 +241,7 @@ export class SubjectSetupCtrl {
       departments: this.departments,
       // batches: this.batches,
       teachers: this.teachers,
+      selectedBatches: this.$scope.selectedBatches,
       onUpdate: (subjectForm, subject) => {
         this.$scope.subjectForm = subjectForm;
         this.$scope.subject = subject;

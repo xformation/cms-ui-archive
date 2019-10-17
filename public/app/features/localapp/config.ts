@@ -42,5 +42,6 @@ export const config = {
   CMS_CHECK_USER_SELECTION_URL: apiUrl + '/api/cmscheckuserselection',
   CMS_SUBJECT_URL: apiUrl + '/api/cmssubjects',
   CMS_SUBJECT_BY_DEPARTMENT_URL: apiUrl + '/api/cmssubjects-bydepartmentid',
+  CMS_SUBJECT_TEACHER_BY_DEPARTMENT_URL: apiUrl + '/api/cmssubjects-teacher-bydepartmentid',
   CMS_TEACHER_BY_FILTER_PARAM_URL: apiUrl + '/api/cmsteachers-qryprms',
 };

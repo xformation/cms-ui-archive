@@ -45,36 +45,37 @@
         <th>Teacher</th>
         <th>Elective</th>
         <th>Status</th>
-        <th>Actions</th>
+        <!-- <th>Actions</th> -->
       </thead>
       <tbody>
-        <tr ng-repeat="subject in ctrl.subjects | orderBy:'subjectDesc'">
-          <td>
-            {{ subject.subjectDesc }}
+        <!-- <tr ng-repeat="subject in ctrl.subjects | orderBy:'subjectDesc'"> -->
+          <tr ng-repeat="teach in ctrl.subjectsTeachers | orderBy:'subject.id' : 'reverse'">
+          <td> 
+            {{ teach.subject.subjectDesc }}
           </td>
           <td>
-            {{ subject.subjectCode }}
+            {{ teach.subject.subjectCode }}
           </td>
           <td>
-            {{ subject.department.name }}
+            {{ teach.subject.department.name }}
           </td>
           <td>
-            {{ subject.batch.batch }}
+            {{ teach.subject.batch.batch }}
           </td>
           <td>
-            {{ subject.teacher.teacherName }}
+            {{ teach.teacher.teacherName }}
           </td>
           <td>
-            {{ subject.subjectType }}
+            {{ teach.subject.subjectType }}
           </td>
           <td>
-            {{ subject.status }}
+            {{ teach.subject.status }}
           </td>
-          <td>
-            <a ng-click="ctrl.editSubject(subject)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
+          <!-- <td>
+            <a ng-click="ctrl.editSubject(teach.subject)"><i class="fa fa-pencil-square-o fa-2x m-r-1"
                 aria-hidden="true"></i></a>
-            <a ng-click="ctrl.deleteSubject(subject)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-          </td>
+            <a ng-click="ctrl.deleteSubject(teach.subject)"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+          </td> -->
         </tr>
       </tbody>
     </table>
