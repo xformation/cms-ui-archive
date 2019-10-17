@@ -806,10 +806,21 @@ export class TimeTableSettingCtrl {
     const statusMsgDiv = document.getElementById('statusMsgDiv');
     statusMsgDiv.className = 'hide';
 
-    const stDt =
-      this.fromLecDate !== undefined && this.fromLecDate !== null && this.fromLecDate !== ''
-        ? moment.utc(this.fromLecDate).format('DD-MM-YYYY')
-        : undefined;
+    // const stDt =
+    //   this.fromLecDate !== undefined && this.fromLecDate !== null && this.fromLecDate !== ''
+    //     ? moment.utc(this.fromLecDate).format('DD-MM-YYYY')
+    //     : undefined;
+    const stDt = new Date(this.fromLecDate);
+    let sdt = undefined;
+    if (this.fromLecDate !== undefined && this.fromLecDate !== null && this.fromLecDate !== '') {
+      sdt =
+        (stDt.getDate() < 10 ? '0' + stDt.getDate() : stDt.getDate()) +
+        '-' +
+        (stDt.getMonth() + 1) +
+        '-' +
+        stDt.getFullYear();
+    }
+
     const ndDt = new Date(this.toLecDate);
     let ndt = undefined;
     if (this.toLecDate !== undefined && this.toLecDate !== null && this.toLecDate !== '') {
@@ -829,8 +840,12 @@ export class TimeTableSettingCtrl {
       this.toLecDate !== null &&
       this.toLecDate !== ''
     ) {
-      const enDt = moment.utc(ndt, 'MM/DD/YYYY');
-      if (enDt.isBefore(stDt)) {
+      // const startDt = moment.utc(sdt, 'MM/DD/YYYY');
+      // const enDt = moment.utc(ndt, 'MM/DD/YYYY');
+      const startDt = moment.utc(sdt, 'DD-MM-YYYY');
+      const enDt = moment.utc(ndt, 'DD-MM-YYYY');
+
+      if (enDt.isBefore(startDt)) {
         alert('To date cannot be a date prior to from date');
         return;
       }
@@ -841,7 +856,7 @@ export class TimeTableSettingCtrl {
         `${config.CMS_LECTURE_URL}?termId=${this.termId}&academicYearId=${this.academicYearId}` +
           `&sectionId=${this.sectionId}&batchId=${this.batchId}&branchId=${this.branchId}` +
           `&departmentId=${this.departmentId}&subjectId=${this.subjectId}` +
-          `&teacherId=${this.teacherId}&fromDate=${stDt}&toDate=${ndt}`
+          `&teacherId=${this.teacherId}&fromDate=${sdt}&toDate=${ndt}`
       )
       .then(
         result => {
