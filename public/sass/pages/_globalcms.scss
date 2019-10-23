@@ -1183,3 +1183,10 @@ input.cust-width-220 {
   padding: 7px 10px;
   border-radius: 5px;
 }
+
+// temporary disabled tabs
+
+#disabled-btn > a:nth-last-child(-n + 5) {
+  pointer-events: none;
+  color: #b5b3b3;
+}

@@ -17,12 +17,12 @@ export class LocalAppCtrl {
     this.sections.push({
       title: 'College Settings',
       id: 'college_settings',
-      description: 'College Info, College branches, Legal entities',
+      description: 'College Info, College Branches, Legal Entities, File Import, Payment',
     });
     this.sections.push({
       title: 'Academic settings',
       id: 'academic_settings',
-      description: 'Year Setting, Department setup, Subject Setup, Timetable Setting',
+      description: 'Year Setting, Department setup, Course, Staff Setup, Subject Setup, Timetable Setting',
     });
 
     this.sections.push({
@@ -30,31 +30,31 @@ export class LocalAppCtrl {
       id: 'roles_permissions',
       description: 'Manage roles and permissions',
     });
-    // this.sections.push({
-    //   title: 'Payroll',
-    //   id: 'payroll',
-    //   description: 'Setup, Leave encashment, Payment and Payslip settings',
-    // });
-    // this.sections.push({
-    //   title: 'Leave & Holidays',
-    //   id: 'leave_holidays',
-    //   description: 'Leave plans, Initial adjustments, Notify and Holidays',
-    // });
-    // this.sections.push({
-    //   title: 'Employee',
-    //   id: 'employee',
-    //   description: 'Job titles, Probation/Notice Period, Employee number settings',
-    // });
-    // this.sections.push({
-    //   title: 'Time & Attendance',
-    //   id: 'time_attendance',
-    //   description: 'Weekly offs, Shifts, Display settings, IP Networks',
-    // });
-    // this.sections.push({
-    //   title: 'Integrations',
-    //   id: 'integrations',
-    //   description: 'Login integration',
-    // });
+    this.sections.push({
+      title: 'Payroll',
+      id: 'payroll',
+      description: 'Setup, Leave encashment, Payment and Payslip settings',
+    });
+    this.sections.push({
+      title: 'Leave & Holidays',
+      id: 'leave_holidays',
+      description: 'Leave plans, Initial adjustments, Notify and Holidays',
+    });
+    this.sections.push({
+      title: 'Employee',
+      id: 'employee',
+      description: 'Job titles, Probation/Notice Period, Employee number settings',
+    });
+    this.sections.push({
+      title: 'Time & Attendance',
+      id: 'time_attendance',
+      description: 'Weekly offs, Shifts, Display settings, IP Networks',
+    });
+    this.sections.push({
+      title: 'Integrations',
+      id: 'integrations',
+      description: 'Login integration',
+    });
 
     const params = this.$location.search();
     const url = this.$location.path();
