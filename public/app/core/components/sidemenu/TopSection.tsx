@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 import _ from 'lodash';
 import TopSectionItem from './TopSectionItem';
-// import TopMenuPlugins from './TopMenuPlugins';
+import TopMenuPlugins from './TopMenuPlugins';
 import config from '../../config';
 import { contextSrv } from 'app/core/services/context_srv';
 import store from 'app/core/store';
@@ -17,15 +17,18 @@ const TopSection: SFC<any> = () => {
     <div className="sidemenu__top">
       {mainLinks.map((link, index) => {
         {
-          // return (link.id.indexOf("plugin-page") === -1 &&
-          //   <TopSectionItem link={link} key={`${link.id}-${index}`} />);
-
           return (
-            <TopSectionItem user={user} ayid={ayid} bid={bid} dptid={dptid} link={link} key={`${link.id}-${index}`} />
+            link.id.indexOf('plugin-page') === -1 && (
+              <TopSectionItem user={user} ayid={ayid} bid={bid} dptid={dptid} link={link} key={`${link.id}-${index}`} />
+            )
           );
+
+          // return (
+          //   <TopSectionItem user={user} ayid={ayid} bid={bid} dptid={dptid} link={link} key={`${link.id}-${index}`} />
+          // );
         }
       })}
-      {/* <TopMenuPlugins links= {mainLinks} /> */}
+      <TopMenuPlugins links={mainLinks} />
     </div>
   );
 };
