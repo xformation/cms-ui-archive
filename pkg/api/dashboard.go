@@ -479,6 +479,7 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 	fmt.Println(roles)
 	var roleTeacher = ""
 	var roleStudent = ""
+	var roleParent = ""
 	var filePath = ""
 
 	if c.SignedInUser.Login == setting.ApplicationAdminUser {
@@ -503,6 +504,13 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 				break
 			}
 		}
+		for _, val := range roles.([]interface{}) {
+			var entry = fmt.Sprint(val)
+			if strings.ToLower(entry) == "parent" {
+				roleParent = strings.ToLower(entry)
+				break
+			}
+		}
 	}
 
 	if roleTeacher == "teacher" {
@@ -519,7 +527,7 @@ func GetDashboardForRbacUser(c *m.ReqContext) Response {
 		} else {
 			return resp
 		}
-	} else if roleStudent == "parent" {
+	} else if roleParent == "parent" {
 		resp := GetRoleBasedDashboardForRbacUser(c, "parent-dashboard")
 		if resp == nil {
 			filePath = path.Join(setting.StaticRootPath, "dashboards/parent_home.json")
