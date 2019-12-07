@@ -38,4 +38,5 @@ import './localapp/roles-permissions/users';
 import './search-filter/searchFilterCtrl';
 import './navbar-popup/navbarPopupCtrl';
 import './teams/CreateTeamCtrl';
+import './custom-dashboard-loader';
 import './profile/all';

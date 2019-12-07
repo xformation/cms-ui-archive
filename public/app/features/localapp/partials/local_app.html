@@ -1,6 +1,6 @@
 <navbar model="ctrl.navModel"></navbar>
 <div class="local-app-container">
-  <aside class="dashboard-settings__aside aside-container" id="disabled-btn">
+  <aside class="dashboard-settings__aside aside-container" id="disabled-btn1">
     <a href="/" class="aside-a"><i class="fa fa-arrow-circle-o-left"></i> BACK</a>
     <!-- <h2 class="dashboard-settings__aside-header"><i class="fa fa-cog"></i> Local Application</h2> -->
     <a href="{{::section.url}}" class="dashboard-settings__nav-item" ng-class="{active: ctrl.viewId === section.id}"
@@ -22,7 +22,9 @@
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'roles_permissions'">
     <roles-permissions></roles-permissions>
   </div>
-  <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'payroll'">This is payroll</div>
+  <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'payroll'">
+    <!-- <custom-dashboard-loader slug="test" uid="3-n_joaZz"></custom-dashboard-loader> -->
+  </div>
 
   <div class="dashboard-settings__content" ng-if="ctrl.viewId === 'leave_holidays'">This is leave holidays</div>
 
