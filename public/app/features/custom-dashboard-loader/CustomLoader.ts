@@ -25,6 +25,8 @@ export class CustomLoader {
       appEvents.emit(name, payload);
     };
     this.loadDashboard();
+
+    appEvents.on('dashboard-initialized', this.onDashboardInitialized.bind(this));
   }
 
   loadDashboard() {
@@ -32,5 +34,9 @@ export class CustomLoader {
     this.dashboardLoaderSrv.loadDashboard(undefined, this.$scope.ctrl.slug, this.$scope.ctrl.uid).then(result => {
       this.rootScope.initDashboard(result, this.$scope);
     });
+  }
+
+  onDashboardInitialized(dashboard: any) {
+    this.dashboardViewState = this.$scope.ctrl.dashboardViewState;
   }
 }

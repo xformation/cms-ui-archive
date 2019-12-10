@@ -79,6 +79,7 @@ export class SaveDashboardModalCtrl {
   dismiss: () => void;
   timeChange = false;
   variableValueChange = false;
+  noChangeUrl: any;
 
   /** @ngInject */
   constructor(private dashboardSrv) {
@@ -98,6 +99,7 @@ export class SaveDashboardModalCtrl {
       saveVariables: this.saveVariables,
       saveTimerange: this.saveTimerange,
       message: this.message,
+      noChangeUrl: this.noChangeUrl,
     };
 
     const dashboard = this.dashboardSrv.getCurrent();
@@ -128,7 +130,10 @@ export function saveDashboardModalDirective() {
     controller: SaveDashboardModalCtrl,
     bindToController: true,
     controllerAs: 'ctrl',
-    scope: { dismiss: '&' },
+    scope: {
+      dismiss: '&',
+      noChangeUrl: '@',
+    },
   };
 }
 

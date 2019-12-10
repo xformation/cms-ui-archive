@@ -1,3 +1,8 @@
 <div ng-if="dashboard">
+    <custom-dash-nav dashboard="dashboard"></custom-dash-nav>
+    <dashboard-settings dashboard="dashboard" ng-if="ctrl.dashboardViewState.state.editview" class="dashboard-settings">
+    </dashboard-settings>
+    <dashboard-submenu ng-if="dashboard.meta.submenuEnabled" dashboard="dashboard">
+    </dashboard-submenu>
     <dashboard-grid dashboard="dashboard"></dashboard-grid>
 </div>

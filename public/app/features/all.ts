@@ -39,4 +39,5 @@ import './search-filter/searchFilterCtrl';
 import './navbar-popup/navbarPopupCtrl';
 import './teams/CreateTeamCtrl';
 import './custom-dashboard-loader';
+import './custom-dashboard-loader/custom-dashboard-nav/customDashNav';
 import './profile/all';

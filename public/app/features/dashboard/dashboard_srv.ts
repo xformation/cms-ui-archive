@@ -74,9 +74,12 @@ export class DashboardSrv {
     }
   }
 
-  postSave(clone, data) {
+  postSave(args, data) {
     this.dash.version = data.version;
-
+    let options: any = {};
+    if (args.length > 1) {
+      options = args[1];
+    }
     // important that these happens before location redirect below
     this.$rootScope.appEvent('dashboard-saved', this.dash);
     this.$rootScope.appEvent('alert-success', ['Dashboard saved']);
@@ -84,7 +87,7 @@ export class DashboardSrv {
     const newUrl = locationUtil.stripBaseFromUrl(data.url);
     const currentPath = this.$location.path();
 
-    if (newUrl !== currentPath) {
+    if (newUrl !== currentPath && parseInt(options.noChangeUrl, 10) === 0) {
       this.$location.url(newUrl).replace();
     }
 
@@ -97,7 +100,7 @@ export class DashboardSrv {
 
     return this.backendSrv
       .saveDashboard(clone, options)
-      .then(this.postSave.bind(this, clone))
+      .then(this.postSave.bind(this, [clone, options]))
       .catch(this.handleSaveDashboardError.bind(this, clone, options));
   }
 
@@ -127,7 +130,11 @@ export class DashboardSrv {
       // });
       // this.dash.originalTemplating = newDash;
       // console.log('Dashboard variables after removing CurrentUser variable ::::::::::: ', this.dash.originalTemplating);
-      return this.showSaveModal();
+      if (options) {
+        return this.showSaveModal(options.noChangeUrl);
+      } else {
+        return this.showSaveModal();
+      }
     }
 
     return this.save(this.dash.getSaveModelClone(), options);
@@ -150,9 +157,12 @@ export class DashboardSrv {
     });
   }
 
-  showSaveModal() {
+  showSaveModal(noChangeUrl?) {
     this.$rootScope.appEvent('show-modal', {
-      templateHtml: '<save-dashboard-modal dismiss="dismiss()"></save-dashboard-modal>',
+      templateHtml:
+        '<save-dashboard-modal dismiss="dismiss()" no-change-url="' +
+        (noChangeUrl ? 1 : 0) +
+        '"></save-dashboard-modal>',
       modalClass: 'modal--narrow',
     });
   }
