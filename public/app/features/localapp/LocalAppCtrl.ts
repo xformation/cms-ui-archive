@@ -5,11 +5,12 @@ import _ from 'lodash';
 export class LocalAppCtrl {
   viewId: string;
   sections: any[];
-
+  isAsideCollapse: boolean;
   constructor(private $scope, private $location, private $rootScope) {
     this.buildSectionList();
     this.onRouteUpdated();
     this.$rootScope.onAppEvent('$routeUpdate', this.onRouteUpdated.bind(this), this.$scope);
+    this.isAsideCollapse = false;
   }
 
   buildSectionList() {
@@ -70,5 +71,9 @@ export class LocalAppCtrl {
     if (!this.viewId) {
       this.viewId = 'college_settings';
     }
+  }
+
+  collapseAside() {
+    this.isAsideCollapse = !this.isAsideCollapse;
   }
 }

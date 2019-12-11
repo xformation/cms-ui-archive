@@ -13,11 +13,27 @@
 
   .aside-container {
     max-width: 20%;
+    -webkit-transition: max-width 1s;
+    transition: max-width 1s;
+    .collapse-button {
+      width: 50px;
+      z-index: 111;
+    }
     .tab-title {
       font-size: 15px;
     }
     .tab-description {
       font-size: 12px;
+    }
+    .dashboard-settings__nav-item {
+      opacity: 1;
+      transition: opacity 1s;
+    }
+  }
+  .collapse {
+    max-width: 0px;
+    .dashboard-settings__nav-item {
+      opacity: 0;
     }
   }
 }
