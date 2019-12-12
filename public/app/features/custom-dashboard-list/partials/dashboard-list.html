@@ -1,0 +1,14 @@
+<div class="dashboard-list-container">
+  <aside class="aside-container dashboard-settings__aside" ng-class="{collapse: ctrl.isAsideCollapse === true}" id="disabled-btn1">
+    <a ng-click="ctrl.collapseAside()" class="aside-a collapse-button"><i class="fa fa-bars"></i> </a>
+    <!-- <h2 class="dashboard-settings__aside-header"><i class="fa fa-cog"></i> Local Application</h2> -->
+    <a class="dashboard-nav-item dashboard-settings__nav-item" ng-class="{active: ctrl.viewId === section.uid}"
+      ng-repeat="section in ctrl.sections" ng-click="ctrl.onClickLeftTab(section)">
+      <div class="tab-title">{{::section.title}}</div>
+    </a>
+  </aside>
+
+  <div class="dashboard-settings__content" ng-if="ctrl.viewId === section.uid" ng-repeat="section in ctrl.sections">
+    <custom-dashboard-loader slug="{{section.slug}}" uid="{{section.uid}}"></custom-dashboard-loader>
+  </div>
+</div>

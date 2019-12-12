@@ -325,6 +325,11 @@ export function setupAngularRoutes($routeProvider, $locationProvider) {
       controller: 'ManageHolidaysSettingCtrl',
       controllerAs: 'ctrl',
     })
+    .when('/customdashboards', {
+      templateUrl: 'public/app/features/custom-dashboard-list/partials/dashboard-list.html',
+      controller: 'CustomDashboardListCtrl',
+      controllerAs: 'ctrl',
+    })
     .otherwise({
       templateUrl: 'public/app/partials/error.html',
       controller: 'ErrorCtrl',

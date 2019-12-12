@@ -40,4 +40,5 @@ import './navbar-popup/navbarPopupCtrl';
 import './teams/CreateTeamCtrl';
 import './custom-dashboard-loader';
 import './custom-dashboard-loader/custom-dashboard-nav/customDashNav';
+import './custom-dashboard-list';
 import './profile/all';

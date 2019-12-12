@@ -1,4 +1,4 @@
-.local-app-container {
+.dashboard-list-container {
   margin-top: 51px;
   min-height: 100vh;
   display: -webkit-box;
@@ -12,12 +12,16 @@
   background-color: #efefef !important;
 
   .aside-container {
-    max-width: 20%;
-    -webkit-transition: max-width 0.5s;
-    transition: max-width 0.5s;
+    width: 20%;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+    padding-top: 14px;
+    text-align: center;
     .collapse-button {
       width: 50px;
       z-index: 111;
+      text-align: left;
+      margin-top: 4px;
     }
     .tab-title {
       font-size: 15px;
@@ -25,14 +29,15 @@
     .tab-description {
       font-size: 12px;
     }
-    .dashboard-settings__nav-item {
+    .dashboard-nav-item {
       opacity: 1;
       transition: opacity 0.5s;
+      padding: 15px 60px;
     }
   }
   .collapse {
-    max-width: 0px;
-    .dashboard-settings__nav-item {
+    width: 0px;
+    .dashboard-nav-item {
       opacity: 0;
     }
   }
