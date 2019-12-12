@@ -1339,6 +1339,15 @@ func (hs *HTTPServer) setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, er
 					{Text: "Style Guide", Id: "styleguide", Url: setting.AppSubUrl + "/styleguide", Icon: "fa fa-fw fa-eyedropper"},
 				},
 			})
+
+			cfgNode.Children = append(cfgNode.Children, &dtos.NavLink{
+				Text:         "Dashboard List",
+				HideFromTabs: true,
+				SubTitle:     "Manage all dashboards",
+				Id:           "custom-dashboards",
+				Icon:         "gicon gicon-dashboard",
+				Url:          setting.AppSubUrl + "/customdashboards",
+			})
 		}
 
 		data.NavTree = append(data.NavTree, cfgNode)
