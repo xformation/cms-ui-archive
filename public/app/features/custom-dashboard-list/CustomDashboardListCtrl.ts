@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import impressionSrv from 'app/core/services/impression_srv';
 
 export class CustomDashboardListCtrl {
   viewId: string;
@@ -7,13 +6,13 @@ export class CustomDashboardListCtrl {
   isAsideCollapse: boolean;
   limit = 20;
   constructor(private backendSrv) {
+    this.sections = [];
     this.getAllDashboards();
     this.isAsideCollapse = false;
   }
 
   getAllDashboards() {
-    const dashIds = _.take(impressionSrv.getDashboardOpened(), this.limit);
-    return this.backendSrv.search({ dashboardIds: dashIds, limit: this.limit }).then(result => {
+    return this.backendSrv.search().then(result => {
       this.buildSectionList(result);
     });
   }
