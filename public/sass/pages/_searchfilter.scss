@@ -1,34 +1,187 @@
-.search-filter-field-wrapper{
-    top: 0;
-    right: 0;
-    z-index: 1050;
-    position: fixed;
-    left: 60px;
-    width: 100%;
-    display: -ms-flexbox;
-    display: flex;
-    background-color: #fff;
-    box-shadow: 0 0 3px #c1c1c1;
+.search-filter-field-wrapper {
+  top: 0;
+  right: 0;
+  z-index: 1050;
+  position: fixed;
+  left: 60px;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 0 3px #c1c1c1;
 
-    input{
-        max-width: 653px;
-        padding: 1rem 1rem 0.75rem 1rem;
-        height: 51px;
-        box-sizing: border-box;
-        outline: none;
-        background: #1e2028;
-        background-color: white;
-        -ms-flex-positive: 10;
-        flex-grow: 10;
-    }
+  input {
+    max-width: 653px;
+    padding: 1rem 1rem 0.75rem 1rem;
+    height: 51px;
+    box-sizing: border-box;
+    outline: none;
+    background: #1e2028;
+    background-color: white;
+    -ms-flex-positive: 10;
+    flex-grow: 10;
+  }
 }
-
-.search-filter-container{
-    width: 700px;
-    top: 52px;
-    right: 0;
-    bottom: 0;
-    z-index: 1050;
-    position: fixed;
-    // left: 60px;
+.search-results-container {
+  padding: 0 !important;
+}
+.search-filter-container {
+  width: 700px;
+  top: 52px;
+  right: 12.5%;
+  bottom: 0;
+  z-index: 1050;
+  position: fixed;
+  // left: 60px;
+  .search-top-links {
+    display: block;
+    ul {
+      display: block;
+      border-bottom: $panel-border;
+      padding: 10px 15px 10px;
+      list-style: none;
+      li {
+        display: inline-block;
+        border: 1px solid #1e2028;
+        margin-right: 10px;
+        border-radius: 25px;
+        &:hover {
+          border-color: #000000;
+        }
+        a {
+          font-size: 14px;
+          font-weight: 500;
+          color: $text-color-weak;
+          padding: 5px 15px;
+          display: block;
+          &:hover {
+            color: $text-color;
+          }
+        }
+      }
+    }
+  }
+  .search-recent-container {
+    display: block;
+    padding: 10px 0px;
+    border-bottom: 1px solid #ddd;
+    .recent-heading {
+      display: block;
+      padding: 0 15px 15px;
+      h3 {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 400;
+        color: #1e2028;
+        line-height: 18px;
+        margin-bottom: 0;
+      }
+      a.clear {
+        font-size: 12px;
+        line-height: 18px;
+        float: right;
+      }
+    }
+    .profile-recent-search {
+      display: block;
+      padding: 0 15px;
+      ul {
+        display: block;
+        li {
+          display: inline-block;
+          padding-right: 0px;
+          padding-left: 0px;
+          width: auto;
+          a {
+            display: block;
+            padding: 3px 10px;
+            text-align: center;
+            &:hover {
+              background-color: #ddd;
+            }
+            span {
+              display: inline-block;
+              width: 36px;
+              height: 36px;
+              background-color: #ddd;
+              border-radius: 50%;
+              overflow: hidden;
+            }
+            p {
+              display: block;
+              font-size: 12px;
+              font-weight: 400;
+              color: #1e2028;
+              margin: 5px 0 0 0;
+            }
+          }
+        }
+      }
+    }
+    .recent-search {
+      display: block;
+      padding-top: 15px;
+      ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          display: block;
+          padding-bottom: 5px;
+          a {
+            display: block;
+            font-size: 14px;
+            line-height: 26px;
+            color: #1e2028;
+            font-weight: 500;
+            padding: 2px 15px;
+            &:hover {
+              background-color: #ddd;
+            }
+            i {
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .try-sreaching {
+    display: block;
+    padding-top: 15px;
+    h3 {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: #1e2028;
+      line-height: 18px;
+      margin-bottom: 15px;
+      padding-left: 15px;
+    }
+    ul {
+      display: block;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        display: block;
+        padding-bottom: 5px;
+        a {
+          display: block;
+          font-size: 14px;
+          line-height: 26px;
+          color: #1e2028;
+          font-weight: 500;
+          padding: 2px 15px;
+          &:hover {
+            background-color: #ddd;
+          }
+          i {
+            padding-right: 10px;
+          }
+        }
+      }
+    }
+  }
 }
