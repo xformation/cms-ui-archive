@@ -11,13 +11,11 @@
         <div class="search-dropdown__col_1">
             <div class="search-results-scroller">
                 <div class="search-results-container" grafana-scrollbar>
-                    <!-- <a href="./plugins/ems-admission/page/enquiries">Test Link to Plugin</a> -->
                     <div class="search-top-links">
                         <ul>
-                            <li><a href="#">Students</a></li>
-                            <li><a href="#">Teachers</a></li>
-                            <li><a href="#">Subjects</a></li>
-                            <li><a href="#">Content</a></li>
+                            <li ng-repeat="section in ctrl.sections" ng-class="{active: ctrl.viewId === section.id}">
+                                <a href="#" ng-click="ctrl.onClickSection(section)">{{::section.title}}</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="search-recent-container">
@@ -27,29 +25,34 @@
                         </div>
                         <div class="profile-recent-search">
                             <ul>
-                                <li><a href="#"><span></span><p>Text 1</p></a></li>
-                                <li><a href="#"><span></span><p>Text 2</p></a></li>
-                                <li><a href="#"><span></span><p>Text 3</p></a></li>
-                                <li><a href="#"><span></span><p>Text 4</p></a></li>
-                                <li><a href="#"><span></span><p>Text 5</p></a></li>
+                                <li ng-repeat="recents in ctrl.recents">
+                                    <a href="#">
+                                        <span></span>
+                                        <p>{{::recents.title}}</p>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="recent-search">
                             <ul>
-                               <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 1</a></li>
-                               <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 2</a></li>
-                               <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 3</a></li> 
+                               <li ng-repeat="recentsText in ctrl.recentsText">
+                                   <a href="#">
+                                       <i class="gf-form-input-icon fa fa-search"></i> 
+                                       {{::recentsText.title}}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="try-sreaching">
                         <h3>Try sreaching for</h3>
                         <ul>
-                            <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 1</a></li>
-                            <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 2</a></li>
-                            <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 3</a></li> 
-                            <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 4</a></li>
-                            <li><a href="#"><i class="gf-form-input-icon fa fa-search"></i> Text 5</a></li>
+                            <li ng-repeat="trySreach in ctrl.trySreach">
+                                <a href="#">
+                                    <i class="gf-form-input-icon fa fa-search"></i> 
+                                    {{::trySreach.title}}
+                                </a>
+                            </li>
                          </ul>
                     </div>
                 </div>
