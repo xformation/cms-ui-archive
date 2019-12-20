@@ -35,6 +35,16 @@
   // left: 60px;
   .search-top-links {
     display: block;
+    h3 {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: #1e2028;
+      line-height: 18px;
+      margin-bottom: 0;
+      margin-left: 15px;
+      margin-top: 15px;
+    }
     ul {
       display: block;
       border-bottom: $panel-border;

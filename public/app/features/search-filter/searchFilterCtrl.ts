@@ -11,11 +11,13 @@ export class SearchFilterCtrl {
   recentsText: any[];
   trySreach: any[];
   /** @ngInject */
-  constructor($scope, private $timeout) {
+  constructor(private $scope, private $timeout, private $location, private $rootScope) {
     this.buildSectionList();
     this.buildRecentsList();
     this.buildRecentsTextList();
     this.buildTrySreachList();
+    this.onRouteUpdated();
+    this.$rootScope.onAppEvent('$routeUpdate', this.onRouteUpdated.bind(this), this.$scope);
     appEvents.on('show-search-filter', this.showSearch.bind(this), $scope);
     appEvents.on('hide-search-filter', this.hideSearch.bind(this), $scope);
   }
@@ -25,23 +27,27 @@ export class SearchFilterCtrl {
     this.sections.push({
       title: 'Students',
       id: 'students',
+      url: "plugins/ems-search-plugin/page/home?entity=students",
     });
     this.sections.push({
       title: 'Teachers',
       id: 'teachers',
+      url: "plugins/ems-search-plugin/page/home?entity=teachers",
     });
     this.sections.push({
-      title: 'Subjects',
-      id: 'subjects',
+      title: 'Staff',
+      id: 'staff',
+      url: "plugins/ems-search-plugin/page/home?entity=staff",
     });
     this.sections.push({
-      title: 'Content',
-      id: 'content',
+      title: 'Vehicle',
+      id: 'vehicle',
+      url: "plugins/ems-search-plugin/page/home?entity=vehicle",
     });
   }
 
-  onClickSection(section: any) {
-    this.viewId = section.id;
+  onRouteUpdated() {
+    this.viewId = this.$location.search().entity;
   }
 
   buildRecentsList() {

@@ -12,16 +12,16 @@
             <div class="search-results-scroller">
                 <div class="search-results-container" grafana-scrollbar>
                     <div class="search-top-links">
+                        <h3>Quick Filters</h3>
                         <ul>
                             <li ng-repeat="section in ctrl.sections" ng-class="{active: ctrl.viewId === section.id}">
-                                <a href="#" ng-click="ctrl.onClickSection(section)">{{::section.title}}</a>
+                                <a href="{{::section.url}}">{{::section.title}}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="search-recent-container">
                         <div class="recent-heading">
-                            <h3>Recent</h3>
-                            <a href="#" class="clear">Clear</a>
+                            <h3>Recent Search:</h3>
                         </div>
                         <div class="profile-recent-search">
                             <ul>
@@ -33,27 +33,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="recent-search">
-                            <ul>
-                               <li ng-repeat="recentsText in ctrl.recentsText">
-                                   <a href="#">
-                                       <i class="gf-form-input-icon fa fa-search"></i> 
-                                       {{::recentsText.title}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="try-sreaching">
-                        <h3>Try sreaching for</h3>
-                        <ul>
-                            <li ng-repeat="trySreach in ctrl.trySreach">
-                                <a href="#">
-                                    <i class="gf-form-input-icon fa fa-search"></i> 
-                                    {{::trySreach.title}}
-                                </a>
-                            </li>
-                         </ul>
                     </div>
                 </div>
             </div>
