@@ -27,22 +27,22 @@ export class SearchFilterCtrl {
     this.sections.push({
       title: 'Students',
       id: 'students',
-      url: "plugins/ems-search-plugin/page/home?entity=students",
+      url: "plugins/ems-search-plugin/page/students",
     });
     this.sections.push({
       title: 'Teachers',
       id: 'teachers',
-      url: "plugins/ems-search-plugin/page/home?entity=teachers",
+      url: "plugins/ems-search-plugin/page/teachers",
     });
     this.sections.push({
       title: 'Staff',
       id: 'staff',
-      url: "plugins/ems-search-plugin/page/home?entity=staff",
+      url: "plugins/ems-search-plugin/page/staffs",
     });
     this.sections.push({
       title: 'Vehicle',
       id: 'vehicle',
-      url: "plugins/ems-search-plugin/page/home?entity=vehicle",
+      url: "plugins/ems-search-plugin/page/vehicles",
     });
   }
 
