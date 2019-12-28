@@ -8,8 +8,10 @@ export class NavbarCtrl {
   globalSettings: any;
   selectedBranches: any;
   user: any;
+  searchedValue: any;
   /** @ngInject */
   constructor(private $rootScope, private contextSrv, private $timeout, private backendSrv) {
+    this.searchedValue = '';
     this.user = contextSrv.user.login;
     console.log('logged in user in navbar : ', this.user);
 
@@ -68,7 +70,7 @@ export function navbarDirective() {
     scope: {
       model: '=',
     },
-    link: (scope, elem) => { },
+    link: (scope, elem) => {},
   };
 }
 

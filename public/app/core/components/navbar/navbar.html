@@ -38,7 +38,7 @@
     </div>
     <div class="search-name p-1">
       <label class="gf-form--has-input-icon mr-auto"><input type="text" class="gf-form-input search-width"
-          placeholder="Search" ng-click="ctrl.openSearchFilter()"><i
+          placeholder="Search" ng-click="ctrl.openSearchFilter()" ng-model="ctrl.searchedValue"><i
           class="gf-form-input-icon fa fa-search"></i></label>
 
       <div class="white-color p-r-1" style="display: flex;align-items: center;" ng-click="ctrl.openDropDown()">
@@ -53,6 +53,6 @@
     </div>
   </div>
 </div>
-<dashboard-search-filter></dashboard-search-filter>
+<dashboard-search-filter searched-value="ctrl.searchedValue"></dashboard-search-filter>
 <!-- <navbar-popup-ctrl></navbar-popup-ctrl> -->
 <navbar-popup></navbar-popup>

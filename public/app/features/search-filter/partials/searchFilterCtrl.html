@@ -15,7 +15,7 @@
                         <h3>Quick Filters</h3>
                         <ul>
                             <li ng-repeat="section in ctrl.sections" ng-class="{active: ctrl.viewId === section.id}">
-                                <a href="{{::section.url}}">{{::section.title}}</a>
+                                <a href="{{ctrl.getUrl(section)}}">{{::section.title}}</a>
                             </li>
                         </ul>
                     </div>

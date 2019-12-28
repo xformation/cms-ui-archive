@@ -10,8 +10,10 @@ export class DashNavCtrl {
   titleTooltip: string;
   globalSettings: any;
   cmsConfig: any;
+  searchedValue: any;
   /** @ngInject */
   constructor(private $scope, private dashboardSrv, private $location, public playlistSrv, private backendSrv) {
+    this.searchedValue = '';
     appEvents.on('save-dashboard', this.saveDashboard.bind(this), $scope);
     $scope.user = $scope.ctrl.dashboardSrv.backendSrv.contextSrv.user.login;
     console.log('logged in user : ', $scope.ctrl.dashboardSrv.backendSrv.contextSrv.user.login);

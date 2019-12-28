@@ -10,16 +10,16 @@ export class SearchFilterCtrl {
   recents: any[];
   recentsText: any[];
   trySreach: any[];
+  searchedValue: any;
   /** @ngInject */
   constructor(private $scope, private $timeout, private $location, private $rootScope) {
     this.buildSectionList();
     this.buildRecentsList();
     this.buildRecentsTextList();
     this.buildTrySreachList();
-    this.onRouteUpdated();
     this.$rootScope.onAppEvent('$routeUpdate', this.onRouteUpdated.bind(this), this.$scope);
-    appEvents.on('show-search-filter', this.showSearch.bind(this), $scope);
-    appEvents.on('hide-search-filter', this.hideSearch.bind(this), $scope);
+    appEvents.on('show-search-filter', this.showSearch.bind(this), this.$scope);
+    appEvents.on('hide-search-filter', this.hideSearch.bind(this), this.$scope);
   }
 
   buildSectionList() {
@@ -27,27 +27,31 @@ export class SearchFilterCtrl {
     this.sections.push({
       title: 'Students',
       id: 'students',
-      url: "plugins/ems-search-plugin/page/students",
+      url: 'plugins/ems-search-plugin/page/students',
     });
     this.sections.push({
       title: 'Teachers',
       id: 'teachers',
-      url: "plugins/ems-search-plugin/page/teachers",
+      url: 'plugins/ems-search-plugin/page/teachers',
     });
     this.sections.push({
       title: 'Staff',
       id: 'staff',
-      url: "plugins/ems-search-plugin/page/staffs",
+      url: 'plugins/ems-search-plugin/page/staffs',
     });
     this.sections.push({
       title: 'Vehicle',
       id: 'vehicle',
-      url: "plugins/ems-search-plugin/page/vehicles",
+      url: 'plugins/ems-search-plugin/page/vehicles',
     });
   }
 
   onRouteUpdated() {
     this.viewId = this.$location.search().entity;
+  }
+
+  getUrl(section) {
+    return section.url + '?value=' + this.searchedValue;
   }
 
   buildRecentsList() {
@@ -154,7 +158,9 @@ export function searchFilterDirective() {
     controller: SearchFilterCtrl,
     bindToController: true,
     controllerAs: 'ctrl',
-    scope: {},
+    scope: {
+      searchedValue: '=',
+    },
   };
 }
 
