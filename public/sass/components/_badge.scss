@@ -1,0 +1,57 @@
+.badge-conainer{
+    background-color: #005eb3;
+    border-radius: 5px;
+    margin: 15px;
+    padding-bottom: 5px;
+    .head{
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #ffffff;
+        h2{
+            color: #ffffff;
+            font-size: 18px;
+            line-height: 30px;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .content{
+        background-color: #ffffff;
+        margin: 10px;
+        padding: 5px 15px;
+        border-radius: 5px;
+        ul{
+            display: block;
+            border-bottom: 1px solid #005eb3;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            &:last-child{
+                border-bottom: none;
+                padding-bottom: 0px;
+                margin-bottom: 0px;  
+            }
+            li{
+                display: block;
+                font-size: 16px;
+                line-height: 28px;
+                color: #005eb3;
+                font-weight: 400;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                p{
+                    display: inline-block;
+                    width: 49%;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                }
+                span{
+                    display: inline-block;
+                    width: 49%;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+}
