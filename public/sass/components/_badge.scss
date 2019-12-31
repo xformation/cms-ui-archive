@@ -1,16 +1,32 @@
+.badge-main{
+    overflow-x: auto;
+    width: 100%;
+    position: relative;
+    height: 100%; 
+}
+.badges-main-container{
+    width: auto;
+    position: absolute;
+    white-space: nowrap;
+}
+
 .badge-conainer{
     background-color: #005eb3;
     border-radius: 5px;
-    margin: 15px;
+    margin:10px;
     padding-bottom: 5px;
+    min-width: 250px;
+    width: auto;
+    position: relative;
+    display: inline-block;
     .head{
         display: block;
-        padding: 15px;
+        padding:10px 15px;
         border-bottom: 1px solid #ffffff;
         h2{
             color: #ffffff;
             font-size: 18px;
-            line-height: 30px;
+            line-height: 22px;
             font-weight: 400;
             margin: 0;
             padding: 0;
@@ -18,7 +34,7 @@
     }
     .content{
         background-color: #ffffff;
-        margin: 10px;
+        margin: 10px 10px 5px;
         padding: 5px 15px;
         border-radius: 5px;
         ul{
@@ -33,21 +49,22 @@
             }
             li{
                 display: block;
-                font-size: 16px;
-                line-height: 28px;
+                font-size: 14px;
+                line-height: 24px;
                 color: #005eb3;
                 font-weight: 400;
                 margin-bottom: 0;
                 padding-bottom: 0;
                 p{
                     display: inline-block;
-                    width: 49%;
+                    width: auto;
                     margin-bottom: 0;
                     padding-bottom: 0;
+                    padding-right: 5px;
                 }
                 span{
                     display: inline-block;
-                    width: 49%;
+                    width: auto;
                     margin-bottom: 0;
                     padding-bottom: 0;
                 }
