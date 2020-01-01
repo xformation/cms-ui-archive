@@ -1,26 +1,62 @@
 export class BadgeRenderer {
   constructor(private panel) {}
 
-  createHtml() {
-    const totalBadges = this.panel.totalBadges;
+  createHtml(isLoading, badgesData) {
+    const { totalBadges, badgesInfo } = this.panel;
     let retHtml = '';
     for (let i = 0; i < totalBadges; i++) {
-      retHtml +=
-        '<div class="badge-conainer">' +
-        '<div class="head">' +
-        '<h2><i class="fa fa-calendar"></i> Operating Systems</h2>' +
-        '</div>' +
-        '<div class="content">' +
-        '<ul>' +
-        '<li><p>Total Classes:</p> <span>50</span></li>' +
-        '<li><p>Balance:</p> <span>10</span></li>' +
-        '</ul>' +
-        '<ul>' +
-        '<li><p>Next Class:</p> <span>30/01/2019</span></li>' +
-        '<li><p>CS 1st Year:</p> <span>10.00 am</span></li>' +
-        '</ul>' +
-        '</div>' +
-        '</div>';
+      if (badgesInfo[i]) {
+        if (isLoading) {
+          retHtml +=
+            '<div class="badge-conainer badge-data-loading query-transaction--loading">Your data is loading....</div>';
+        } else {
+          let badgeData = badgesData[i];
+          const badgeInfo = badgesInfo[i];
+          if (!badgeData) {
+            badgeData = {
+              [badgeInfo.info1Key]: '',
+              [badgeInfo.info2Key]: '',
+              [badgeInfo.info3Key]: '',
+              [badgeInfo.info4Key]: '',
+              [badgeInfo.headerKey]: '',
+            };
+          }
+          retHtml +=
+            '<div class="badge-conainer">' +
+            '<div class="head">' +
+            '<h2><i class="fa fa-calendar"></i> ' +
+            badgeData[badgeInfo.headerKey] +
+            '</h2>' +
+            '</div>' +
+            '<div class="content">' +
+            '<ul>' +
+            '<li><p>' +
+            badgeInfo.info1Label +
+            '</p> <span>' +
+            badgeData[badgeInfo.info1Key] +
+            '</span></li>' +
+            '<li><p>' +
+            badgeInfo.info2Label +
+            '</p> <span>' +
+            badgeData[badgeInfo.info2Key] +
+            '</span></li>' +
+            '</ul>' +
+            '<ul>' +
+            '<li><p>' +
+            badgeInfo.info3Label +
+            '</p> <span>' +
+            badgeData[badgeInfo.info3Key] +
+            '</span></li>' +
+            '<li><p>' +
+            badgeInfo.info4Label +
+            '</p> <span>' +
+            badgeData[badgeInfo.info4Key] +
+            '</span></li>' +
+            '</ul>' +
+            '</div>' +
+            '</div>';
+        }
+      }
     }
     return retHtml;
   }
