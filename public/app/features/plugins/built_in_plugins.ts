@@ -26,6 +26,7 @@ import * as singlestatPanel from 'app/plugins/panel/singlestat/module';
 import * as gettingStartedPanel from 'app/plugins/panel/gettingstarted/module';
 import * as gaugePanel from 'app/plugins/panel/gauge/module';
 import * as badgePanel from 'app/plugins/panel/badge/module';
+import * as analyticsPanel from 'app/plugins/panel/analytics/module';
 
 const builtInPlugins = {
   'app/plugins/datasource/graphite/module': graphitePlugin,
@@ -56,6 +57,7 @@ const builtInPlugins = {
   'app/plugins/panel/gettingstarted/module': gettingStartedPanel,
   'app/plugins/panel/gauge/module': gaugePanel,
   'app/plugins/panel/badge/module': badgePanel,
+  'app/plugins/panel/analytics/module': analyticsPanel,
 };
 
 export default builtInPlugins;
