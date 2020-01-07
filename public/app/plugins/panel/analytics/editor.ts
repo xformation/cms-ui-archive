@@ -22,17 +22,7 @@ export class AnalyticsEditorCtrl {
     if (this.dataSetInfo.length < this.totalDataSets) {
       const diffLength = this.totalDataSets - this.dataSetInfo.length;
       for (let i = 0; i < diffLength; i++) {
-        this.dataSetInfo.push({
-          headerKey: '',
-          info1Label: '',
-          info1Key: '',
-          info2Label: '',
-          info2Key: '',
-          info3Label: '',
-          info3Key: '',
-          info4Label: '',
-          info4Key: '',
-        });
+        this.dataSetInfo.push({});
       }
     } else {
       this.dataSetInfo.length = this.totalDataSets;

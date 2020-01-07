@@ -35,6 +35,15 @@ class AnalyticsCtrl extends MetricsPanelCtrl {
         this.randomScalingFactor(),
         this.randomScalingFactor(),
       ],
+      [
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+        this.randomScalingFactor(),
+      ],
     ],
   };
 
@@ -94,7 +103,11 @@ class AnalyticsCtrl extends MetricsPanelCtrl {
     function renderPanel(renderData) {
       const canvas = elem.find('canvas')[0];
       const ctx = canvas.getContext('2d');
-      renderData.createChart(ctrl.isLoading, ctrl.dummyData, ctx);
+      if (!ctrl.isLoading) {
+        canvas.style.display = '';
+        elem.find('.data-loading').remove();
+        renderData.createChart(ctrl.isLoading, ctrl.dummyData, ctx);
+      }
     }
 
     ctrl.events.on('render', renderData => {
