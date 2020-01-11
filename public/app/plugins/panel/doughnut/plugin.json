@@ -1,0 +1,18 @@
+{
+  "type": "panel",
+  "name": "Doughnut",
+  "id": "doughnut",
+
+  "info": {
+    "description": "Analytics of given data",
+    "author": {
+      "name": "Grafana Project",
+      "url": "https://grafana.com"
+},
+    "logos": {
+      "small": "img/Donut-Chart.svg",
+      "large": "img/Donut-Chart.svg"
+    },
+    "version": "5.0.0"
+  }
+}
