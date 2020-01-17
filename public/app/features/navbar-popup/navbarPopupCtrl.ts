@@ -1,9 +1,14 @@
 import coreModule from '../../core/core_module';
+// import { react2AngularDirective } from '../../core/utils/react2angular';
+// import { GlobalPrefSectionItem } from '../../../app/core/components/sidemenu/GlobalPrefSectionItem';
 import appEvents from 'app/core/app_events';
 // import { appEvents, NavModel } from 'app/core/core';
 import { config } from '../localapp/config';
 import store from '../../core/store';
 // import { OnInit, Router, ActivatedRoute } from 'angular';
+// import { CmsGlobalParameters } from './cms_globalparameter';
+// import { Observable } from 'rxjs';
+import wsCmsBackendServiceClient from './wsCmsBackendServiceClient';
 
 export class NavbarPopupCtrl {
   isOpen: boolean;
@@ -14,6 +19,7 @@ export class NavbarPopupCtrl {
   ayId: any;
   branchId: any;
   departmentId: any;
+  // cmsGlobalParameters: CmsGlobalParameters;
 
   /** @ngInject */
   constructor(private $scope, private $timeout, private backendSrv) {
@@ -24,18 +30,48 @@ export class NavbarPopupCtrl {
     this.ayId = 0;
     this.branchId = 0;
     this.departmentId = 0;
+    this.initGlobalObjectFromRest($scope.user);
+    // this.getGlobalConfigurations($scope.ctrl.backendSrv.contextSrv.user.login);
+    // $scope.init();
+  }
+  // getGlobalParmsFromService() {
+  //   const globalParametersObservable = this.globalParameterSrv.getGlobalParameters();
+  //   globalParametersObservable.subscribe((cmsGlobalParameters: CmsGlobalParameters) => {
+  //     this.cmsGlobalParameters = cmsGlobalParameters;
+  //   });
+  // }
 
-    $scope.init = () => {
-      this.backendSrv.get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + $scope.user).then(result => {
+  // initGlobalObject() {
+  //   console.log('global settings in navbarPopup : ', this.cmsGlobalParameters);
+  //   this.$scope.selectedAcademicYears = this.cmsGlobalParameters.academicYearList;
+  //   this.$scope.selectedBranches = this.cmsGlobalParameters.branchList;
+  //   this.$scope.selectedDepartments = this.cmsGlobalParameters.departmentList;
+
+  //   this.ayId = this.cmsGlobalParameters.academicYearId;
+  //   this.branchId = this.cmsGlobalParameters.branchId;
+  //   this.departmentId = this.cmsGlobalParameters.departmentId;
+
+  //   this.$scope.selectedCollege = this.cmsGlobalParameters.college;
+  //   this.$scope.cmsAcademicYearVo = this.cmsGlobalParameters.academicYear;
+  //   this.$scope.branch = this.cmsGlobalParameters.branch;
+  //   this.$scope.department = this.cmsGlobalParameters.department;
+
+  // }
+
+  async initGlobalObjectFromRest(userName) {
+    await this.backendSrv
+      .get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName)
+      .then(result => {
         this.globalSettings = result;
         console.log('global settings in navbarPopup : ', this.globalSettings);
         this.$scope.selectedBranches = this.globalSettings.branchList;
         this.$scope.selectedAcademicYears = this.globalSettings.academicYearList;
-        this.$scope.selectedDepartments = this.globalSettings.departmentList;
+        this.$scope.selectedDepartments = {};
+        this.$scope.originalDepartmentList = this.globalSettings.departmentList;
         this.$scope.selectedCollege = this.globalSettings.college;
         this.ayId = this.globalSettings.selectedAcademicYearId;
         if (this.ayId === null || this.ayId === undefined || this.ayId === 0) {
-          this.ayId = this.globalSettings.cmsAcademicYearVo.id;
+          this.ayId = this.globalSettings.academicYear.id;
         }
         this.branchId = this.globalSettings.selectedBranchId;
         if (this.branchId === null || this.branchId === undefined || this.branchId === 0) {
@@ -45,16 +81,19 @@ export class NavbarPopupCtrl {
         }
         this.departmentId = this.globalSettings.selectedDepartmentId;
 
-        this.$scope.cmsAcademicYearVo = this.globalSettings.cmsAcademicYearVo;
+        this.$scope.academicYear = this.globalSettings.academicYear;
         this.$scope.branch = this.globalSettings.branch;
         this.$scope.department = this.globalSettings.department;
+        // this.cmsGlobalParameters = new CmsGlobalParameters(this.ayId, this.branchId, this.departmentId,
+        //   this.globalSettings.academicYearList, this.globalSettings.branchList, this.globalSettings.departmentList,
+        //   this.globalSettings.college, this.globalSettings.cmsAcademicYearVo, this.globalSettings.branch, this.globalSettings.department);
         store.set('ayId', this.ayId);
         store.set('bId', this.branchId);
         store.set('deptId', this.departmentId);
+      })
+      .catch(() => {
+        console.log('Due to some error/exception, cannot access global settings. ');
       });
-    };
-    // this.getGlobalConfigurations($scope.ctrl.backendSrv.contextSrv.user.login);
-    $scope.init();
   }
 
   hidePopup() {
@@ -86,32 +125,37 @@ export class NavbarPopupCtrl {
   }
 
   getGlobalConfigurations(userName) {
-    this.backendSrv.get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName).then(result => {
-      this.globalSettings = result;
-      console.log('global settings in navbarPopup : ', this.globalSettings);
-      this.$scope.selectedBranches = this.globalSettings.branchList;
-      this.$scope.selectedAcademicYears = this.globalSettings.academicYearList;
-      this.$scope.selectedDepartments = this.globalSettings.departmentList;
-      this.$scope.selectedCollege = this.globalSettings.college;
-      this.ayId = this.globalSettings.selectedAcademicYearId;
-      if (this.ayId === null || this.ayId === undefined || this.ayId === 0) {
-        this.ayId = this.globalSettings.cmsAcademicYearVo.id;
-      }
-      this.branchId = this.globalSettings.selectedBranchId;
-      if (this.branchId === null || this.branchId === undefined || this.branchId === 0) {
-        if (this.globalSettings.branch) {
-          this.branchId = this.globalSettings.branch.id;
+    this.backendSrv
+      .get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName)
+      .then(result => {
+        this.globalSettings = result;
+        console.log('global settings in navbarPopup : ', this.globalSettings);
+        this.$scope.selectedBranches = this.globalSettings.branchList;
+        this.$scope.selectedAcademicYears = this.globalSettings.academicYearList;
+        this.$scope.selectedDepartments = this.globalSettings.departmentList;
+        this.$scope.selectedCollege = this.globalSettings.college;
+        this.ayId = this.globalSettings.selectedAcademicYearId;
+        if (this.ayId === null || this.ayId === undefined || this.ayId === 0) {
+          this.ayId = this.globalSettings.academicYear.id;
         }
-      }
-      this.departmentId = this.globalSettings.selectedDepartmentId;
+        this.branchId = this.globalSettings.selectedBranchId;
+        if (this.branchId === null || this.branchId === undefined || this.branchId === 0) {
+          if (this.globalSettings.branch) {
+            this.branchId = this.globalSettings.branch.id;
+          }
+        }
+        this.departmentId = this.globalSettings.selectedDepartmentId;
 
-      this.$scope.cmsAcademicYearVo = this.globalSettings.cmsAcademicYearVo;
-      this.$scope.branch = this.globalSettings.branch;
-      this.$scope.department = this.globalSettings.department;
-      store.set('ayId', this.ayId);
-      store.set('bId', this.branchId);
-      store.set('deptId', this.departmentId);
-    });
+        this.$scope.academicYear = this.globalSettings.academicYear;
+        this.$scope.branch = this.globalSettings.branch;
+        this.$scope.department = this.globalSettings.department;
+        store.set('ayId', this.ayId);
+        store.set('bId', this.branchId);
+        store.set('deptId', this.departmentId);
+      })
+      .catch(() => {
+        console.log('Due to some error/exception, cannot access global settings. ');
+      });
   }
 
   applyExistingPreference(userName) {
@@ -146,12 +190,22 @@ export class NavbarPopupCtrl {
   }
 
   onChangeBranch() {
+    const temp = this.$scope.originalDepartmentList;
+    this.$scope.selectedDepartments = {};
     if (!this.branchId) {
-      this.$scope.selectedDepartments = {};
       return;
     }
-    this.getDepartment(this.branchId);
+    const temp2 = [];
+    for (let i = 0; i < temp.length; i++) {
+      if (parseInt(temp[i].branchId, 10) === parseInt(this.branchId, 10)) {
+        temp2.push(temp[i]);
+      }
+    }
+    this.$scope.selectedDepartments = temp2;
+
+    // this.getDepartment(this.branchId);
   }
+
   getDepartment(bId) {
     this.backendSrv.get(config.CMS_DEPARTMENT_BY_BRANCH_URL + bId).then(result => {
       this.$scope.selectedDepartments = result;
@@ -177,7 +231,7 @@ export class NavbarPopupCtrl {
     objBtnApply.removeAttribute('disabled');
     const objMsgDiv = document.getElementById('msgDiv');
     objMsgDiv.innerText = 'Preferences applied successfully';
-    window.location.reload();
+    // window.location.reload();
   }
 
   async applyChange() {
@@ -193,10 +247,35 @@ export class NavbarPopupCtrl {
           '&departmentId=' +
           this.departmentId
       )
-      .then(result => {});
+      .then(result => {
+        console.log('Global settings successfully applied.');
+      })
+      .catch(() => {
+        console.log('Due to some error/exception, cannot access global settings. ');
+      });
+    this.registerSocket();
     store.set('ayId', this.ayId);
     store.set('bId', this.branchId);
     store.set('deptId', this.departmentId);
+  }
+
+  registerSocket() {
+    // let self = this;
+    const socket = wsCmsBackendServiceClient.getInstance();
+
+    socket.onmessage = (response: any) => {
+      //   let message = JSON.parse(response.data);
+      console.log('message received from server on navbar popup ::: ', response);
+    };
+
+    socket.onopen = () => {
+      console.log('broadcast_selected_preferences. Logged in user : ' + this.backendSrv.contextSrv.user.login);
+      socket.send(this.backendSrv.contextSrv.user.login);
+    };
+
+    window.onbeforeunload = () => {
+      console.log('websocket connection is going to be closed with cms backend service');
+    };
   }
 }
 
