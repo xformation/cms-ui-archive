@@ -1,5 +1,5 @@
 const cfg = {
-  URL: 'ws://localhost:4000/websocket/tracker/websocket',
+  URL: 'ws://100.81.3.26:4000/websocket/tracker/websocket',
 };
 
 const wsCmsBackendServiceSingletonClient = (() => {
@@ -12,9 +12,9 @@ const wsCmsBackendServiceSingletonClient = (() => {
 
   return {
     getInstance: () => {
-      if (!instance) {
-        instance = createInstance();
-      }
+      //   if (!instance) {
+      instance = createInstance();
+      //   }
       return instance;
     },
   };
