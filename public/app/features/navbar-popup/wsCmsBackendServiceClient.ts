@@ -1,5 +1,5 @@
 const cfg = {
-  URL: 'ws://100.81.3.26:4000/websocket/tracker/websocket',
+  URL: 'ws://100.81.5.26:4000/websocket/tracker/websocket',
 };
 
 const wsCmsBackendServiceSingletonClient = (() => {
