@@ -1143,7 +1143,24 @@ table.staff-management-table {
   background-color: white !important;
 }
 .wid-navpop {
-  width: 300px !important;
+  width: 240px !important;
+}
+
+.global-dropdown {
+  color: black;
+  border-radius: 3px;
+  width: 200px;
+  margin-top: 15px;
+  padding-left: 5px;
+}
+
+#cust-settings {
+  right: 1%;
+  height: 270px;
+}
+
+#cust-pl {
+  padding-left: 20px !important;
 }
 
 .cust-mt-4 {
