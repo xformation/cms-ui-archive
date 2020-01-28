@@ -1,10 +1,10 @@
 <div class="search-backdrop" ng-if="ctrl.isOpen" ng-click="ctrl.hidePopup()" ng-style="{'top':ctrl.top}">
 </div>
-<div class="search-filter-container wid-navpop" ng-if="ctrl.isOpen" ng-style="{'top':ctrl.top}">
+<div id="cust-settings" class="search-filter-container wid-navpop" ng-if="ctrl.isOpen" ng-style="{'top':ctrl.top}">
     <div class="search-dropdown">
         <div class="search-dropdown__col_1">
             <div class="search-results-scroller">
-                <div class="search-results-container" grafana-scrollbar>
+                <div id="cust-pl" class="search-results-container" grafana-scrollbar>
                     <div ng-if="user !== 'admin' && user !== 'cmsadmin' " style="color:black;"
                         class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
                         <div id="dvAyId">AcademicYear - {{cmsAcademicYearVo.year}}</div>
@@ -26,7 +26,7 @@
                     <div ng-if="user === 'admin' || user === 'cmsadmin'">
                         <div style="color:black;"
                             class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
-                            <select id="selAy" style="color:black;border:none; background:none;  margin-top: 10px;"
+                            <select id="selAy" class="global-dropdown"
                                 ng-model="ctrl.ayId">
                                 <option value="">Select Academic Year</option>
                                 <option ng-repeat="ay in selectedAcademicYears" value="{{ay.id}}">{{ay.year}} -
@@ -36,7 +36,7 @@
                     </div>
                     <div ng-if="user === 'admin' || user === 'cmsadmin'">
                         <div style="color:black;">
-                            <select id="selBranch" style="color:black; border:none; background:none;"
+                            <select id="selBranch" class="global-dropdown"
                                 ng-model="ctrl.branchId" ng-change="ctrl.onChangeBranch()">
                                 <option value="">Select Branch</option>
                                 <option ng-repeat="branch in selectedBranches" value="{{branch.id}}">
@@ -48,7 +48,7 @@
 
                     <div ng-if="user === 'admin' || user === 'cmsadmin'">
                         <div style="color:black;">
-                            <select id="selDept" style="color:black;border:none; background:none; margin-bottom:10px;"
+                            <select id="selDept" class="global-dropdown m-b-1"
                                 ng-model="ctrl.departmentId">
                                 <option value="">Select Department</option>
                                 <option ng-repeat="department in selectedDepartments" value="{{department.id}}">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style">
-                        <input id="btnApply" type="button" class="btn bs" value="Apply"
+                        <input id="btnApply" type="button" class="btn btn-primary border-bottom" value="Apply"
                             ng-click="ctrl.validateAndPostChanges()" />
                     </div>
                     <div ng-if="user === 'admin' || user === 'cmsadmin'" class="cust-style"></div>
