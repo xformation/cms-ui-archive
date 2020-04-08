@@ -259,22 +259,27 @@ export class TimeTableSettingCtrl {
   }
 
   getGlobalConfigurations(userName) {
-    this.backendSrv.get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName).then(result => {
-      if (result.selectedAcademicYearId === null || result.selectedAcademicYearId === 0) {
-        this.academicYearId = result.cmsAcademicYearVo.id;
-      } else {
-        this.academicYearId = result.selectedAcademicYearId;
-      }
-      this.departmentId = result.selectedDepartmentId;
-      this.branchId = result.selectedBranchId;
-      // console.log('AYID :::: ', this.academicYearId);
-      // console.log('BRANCHID :::: ', this.branchId);
-      // console.log('DEPT ID :::: ', this.departmentId);
-      this.getTerms(this.academicYearId);
-      this.getCmsBatches();
-      this.getAcademicYears();
-      // this.selectedBranches = this.globalSettings.branchList;
-    });
+    this.backendSrv
+      .get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName)
+      .then(result => {
+        if (result.selectedAcademicYearId === null || result.selectedAcademicYearId === 0) {
+          this.academicYearId = result.cmsAcademicYearVo.id;
+        } else {
+          this.academicYearId = result.selectedAcademicYearId;
+        }
+        this.departmentId = result.selectedDepartmentId;
+        this.branchId = result.selectedBranchId;
+        // console.log('AYID :::: ', this.academicYearId);
+        // console.log('BRANCHID :::: ', this.branchId);
+        // console.log('DEPT ID :::: ', this.departmentId);
+        this.getTerms(this.academicYearId);
+        this.getCmsBatches();
+        this.getAcademicYears();
+        // this.selectedBranches = this.globalSettings.branchList;
+      })
+      .catch(() => {
+        console.log('Due to some error/exception, cannot access global settings. ');
+      });
   }
 
   activateTab(tabIndex) {

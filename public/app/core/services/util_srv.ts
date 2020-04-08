@@ -237,9 +237,11 @@ export class UtilSrv {
     scope.create = () => {
       payload.onCreate(scope.subjectForm, scope.subject, scope.departmentId, scope.branchId, isSuccess => {
         scope.is_success_bar = isSuccess;
-        setTimeout(() => {
-          scope.dismiss();
-        }, 4000);
+        if (scope.is_success_bar === 1) {
+          setTimeout(() => {
+            scope.dismiss();
+          }, 4000);
+        }
       });
     };
 

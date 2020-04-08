@@ -7,12 +7,12 @@
                 <div id="cust-pl" class="search-results-container" grafana-scrollbar>
                     <div ng-if="user !== 'admin' && user !== 'cmsadmin' " style="color:black;"
                         class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
-                        <div id="dvAyId">AcademicYear - {{cmsAcademicYearVo.year}}</div>
+                        <div id="dvAyId">AcademicYear - {{academicYear.year}}</div>
                         <div id="dvBranchId">Branch - {{branch.branchName}}</div>
                         <div id="dvBranchId">Department - {{department.name}}</div>
-                        <input id="hdnAyId" type="hidden" value="{{cmsAcademicYearVo.id}}" />
-                        <input id="hdnBranchId" type="hidden" value="{{branch.id}}" />
-                        <input id="hdnDeptId" type="hidden" value="{{department.id}}" />
+                        <input id="hdnAyId" type="hidden" value="{{ctrl.ayId}}" />
+                        <input id="hdnBranchId" type="hidden" value="{{ctrl.branchId}}" />
+                        <input id="hdnDeptId" type="hidden" value="{{ctrl.departmentId}}" />
                     </div>
                     <!-- <div style="display: flex;justify-content: flex-start;align-items:center">
                         <div style="border-radius: 50px;background: gray; width: 50px; height: 50px; text-align: center; padding-top: 15px; margin-right: 20px;">

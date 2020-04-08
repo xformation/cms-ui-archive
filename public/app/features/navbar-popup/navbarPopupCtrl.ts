@@ -63,7 +63,7 @@ export class NavbarPopupCtrl {
       .get(config.CMS_GLOBAL_CONFIG_URL + '?userName=' + userName)
       .then(result => {
         this.globalSettings = result;
-        console.log('global settings in navbarPopup : ', this.globalSettings);
+        console.log('1. navbarPopup. this.globalSettings: --> ', this.globalSettings);
         this.$scope.selectedBranches = this.globalSettings.branchList;
         this.$scope.selectedAcademicYears = this.globalSettings.academicYearList;
         this.$scope.selectedDepartments = {};
@@ -85,9 +85,13 @@ export class NavbarPopupCtrl {
           this.onChangeBranch();
           this.applyExistingPreference(userName);
         }
-        this.$scope.academicYear = this.globalSettings.academicYear;
+        this.$scope.academicYear = this.globalSettings.cmsAcademicYearVo;
         this.$scope.branch = this.globalSettings.branch;
         this.$scope.department = this.globalSettings.department;
+        console.log('Academic Year ::::::::: ', this.$scope.academicYear);
+        console.log('branch :::::::::::::::: ', this.$scope.branch);
+        console.log('department :::::::::::: ', this.$scope.department);
+
         // this.cmsGlobalParameters = new CmsGlobalParameters(this.ayId, this.branchId, this.departmentId,
         //   this.globalSettings.academicYearList, this.globalSettings.branchList, this.globalSettings.departmentList,
         //   this.globalSettings.college, this.globalSettings.cmsAcademicYearVo, this.globalSettings.branch, this.globalSettings.department);
@@ -95,8 +99,8 @@ export class NavbarPopupCtrl {
         // store.set('bId', this.branchId);
         // store.set('deptId', this.departmentId);
       })
-      .catch(() => {
-        console.log('Due to some error/exception, cannot access global settings. ');
+      .catch(e => {
+        console.log('Due to some error/exception, cannot access global settings. ', e);
       });
   }
 
@@ -171,12 +175,16 @@ export class NavbarPopupCtrl {
       const objDept = document.getElementById('selDept');
       this.setSelectedValue(objDept, this.departmentId);
     } else {
-      const objAy = document.getElementById('hdnAyId');
-      const objBranch = document.getElementById('hdnBranchId');
-      this.setSelectedValue(objAy, this.ayId);
-      this.setSelectedValue(objBranch, this.branchId);
-      const objDept = document.getElementById('hdnDeptId');
-      this.setSelectedValue(objDept, this.departmentId);
+      // const objAy = document.getElementById('hdnAyId');
+      // objAy.setAttribute("value",this.ayId);
+      // const objBranch = document.getElementById('hdnBranchId');
+      // objBranch.setAttribute("value",this.branchId);
+      // this.setSelectedValue(objAy, this.ayId);
+      // this.setSelectedValue(objBranch, this.branchId);
+      // const objDept = document.getElementById('hdnDeptId');
+      // objDept.setAttribute("value",this.departmentId);
+      this.applyChange();
+      // this.setSelectedValue(objDept, this.departmentId);
     }
 
     // store.set('ayId', this.ayId);
@@ -197,6 +205,9 @@ export class NavbarPopupCtrl {
     const temp = this.$scope.originalDepartmentList;
     this.$scope.selectedDepartments = {};
     if (!this.branchId) {
+      return;
+    }
+    if (temp === null) {
       return;
     }
     const temp2 = [];

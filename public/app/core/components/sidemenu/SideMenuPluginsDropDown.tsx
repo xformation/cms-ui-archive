@@ -1,7 +1,6 @@
 import React from 'react';
 import PluginItem from './PluginItem';
 import { contextSrv } from 'app/core/services/context_srv';
-import store from 'app/core/store';
 
 class SideMenuPluginsDropDown extends React.Component<any, any> {
   constructor(props: any) {
@@ -9,9 +8,6 @@ class SideMenuPluginsDropDown extends React.Component<any, any> {
     this.state = {
       searchItem: '',
       user: contextSrv.user,
-      bid: store.get('bId'),
-      ayid: store.get('ayId'),
-      dptid: store.get('deptId'),
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -25,7 +21,7 @@ class SideMenuPluginsDropDown extends React.Component<any, any> {
 
   render() {
     const { links } = this.props;
-    const { searchItem, user, ayid, bid, dptid } = this.state;
+    const { searchItem, user } = this.state;
     return (
       <div
         className="dropdown-menu dropdown-menu--sidemenu sidemenu-plugin-container"
@@ -48,7 +44,7 @@ class SideMenuPluginsDropDown extends React.Component<any, any> {
               return (
                 link.id.indexOf('plugin-page') !== -1 &&
                 link.text.indexOf(searchItem) !== -1 && (
-                  <PluginItem user={user} ayid={ayid} bid={bid} dptid={dptid} link={link} key={`${link.id}-${index}`} />
+                  <PluginItem user={user} link={link} key={`${link.id}-${index}`} />
                 )
               );
             }
