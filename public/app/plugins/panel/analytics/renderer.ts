@@ -84,7 +84,7 @@ export class AnalyticsRenderer {
         backgroundColor: info.backgroundColor,
         borderColor: info.borderColor,
         data: dataSet,
-        fill: info.fill,
+        fill: info.fill || false,
       });
     }
     retData.datasets = tempData;
