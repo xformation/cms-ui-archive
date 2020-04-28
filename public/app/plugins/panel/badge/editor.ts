@@ -5,13 +5,16 @@ export class BadgeEditorCtrl {
   panelCtrl: any;
   totalBadges: any;
   badgesInfo: any;
+  apiEndPoint: any;
   /** @ngInject */
   constructor($scope) {
     $scope.editor = this;
     this.panelCtrl = $scope.ctrl;
     this.panel = this.panelCtrl.panel;
     this.totalBadges = this.panel.totalBadges;
+    this.apiEndPoint = this.panel.apiEndPoint;
     this.badgesInfo = this.panel.badgesInfo;
+    this.setBadgeInfo();
   }
 
   setBadgeInfo() {
@@ -39,17 +42,24 @@ export class BadgeEditorCtrl {
   onChangeTotalBadges() {
     this.setBadgeInfo();
     this.panel.totalBadges = this.totalBadges;
-    this.render();
+  }
+
+  onChangeApiEndPoint() {
+    this.setBadgeInfo();
+    this.panel.apiEndPoint = this.apiEndPoint;
   }
 
   onChangeBadgeInfo() {
     this.panel.badgesInfo = this.badgesInfo;
-    this.render();
   }
 
   render() {
     this.panelCtrl.render();
   }
+
+  // getData() {
+  //   this.panelCtrl.getData();
+  // }
 }
 
 /** @ngInject */

@@ -1,3 +1,21 @@
+<div class="gf-form-group" style="margin-bottom: 10px;">
+	<div class="gf-form-inline">
+		<div class="gf-form">
+			<span class="gf-form-label width-10">API End Point</span>
+			<input class="gf-form-input" type="text" ng-model="editor.apiEndPoint"
+				ng-change="editor.onChangeApiEndPoint()" />
+		</div>
+	</div>
+</div>
+
+<!-- <div class="editor-row" style="margin-bottom: 2.5rem">
+	<div class="gf-form">
+		<button class="btn btn-success" ng-click="editor.getData()">
+			Get Data
+		</button>
+	</div>
+</div> -->
+
 <div class="gf-form-group">
 	<div class="gf-form-inline">
 		<div class="gf-form">
@@ -65,5 +83,10 @@
 				bs-tooltip="" ng-model="badgeInfo.info4Key"
 				ng-change="editor.onChangeBadgeInfo()" />
 		</div>
+	</div>
+	<div class="gf-form">
+		<button class="btn btn-success" ng-click="editor.render()">
+			Render
+		</button>
 	</div>
 </div>

@@ -8,6 +8,7 @@ class BadgeCtrl extends MetricsPanelCtrl {
   panelDefaults = {
     totalBadges: 1,
     badgesInfo: [],
+    apiEndPoint: '',
   };
 
   tempData = [
@@ -62,11 +63,15 @@ class BadgeCtrl extends MetricsPanelCtrl {
   }
 
   getData() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.tempData);
-      }, 1000);
-    });
+    const requestOptions = {
+      method: 'GET',
+    };
+    return fetch(this.panel.apiEndPoint, requestOptions).then((response: any) => response.json());
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve(this.tempData);
+    //   }, 1000);
+    // });
   }
 
   onInitEditMode() {
@@ -78,9 +83,15 @@ class BadgeCtrl extends MetricsPanelCtrl {
   }
 
   render() {
-    const badgeRenderer = new BadgeRenderer(this.panel);
-    const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.responseData);
-    return super.render(badgeHtml);
+    this.getData().then(
+      (response: any) => {
+        this.responseData = response;
+        const badgeRenderer = new BadgeRenderer(this.panel);
+        const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.responseData);
+        return super.render(badgeHtml);
+      },
+      (error: any) => {}
+    );
   }
 
   link(scope, elem, attrs, ctrl: BadgeCtrl) {
