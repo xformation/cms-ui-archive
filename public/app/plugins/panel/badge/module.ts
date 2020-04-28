@@ -12,10 +12,12 @@ class BadgeCtrl extends MetricsPanelCtrl {
   };
   isLoading: any;
   responseData: any;
+  lastApiCalled: any;
   constructor($scope, $injector) {
     super($scope, $injector);
     this.isLoading = false;
     this.responseData = [];
+    this.lastApiCalled = '';
     _.defaults(this.panel, this.panelDefaults);
     this.events.on('data-received', this.onDataReceived.bind(this));
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
@@ -32,6 +34,7 @@ class BadgeCtrl extends MetricsPanelCtrl {
   }
 
   getData() {
+    this.lastApiCalled = this.panel.apiEndPoint;
     this.isLoading = true;
     const requestOptions = {
       method: 'GET',
@@ -48,16 +51,23 @@ class BadgeCtrl extends MetricsPanelCtrl {
   }
 
   render() {
-    this.getData().then(
-      (response: any) => {
-        this.responseData = response;
-        const badgeRenderer = new BadgeRenderer(this.panel);
-        this.isLoading = false;
-        const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.responseData);
-        return super.render(badgeHtml);
-      },
-      (error: any) => {}
-    );
+    if (this.lastApiCalled !== this.panel.apiEndPoint) {
+      this.getData().then(
+        (response: any) => {
+          this.responseData = response;
+          const badgeRenderer = new BadgeRenderer(this.panel);
+          this.isLoading = false;
+          const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.responseData);
+          return super.render(badgeHtml);
+        },
+        (error: any) => {}
+      );
+    } else {
+      const badgeRenderer = new BadgeRenderer(this.panel);
+      this.isLoading = false;
+      const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.responseData);
+      return super.render(badgeHtml);
+    }
   }
 
   link(scope, elem, attrs, ctrl: BadgeCtrl) {

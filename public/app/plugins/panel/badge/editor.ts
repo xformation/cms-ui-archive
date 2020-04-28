@@ -11,7 +11,8 @@ export class BadgeEditorCtrl {
     $scope.editor = this;
     this.panelCtrl = $scope.ctrl;
     this.panel = this.panelCtrl.panel;
-    this.totalBadges = this.panel.totalBadges;
+    // this.totalBadges = this.panel.totalBadges;
+    this.totalBadges = 1;
     this.apiEndPoint = this.panel.apiEndPoint;
     this.badgesInfo = this.panel.badgesInfo;
     this.setBadgeInfo();
@@ -45,7 +46,7 @@ export class BadgeEditorCtrl {
   }
 
   onChangeApiEndPoint() {
-    this.setBadgeInfo();
+    // this.setBadgeInfo();
     this.panel.apiEndPoint = this.apiEndPoint;
   }
 
