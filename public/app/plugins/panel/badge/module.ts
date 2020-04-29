@@ -39,7 +39,9 @@ class BadgeCtrl extends MetricsPanelCtrl {
     const requestOptions = {
       method: 'GET',
     };
-    return fetch(this.panel.apiEndPoint, requestOptions).then((response: any) => response.json());
+    return fetch(this.panel.apiEndPoint + this.$scope.ctrl.contextSrv.user.login, requestOptions).then(
+      (response: any) => response.json()
+    );
   }
 
   onInitEditMode() {

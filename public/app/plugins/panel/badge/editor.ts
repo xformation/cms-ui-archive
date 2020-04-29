@@ -32,6 +32,8 @@ export class BadgeEditorCtrl {
           info3Key: '',
           info4Label: '',
           info4Key: '',
+          departmentKey: '',
+          yearKey: '',
         });
       }
     } else {
