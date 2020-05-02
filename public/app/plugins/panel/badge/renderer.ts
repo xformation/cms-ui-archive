@@ -22,6 +22,8 @@ export class BadgeRenderer {
             [badgeInfo.info3Key]: '',
             [badgeInfo.info4Key]: '',
             [badgeInfo.headerKey]: '',
+            [badgeInfo.departmentKey]: '',
+            [badgeInfo.yearKey]: '',
           };
         }
         retHtml +=
@@ -49,12 +51,18 @@ export class BadgeRenderer {
           badgeInfo.info3Label +
           '</p> <span>' +
           badgeData[badgeInfo.info3Key] +
-          '</span></li>' +
-          '<li><p>' +
-          badgeInfo.info4Label +
-          '</p> <span>' +
+          '&nbsp;' +
           badgeData[badgeInfo.info4Key] +
           '</span></li>' +
+          '<li><p> <span>' +
+          // badgeInfo.info4Label +
+          badgeData[badgeInfo.departmentKey] +
+          '</span>&nbsp;&nbsp;<span>' +
+          badgeData[badgeInfo.yearKey] +
+          '</span>' +
+          '<span>' +
+          // badgeData[badgeInfo.info4Key] +
+          '</span></p></li>' +
           '</ul>' +
           '</div>' +
           '</div>';
