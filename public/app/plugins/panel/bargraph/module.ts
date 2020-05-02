@@ -11,6 +11,8 @@ class BarGraphCtrl extends MetricsPanelCtrl {
     chartTitle: '',
     xAxisLabel: 'X axis',
     yAxisLabel: 'Y axis',
+    valueLessThanColor: '',
+    valueLessThan: '',
   };
   isLoading: any;
   barRenderer: any = null;

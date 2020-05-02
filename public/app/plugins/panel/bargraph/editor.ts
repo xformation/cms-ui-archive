@@ -6,6 +6,8 @@ export class BarEditorCtrl {
   chartTitle: any;
   xAxisLabel: any;
   yAxisLabel: any;
+  valueLessThan: any;
+  valueLessThanColor: any;
   /** @ngInject */
   constructor($scope) {
     $scope.editor = this;
@@ -16,6 +18,8 @@ export class BarEditorCtrl {
     this.chartTitle = this.panel.chartTitle;
     this.xAxisLabel = this.panel.xAxisLabel;
     this.yAxisLabel = this.panel.yAxisLabel;
+    this.valueLessThan = this.panel.valueLessThan;
+    this.valueLessThanColor = this.panel.valueLessThanColor;
   }
 
   setDataSetInfo() {
@@ -53,6 +57,14 @@ export class BarEditorCtrl {
 
   render() {
     this.panelCtrl.reConfigChart();
+  }
+
+  onChangeLessThanValue() {
+    this.panel.valueLessThan = this.valueLessThan;
+  }
+
+  onChangeLessThanValueColor() {
+    this.panel.valueLessThanColor = this.valueLessThanColor;
   }
 }
 

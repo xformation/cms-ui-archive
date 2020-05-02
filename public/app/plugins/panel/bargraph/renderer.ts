@@ -74,15 +74,30 @@ export class BarRenderer {
     const tempData = [];
     const { dataSets, labels } = responseData;
     retData.labels = labels;
-    const { dataSetInfo } = this.panel;
+    const { dataSetInfo, valueLessThan, valueLessThanColor } = this.panel;
     const length = dataSets.length > dataSetInfo.length ? dataSetInfo.length : dataSets.length;
     for (let i = 0; i < length; i++) {
       const dataSet = dataSets[i];
       const info = dataSetInfo[i];
+      let backgroundColor = info.backgroundColor;
+      let borderColor = info.borderColor;
+      if (valueLessThan && valueLessThanColor) {
+        backgroundColor = [];
+        borderColor = [];
+        for (let j = 0; j < dataSet.length; j++) {
+          if (parseFloat(dataSet[j]) < parseFloat(valueLessThan)) {
+            backgroundColor.push(valueLessThanColor);
+            borderColor.push(valueLessThanColor);
+          } else {
+            backgroundColor.push(info.backgroundColor);
+            borderColor.push(info.borderColor);
+          }
+        }
+      }
       tempData.push({
         label: info.label,
-        backgroundColor: info.backgroundColor,
-        borderColor: info.borderColor,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
         data: dataSet,
         borderWidth: 1,
       });
