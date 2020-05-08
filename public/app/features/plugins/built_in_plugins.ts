@@ -29,6 +29,7 @@ import * as badgePanel from 'app/plugins/panel/badge/module';
 import * as analyticsPanel from 'app/plugins/panel/analytics/module';
 import * as barPanel from 'app/plugins/panel/bargraph/module';
 import * as doughnutPanel from 'app/plugins/panel/doughnut/module';
+import * as BadgeDataSourcPanel from 'app/plugins/panel/badge-data-source/module';
 
 const builtInPlugins = {
   'app/plugins/datasource/graphite/module': graphitePlugin,
@@ -59,6 +60,7 @@ const builtInPlugins = {
   'app/plugins/panel/gettingstarted/module': gettingStartedPanel,
   'app/plugins/panel/gauge/module': gaugePanel,
   'app/plugins/panel/badge/module': badgePanel,
+  'app/plugins/panel/badge-data-source/module': BadgeDataSourcPanel,
   'app/plugins/panel/analytics/module': analyticsPanel,
   'app/plugins/panel/bargraph/module': barPanel,
   'app/plugins/panel/doughnut/module': doughnutPanel,
