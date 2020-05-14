@@ -31,6 +31,7 @@ import * as barPanel from 'app/plugins/panel/bargraph/module';
 import * as doughnutPanel from 'app/plugins/panel/doughnut/module';
 import * as BadgeDataSourcPanel from 'app/plugins/panel/badge-data-source/module';
 import * as analyticsDataSourcePanel from 'app/plugins/panel/analytics-data-source/module';
+import * as pieDataSourcePanel from 'app/plugins/panel/pie-chart-data-source/module';
 
 const builtInPlugins = {
   'app/plugins/datasource/graphite/module': graphitePlugin,
@@ -66,6 +67,7 @@ const builtInPlugins = {
   'app/plugins/panel/analytics-data-source/module': analyticsDataSourcePanel,
   'app/plugins/panel/bargraph/module': barPanel,
   'app/plugins/panel/doughnut/module': doughnutPanel,
+  'app/plugins/panel/pie-chart-data-source/module': pieDataSourcePanel,
 };
 
 export default builtInPlugins;
