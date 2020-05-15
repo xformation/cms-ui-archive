@@ -1,11 +1,13 @@
-.badge-main {
+.badge-main,
+.pie-main {
   overflow-x: auto;
   width: 100%;
   position: relative;
   height: 100%;
   min-height: 180px;
 }
-.badges-main-container {
+.badges-main-container,
+.pie-main-container {
   width: auto;
   position: absolute;
   white-space: nowrap;
@@ -76,6 +78,17 @@
           padding-bottom: 0;
         }
       }
+    }
+  }
+}
+
+.pie-main {
+  .pie-main-container {
+    .pie-chart {
+      max-height: 400px !important;
+      max-width: 400px !important;
+      display: inline-block !important;
+      margin-bottom: 30px;
     }
   }
 }

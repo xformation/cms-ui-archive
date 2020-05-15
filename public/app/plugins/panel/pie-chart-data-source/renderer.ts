@@ -16,6 +16,7 @@ export class PieRenderer {
         responsive: true,
         title: {
           display: true,
+          text: responseData.label,
         },
         tooltips: {
           mode: 'index',
