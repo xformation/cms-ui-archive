@@ -14,7 +14,7 @@ export class LegalEntitiesCtrl {
   cmsSelectedBranches: any;
   clgObject: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/legalentity_logo.png';
+  logoSrc: any = '/public/img/legalentity_logo.png';
   isLogoChanged = false;
   $scope;
   dependedObj = {};

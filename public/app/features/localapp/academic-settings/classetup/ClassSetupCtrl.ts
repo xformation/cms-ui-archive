@@ -1,8 +1,8 @@
 export class ClassSetupCtrl {
   navModel: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/logo-placeholder.png';
-  bgSrc = '/public/img/dashboard.png';
+  logoSrc: any = '/public/img/logo-placeholder.png';
+  bgSrc: any = '/public/img/dashboard.png';
   $scope;
   /** @ngInject */
   constructor($scope) {

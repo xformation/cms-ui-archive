@@ -115,7 +115,7 @@ export default class StackdriverDatasource {
     const result = [];
     const data = await this.getTimeSeries(options);
     if (data.results) {
-      Object['values'](data.results).forEach(queryRes => {
+      Object['values'](data.results).forEach((queryRes: any) => {
         if (!queryRes.series) {
           return;
         }

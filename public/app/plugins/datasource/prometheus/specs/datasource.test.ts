@@ -339,7 +339,7 @@ const backendSrv = {
   datasourceRequest: jest.fn(),
 } as any;
 
-const templateSrv = {
+const templateSrv: any = {
   getAdhocFilters: () => [],
   replace: jest.fn(str => str),
 };

@@ -99,7 +99,7 @@ export class Graph extends PureComponent<GraphProps, GraphState> {
   $el: any;
   dynamicOptions = null;
 
-  state = {
+  state: GraphState = {
     hiddenSeries: new Set(),
     showAllTimeSeries: false,
   };
@@ -185,7 +185,7 @@ export class Graph extends PureComponent<GraphProps, GraphState> {
       // Deduplicate series as visibility tracks the alias property
       const oneSeriesVisible = hiddenSeries.size === new Set(data.map(d => d.alias)).size - 1;
 
-      let nextHiddenSeries = new Set();
+      let nextHiddenSeries: Set<string> = new Set();
       if (exclusive) {
         if (hiddenSeries.has(series.alias) || !oneSeriesVisible) {
           nextHiddenSeries = new Set(data.filter(d => d.alias !== series.alias).map(d => d.alias));

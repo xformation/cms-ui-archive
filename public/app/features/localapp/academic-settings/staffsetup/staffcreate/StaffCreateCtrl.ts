@@ -9,7 +9,7 @@ export class StaffCreateCtrl {
   activeTabContactIndex = 0;
   activeTabPrimaryIndex = 0;
   activeBtnIndex = 0;
-  profileSrc = '/public/img/cubes.png';
+  profileSrc: any = '/public/img/cubes.png';
   isTeacherProfileChanged = false;
   $scope: any;
   teachers: any;

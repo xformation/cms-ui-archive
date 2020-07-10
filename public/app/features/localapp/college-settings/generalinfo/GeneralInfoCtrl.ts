@@ -6,8 +6,8 @@ export class GeneralInfoCtrl {
   navModel: any;
   query: any;
   activeTabIndex = 0;
-  logoSrc = '/public/img/college_logo.png';
-  bgSrc = '/public/img/dashboard.png';
+  logoSrc: any = '/public/img/college_logo.png';
+  bgSrc: any = '/public/img/dashboard.png';
   isCollegeLogoChanged = false;
   isCollegeBgChanged = false;
   $scope: any;

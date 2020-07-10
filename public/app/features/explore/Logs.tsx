@@ -267,7 +267,7 @@ export default class Logs extends PureComponent<LogsProps, LogsState> {
   deferLogsTimer: NodeJS.Timer;
   renderAllTimer: NodeJS.Timer;
 
-  state = {
+  state: LogsState = {
     dedup: LogsDedupStrategy.none,
     deferLogs: true,
     hiddenLogLevels: new Set(),
