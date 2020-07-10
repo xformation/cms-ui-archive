@@ -58,17 +58,20 @@ export class AnalyticsRenderer {
     }
     const retData: any = {};
     const tempData = [];
+    responseData = this.manipulateData(responseData);
     const { bar, line, labels } = responseData;
     retData.labels = labels;
     const { dataSetInfo, lineDataSetInfo } = this.panel;
-    tempData.push({
-      type: 'line',
-      label: lineDataSetInfo.label,
-      borderColor: lineDataSetInfo.borderColor,
-      borderWidth: 2,
-      fill: false,
-      data: line,
-    });
+    if (lineDataSetInfo.showLine) {
+      tempData.push({
+        type: 'line',
+        label: lineDataSetInfo.label,
+        borderColor: lineDataSetInfo.borderColor,
+        borderWidth: 2,
+        fill: false,
+        data: line,
+      });
+    }
     tempData.push({
       type: 'bar',
       label: dataSetInfo.label,
@@ -80,6 +83,24 @@ export class AnalyticsRenderer {
     });
     retData.datasets = tempData;
     return retData;
+  }
+
+  manipulateData(responseData) {
+    const length = responseData.length;
+    const bar = [];
+    const line = [];
+    const labels = [];
+    for (let i = 0; i < length; i++) {
+      const data = responseData[i];
+      if (data.datapoints) {
+        bar.push(data.datapoints[0][0]);
+        if (data.datapoints[0].length > 2) {
+          line.push(data.datapoints[0][1]);
+        }
+      }
+      labels.push(data.target);
+    }
+    return { bar, line, labels };
   }
 
   createChart(isLoading, responseData, ctx) {

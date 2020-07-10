@@ -35,6 +35,10 @@
 			<input type="text" class="gf-form-input max-width-20" bs-tooltip="" ng-model="editor.lineDataSetInfo.borderColor"
 				ng-change="editor.onChangeLineDataSetInfo()" />
 		</div>
+		<gf-form-switch class="gf-form" label="Show Line"
+			tooltip=""
+			checked="editor.lineDataSetInfo.showLine" label-class="width-12" on-change="editor.onChangeLineDataSetInfo()">
+		</gf-form-switch>
 	</div>
 	<div class="section gf-form-group">
 		<h5 class="section-heading">Bar data set info:</h5>

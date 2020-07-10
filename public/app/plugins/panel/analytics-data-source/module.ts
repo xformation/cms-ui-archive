@@ -7,7 +7,9 @@ class AnalyticsCtrl extends MetricsPanelCtrl {
   static templateUrl = './partials/module.html';
   panelDefaults = {
     dataSetInfo: {},
-    lineDataSetInfo: {},
+    lineDataSetInfo: {
+      showLine: true,
+    },
     chartTitle: '',
     xAxisLabel: 'X axis',
     yAxisLabel: 'Y axis',
@@ -55,7 +57,7 @@ class AnalyticsCtrl extends MetricsPanelCtrl {
 
   onDataReceived(dataList: any) {
     this.data = dataList;
-    this.data = this.dummyData;
+    // this.data = this.dummyData;
     this.render();
   }
 
