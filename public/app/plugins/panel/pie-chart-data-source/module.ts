@@ -5,7 +5,9 @@ import { PieRenderer } from './renderer';
 
 class PieDataSourceCtrl extends MetricsPanelCtrl {
   static templateUrl = './partials/module.html';
-  panelDefaults = {};
+  panelDefaults = {
+    label: '',
+  };
   pieRenderer: any;
   data: any = [];
   isLoading: any;
@@ -66,13 +68,13 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
 
   onDataReceived(dataList: any) {
     this.data = dataList;
-    this.data = this.dummyData;
+    // this.data = this.dummyData;
     this.render();
   }
 
   render() {
     if (!this.pieRenderer) {
-      this.pieRenderer = new PieRenderer();
+      this.pieRenderer = new PieRenderer(this.panel);
     }
     return super.render(this.pieRenderer);
   }
@@ -90,10 +92,11 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
 
   link(scope, elem, attrs, ctrl: PieDataSourceCtrl) {
     function renderPanel(renderData) {
-      const parentElement = elem.find('.pie-main-container');
+      const canvas = elem.find('canvas')[0];
+      const ctx = canvas.getContext('2d');
       if (!ctrl.isLoading) {
         elem.find('.data-loading').remove();
-        renderData.createChart(ctrl.isLoading, ctrl.data, parentElement);
+        renderData.createChart(ctrl.isLoading, ctrl.data, ctx);
       }
     }
 

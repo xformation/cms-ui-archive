@@ -3,11 +3,17 @@ import _ from 'lodash';
 export class PieEditorCtrl {
   panel: any;
   panelCtrl: any;
+  label: any;
   /** @ngInject */
   constructor($scope) {
     $scope.editor = this;
     this.panelCtrl = $scope.ctrl;
+    this.label = this.panelCtrl.panel.label;
     this.panel = this.panelCtrl.panel;
+  }
+
+  onChangeLabel() {
+    this.panel.label = this.label;
   }
 
   render() {
