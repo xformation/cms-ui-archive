@@ -12,7 +12,7 @@ export class AnalyticsRenderer {
   initConfig(responseData) {
     const dataSets = this.createDataSet(responseData);
     this.config = {
-      type: 'line',
+      type: 'bar',
       data: dataSets,
       options: {
         responsive: true,
