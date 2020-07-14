@@ -45,6 +45,12 @@ export class AnalyticsRenderer {
                 display: true,
                 labelString: this.panel.yAxisLabel,
               },
+              ticks: {
+                beginAtZero: true,
+                min: this.panel.dataSetInfo.minY ? parseInt(this.panel.dataSetInfo.minY, 10) : 0,
+                max: this.panel.dataSetInfo.maxY ? parseInt(this.panel.dataSetInfo.maxY, 10) : 100,
+                stepSize: this.panel.dataSetInfo.stepSize ? parseInt(this.panel.dataSetInfo.stepSize, 10) : 10,
+              },
             },
           ],
         },

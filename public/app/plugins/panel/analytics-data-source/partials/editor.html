@@ -57,6 +57,21 @@
 			<input type="text" class="gf-form-input max-width-20" bs-tooltip="" ng-model="editor.dataSetInfo.borderColor"
 				ng-change="editor.onChangeDataSetInfo()" />
 		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-12">Y axis Min:</label>
+			<input type="text" class="gf-form-input max-width-20" bs-tooltip="" ng-model="editor.dataSetInfo.minY"
+				ng-change="editor.onChangeDataSetInfo()" />
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-12">Y axis Max:</label>
+			<input type="text" class="gf-form-input max-width-20" bs-tooltip="" ng-model="editor.dataSetInfo.maxY"
+				ng-change="editor.onChangeDataSetInfo()" />
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-12">Step Size:</label>
+			<input type="text" class="gf-form-input max-width-20" bs-tooltip="" ng-model="editor.dataSetInfo.stepSize"
+				ng-change="editor.onChangeDataSetInfo()" />
+		</div>
 		<gf-form-switch class="gf-form" label="Fill"
 			tooltip=""
 			checked="editor.dataSetInfo.fill" label-class="width-12" on-change="editor.onChangeDataSetInfo()">
