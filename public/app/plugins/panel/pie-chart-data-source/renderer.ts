@@ -66,7 +66,9 @@ export class PieRenderer {
   }
 
   destroyChart() {
-    this.chart.destroy();
+    if (this.chart) {
+      this.chart.destroy();
+    }
     this.chart = null;
   }
 }

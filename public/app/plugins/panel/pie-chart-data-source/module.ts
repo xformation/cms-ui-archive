@@ -69,6 +69,9 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
   onDataReceived(dataList: any) {
     this.data = dataList;
     // this.data = this.dummyData;
+    if (this.pieRenderer) {
+      this.pieRenderer.destroyChart();
+    }
     this.render();
   }
 

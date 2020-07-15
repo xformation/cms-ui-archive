@@ -58,6 +58,9 @@ class AnalyticsCtrl extends MetricsPanelCtrl {
   onDataReceived(dataList: any) {
     this.data = dataList;
     // this.data = this.dummyData;
+    if (this.analyticsRenderer) {
+      this.analyticsRenderer.destroyChart();
+    }
     this.render();
   }
 
