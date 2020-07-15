@@ -40,7 +40,13 @@ export class PieRenderer {
     const labels = [];
     for (let i = 0; i < responseData.length; i++) {
       dataSets.data.push(responseData[i].datapoints[0][0]);
-      labels.push(responseData[i].target);
+      let target = responseData[i].target;
+      if (this.panel.regex) {
+        const flags = this.panel.caseSensitive ? '' : 'i' + this.panel.global ? 'g' : '';
+        const regex = new RegExp(this.panel.regex, flags);
+        target = target.replace(regex, '');
+      }
+      labels.push(target);
     }
     retData.datasets = [dataSets];
     retData.labels = labels;
