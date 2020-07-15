@@ -104,7 +104,13 @@ export class AnalyticsRenderer {
           line.push(data.datapoints[0][1]);
         }
       }
-      labels.push(data.target);
+      let target = data.target;
+      if (this.panel.dataSetInfo.regex) {
+        const flags = (this.panel.dataSetInfo.caseSensitive ? '' : 'i') + (this.panel.dataSetInfo.global ? 'g' : '');
+        const regex = new RegExp(this.panel.dataSetInfo.regex, flags);
+        target = target.replace(regex, '');
+      }
+      labels.push(target.trim());
     }
     return { bar, line, labels };
   }

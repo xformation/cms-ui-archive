@@ -42,11 +42,11 @@ export class PieRenderer {
       dataSets.data.push(responseData[i].datapoints[0][0]);
       let target = responseData[i].target;
       if (this.panel.regex) {
-        const flags = this.panel.caseSensitive ? '' : 'i' + this.panel.global ? 'g' : '';
+        const flags = (this.panel.caseSensitive ? '' : 'i') + (this.panel.global ? 'g' : '');
         const regex = new RegExp(this.panel.regex, flags);
         target = target.replace(regex, '');
       }
-      labels.push(target);
+      labels.push(target.trim());
     }
     retData.datasets = [dataSets];
     retData.labels = labels;

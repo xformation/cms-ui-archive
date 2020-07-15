@@ -76,6 +76,18 @@
 			tooltip=""
 			checked="editor.dataSetInfo.fill" label-class="width-12" on-change="editor.onChangeDataSetInfo()">
 		</gf-form-switch>
+		<div class="gf-form-inline">
+			<div class="gf-form">
+				<span class="gf-form-label width-10">Label Regex: </span>
+				<input class="gf-form-input" type="text" ng-model="editor.dataSetInfo.regex" ng-change="editor.onChangeDataSetInfo()" />
+			</div>
+		</div>
+		<gf-form-switch class="gf-form" label="Case Sensitive" tooltip="" checked="editor.dataSetInfo.caseSensitive" label-class="width-12"
+			on-change="editor.onChangeDataSetInfo()">
+		</gf-form-switch>
+		<gf-form-switch class="gf-form" label="Global" tooltip="" checked="editor.dataSetInfo.global" label-class="width-12"
+			on-change="editor.onChangeDataSetInfo()">
+		</gf-form-switch>
 	</div>
 	<div class="gf-form">
 		<button class="btn btn-success" ng-click="editor.render()">
