@@ -82,6 +82,12 @@
 				<input class="gf-form-input" type="text" ng-model="editor.dataSetInfo.regex" ng-change="editor.onChangeDataSetInfo()" />
 			</div>
 		</div>
+		<div class="gf-form-inline">
+			<div class="gf-form">
+				<span class="gf-form-label width-10">Maximum Label Length: </span>
+				<input class="gf-form-input" type="text" ng-model="editor.dataSetInfo.maxLength" ng-change="editor.onChangeDataSetInfo()" />
+			</div>
+		</div>
 		<gf-form-switch class="gf-form" label="Case Sensitive" tooltip="" checked="editor.dataSetInfo.caseSensitive" label-class="width-12"
 			on-change="editor.onChangeDataSetInfo()">
 		</gf-form-switch>

@@ -36,6 +36,16 @@ export class AnalyticsRenderer {
                 display: true,
                 labelString: this.panel.xAxisLabel,
               },
+              ticks: {
+                maxRotation: 0,
+                callback: (value: any, index: any, values: any) => {
+                  const maxLength = this.panel.dataSetInfo.maxLength || 10;
+                  if (value.length > maxLength) {
+                    value = value.substring(0, maxLength) + '...';
+                  }
+                  return value;
+                },
+              },
             },
           ],
           yAxes: [
