@@ -6,9 +6,9 @@ export class PieRenderer {
   randomScalingFactor() {
     return Math.floor(Math.random() * 100);
   }
-  chart = null;
-  initConfig(responseData) {
-    const dataSets = this.manipulateData(responseData);
+  charts = [];
+
+  initConfig(dataSets, label) {
     return {
       type: 'pie',
       data: dataSets,
@@ -16,7 +16,7 @@ export class PieRenderer {
         responsive: true,
         title: {
           display: true,
-          text: this.panel.label,
+          text: label,
         },
         tooltips: {
           mode: 'index',
@@ -32,43 +32,70 @@ export class PieRenderer {
 
   manipulateData(responseData: any) {
     const retData: any = {};
-    const dataSets = {
-      data: [],
-      label: this.panel.label,
-      backgroundColor: ['rgb(54, 162, 235)', 'rgb(75, 192, 192)', 'rgb(201, 203, 207)', 'rgb(255, 159, 64)'],
-    };
-    const labels = [];
+    const backgroundColor = ['rgb(54, 162, 235)', 'rgb(75, 192, 192)', 'rgb(201, 203, 207)', 'rgb(255, 159, 64)'];
+    const dataSets = {};
+    const labels = {};
     for (let i = 0; i < responseData.length; i++) {
-      dataSets.data.push(responseData[i].datapoints[0][0]);
       let target = responseData[i].target;
+      let key = target;
+      if (this.panel.keyRegex) {
+        const keyRegex = new RegExp(this.panel.keyRegex, 'g');
+        key = target.replace(keyRegex, '');
+      }
       if (this.panel.regex) {
         const flags = (this.panel.caseSensitive ? '' : 'i') + (this.panel.global ? 'g' : '');
         const regex = new RegExp(this.panel.regex, flags);
         target = target.replace(regex, '');
       }
-      labels.push(target.trim());
+      dataSets[key] = dataSets[key] || {
+        data: [],
+        label: this.panel.label,
+        backgroundColor,
+      };
+      dataSets[key].data.push(responseData[i].datapoints[0][0]);
+      dataSets[key].label = key;
+      dataSets[key].backgroundColor = backgroundColor;
+      labels[key] = labels[key] || [];
+      labels[key].push(target.trim());
     }
-    retData.datasets = [dataSets];
+    retData.dataSets = dataSets;
     retData.labels = labels;
     return retData;
   }
 
-  createChart(isLoading, responseData, ctx) {
+  createChart(isLoading, responseData, parentElement) {
     if (isLoading) {
     } else {
-      if (this.chart) {
-        this.chart.update();
+      if (this.charts && this.charts.length > 0) {
+        const length = this.charts.length;
+        for (let i = 0; i < length; i++) {
+          this.charts[i].update();
+        }
       } else {
-        const config = this.initConfig(responseData);
-        this.chart = new Chart(ctx, config);
+        const retData = this.manipulateData(responseData);
+        const dataSets = retData.dataSets;
+        const labels = retData.labels;
+        const keys = Object.keys(dataSets);
+        let canvasHTML = '';
+        for (let i = 0; i < keys.length; i++) {
+          canvasHTML += "<canvas class='pie-chart pie-chart-" + i + "'></canvas>";
+        }
+        parentElement.html(canvasHTML);
+        for (let i = 0; i < keys.length; i++) {
+          const canvas = parentElement.find('.pie-chart-' + i)[0];
+          const ctx = canvas.getContext('2d');
+          const config = this.initConfig({ datasets: [dataSets[keys[i]]], labels: labels[keys[i]] }, keys[i]);
+          this.charts.push(new Chart(ctx, config));
+        }
       }
     }
   }
 
   destroyChart() {
-    if (this.chart) {
-      this.chart.destroy();
+    const length = this.charts.length;
+    for (let i = 0; i < length; i++) {
+      this.charts[i].destroy();
     }
-    this.chart = null;
+    this.charts = [];
   }
 }

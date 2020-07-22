@@ -7,6 +7,7 @@ export class PieEditorCtrl {
   regex: any;
   caseSensitive: any;
   global: any;
+  keyRegex: any;
   /** @ngInject */
   constructor($scope) {
     $scope.editor = this;
@@ -15,6 +16,7 @@ export class PieEditorCtrl {
     this.regex = this.panelCtrl.panel.regex;
     this.global = this.panelCtrl.panel.global;
     this.caseSensitive = this.panelCtrl.panel.caseSensitive;
+    this.keyRegex = this.panelCtrl.panel.keyRegex;
     this.panel = this.panelCtrl.panel;
   }
 
@@ -24,6 +26,10 @@ export class PieEditorCtrl {
 
   onChangeRegex() {
     this.panel.regex = this.regex;
+  }
+
+  onChangeKeyRegex() {
+    this.panel.keyRegex = this.keyRegex;
   }
 
   onChangeGlobal() {

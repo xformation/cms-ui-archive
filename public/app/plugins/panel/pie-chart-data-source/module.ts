@@ -11,48 +11,6 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
   pieRenderer: any;
   data: any = [];
   isLoading: any;
-  dummyData: any = [
-    {
-      label: 'Science',
-      data: [
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-      ],
-      dataLabels: ['Total Seat', 'Enquiry', 'Application', 'Converted'],
-    },
-    {
-      label: 'Civil',
-      data: [
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-      ],
-      dataLabels: ['Total Seat', 'Enquiry', 'Application', 'Converted'],
-    },
-    {
-      label: 'Electronics',
-      data: [
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-      ],
-      dataLabels: ['Total Seat', 'Enquiry', 'Application', 'Converted'],
-    },
-    {
-      label: 'Information Technology',
-      data: [
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-        this.randomScalingFactor(),
-      ],
-      dataLabels: ['Total Seat', 'Enquiry', 'Application', 'Converted'],
-    },
-  ];
 
   constructor($scope, $injector) {
     super($scope, $injector);
@@ -68,7 +26,6 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
 
   onDataReceived(dataList: any) {
     this.data = dataList;
-    // this.data = this.dummyData;
     if (this.pieRenderer) {
       this.pieRenderer.destroyChart();
     }
@@ -95,11 +52,10 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
 
   link(scope, elem, attrs, ctrl: PieDataSourceCtrl) {
     function renderPanel(renderData) {
-      const canvas = elem.find('canvas')[0];
-      const ctx = canvas.getContext('2d');
+      const parentElement = elem.find('.pie-main-container');
       if (!ctrl.isLoading) {
         elem.find('.data-loading').remove();
-        renderData.createChart(ctrl.isLoading, ctrl.data, ctx);
+        renderData.createChart(ctrl.isLoading, ctrl.data, parentElement);
       }
     }
 

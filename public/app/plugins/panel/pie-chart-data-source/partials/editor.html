@@ -17,6 +17,12 @@
 	<gf-form-switch class="gf-form" label="Global" tooltip="" checked="editor.global" label-class="width-12"
 		on-change="editor.onChangeGlobal()">
 	</gf-form-switch>
+	<div class="gf-form-inline">
+		<div class="gf-form">
+			<span class="gf-form-label width-10">Key Regex: </span>
+			<input class="gf-form-input" type="text" ng-model="editor.keyRegex" ng-change="editor.onChangeKeyRegex()" />
+		</div>
+	</div>
 </div>
 
 
