@@ -26,6 +26,7 @@ class PieDataSourceCtrl extends MetricsPanelCtrl {
 
   onDataReceived(dataList: any) {
     this.data = dataList;
+    console.log(dataList);
     if (this.pieRenderer) {
       this.pieRenderer.destroyChart();
     }
