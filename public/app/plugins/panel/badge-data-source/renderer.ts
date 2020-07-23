@@ -1,10 +1,7 @@
 export class BadgeRenderer {
-  constructor(private panel: any) {
-    console.log(this.panel);
-  }
+  constructor() {}
 
   createHtml(isLoading, badgesData) {
-    // const { badgesInfo } = this.panel;
     let retHtml = '';
     let totalBadges = 0;
     if (badgesData && badgesData.length > 0) {

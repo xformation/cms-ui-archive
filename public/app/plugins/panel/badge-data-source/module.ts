@@ -71,7 +71,7 @@ class BadgeDataSourceCtrl extends MetricsPanelCtrl {
   }
 
   render() {
-    const badgeRenderer = new BadgeRenderer(this.panel);
+    const badgeRenderer = new BadgeRenderer();
     this.isLoading = false;
     const badgeHtml = badgeRenderer.createHtml(this.isLoading, this.data);
     return super.render(badgeHtml);
@@ -81,6 +81,22 @@ class BadgeDataSourceCtrl extends MetricsPanelCtrl {
     function renderPanel(renderData) {
       const parentElement = elem.find('.badges-main-container');
       parentElement.html(renderData);
+      setHeight(parentElement);
+    }
+
+    function setHeight(parentElement) {
+      const badges = parentElement.find('.content');
+      let maxHeight = 0;
+      for (let i = 0; i < badges.length; i++) {
+        const badge = badges[i];
+        if (badge.offsetHeight > maxHeight) {
+          maxHeight = badge.offsetHeight;
+        }
+      }
+      for (let i = 0; i < badges.length; i++) {
+        const badge = badges[i];
+        badge.style['height'] = maxHeight + 'px';
+      }
     }
 
     ctrl.events.on('render', renderData => {
