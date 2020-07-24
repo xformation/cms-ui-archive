@@ -8,12 +8,12 @@
       </li>
     </ul>
     <div class="dashboard-list-container">
-      <aside class="aside-container ">
+      <aside class="aside-container " ng-class="{collapse: ctrl.isAsideCollapse}">
         <ul class="navigation-tabs vertical-tabs">
-          <li class="cursor-pointer nav-item">
+          <li class="cursor-pointer nav-item" ng-click="ctrl.collapseAside()">
             <a class="collapse-button text-left"><i class="fa fa-bars"></i></a>
           </li>
-          <li class="cursor-pointer nav-item" ng-repeat="dashboard in ctrl.activeSection.dashboards" ng-click="ctrl.setActiveDashboard(dashboard, $index)" ng-class="{active:dashboard.uid == ctrl.activeDashboard.uid}">
+          <li class="cursor-pointer nav-item dashboard-nav-item" ng-repeat="dashboard in ctrl.activeSection.dashboards" ng-click="ctrl.setActiveDashboard(dashboard, $index)" ng-class="{active:dashboard.uid == ctrl.activeDashboard.uid}">
             <i class="fa fa-cog"></i>
             <a class="nav-link" >{{dashboard.title}}</a>
           </li>
