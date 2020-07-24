@@ -1,16 +1,29 @@
-<div class="dashboard-list-container" ng-if="ctrl.sections.length > 0">
-  <aside class="aside-container dashboard-settings__aside" ng-class="{collapse: ctrl.isAsideCollapse === true}" id="disabled-btn1">
-    <a ng-click="ctrl.collapseAside()" class="aside-a collapse-button"><i class="fa fa-bars"></i> </a>
-    <!-- <h2 class="dashboard-settings__aside-header"><i class="fa fa-cog"></i> Local Application</h2> -->
-    <a class="dashboard-nav-item dashboard-settings__nav-item" ng-class="{active: ctrl.viewId === section.uid}"
-      ng-repeat="section in ctrl.sections" ng-click="ctrl.onClickLeftTab(section)">
-      <div class="tab-title">{{::section.title}}</div>
-    </a>
-  </aside>
-  <div class="dashboard-settings__content" ng-if="ctrl.viewId === section.uid" ng-repeat="section in ctrl.sections">
-    <custom-dashboard-loader slug="{{section.slug}}" uid="{{section.uid}}"></custom-dashboard-loader>
+<div class="dashboard-main-container">
+  <div class="dashboard-inner-container">
+    <ul class="navigation-tabs">
+      <li class="cursor-pointer nav-item" ng-repeat="section in ctrl.sections"
+        ng-click="ctrl.setActiveSection(section)" ng-class="{active:section.folderId == ctrl.activeSection.folderId}">
+        <i class="fa fa-cog"></i>
+        <a class="nav-link">{{section.title}}</a>
+      </li>
+    </ul>
+    <div class="dashboard-list-container">
+      <aside class="aside-container ">
+        <ul class="navigation-tabs vertical-tabs">
+          <li class="cursor-pointer nav-item">
+            <a class="collapse-button text-left"><i class="fa fa-bars"></i></a>
+          </li>
+          <li class="cursor-pointer nav-item" ng-repeat="dashboard in ctrl.activeSection.dashboards" ng-click="ctrl.setActiveDashboard(dashboard, $index)" ng-class="{active:dashboard.uid == ctrl.activeDashboard.uid}">
+            <i class="fa fa-cog"></i>
+            <a class="nav-link" >{{dashboard.title}}</a>
+          </li>
+        </ul>
+      </aside>
+      <div class="dashboard-settings__content" ng-if="ctrl.activeDashboard.uid === dashboard.uid"
+        ng-repeat="dashboard in ctrl.activeSection.dashboards">
+        <custom-dashboard-loader slug="{{ctrl.activeDashboard.slug}}" uid="{{ctrl.activeDashboard.uid}}">
+        </custom-dashboard-loader>
+      </div>
+    </div>
   </div>
-</div>
-<div ng-if="ctrl.sections.length === 0" class="no-dashboards-label">
-  There are no dashboards created.
 </div>
