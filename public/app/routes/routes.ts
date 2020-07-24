@@ -329,6 +329,7 @@ export function setupAngularRoutes($routeProvider, $locationProvider) {
       templateUrl: 'public/app/features/custom-dashboard-list/partials/dashboard-list.html',
       controller: 'CustomDashboardListCtrl',
       controllerAs: 'ctrl',
+      reloadOnSearch: false,
     })
     .otherwise({
       templateUrl: 'public/app/partials/error.html',
